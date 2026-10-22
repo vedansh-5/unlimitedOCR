@@ -27,9 +27,7 @@ Lessons:
 - Every comparison to the paper's numbers must first account for a possible MLX vs
   CUDA gap, which E-002 measures.
 
-Not yet checked:
-- Whether the port's no-repeat guard and R-SWA cache match the upstream code line for
-  line (plan item 1.2).
+Checked later (R-002 below): the no-repeat guard and the R-SWA cache.
 - Whether the OmniDocBench evaluator's formula metric (CDM) runs on macOS.
 
 ## E-001a: First run crashed on the first generated token (2026-10-23)
@@ -50,7 +48,7 @@ Not yet checked:
 - **Lesson:** the port's tests never load the model, and its end-to-end path did not
   run with its own pinned versions. Everything downstream of the port needs our own
   end-to-end check.
-- **Follow-up:** report the bug to the port author (needs approval: outward-facing).
+- **Follow-up:** reported upstream: https://huggingface.co/shubhxho/Unlimited-OCR-MLX/discussions/1
 
 ## E-001: Smoke test and cost (2026-10-23)
 
@@ -114,3 +112,78 @@ Both finished normally (`finish_reason: stop`, `complete: true`).
   `--keep-prompt-space` reproduces the port's behaviour (used by E-001's script).
 - **Lesson:** a one-token prompt difference changes output. Any MLX-vs-paper gap must be
   checked against prompt format first.
+
+## R-002: Port vs upstream code, guard and R-SWA cache (2026-10-23)
+
+Reading only. Upstream = `modeling_unlimitedocr.py` / `modeling_deepseekv2.py` at model
+revision `07dea83`; port = `unlimited_ocr_mlx.py` at `e4c39cd` plus mlx-vlm 0.6.16.
+
+| Part | Same as upstream? | Detail |
+|---|---|---|
+| No-repeat rule | Yes | Same window, same prefix match, same whitelist; only the code style differs |
+| Tokens the guard sees | Yes | Prompt plus generated tokens in both |
+| Length limit | No | Upstream `max_length=32768` counts prompt + output; the port's `--max-tokens 32768` counts output only, so the port can generate past upstream's limit on long inputs |
+| R-SWA cache layout | Yes | Full prompt KV kept, then a ring of the last 128 output tokens, overwritten in order |
+| Where "prompt" ends in the cache | **Only for prompts up to 2,048 tokens** | Upstream records the prompt length after the one-shot prefill. mlx-vlm chunks prompts longer than `DEFAULT_PREFILL_STEP_SIZE = 2048` and feeds the last prompt token as a single step; the ring cache then treats that token as output and overwrites it after 128 generated tokens |
+
+Affected by the last row: dense gundam pages (prompt about 2,700 tokens) and every base
+request of 8 or more pages (275 prompt tokens per page). Likely small, since the token
+lost is the final `.` of the prompt, but untested. Test: E-001c, page 10 with chunking
+disabled (`--prefill-step-size 100000`), one change.
+
+## R-003: mlx-vlm batch generation drops R-SWA (2026-10-23)
+
+Reading only. In mlx-vlm 0.6.16, `batch_generate` builds caches with `_make_cache`
+(`generate/ar.py`), which converts each layer's cache to a batch cache.
+`RingSlidingKVCache` subclasses `KVCache` and has no `to_batch`, so it becomes a plain
+`BatchKVCache`: every generated token stays in the cache and attention is full, not
+R-SWA. Batched output would therefore not be the paper's model behaviour.
+
+Consequence: batching (speed idea 4) needs its own batch R-SWA cache: left-padded
+prompts, the same prompt length for every row after padding, a shared ring of 128
+decode slots, and a mask that hides the padding even in the ring phase. Expected
+gain is below linear: rows usually pick different experts, so each decode step reads
+more expert weights.
+
+## E-002: OmniDocBench v1.6 test baseline, 140 pages (2026-10-23)
+
+- **What and why:** score the unchanged model (plus the two port fixes) with the
+  official evaluator, to check the MLX setup against the paper before any improvement.
+- **Hypothesis:** scores fall within sampling error of the paper's v1.6 row.
+- **Configuration:** dataset `aa1ee96`, evaluator `f133a71` (quick_match, 4 workers,
+  CDM off), 15 pages per document type with seed 42 (all 5 historical pages), gundam
+  mode, Baidu prompt, defaults otherwise. Scripts: `omnidocbench.py` steps
+  select / fetch / predict / evaluate / summary.
+
+| Metric | E-002 (raw mean) | E-002 reweighted to full-set type mix, 95% CI | Paper v1.6 | Leaderboard v1.6 |
+|---|---|---|---|---|
+| Text Edit (down) | 0.0589 | 0.0362 [0.0243, 0.0510] | 0.042 | 0.0394 |
+| Table TEDS (up) | 92.35 | 92.37 [88.69, 95.67] (51 tables, not reweighted) | 90.16 | 90.21 |
+| Table TEDS-S (up) | 94.91 | 94.90 [91.86, 97.46] | 93.32 | 93.36 |
+| Read-order Edit (down) | 0.1271 | 0.1069 [0.0784, 0.1425] | 0.129 | 0.128 |
+| Formula CDM (up) | not measured | | 95.79 | 95.72 |
+
+Reweighting: the subset over-samples `historical_document` (5 of 140 pages vs 5 of
+1,651) whose text edit is 0.558, so per-type means are weighted by full-set page counts.
+CIs: 2,000 stratified bootstrap resamples, seed 0.
+
+Text edit by document type (raw): PPT 0.006, academic 0.018, book 0.020, colorful
+textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, note
+0.095, research report 0.001.
+
+- **Cost:** 42.3 min model time (18.1 s per page, max 121 s), 75 tok/s, peak 10.0 GB,
+  no page hit the token limit. Scoring about 10 min on CPU.
+- **Hypothesis supported:** yes. Every paper and leaderboard value lies inside the 95%
+  interval. The MLX port with our fixes reproduces the paper on this subset.
+- **Repetition loops found:** 2 of 140 pages, both historical documents
+  (`page-8e2f…`: one formula line repeated 58 times, Distinct-35 = 0.33; `page-0708…`:
+  a numbered list cycling, Distinct-35 = 0.43, ending in a broken `<|det|>` marker that
+  leaks into the Markdown). Two more pages are borderline (Distinct-35 0.75 and 0.84),
+  to inspect in I-1.
+- **Why the 35-gram guard misses them:** each repeat is its own block with new box
+  coordinates (`[875, 190, …]`, `[875, 240, …]`, …), so no 35-token sequence ever
+  repeats exactly. The guard cannot see a loop that walks down the page.
+- **Lesson for I-1:** detect repeats on the text with `<|det|>` markers and coordinates
+  removed; this catches exactly the loops the guard misses.
+- **Check fix:** the first version of the loop checks counted a sparse HTML table as a
+  loop (compression 7.6). Checks now run on tag-stripped text; regression test added.

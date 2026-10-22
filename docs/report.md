@@ -104,9 +104,30 @@ in `run_ocr.py`, which otherwise runs the port's code unchanged.
    fixed both and left the rest of the output identical. All runs use Baidu's prompt
    format.
 
-## 5. Results [planned]
+## 5. Results
 
-No results yet.
+### 5.1 Reproduction on OmniDocBench v1.6 [verified]
+
+140 pages (15 per document type, all 5 historical documents; seed 42), official
+evaluator at commit `f133a71`, formula CDM not computed. Because the subset
+over-samples historical documents, per-type means are reweighted to the full
+benchmark's type mix; intervals are 95% stratified bootstrap (2,000 resamples).
+
+| Metric | This work (MLX, M5, 16 GB) | Paper (GPU) | Official leaderboard |
+|---|---|---|---|
+| Text Edit (lower is better) | 0.036 [0.024, 0.051] | 0.042 | 0.039 |
+| Table TEDS | 92.4 [88.7, 95.7] | 90.2 | 90.2 |
+| Table TEDS-S | 94.9 [91.9, 97.5] | 93.3 | 93.4 |
+| Reading-order Edit (lower is better) | 0.107 [0.078, 0.143] | 0.129 | 0.128 |
+
+All reference values fall inside the intervals: the MLX implementation, with the two
+corrections in section 4.1, reproduces the published accuracy within sampling error.
+Inference took 18.1 s per page on average at 75 output tokens/s, with peak memory of
+10.0 GB.
+
+Two of 140 pages (both historical documents) ended in repetition loops. In both, each
+repeated line is a separate layout block with new box coordinates, so no 35-token
+sequence repeats exactly and the decode-time n-gram guard never triggers.
 
 ## 6. Discussion and limitations [draft]
 

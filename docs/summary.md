@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-23 (after E-001)
+Last updated: 2026-10-23 (after E-002)
 
 ## Objective
 
@@ -12,7 +12,7 @@ the improvement can be measured fairly.
 
 Scope: no training. The released weights are used as published.
 
-Environment set up; model runs end to end on this Mac (E-001). No benchmark run yet.
+Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper within sampling error (E-002). Next: E-001c, dev baseline, long documents, then improvements.
 
 | Item | State |
 |---|---|
@@ -23,7 +23,7 @@ Environment set up; model runs end to end on this Mac (E-001). No benchmark run 
 | Port prompt differs from Baidu's (extra trailing space) | Fixed by default in `run_ocr.py`; removed both start-of-output errors (findings E-001b) |
 | `ocr_to_md.py`, `checks.py` | Done, with tests |
 | Smoke test (E-001) | Done: 17 s per dense gundam page, about 8 s per base page, peak 9.6 GB |
-| Baseline on this machine | Not run |
+| Test baseline (E-002, 140 OmniDocBench v1.6 pages) | Done: matches the paper within sampling error |
 | Improvements | None tried |
 
 ## Baseline
@@ -31,7 +31,7 @@ Environment set up; model runs end to end on this Mac (E-001). No benchmark run 
 | Source | OmniDocBench v1.5 overall | v1.6 overall | Long-doc 40+ pages edit distance |
 |---|---|---|---|
 | Paper (A800 GPUs, reported) | 93.23 | 93.92 | 0.1069 |
-| This project (M5, MLX) | not measured | not measured | not measured |
+| This project (M5, MLX), E-002 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | not measured yet (E-003) |
 
 ## Best result so far
 
@@ -52,7 +52,12 @@ None.
 
 ## Outstanding issues
 
-- Bug report to the port author drafted; posting needs a Hugging Face login.
+- Repetition loops on 2 of 140 pages, invisible to the 35-gram guard because box
+  coordinates change on every repeat. Target of I-1.
+- mlx-vlm chunked prefill treats the last prompt token as output for prompts over
+  2,048 tokens (R-002); E-001c tests whether it matters.
+
+- Port bugs reported upstream (discussion 1); waiting on the author.
 
 - Deadline and rubric not yet known.
 - Per-page runtime on this machine unknown; it decides how much of OmniDocBench can

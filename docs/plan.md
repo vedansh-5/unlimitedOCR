@@ -129,11 +129,11 @@ and raw outputs under `results/<experiment id>/`; nothing is overwritten.
 | ID | What | Why | Rough cost |
 |---|---|---|---|
 | E-001 | One page (gundam) and one short PDF (base), default settings | Measures seconds per page and peak memory, which sets the budget for everything else | ~30 min plus 6.7 GB download |
-| E-002 | Fixed OmniDocBench v1.5 subset, about 15 pages per type x 9 types, official evaluator | First parity check of MLX against the paper's Tables 1 and 2 | Depends on E-001; guess 1 to 3 h |
+| E-002 | Fixed OmniDocBench v1.6 subset, 15 pages per type, 140 pages, official evaluator without CDM | First parity check of MLX against the paper (v1.6 row) and the official leaderboard | About 35 to 60 min (from E-001 timings) |
 | E-003 | Own long-document set (2, 5, 10, 20, 40+ pages) from born-digital PDFs, text layer as reference; Distinct-20/35 and edit distance | Reproduces the shape of the paper's Table 3; needed for the loop work | Guess 2 to 4 h |
 
-The full OmniDocBench run (1,355 pages) is only for final numbers. At a guessed 30 to
-60 s per page it is 11 to 23 h, so it runs overnight once, near the end.
+The full OmniDocBench v1.6 run (1,651 pages) is only for final numbers. At 15 to 25 s
+per page (E-001) it is about 7 to 11.5 h, so it runs overnight once, near the end.
 
 ### Improvement candidates, ranked
 

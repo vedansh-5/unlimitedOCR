@@ -92,3 +92,69 @@ Chronological. One entry per meaningful action or decision.
 - **Action:** added `ocr_to_md.py` (runs the model in a separate process, splits pages
   at `<PAGE>`, strips markers with Baidu's `remove_det`) and `checks.py` (repeat,
   compression, Distinct-n, ragged tables, empty pages), with tests.
+
+## 2026-10-23: E-002 setup (OmniDocBench)
+
+- **Decision: v1.6, not v1.5.** The evaluator's current code is v1.6 (`omnidocbench-eval
+  1.6.0`, commit `f133a71`); the paper reports v1.6 (93.92 overall); and the official
+  OmniDocBench leaderboard independently lists Unlimited-OCR on v1.6_full at 94.00
+  overall, Text Edit 0.0394, CDM 95.72, TEDS 90.21, TEDS-S 93.36, Read-order Edit 0.128.
+  v1.5 would only add the DeepSeek-OCR comparison, which this project does not need.
+  Dataset revision `aa1ee96` (1,651 pages, 10 document types).
+- **Decision: no CDM for now.** CDM needs Linux, TeX Live, ImageMagick and Ghostscript,
+  which do not fit a contained macOS setup. Text Edit, Table TEDS / TEDS-S, Read-order
+  Edit and formula Edit distance are measured; Formula CDM and Overall are reported as
+  not measured.
+- **Subset:** 15 pages per document type (all 5 of `historical_document`), seed 42, 140
+  pages. Selection code: `omnidocbench.py select`; list in `results/E-002/subset.txt`.
+- **Evaluator environment:** Python 3.11 venv at `unlimitedOCRvenv/omnidocbench-env`.
+  Its pins leave `pyarrow` and `datasets` open; the newest `pyarrow` needs NumPy 2 while
+  the evaluator pins NumPy 1.24.4. Resolved with `--exclude-newer 2025-09-26` (the v1.5
+  evaluation-code release date). Exact versions: `results/omnidocbench-env-freeze.txt`.
+- **Containment:** `NLTK_DATA` added to `env.sh` so the METEOR metric's data stays in
+  `unlimitedOCRvenv/`.
+
+## 2026-10-23: Port bugs reported upstream
+
+- **Action:** reported both port bugs (decode crash, trailing prompt space) with a
+  minimal repro and a suggested fix:
+  https://huggingface.co/shubhxho/Unlimited-OCR-MLX/discussions/1
+- **Next:** if the port fixes them, drop the matching patches from `run_ocr.py` and pin
+  the new port commit, after checking the output is unchanged.
+
+## 2026-10-23: Faster iteration, dev/test split
+
+- **Problem:** about 30 min per 140-page run makes a dozen experiments cost 6 h.
+- **Instruction:** work on all four speed-ups: a small dev subset, re-running only
+  affected pages, rescoring without a model run when only post-processing changes, and
+  batching. No queued background runs unless asked. No training.
+- **Decision:** E-002 (140 pages) is the test baseline and is not re-run until final
+  confirmation. Ideas are tried on a 45-page dev subset (5 per document type) drawn from
+  pages outside E-002, so the test numbers stay unbiased.
+- **Order:** E-001c (prefill chunking check), then batching checked for identical output
+  against about 20 E-002 pages, then the dev baseline (with batching if it passed), then
+  improvements.
+- **Rejected:** running several model processes in parallel. One GPU is the bottleneck
+  and two copies (about 9.6 GB each) do not fit in 16 GB.
+- **Rejected for speed:** quantization as a speed-up for other experiments, because it
+  changes outputs; it stays a separate experiment (I-2 in the plan).
+
+## 2026-10-23: Batching postponed
+
+- **Finding:** mlx-vlm's batch path drops R-SWA (findings R-003), so batching needs a
+  custom batch cache (about half a day, 1.5 to 2x expected).
+- **Instruction:** skip batching for now; suggest it again if runs feel slow.
+- **Decision:** speed comes from the dev subset, re-running only affected pages, and
+  rescoring without model runs.
+
+## 2026-10-23: E-002 done
+
+- **Result:** reproduction confirmed. Reweighted Text Edit 0.036 [0.024, 0.051], TEDS
+  92.4 [88.7, 95.7], Read-order 0.107 [0.078, 0.143]; paper and leaderboard values all
+  inside the intervals (findings E-002, report 5.1).
+- **Found:** 2 looping pages (historical documents); the 35-gram guard misses them
+  because box coordinates change per repeat. This sets the design of I-1.
+- **Fixed:** loop checks now ignore HTML tags (a sparse table had looked like a loop).
+- **Repo:** benchmark ground truth and evaluator files that quote it are not
+  committed; our predictions, scores and configs are.
+- **Next:** E-001c, then the dev baseline (E-004), then E-003.
