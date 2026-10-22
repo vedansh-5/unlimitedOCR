@@ -1,0 +1,70 @@
+[project]
+name = "unlimited-ocr-mac"
+version = "0.1.0"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "unlimited-ocr-mlx @ git+https://huggingface.co/shubhxho/Unlimited-OCR-MLX@e4c39cde12444991663c8d75a5b8c96d2e78d8e4",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.uv]
+constraint-dependencies = [
+  "annotated-doc==0.0.5",
+  "annotated-types==0.8.0",
+  "anyio==4.14.2",
+  "certifi==2026.7.22",
+  "cffi==2.1.1",
+  "charset-normalizer==3.5.1",
+  "click==8.4.2",
+  "colorama==0.4.6 ; sys_platform == 'win32'",
+  "fastapi==0.141.1",
+  "filelock==3.32.4",
+  "fsspec==2026.7.0",
+  "h11==0.16.0",
+  "hf-xet==1.6.0 ; platform_machine == 'AMD64' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64'",
+  "httpcore==1.0.9",
+  "httpx==0.28.1",
+  "huggingface-hub==1.28.0",
+  "idna==3.19",
+  "jinja2==3.1.6",
+  "llguidance==1.8.0",
+  "markdown-it-py==4.2.0",
+  "markupsafe==3.0.3",
+  "mdurl==0.1.2",
+  "miniaudio==1.71",
+  "mlx==0.32.1",
+  "mlx-audio==0.5.0",
+  "mlx-metal==0.32.1 ; sys_platform == 'darwin'",
+  "mlx-vlm==0.6.16",
+  "numpy==2.5.2",
+  "opencv-python==5.0.0.93",
+  "packaging==26.3",
+  "pillow==12.3.0",
+  "pycparser==3.0 ; implementation_name != 'PyPy'",
+  "pydantic==2.13.4",
+  "pydantic-core==2.46.4",
+  "pygments==2.21.0",
+  "pymupdf==1.28.2",
+  "python-multipart==0.0.32",
+  "pyyaml==6.0.3",
+  "regex==2026.7.19",
+  "requests==2.34.2",
+  "rich==15.0.0",
+  "safetensors==0.8.0",
+  "scipy==1.18.1",
+  "sentencepiece==0.2.2",
+  "shellingham==1.5.4",
+  "sounddevice==0.5.6",
+  "starlette==1.6.0",
+  "tokenizers==0.22.2",
+  "tqdm==4.70.0",
+  "transformers==5.15.1",
+  "typer==0.27.1",
+  "typing-extensions==4.16.0",
+  "typing-inspection==0.4.4",
+  "urllib3==2.7.0",
+  "uvicorn==0.52.4",
+  "websockets==17.0.1",
+]

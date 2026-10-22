@@ -1,0 +1,5 @@
+unlimitedOCRvenv/
+results/raw/
+__pycache__/
+.DS_Store
+results/*/inputs/
