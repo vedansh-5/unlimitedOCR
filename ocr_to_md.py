@@ -13,12 +13,17 @@ DET_RE = re.compile(r"<\|det\|>([^<\s]+)(?:\s*\[[^\]]*\])?\s*<\|/det\|>(.*)", re
 PAGE_RE = re.compile(r"<page>", re.IGNORECASE)
 
 
+def cut_unclosed_marker(line):
+    start = line.rfind("<|det|>")
+    return line[:start] if start != -1 and "<|/det|>" not in line[start:] else line
+
+
 # Adapted from remove_det in the Unlimited-OCR README (github.com/baidu/Unlimited-OCR, MIT).
-def remove_det(raw):
+def remove_det(raw, repair=False):
     blocks = []
     cur = None
     for line in raw.splitlines():
-        line = line.rstrip()
+        line = (cut_unclosed_marker(line) if repair else line).rstrip()
         if not line:
             continue
         m = DET_RE.match(line)
@@ -43,8 +48,8 @@ def split_pages(raw):
     return pages[1:] if len(pages) > 1 and not pages[0].strip() else pages
 
 
-def to_markdown(raw):
-    return "\n\n".join(page for page in (remove_det(p) for p in split_pages(raw)) if page)
+def to_markdown(raw, repair=False):
+    return "\n\n".join(page for page in (remove_det(p, repair) for p in split_pages(raw)) if page)
 
 
 def run_model(source, out_dir, extra_args=()):

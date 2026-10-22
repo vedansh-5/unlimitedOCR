@@ -23,3 +23,14 @@ def test_page_separator_does_not_leak_markers():
 
 def test_leading_page_separator_does_not_create_an_empty_page():
     assert split_pages("<PAGE>one\n<PAGE>two") == ["one\n", "two"]
+
+
+BROKEN = "<|det|>text [1, 2, 3, 4]<|/det|>fine\n<|det|>text [768, 189,</td><td></td>\nmore <|det|>title [5, 6"
+
+
+def test_unclosed_markers_leak_without_repair():
+    assert "<|det|>" in to_markdown(BROKEN)
+
+
+def test_repair_cuts_unclosed_markers():
+    assert to_markdown(BROKEN, repair=True) == "fine\nmore"

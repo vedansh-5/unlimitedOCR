@@ -21,3 +21,11 @@ def test_select_is_reproducible_and_seed_dependent():
 
     assert names(42) == names(42)
     assert names(42) != names(7)
+
+
+def test_select_skips_excluded_pages():
+    taken = {image_name(p) for p in select(PAGES, 5, 42)}
+    rest = select(PAGES, 5, 42, exclude=taken)
+
+    assert not taken & {image_name(p) for p in rest}
+    assert len(rest) == 10

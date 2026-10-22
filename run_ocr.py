@@ -23,6 +23,11 @@ unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor.__call__ = _guard_call_kee
 
 if __name__ == "__main__":
     argv = sys.argv[1:]
+    if "--content-guard" in argv:
+        argv.remove("--content-guard")
+        from loops import ContentNoRepeatGuard
+
+        unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = ContentNoRepeatGuard
     if "--keep-prompt-space" in argv:
         argv.remove("--keep-prompt-space")
     else:
