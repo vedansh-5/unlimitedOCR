@@ -203,3 +203,92 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   this test cannot separate the two.
 - **Decision:** keep mlx-vlm's default chunked prefill, so all runs stay comparable with
   E-002. Revisit only if long multi-page inputs (E-003) show a problem.
+
+## E-004: Dev baseline, 45 pages (2026-10-23)
+
+- **What and why:** reference point for trying fixes quickly. 5 pages per document type,
+  seed 42, none shared with E-002 (no historical documents left, all 5 are in E-002).
+  Same settings as E-002.
+- **Scores (raw means, not reweighted):** Text Edit 0.0526, Table TEDS 93.50, TEDS-S
+  95.59, Read-order Edit 0.1343. By type, text edit: PPT 0.090, academic 0.004, book
+  0.004, colorful textbook 0.020, exam 0.078, magazine 0.045, newspaper 0.213, note
+  0.002, research report 0.008.
+- **Cost:** 18.3 min model time, 24.4 s per page on average; one page alone took 377 s.
+- **Loop found:** `newspaper_Daily Star 2025-1-8…page_060` repeated "The image contains
+  no text. The horizontal lines are stylistic or background elements and must be
+  ignored…" 555 times as `image_footnote` blocks with new coordinates each time, ran
+  into the 32,768-token cap (`finish_reason: length`), and scored text edit 0.829. Same
+  mechanism as E-002: the 35-gram guard never fires because coordinates change.
+- **Detector:** `loops.py` flags exactly this page (max repeat 555) and nothing else
+  among the 45.
+- **Lesson:** loops are not limited to old scans; one loop page costs as much time as
+  15 normal pages and drives the newspaper average from about 0.05 to 0.21.
+
+## E-005: I-1 loop fix on the dev subset (2026-10-23)
+
+- **Problem:** E-004 page `newspaper_Daily Star…page_060` looped 555 times, hit the
+  token cap and scored text edit 0.829.
+- **Change (one variable):** `omnidocbench.py retry --base E-004 --content-guard`.
+  Pages flagged by `loops.is_loop` (only this one) are re-run with the coordinate-blind
+  guard; all other 44 outputs are copied from E-004 unchanged.
+- **Hypothesis:** with box coordinates ignored, the 35-gram rule sees the repeat and
+  blocks it, so the page finishes normally and its text edit drops.
+
+| | E-004 | E-005 |
+|---|---|---|
+| Looping page: output tokens / time | 32,768 (cap) / 377 s | 1,290 / 19 s |
+| Looping page: finish | length | stop |
+| Looping page: text edit | 0.829 | 0.371 |
+| Dev Text Edit | 0.0526 | 0.0422 |
+| Dev Read-order Edit | 0.1343 | 0.1306 |
+| Dev Table TEDS / TEDS-S | 93.50 / 95.59 | 93.50 / 95.59 |
+
+- **Hypothesis supported:** yes. The retried page now transcribes the puzzles page
+  (title, sudoku grid) instead of looping; the remaining error on it is ordinary OCR
+  error. Dev text edit improves by 20% from one page.
+- **Decision:** keep; confirm on the test subset (E-006).
+
+## E-006: I-1 loop fix on the test subset (2026-10-23)
+
+- **Change:** `omnidocbench.py retry --base E-002 --content-guard`; only the 2 flagged
+  pages re-run, 138 copied from E-002.
+
+| | E-002 | E-006 |
+|---|---|---|
+| `page-8e2f…`: max repeat / text edit / read-order | 58 / 0.959 / 0.290 | 30 / 0.955 / 0.290 |
+| `page-0708…`: max repeat / text edit / read-order / broken marker | 30 / 0.976 / 0.714 / yes | 6 / 0.950 / 0.929 / no |
+| Time on the 2 pages | 21 s + 24 s | 16 s + 7 s |
+| Test Text Edit (raw mean) | 0.0589 | 0.0587 |
+| Test Read-order Edit | 0.1271 | 0.1286 |
+| Test Table TEDS / TEDS-S | 92.35 / 94.91 | 92.35 / 94.91 |
+
+- **Hypothesis supported:** only partly. The guard cuts the repeats and removes the
+  broken marker, but both pages stay almost entirely wrong (text edit about 0.95).
+- **Why:** these are not runaway loops but reading failures. Both are warped scans of
+  vertical classical Chinese; for each column it cannot read, the model writes the same
+  made-up line (`\( \therefore m = \frac{3}{11} \)`). Each copy is short and in its own
+  block, so even the coordinate-blind guard only blocks exact 35-token repeats and the
+  model produces near copies.
+- **Contrast with E-005:** there the page was readable and the loop was the failure;
+  removing it recovered the page. Here the loop is a symptom of not being able to read.
+- **Decision:** keep I-1. Large gain where the loop is the failure (dev), neutral on
+  aggregate where it is not (test: text edit -0.0002, read-order +0.0015 from one page
+  that is wrong either way), and it saves time on every looping page.
+- **Lesson for the report:** loop repair fixes runaway decoding, not unreadable input.
+- **Correction (same night):** the per-page values in this table were first written
+  against the wrong page (read in file order, not by name). Re-checked by page name;
+  totals and conclusion unchanged.
+
+## E-007: I-6 broken-marker repair on the test subset (2026-10-23)
+
+- **Problem:** `page-0708…` in E-002 ended with an unclosed `<|det|>text [768, 189,`
+  that leaked into the Markdown.
+- **Change (one variable):** `omnidocbench.py rescore --base E-002 --repair-markers`;
+  no model run. Only that page's Markdown changed.
+- **Result:** page text edit 0.9755 to 0.9760, read-order unchanged; all headline
+  metrics identical to E-002 (Text Edit 0.0589, TEDS 92.35, R-order 0.1271).
+- **Hypothesis supported:** no measurable effect. The leaked fragment was tiny next to
+  a page that is wrong everywhere else.
+- **Decision:** keep the option (it makes the Markdown clean for users) but it is not a
+  benchmark improvement; not counted as one in the report. Dev has no broken markers,
+  so there is nothing to measure there.

@@ -1,0 +1,553 @@
+2026-10-23 03:23:56.892 | INFO     | src.dataset.end2end_dataset:_collect_page_matches:2054 - [quick-match] using page workers=4
+Matching pages:   0%|                                                                                               | 0/140 [00:00<?, ?it/s]2026-10-23 03:23:56.912 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] PPT_fundamental_theorem_of_calculus___page_006.png: choose=quick_unsplit page_cost=1.2326
+2026-10-23 03:24:00.430 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] book_en_国外数学教材-An Excursion through Elementary Mathematics（初等数学漫游）-An excursion through elementary mathematics, Vol.3 (Caminha Muniz Neto A)_0242.png: choose=split_hungarian page_cost=3.2246
+Matching pages:   4%|###7                                                                                   | 6/140 [00:03<01:18,  1.70it/s]2026-10-23 03:24:01.626 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] PPT_ch7_page_034.png: choose=quick_unsplit page_cost=3.0276
+Matching pages:   5%|####3                                                                                  | 7/140 [00:04<01:33,  1.42it/s]2026-10-23 03:24:02.767 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0017.png: choose=quick_unsplit page_cost=1.0714
+Matching pages:   6%|####9                                                                                  | 8/140 [00:05<01:45,  1.25it/s]2026-10-23 03:24:03.400 | INFO     | src.dataset.end2end_dataset:_maybe_apply_local_text_span_fallback:639 - [text-fallback] book_en_搬书匠-3246-Electronics Cookbook-2017-英文版_page_193.png: gt_idx=[9] edit=1.0000->0.0000 pred_idx=[7]
+Matching pages:   6%|#####5                                                                                 | 9/140 [00:06<01:39,  1.32it/s]Matching pages:  11%|#########2                                                                            | 15/140 [00:08<01:03,  1.97it/s]Matching pages:  12%|##########4                                                                           | 17/140 [00:10<01:13,  1.67it/s]Matching pages:  13%|###########                                                                           | 18/140 [00:11<01:13,  1.65it/s]Matching pages:  14%|###########6                                                                          | 19/140 [00:13<01:50,  1.09it/s]2026-10-23 03:24:12.781 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] PPT_ch7_page_142.png: choose=quick_unsplit page_cost=7.0000
+Matching pages:  14%|############2                                                                         | 20/140 [00:15<02:22,  1.19s/it]Matching pages:  16%|#############5                                                                        | 22/140 [00:19<02:45,  1.40s/it]Matching pages:  18%|###############3                                                                      | 25/140 [00:22<02:24,  1.26s/it]Matching pages:  20%|#################2                                                                    | 28/140 [00:22<01:28,  1.27it/s]Matching pages:  23%|###################6                                                                  | 32/140 [00:23<00:53,  2.03it/s]2026-10-23 03:24:21.867 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0035.png: choose=quick_unsplit page_cost=11.3021
+Matching pages:  24%|####################2                                                                 | 33/140 [00:24<01:11,  1.49it/s]Matching pages:  24%|####################8                                                                 | 34/140 [00:30<02:39,  1.50s/it]Matching pages:  25%|#####################5                                                                | 35/140 [00:55<10:06,  5.77s/it]Matching pages:  26%|######################7                                                               | 37/140 [01:08<10:25,  6.07s/it]Matching pages:  27%|#######################3                                                              | 38/140 [01:32<16:04,  9.45s/it]2026-10-23 03:25:42.112 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] exam_paper_en-file-putnam-archive_1998_Solutions_1998s_page_002.png: stage=page_total elapsed=82.09s
+Matching pages:  28%|#######################9                                                              | 39/140 [01:45<17:15, 10.26s/it]Matching pages:  29%|#########################1                                                            | 41/140 [01:45<10:33,  6.40s/it]Matching pages:  32%|###########################6                                                          | 45/140 [01:47<05:12,  3.29s/it]Matching pages:  33%|############################2                                                         | 46/140 [01:48<04:29,  2.87s/it]2026-10-23 03:25:53.327 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] exam_paper_en-file-putnam-archive_1991_Problems_1991_page_001.png: stage=page_total elapsed=93.62s
+Matching pages:  34%|############################8                                                         | 47/140 [01:56<05:58,  3.85s/it]Matching pages:  36%|##############################7                                                       | 50/140 [02:06<05:32,  3.70s/it]Matching pages:  37%|###############################9                                                      | 52/140 [02:07<04:00,  2.73s/it]Matching pages:  39%|#################################1                                                    | 54/140 [02:09<03:12,  2.23s/it]Matching pages:  42%|####################################2                                                 | 59/140 [02:13<01:58,  1.46s/it]Matching pages:  44%|######################################                                                | 62/140 [02:14<01:22,  1.06s/it]Matching pages:  45%|######################################7                                               | 63/140 [02:16<01:39,  1.29s/it]2026-10-23 03:26:15.438 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] exam_paper_en-file-putnam-archive_2007_Solutions_2007s_page_003.png: choose=split_hungarian page_cost=74.0312
+2026-10-23 03:26:15.438 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] exam_paper_en-file-putnam-archive_2007_Solutions_2007s_page_003.png: stage=page_total elapsed=113.57s
+Matching pages:  46%|#######################################3                                              | 64/140 [02:18<01:41,  1.34s/it]Matching pages:  49%|#########################################7                                            | 68/140 [02:21<01:12,  1.01s/it]Matching pages:  50%|###########################################                                           | 70/140 [02:22<01:03,  1.10it/s]Matching pages:  51%|###########################################6                                          | 71/140 [02:22<00:54,  1.26it/s]Matching pages:  53%|#############################################4                                        | 74/140 [02:28<01:26,  1.31s/it]Matching pages:  54%|##############################################                                        | 75/140 [02:29<01:14,  1.15s/it]Matching pages:  56%|###############################################9                                      | 78/140 [02:29<00:48,  1.28it/s]Matching pages:  59%|##################################################3                                   | 82/140 [02:37<01:12,  1.26s/it]2026-10-23 03:26:35.263 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] notes_9e951846094758afac08c620144e3a76_14.jpg: choose=quick_unsplit page_cost=6.7859
+Matching pages:  59%|##################################################9                                   | 83/140 [02:38<01:10,  1.24s/it]Matching pages:  60%|###################################################6                                  | 84/140 [02:38<01:03,  1.13s/it]Matching pages:  66%|#########################################################1                            | 93/140 [02:39<00:19,  2.38it/s]Matching pages:  69%|##########################################################9                           | 96/140 [03:04<01:41,  2.31s/it]Matching pages:  71%|############################################################8                         | 99/140 [03:08<01:24,  2.06s/it]Matching pages:  71%|############################################################7                        | 100/140 [03:08<01:16,  1.90s/it]2026-10-23 03:27:08.264 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] page-773aa2c0-3413-41d0-b019-a573da251455.png: choose=quick_unsplit page_cost=1.4011
+Matching pages:  72%|#############################################################3                       | 101/140 [03:11<01:17,  1.99s/it]Matching pages:  73%|#############################################################9                       | 102/140 [03:17<01:38,  2.60s/it]2026-10-23 03:27:14.064 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] page-8f6792bd-b5e4-435e-b1b0-1b2daa3f7234.png: choose=quick_unsplit page_cost=5.2857
+Matching pages:  74%|###############################################################1                     | 104/140 [03:18<01:12,  2.02s/it]Matching pages:  75%|###############################################################7                     | 105/140 [03:24<01:35,  2.72s/it]Matching pages:  76%|################################################################3                    | 106/140 [03:28<01:41,  2.98s/it]2026-10-23 03:27:25.944 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] jiaocaineedrop_jiaocai_needrop_en_2820.jpg: stage=page_total elapsed=100.82s
+Matching pages:  76%|################################################################9                    | 107/140 [03:29<01:20,  2.43s/it]2026-10-23 03:27:27.669 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] page-aee8f1d9-7240-4517-b615-389594556d57.png: choose=split_hungarian page_cost=1.8810
+Matching pages:  77%|#################################################################5                   | 108/140 [03:30<01:12,  2.25s/it]Matching pages:  78%|##################################################################1                  | 109/140 [03:33<01:10,  2.28s/it]2026-10-23 03:27:41.110 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] page-b21c7247-a843-4316-a44d-c3365077f077.png: choose=quick_unsplit page_cost=11.0509
+Matching pages:  79%|###################################################################3                 | 111/140 [03:44<01:46,  3.67s/it]Matching pages:  81%|####################################################################6                | 113/140 [03:44<01:02,  2.31s/it]Matching pages:  81%|#####################################################################2               | 114/140 [03:46<01:00,  2.33s/it]Matching pages:  82%|#####################################################################8               | 115/140 [04:04<02:29,  5.98s/it]Matching pages:  83%|######################################################################4              | 116/140 [04:13<02:41,  6.73s/it]Matching pages:  84%|#######################################################################              | 117/140 [04:17<02:13,  5.82s/it]Matching pages:  84%|#######################################################################6             | 118/140 [04:35<03:23,  9.25s/it]2026-10-23 03:28:36.078 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] jiaocaineedrop_jiaocai_needrop_en_2604.jpg: stage=page_total elapsed=173.37s
+Matching pages:  86%|########################################################################8            | 120/140 [04:39<02:00,  6.03s/it]Matching pages:  88%|##########################################################################6          | 123/140 [04:41<01:00,  3.53s/it]2026-10-23 03:28:41.184 | INFO     | src.dataset.end2end_dataset:_maybe_apply_local_text_span_fallback:639 - [text-fallback] scihub_pssa.201330411.pdf_0.jpg: gt_idx=[14] edit=1.0000->0.2000 pred_idx=[12]
+Matching pages:  93%|##############################################################################9      | 130/140 [04:44<00:15,  1.57s/it]Matching pages:  94%|###############################################################################5     | 131/140 [04:51<00:19,  2.18s/it]Matching pages:  96%|#################################################################################9   | 135/140 [04:52<00:07,  1.48s/it]Matching pages:  97%|##################################################################################5  | 136/140 [04:53<00:05,  1.44s/it]Matching pages:  99%|###################################################################################7 | 138/140 [04:54<00:02,  1.10s/it]2026-10-23 03:29:27.684 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] page-d9a27df2-127e-4f76-bb61-e7e741078bef.png: stage=page_total elapsed=117.63s
+Matching pages:  99%|####################################################################################3| 139/140 [05:30<00:06,  6.63s/it]2026-10-23 03:30:18.853 | INFO     | src.dataset.end2end_dataset:_match_display_formula_candidates:1568 - [formula-match-candidate] yanbaopptmerge_9081a70ff98b3e7d640660a9412c447d.pdf_1287.jpg: choose=quick_unsplit page_cost=63.9510
+2026-10-23 03:30:18.853 | WARNING  | src.dataset.end2end_dataset:_log_slow_stage:115 - [match-stage-slow] yanbaopptmerge_9081a70ff98b3e7d640660a9412c447d.pdf_1287.jpg: stage=page_total elapsed=106.55s
+Matching pages: 100%|#####################################################################################| 140/140 [06:21<00:00, 14.75s/it]Matching pages: 100%|#####################################################################################| 140/140 [06:21<00:00,  2.73s/it]
+###### Process:  pred_quick_match
+【text_block】
+Edit_dist:
+---------------  ---------
+ALL_page_avg     0.0586982
+edit_whole       0.0799252
+edit_sample_avg  0.11429
+---------------  ---------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  -----------
+ALL                               0.0586982
+None                              0.0161103
+colorful_backgroud                0.0121866
+data_source: PPT2PDF              0.00617167
+data_source: academic_literature  0.0174913
+data_source: book                 0.0200352
+data_source: colorful_textbook    0.0499546
+data_source: exam_paper           0.0520699
+data_source: historical_document  0.55242
+data_source: magazine             0.0188847
+data_source: newspaper            0.0932511
+data_source: note                 0.0946498
+data_source: research_report      0.000724581
+fuzzy_content                     0.950298
+fuzzy_scan                        0
+geometric_deformation             0.825032
+language: en_ch_mixed             0.0743566
+language: english                 0.018531
+language: simplified_chinese      0.0680191
+language: traditional_chinese     0.451793
+layout: 1andmore_column           0.0254963
+layout: double_column             0.0203628
+layout: other_layout              0.127006
+layout: single_column             0.0312898
+layout: three_column              0.0514199
+subset: equation_hard             0.0442387
+subset: layout_hard               0.241883
+subset: table_hard                0.00356805
+subset: v1.5                      0.0429626
+text_O-shaped_wrap                0.0820513
+watermark                         0.0857452
+--------------------------------  -----------
+====================================================================================================
+【display_formula】
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.12047
+edit_whole       0.136238
+edit_sample_avg  0.158655
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  ---------
+ALL                               0.12047
+None                              0.0618279
+colorful_backgroud                0.21875
+data_source: PPT2PDF              0.124093
+data_source: academic_literature  0.17399
+data_source: book                 0.156145
+data_source: colorful_textbook    0.133333
+data_source: exam_paper           0.0133105
+data_source: note                 0.125683
+language: en_ch_mixed             0.401099
+language: english                 0.0995428
+language: simplified_chinese      0.127125
+layout: 1andmore_column           0.11462
+layout: double_column             0.0142509
+layout: other_layout              0.210313
+layout: single_column             0.12516
+layout: three_column              0.210162
+subset: equation_hard             0.155443
+subset: layout_hard               0.273908
+subset: v1.5                      0.0775977
+text_O-shaped_wrap                0.133333
+--------------------------------  ---------
+====================================================================================================
+[TEDS] workers=4 samples=51 timeout=120.0
+TEDS:   0%|                                                                                                          | 0/51 [00:00<?, ?it/s]TEDS:   2%|#9                                                                                                | 1/51 [00:01<01:17,  1.55s/it]TEDS:  10%|#########6                                                                                        | 5/51 [00:03<00:30,  1.49it/s]TEDS:  16%|###############3                                                                                  | 8/51 [00:05<00:26,  1.59it/s]TEDS:  22%|####################9                                                                            | 11/51 [00:05<00:17,  2.31it/s]TEDS:  24%|######################8                                                                          | 12/51 [00:07<00:23,  1.67it/s]TEDS:  29%|############################5                                                                    | 15/51 [00:07<00:14,  2.42it/s]TEDS:  31%|##############################4                                                                  | 16/51 [00:09<00:20,  1.67it/s]TEDS:  37%|####################################1                                                            | 19/51 [00:09<00:12,  2.61it/s]TEDS:  39%|######################################                                                           | 20/51 [00:11<00:19,  1.61it/s]TEDS:  43%|#########################################8                                                       | 22/51 [00:11<00:12,  2.23it/s]TEDS:  45%|###########################################7                                                     | 23/51 [00:11<00:11,  2.54it/s]TEDS:  47%|#############################################6                                                   | 24/51 [00:13<00:17,  1.54it/s]TEDS:  49%|###############################################5                                                 | 25/51 [00:13<00:13,  1.91it/s]TEDS:  51%|#################################################4                                               | 26/51 [00:13<00:10,  2.37it/s]TEDS:  55%|#####################################################2                                           | 28/51 [00:15<00:13,  1.66it/s]TEDS:  57%|#######################################################1                                         | 29/51 [00:15<00:11,  1.92it/s]TEDS:  61%|##########################################################9                                      | 31/51 [00:15<00:08,  2.46it/s]TEDS:  63%|############################################################8                                    | 32/51 [00:17<00:11,  1.61it/s]TEDS:  65%|##############################################################7                                  | 33/51 [00:17<00:10,  1.73it/s]TEDS:  67%|################################################################6                                | 34/51 [00:18<00:08,  1.90it/s]TEDS:  69%|##################################################################5                              | 35/51 [00:19<00:11,  1.44it/s]TEDS:  71%|####################################################################4                            | 36/51 [00:19<00:09,  1.66it/s]TEDS:  73%|######################################################################3                          | 37/51 [00:19<00:07,  1.87it/s]TEDS:  75%|########################################################################2                        | 38/51 [00:21<00:09,  1.37it/s]TEDS:  76%|##########################################################################1                      | 39/51 [00:21<00:07,  1.56it/s]TEDS:  78%|############################################################################                     | 40/51 [00:22<00:06,  1.64it/s]TEDS:  80%|#############################################################################9                   | 41/51 [00:22<00:04,  2.08it/s]TEDS:  82%|###############################################################################8                 | 42/51 [00:24<00:07,  1.18it/s]TEDS:  86%|###################################################################################6             | 44/51 [00:25<00:05,  1.25it/s]TEDS:  90%|#######################################################################################4         | 46/51 [00:25<00:02,  1.79it/s]TEDS:  92%|#########################################################################################3       | 47/51 [00:27<00:02,  1.43it/s]TEDS:  94%|###########################################################################################2     | 48/51 [00:27<00:01,  1.52it/s]TEDS:  98%|###############################################################################################  | 50/51 [00:27<00:00,  2.38it/s]TEDS: 100%|#################################################################################################| 51/51 [00:28<00:00,  2.29it/s]TEDS: 100%|#################################################################################################| 51/51 [00:28<00:00,  1.80it/s]
+【table】
+TEDS:
+---  --------
+all  0.923651
+---  --------
+====================================================================================================
+TEDS_structure_only:
+---  -------
+all  0.94898
+---  -------
+====================================================================================================
+Edit_dist:
+---------------  ---------
+ALL_page_avg     0.0695997
+edit_whole       0.107947
+edit_sample_avg  0.0679353
+---------------  ---------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  ----------
+ALL                               0.0695997
+colorful_backgroud                0.00147493
+data_source: PPT2PDF              0.224237
+data_source: academic_literature  0.133312
+data_source: colorful_textbook    0.116265
+data_source: exam_paper           0.0193957
+data_source: magazine             0
+data_source: note                 0.108794
+data_source: research_report      0.0432259
+fuzzy_scan                        0.00826446
+language: en_ch_mixed             0.199183
+language: english                 0.0814726
+language: simplified_chinese      0.055522
+layout: 1andmore_column           0.0747133
+layout: double_column             0
+layout: other_layout              0.0803043
+layout: single_column             0.0742683
+subset: table_hard                0.0866643
+subset: v1.5                      0.065618
+watermark                         0.0596206
+--------------------------------  ----------
+====================================================================================================
+TEDS:
+--------------------------------  --------
+ALL                               0.923539
+colorful_backgroud                0.996599
+data_source: PPT2PDF              0.966082
+data_source: academic_literature  0.850853
+data_source: colorful_textbook    0.961866
+data_source: exam_paper           0.976396
+data_source: magazine             1
+data_source: note                 0.782881
+data_source: research_report      0.942455
+fuzzy_scan                        0.988813
+language: en_ch_mixed             0.936521
+language: english                 0.914299
+language: simplified_chinese      0.925739
+layout: 1andmore_column           0.865956
+layout: double_column             1
+layout: other_layout              0.954379
+layout: single_column             0.912367
+subset: table_hard                0.91036
+subset: v1.5                      0.926614
+watermark                         0.928571
+--------------------------------  --------
+====================================================================================================
+TEDS_structure_only:
+--------------------------------  --------
+ALL                               0.949084
+colorful_backgroud                1
+data_source: PPT2PDF              1
+data_source: academic_literature  0.936194
+data_source: colorful_textbook    0.971154
+data_source: exam_paper           0.982143
+data_source: magazine             1
+data_source: note                 0.852871
+data_source: research_report      0.950937
+fuzzy_scan                        1
+language: en_ch_mixed             0.942308
+language: english                 0.964552
+language: simplified_chinese      0.944251
+layout: 1andmore_column           0.936761
+layout: double_column             1
+layout: other_layout              0.967111
+layout: single_column             0.937827
+subset: table_hard                0.942077
+subset: v1.5                      0.95072
+watermark                         0.9375
+--------------------------------  --------
+====================================================================================================
+【reading_order】
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.128636
+edit_whole       0.215712
+edit_sample_avg  0.128636
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  ---------
+ALL                               0.128636
+None                              0.042989
+colorful_backgroud                0.0263068
+data_source: PPT2PDF              0.0222222
+data_source: academic_literature  0.0818519
+data_source: book                 0.0902597
+data_source: colorful_textbook    0.109448
+data_source: exam_paper           0.102415
+data_source: historical_document  0.423999
+data_source: magazine             0.0422564
+data_source: newspaper            0.219523
+data_source: note                 0.124502
+data_source: research_report      0.266789
+fuzzy_content                     0.928571
+fuzzy_scan                        0.0849673
+geometric_deformation             0.611426
+language: en_ch_mixed             0.0676471
+language: english                 0.0768892
+language: simplified_chinese      0.176542
+language: traditional_chinese     0.457418
+layout: 1andmore_column           0.0645056
+layout: double_column             0.040364
+layout: other_layout              0.190097
+layout: single_column             0.112023
+layout: three_column              0.223859
+subset: equation_hard             0
+subset: layout_hard               0.209073
+subset: table_hard                0.192063
+subset: v1.5                      0.120989
+text_O-shaped_wrap                0.388889
+watermark                         0.188312
+--------------------------------  ---------
+====================================================================================================
+========== RUNTIME_ENVIRONMENT pred_quick_match ==========
+save_name: pred_quick_match
+[system]
+platform: macOS-27.0.1-arm64-arm-64bit
+python_version: 3.11.17 (main, Oct 21 2026, 17:46:23) [Clang 23.1.3 ]
+python_executable: /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env/bin/python
+python_prefix: /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env
+conda_env: 
+conda_prefix: 
+libc: 
+uname: Darwin Vedanshs-MacBook.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64 arm
+[system_packages]
+package_manager: unavailable
+fontconfig: unavailable (no supported package manager found)
+ghostscript: unavailable (no supported package manager found)
+imagemagick: unavailable (no supported package manager found)
+latexml: unavailable (no supported package manager found)
+python3: unavailable (no supported package manager found)
+python3-pip: unavailable (no supported package manager found)
+python3-setuptools: unavailable (no supported package manager found)
+python3-wheel: unavailable (no supported package manager found)
+texlive-base: unavailable (no supported package manager found)
+texlive-binaries: unavailable (no supported package manager found)
+texlive-fonts-recommended: unavailable (no supported package manager found)
+texlive-lang-chinese: unavailable (no supported package manager found)
+texlive-lang-cjk: unavailable (no supported package manager found)
+texlive-latex-base: unavailable (no supported package manager found)
+texlive-latex-extra: unavailable (no supported package manager found)
+texlive-plain-generic: unavailable (no supported package manager found)
+[python_packages]
+Levenshtein: 0.25.1
+Pillow: 10.4.0
+PyYAML: 6.0.2
+apted: 1.0.3
+beautifulsoup4: 4.11.1
+evaluate: 0.4.3
+func-timeout: 4.3.5
+loguru: 0.7.2
+lxml: 4.9.1
+matplotlib: 3.7.5
+nltk: 3.9.1
+numpy: 1.24.4
+pandas: 2.0.3
+pip: unavailable
+pylatexenc: 2.10
+scipy: 1.10.1
+setuptools: unavailable
+tabulate: 0.9.0
+tqdm: 4.67.1
+wheel: unavailable
+[external_tools]
+convert: path=/opt/homebrew/bin/convert returncode=0 output=WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert" | Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules
+ghostscript: path=/opt/homebrew/bin/gs returncode=0 output=10.07.1
+identify: path=/opt/homebrew/bin/identify returncode=0 output=Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd
+kpsewhich: path=/Library/TeX/texbin/kpsewhich returncode=0 output=kpathsea version 6.4.2 | Copyright 2026 Karl Berry & Olaf Weber. | License LGPLv2.1+: GNU Lesser GPL version 2.1 or later <https://gnu.org/licenses/lgpl.html> | This is free software: you are free to change and redistribute it. | There is NO WARRANTY, to the extent permitted by law.
+latexmlc: path=latexmlc returncode=None output=unavailable (FileNotFoundError: [Errno 2] No such file or directory: 'latexmlc')
+magick: path=/opt/homebrew/bin/magick returncode=0 output=Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd
+pdflatex: path=/Library/TeX/texbin/pdflatex returncode=0 output=pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) | kpathsea version 6.4.2 | Copyright 2026 Han The Thanh (pdfTeX) et al. | There is NO warranty.  Redistribution of this software is | covered by the terms of both the pdfTeX copyright and
+tlmgr: path=/Library/TeX/texbin/tlmgr returncode=0 output=tlmgr revision 79591 (2026-07-05 13:56:20 +0200) | tlmgr using installation: /usr/local/texlive/2026basic | TeX Live (https://tug.org/texlive) version 2026
+[texlive]
+cjk_font_family: gkai
+cjk_sty: status=missing path= version=unavailable date= header=
+cjk_font_fd: status=missing path= version=unavailable date= header=
+
+========== END_RUNTIME_ENVIRONMENT pred_quick_match ==========
+========== STAGE_EXECUTION pred_quick_match ==========
+save_name: pred_quick_match
+[page_match]
+workers: 4
+page_count: 140
+quick_match_truncated_timeout_sec: 300
+match_timeout_sec: 420
+fallbacks:
+  - page_timeout: count=0
+  - quick_match_timeout: count=0
+[table.TEDS]
+workers: 4
+timeout_sec: 120.0
+sample_count: 51
+timeout_case_count: 0
+error_case_count: 0
+exception_case_count: 0
+
+========== END_STAGE_EXECUTION pred_quick_match ==========
+========== FINAL_EVAL_RUN_REPORT pred_quick_match ==========
+{
+  "notebook_metric_summary": {
+    "metrics": {
+      "display_formula_CDM": {
+        "notebook_value": null,
+        "page_denominator": null,
+        "raw": null
+      },
+      "reading_order_Edit_dist": {
+        "notebook_value": 0.12863580867651378,
+        "page_denominator": 140,
+        "raw": 0.12863580867651378
+      },
+      "table_TEDS": {
+        "notebook_value": 92.35389323659786,
+        "page_denominator": 37,
+        "raw": 0.9235389323659786
+      },
+      "table_TEDS_structure_only": {
+        "notebook_value": 94.90844465073488,
+        "page_denominator": 37,
+        "raw": 0.9490844465073488
+      },
+      "text_block_Edit_dist": {
+        "notebook_value": 0.058698195738116715,
+        "page_denominator": 137,
+        "raw": 0.058698195738116715
+      }
+    },
+    "overall_notebook": null,
+    "source": "tools/generate_result_tables.ipynb#cell-2"
+  },
+  "page_denominators": {
+    "display_formula": {
+      "Edit_dist": {
+        "ALL": 21
+      }
+    },
+    "reading_order": {
+      "Edit_dist": {
+        "ALL": 140
+      }
+    },
+    "table": {
+      "Edit_dist": {
+        "ALL": 37
+      },
+      "TEDS": {
+        "ALL": 37
+      },
+      "TEDS_structure_only": {
+        "ALL": 37
+      }
+    },
+    "text_block": {
+      "Edit_dist": {
+        "ALL": 137
+      }
+    }
+  },
+  "runtime_environment": {
+    "external_tools": {
+      "convert": {
+        "output": "WARNING: The convert command is deprecated in IMv7, use \"magick\" instead of \"convert\" or \"magick convert\" | Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules",
+        "path": "/opt/homebrew/bin/convert",
+        "returncode": 0
+      },
+      "ghostscript": {
+        "output": "10.07.1",
+        "path": "/opt/homebrew/bin/gs",
+        "returncode": 0
+      },
+      "identify": {
+        "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd",
+        "path": "/opt/homebrew/bin/identify",
+        "returncode": 0
+      },
+      "kpsewhich": {
+        "output": "kpathsea version 6.4.2 | Copyright 2026 Karl Berry & Olaf Weber. | License LGPLv2.1+: GNU Lesser GPL version 2.1 or later <https://gnu.org/licenses/lgpl.html> | This is free software: you are free to change and redistribute it. | There is NO WARRANTY, to the extent permitted by law.",
+        "path": "/Library/TeX/texbin/kpsewhich",
+        "returncode": 0
+      },
+      "latexmlc": {
+        "output": "unavailable (FileNotFoundError: [Errno 2] No such file or directory: 'latexmlc')",
+        "path": "latexmlc",
+        "returncode": null
+      },
+      "magick": {
+        "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd",
+        "path": "/opt/homebrew/bin/magick",
+        "returncode": 0
+      },
+      "pdflatex": {
+        "output": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) | kpathsea version 6.4.2 | Copyright 2026 Han The Thanh (pdfTeX) et al. | There is NO warranty.  Redistribution of this software is | covered by the terms of both the pdfTeX copyright and",
+        "path": "/Library/TeX/texbin/pdflatex",
+        "returncode": 0
+      },
+      "tlmgr": {
+        "output": "tlmgr revision 79591 (2026-07-05 13:56:20 +0200) | tlmgr using installation: /usr/local/texlive/2026basic | TeX Live (https://tug.org/texlive) version 2026",
+        "path": "/Library/TeX/texbin/tlmgr",
+        "returncode": 0
+      }
+    },
+    "python_packages": {
+      "Levenshtein": "0.25.1",
+      "Pillow": "10.4.0",
+      "PyYAML": "6.0.2",
+      "apted": "1.0.3",
+      "beautifulsoup4": "4.11.1",
+      "evaluate": "0.4.3",
+      "func-timeout": "4.3.5",
+      "loguru": "0.7.2",
+      "lxml": "4.9.1",
+      "matplotlib": "3.7.5",
+      "nltk": "3.9.1",
+      "numpy": "1.24.4",
+      "pandas": "2.0.3",
+      "pip": "unavailable",
+      "pylatexenc": "2.10",
+      "scipy": "1.10.1",
+      "setuptools": "unavailable",
+      "tabulate": "0.9.0",
+      "tqdm": "4.67.1",
+      "wheel": "unavailable"
+    },
+    "system": {
+      "conda_env": "",
+      "conda_prefix": "",
+      "libc": "",
+      "os_release": {},
+      "platform": "macOS-27.0.1-arm64-arm-64bit",
+      "python_executable": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env/bin/python",
+      "python_prefix": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env",
+      "python_version": "3.11.17 (main, Oct 21 2026, 17:46:23) [Clang 23.1.3 ]",
+      "uname": "Darwin Vedanshs-MacBook.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64 arm"
+    },
+    "system_packages": {
+      "package_manager": "unavailable",
+      "tracked_packages": {
+        "fontconfig": "unavailable (no supported package manager found)",
+        "ghostscript": "unavailable (no supported package manager found)",
+        "imagemagick": "unavailable (no supported package manager found)",
+        "latexml": "unavailable (no supported package manager found)",
+        "python3": "unavailable (no supported package manager found)",
+        "python3-pip": "unavailable (no supported package manager found)",
+        "python3-setuptools": "unavailable (no supported package manager found)",
+        "python3-wheel": "unavailable (no supported package manager found)",
+        "texlive-base": "unavailable (no supported package manager found)",
+        "texlive-binaries": "unavailable (no supported package manager found)",
+        "texlive-fonts-recommended": "unavailable (no supported package manager found)",
+        "texlive-lang-chinese": "unavailable (no supported package manager found)",
+        "texlive-lang-cjk": "unavailable (no supported package manager found)",
+        "texlive-latex-base": "unavailable (no supported package manager found)",
+        "texlive-latex-extra": "unavailable (no supported package manager found)",
+        "texlive-plain-generic": "unavailable (no supported package manager found)"
+      }
+    },
+    "texlive": {
+      "cjk_font_family": "gkai",
+      "cjk_font_fd": {
+        "date": "",
+        "header": "",
+        "path": "",
+        "status": "missing",
+        "version": "unavailable"
+      },
+      "cjk_sty": {
+        "date": "",
+        "header": "",
+        "path": "",
+        "status": "missing",
+        "version": "unavailable"
+      }
+    }
+  },
+  "save_name": "pred_quick_match",
+  "stage_execution": {
+    "metrics": {
+      "table": {
+        "TEDS": {
+          "error_case_count": 0,
+          "error_cases": [],
+          "exception_case_count": 0,
+          "exception_cases": [],
+          "sample_count": 51,
+          "timeout_case_count": 0,
+          "timeout_cases": [],
+          "timeout_sec": 120.0,
+          "workers": 4
+        }
+      }
+    },
+    "page_match": {
+      "fallbacks": {
+        "page_timeout": {
+          "cases": [],
+          "count": 0
+        },
+        "quick_match_timeout": {
+          "cases": [],
+          "count": 0
+        }
+      },
+      "match_timeout_sec": 420,
+      "page_count": 140,
+      "quick_match_truncated_timeout_sec": 300,
+      "workers": 4
+    }
+  }
+}
+========== END_FINAL_EVAL_RUN_REPORT pred_quick_match ==========
+[final-eval-run-report] saved to ./result/pred_quick_match_run_summary.json
+[runtime-environment-json] saved to ./result/pred_quick_match_runtime_environment.json
+[runtime-environment-log] saved to ./result/pred_quick_match_runtime_environment.log
+[stage-execution-json] saved to ./result/pred_quick_match_stage_execution.json
+[stage-execution-log] saved to ./result/pred_quick_match_stage_execution.log

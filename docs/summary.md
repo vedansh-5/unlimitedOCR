@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-23 (after E-002)
+Last updated: 2026-10-23, night (after E-006)
 
 ## Objective
 
@@ -24,7 +24,9 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 | `ocr_to_md.py`, `checks.py` | Done, with tests |
 | Smoke test (E-001) | Done: 17 s per dense gundam page, about 8 s per base page, peak 9.6 GB |
 | Test baseline (E-002, 140 OmniDocBench v1.6 pages) | Done: matches the paper within sampling error |
-| Improvements | None tried |
+| Dev baseline (E-004, 45 pages) | Done: Text Edit 0.053, TEDS 93.5, R-order 0.134; 1 runaway loop |
+| I-1 loop repair | Kept. Dev text edit 0.053 to 0.042; neutral on test (its 2 loop pages are unreadable scans) |
+| I-6 broken-marker repair | No effect on scores (E-007); kept as a clean-output option only |
 
 ## Baseline
 
@@ -35,7 +37,7 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 
 ## Best result so far
 
-None.
+Dev: Text Edit 0.042 with I-1 (from 0.053). Test: unchanged within noise.
 
 ## Key findings so far (from reading, not experiments)
 
@@ -66,7 +68,10 @@ None.
 - Hugging Face currently serves OmniDocBench v1.6; the v1.5 revision still has to be
   located.
 
-## Next steps
+## Next steps (where to pick up)
 
-1. Baseline on a fixed OmniDocBench subset with the official evaluator (E-002).
-2. Choose the first improvement from the ranked list in `plan.md`.
+1. E-003: long documents (`long_docs.py make` is done; run
+   `run_batch.py --exp E-003 --inputs results/E-003/inputs`, then `long_docs.py score`).
+   About 30 to 35 min. Not started overnight on purpose.
+2. Apply I-1 to long documents: per-page retry of looping pages in gundam mode.
+3. Next improvements from `plan.md`: I-2 quantization, I-3 fewer experts.

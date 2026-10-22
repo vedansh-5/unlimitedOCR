@@ -1,0 +1,14 @@
+Loading baidu/Unlimited-OCR with MLX-VLM …
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 4590.63it/s]
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 2 OCR request(s).
+[1/2] page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-006/raw/page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.md | 1 image(s), gundam, 1331 generated tokens, 16.2s, 91.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-006/raw/page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.json
+[2/2] page-07088b2f-f9d6-4c38-9c97-d7f98bc3d556.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-006/raw/page-07088b2f-f9d6-4c38-9c97-d7f98bc3d556.md | 1 image(s), gundam, 468 generated tokens, 7.0s, 88.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-006/raw/page-07088b2f-f9d6-4c38-9c97-d7f98bc3d556.json
+Finished 2 complete request(s); 0 incomplete; 0 skipped.

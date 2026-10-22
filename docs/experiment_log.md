@@ -164,3 +164,36 @@ Chronological. One entry per meaningful action or decision.
 - **Result:** disabling chunked prefill changed one box coordinate by 1 on page 10 and
   nothing else (findings E-001c).
 - **Decision:** keep the default; the deviation is measured and negligible here.
+
+## 2026-10-23: Fixes for what E-002 found
+
+- **Instruction:** be fix-oriented: after each test, implement the fix for what it
+  found and measure it.
+- **I-1 (loops):** `loops.py` detects loops on raw output with box coordinates ignored
+  (6+ repeats of one block, or an unclosed marker; threshold fixed in advance, not
+  tuned on test pages). On E-002 it flags exactly the 2 real loops and nothing else.
+  `ContentNoRepeatGuard` applies Baidu's 35-gram rule to the text with `<|det|>` spans
+  removed; `run_ocr.py --content-guard` enables it. `omnidocbench.py retry` copies a
+  baseline's clean pages and re-runs only flagged ones with the guard.
+- **I-6 (broken markers):** `to_markdown(repair=True)` cuts unclosed `<|det|>`
+  markers. Behind `--repair-markers` so the baseline keeps Baidu's exact post-processing;
+  `omnidocbench.py rescore` applies it without a model run.
+- **Order:** dev (E-004) first, then test (E-002). If the dev subset has no flagged
+  pages, the fix is applied to the test pages directly, since nothing is tuned.
+
+## 2026-10-23: E-004, E-005, E-006 (dev baseline and loop repair)
+
+- **E-004 dev baseline:** Text Edit 0.0526, TEDS 93.5, R-order 0.134. One newspaper page
+  looped 555 times and hit the token cap (377 s).
+- **E-005 (I-1 on dev):** the looping page re-run with the coordinate-blind guard
+  finished in 19 s; dev Text Edit 0.0526 to 0.0422.
+- **E-006 (I-1 on test):** the 2 looping pages are unreadable vertical Chinese scans;
+  repetition dropped but text stayed wrong. Test Text Edit 0.0589 to 0.0587, R-order
+  0.1271 to 0.1286.
+- **Decision:** keep I-1 (helps runaway loops, neutral otherwise, saves time).
+- **Instruction:** user going to sleep; stop at a clean point, no long run overnight.
+  E-003 deferred to the next session.
+- **E-007 (I-6 on test):** marker repair changed only the broken page and moved no
+  metric. Kept as an output-cleaning option, not reported as an improvement.
+- **Correction:** E-006 per-page values were first attributed to the wrong pages;
+  fixed after re-checking by page name. Totals unchanged.

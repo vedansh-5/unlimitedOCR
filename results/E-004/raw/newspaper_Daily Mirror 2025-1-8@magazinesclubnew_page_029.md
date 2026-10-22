@@ -1,0 +1,39 @@
+<|det|>header [32, 26, 130, 41]<|/det|>mirror.co.uk
+<|det|>header [776, 25, 969, 40]<|/det|>WEDNESDAY 08.01.2025 DAILY MIRROR
+<|det|>page_number [949, 26, 969, 38]<|/det|>29
+<|det|>image [51, 66, 223, 171]<|/det|>
+<|det|>image_footnote [50, 172, 221, 182]<|/det|>FAMILY Harry, Holly, Emma and Steve
+<|det|>title [47, 189, 142, 203]<|/det|>EXCLUSIVE
+<|det|>title [46, 206, 160, 216]<|/det|>BY MATTHEW BARBOUR
+<|det|>text [46, 220, 200, 290]<|/det|>At the age of four, while her little pals were running about, laughing and giggling, Emma Griffin remembers “playing with dead people”.
+<|det|>text [46, 290, 167, 387]<|/det|>Another childhood memory is of Sunday afternoons, when other mums and dads were out for a stroll after lunch and her parents, Pat and Pip, would be holding a seance to commune with the other side.
+<|det|>text [47, 387, 170, 446]<|/det|>Emma, 48, now a full-time witch, says: "It seemed normal for me to see – and play with – dead people from the age of just four.
+<|det|>text [47, 446, 188, 524]<|/det|>“My first time was at Hampton Court, but ever since then, it’s happened regularly. My younger brother Ben and I knew our parents were different, but then, aren’t everyone’s?”
+<|det|>text [47, 524, 217, 574]<|/det|>She says she inherited her mum's magical powers and "came out of the closet – the broom closet" after her parents died from cancer in 2019 and 2020.
+<|det|>text [46, 583, 216, 653]<|/det|>She is now a full-time witch, charging £100 for a 'one-to-one guidance medicine reading'. She says: "I'm the real-life Molly Weasley. Everyone calls me that."
+<|det|>text [47, 653, 168, 722]<|/det|>But, unlike the Harry Potter witch, she is a thoroughly modern Molly, with 96,000 followers on Instagram and 40,000 on TikTok.
+<|det|>text [47, 722, 178, 791]<|/det|>And she recently cast her spell on 262 would-be magic makers from across the world, initiating them as witches in one big, free Zoom session.
+<|det|>text [47, 791, 171, 861]<|/det|>Emma did not discover her mum was a witch until she was 17, when she rushed home in tears after visiting a psychic fair with Steve, now her husband.
+<|det|>text [47, 861, 164, 911]<|/det|>A tarot reader had told her she and Steve, then also 17 and an art student like her, would never have children.
+<|det|>text [47, 911, 168, 921]<|/det|>Determined to help,
+<|det|>text [47, 921, 222, 950]<|/det|>her mum confessed she was actually a sorceress and would teach Emma the skills to prove the reader wrong.
+<|det|>text [58, 950, 223, 960]<|/det|>In 1999, Emma and Steve had
+<|det|>title [178, 811, 260, 886]<|/det|>It seemed normal to me to see dead people
+<|det|>text [179, 890, 272, 909]<|/det|>EMMA GRIFFIN WITCH ON PARANORMAL POWER
+<|det|>text [231, 850, 407, 880]<|/det|>daughter Holly,
+then son Harry three
+years later.
+<|det|>text [231, 880, 407, 920]<|/det|>Soon after, moving from London to Cornwall to be closer to nature, Emma began giving
+<|det|>text [231, 920, 407, 950]<|/det|>clients spiritual guidance, while working in jobs ranging from fashion design to illustration.
+<|det|>text [241, 950, 407, 960]<|/det|>She became a full-time witch
+<|det|>text [413, 790, 591, 830]<|/det|>around five years ago and initiated nursery manager Holly as a sea witch in 2021, making a third generation of witches in her family.
+<|det|>text [413, 830, 545, 960]<|/det|>Emma says: "When I tell people I'm a witch, the majority are fascinated and have loving about what I do, from helping people find happiness to healing them, even helping them conceive, like I myself did 25 years ago."
+<|det|>text [596, 790, 773, 860]<|/det|>Talking of the Zoom witch initiation, which included women from as far away as Finland and Australia, she says: "I guided them through the ceremony, helping them become witches, telling them to spread the word far and wide."
+<|det|>image [610, 862, 700, 937]<|/det|>
+<|det|>text [684, 860, 774, 960]<|/det|>She has faced hostility from people saying she will “go to hell for working for the devil”, but Emma says being a witch is “positive and natural”. And she
+<|det|>text [779, 790, 956, 819]<|/det|>has always been open with her kids about being a witch. She says: "They were attracted to the spirituality of it."
+<|det|>text [779, 819, 956, 868]<|/det|>Her husband is also on “team witch”, says Emma, whose website has attracted clients wanting help with everything from mental health to fertility issues.
+<|det|>text [779, 868, 956, 908]<|/det|>She says: “I intend to keep spreading the word. Those muggles (people without magical talents) are really missing out.”
+<|det|>text [779, 908, 956, 937]<|/det|>☐ Follow Emma at instagram.com/emmagriffinwitch. Her book, The Witch's Way Home, is out now
+<|det|>text [865, 938, 955, 956]<|/det|>features@mirror.co.uk
+X@DailyMirror

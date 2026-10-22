@@ -139,10 +139,11 @@ per page (E-001) it is about 7 to 11.5 h, so it runs overnight once, near the en
 
 | Rank | ID | Change | Targets | Why it may help |
 |---|---|---|---|---|
-| 1 | I-1 | Loop detection plus retry of flagged pages in gundam mode | Long-doc edit distance and Distinct-n; OmniDocBench text edit | The paper blames its worst long-doc errors on repetition from low-resolution Base mode. The 35-gram guard misses loops with small changes |
+| 1 | I-1 | Loop detection (`loops.py`: a block repeated 6+ times with box coordinates ignored, or an unclosed marker) plus retry of only the flagged pages with a coordinate-blind repeat guard (`--content-guard`) | OmniDocBench text edit on looping pages; long-doc edit distance and Distinct-n | E-002 showed the 35-gram guard misses loops because each repeat has new box coordinates. Multi-page: retry flagged pages alone in gundam mode (the paper blames Base-mode resolution) |
 | 2 | I-2 | 8-bit and 4-bit quantization of the decoder | Memory and speed on 16 GB | MoE decoding reads expert weights for every token; smaller weights mean less to read. Accuracy cost measured on E-002 |
 | 3 | I-3 | Fewer active experts per token (6 to 4) and expert-usage profiling | Speed | Tests whether OCR needs all 6 experts. MoE-specific; reverted if accuracy drops beyond a set margin |
 | 4 | I-4 | Page grouping: chunk size and overlap across `--max-pages-per-request` | Long-doc accuracy and peak memory | Chunks break R-SWA's continuity; sizes are a guess today |
+| 1b | I-6 | Cut unclosed `<|det|>` markers from the Markdown (`--repair-markers`) | Text edit on pages where the model broke its own format | E-002 had a half-written marker leaking into the output. Post-processing only, so it is rescored without a model run; reported separately from Baidu's `remove_det` |
 | 5 | I-5 | Newer dependencies, one at a time: `mlx` 0.32.1 to latest first, then Pillow and transformers | Speed; accuracy checked for drift | Newer MLX may have faster kernels. Weights are unchanged, so accuracy should not move; Pillow (image resizing) and tokenizer changes could shift it slightly |
 
 Deferred: Tesseract comparison, API models. Each needs a separate go. Training is out

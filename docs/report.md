@@ -129,6 +129,34 @@ Two of 140 pages (both historical documents) ended in repetition loops. In both,
 repeated line is a separate layout block with new box coordinates, so no 35-token
 sequence repeats exactly and the decode-time n-gram guard never triggers.
 
+### 5.2 Loop repair, I-1 [verified]
+
+**Problem.** Some pages end in repetition loops (2 of 140 test pages, 1 of 45 dev
+pages). In every case the model starts a new layout block for each repeat, with new
+box coordinates. Because the decode-time guard bans only exact 35-token repeats, the
+changing coordinates hide the loop from it.
+
+**Method.** (1) A detector flags a page when one block's text, with the
+`<|det|> type [box] <|/det|>` prefix removed, repeats 6 or more times, or when a marker
+is left unclosed. The threshold was fixed before looking at test pages. (2) Flagged
+pages are re-decoded with the same 35-token rule applied to the text with marker spans
+removed, so a repeat that only changes coordinates is blocked. All other pages are left
+untouched.
+
+**Results.**
+
+| Subset | Pages re-run | Text Edit before, after | Read-order Edit before, after | Time on re-run pages |
+|---|---|---|---|---|
+| Dev (45) | 1 | 0.0526, 0.0422 | 0.1343, 0.1306 | 377 s, 19 s |
+| Test (140) | 2 | 0.0589, 0.0587 | 0.1271, 0.1286 | 45 s, 23 s |
+
+On the dev page (a newspaper puzzles page) the loop was the failure: the page ran into
+the 32,768-token limit repeating one sentence 555 times. Repair recovered the content
+(page text edit 0.829 to 0.371) and cut its decoding time by 95%. The two test pages are
+warped scans of vertical classical Chinese that the model cannot read; there the loop is
+a symptom, and repair reduces repetition without making the text correct. Loop repair
+therefore helps when decoding runs away on a readable page, and is neutral otherwise.
+
 ## 6. Discussion and limitations [draft]
 
 - Training-based improvements are out of reach on this hardware.
