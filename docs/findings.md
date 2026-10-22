@@ -187,3 +187,19 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   removed; this catches exactly the loops the guard misses.
 - **Check fix:** the first version of the loop checks counted a sparse HTML table as a
   loop (compression 7.6). Checks now run on tag-stripped text; regression test added.
+
+## E-001c: Chunked prefill vs one-shot prefill (2026-10-23)
+
+- **What and why:** R-002 found that for prompts over 2,048 tokens mlx-vlm feeds the last
+  prompt token as a decode step, so the R-SWA ring treats it as output. Test whether
+  that changes the result.
+- **Hypothesis:** small or no effect, since only the final prompt token is affected.
+- **Change (one variable):** `--prefill-step-size 100000` (no chunking, like upstream)
+  on E-001b's page 10 (prompt 2,737 tokens). Script: `results/E-001c/run.sh`.
+- **Result:** same 1,096 output tokens, same text; the only difference in the raw output
+  is one box coordinate (`340` vs `339`). Time 15.9 s vs 16.9 s, peak 9.62 GB in both.
+- **Hypothesis supported:** yes. The coordinate change may come from the different order
+  of floating-point operations in chunked vs one-shot prefill rather than from the cache;
+  this test cannot separate the two.
+- **Decision:** keep mlx-vlm's default chunked prefill, so all runs stay comparable with
+  E-002. Revisit only if long multi-page inputs (E-003) show a problem.

@@ -158,3 +158,9 @@ Chronological. One entry per meaningful action or decision.
 - **Repo:** benchmark ground truth and evaluator files that quote it are not
   committed; our predictions, scores and configs are.
 - **Next:** E-001c, then the dev baseline (E-004), then E-003.
+
+## 2026-10-23: E-001c done
+
+- **Result:** disabling chunked prefill changed one box coordinate by 1 on page 10 and
+  nothing else (findings E-001c).
+- **Decision:** keep the default; the deviation is measured and negligible here.

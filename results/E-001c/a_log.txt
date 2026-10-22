@@ -1,0 +1,12 @@
+Loading baidu/Unlimited-OCR with MLX-VLM …
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3980.04it/s]
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 1 OCR request(s).
+[1/1] paper_p10-10.png
+DONE  results/E-001c/a_gundam_p10_noprefillchunk/paper_p10-10.md | 1 image(s), gundam, 1096 generated tokens, 16.9s, 84.0 tok/s | metrics: results/E-001c/a_gundam_p10_noprefillchunk/paper_p10-10.json
+Finished 1 complete request(s); 0 incomplete; 0 skipped.
