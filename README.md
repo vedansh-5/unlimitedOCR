@@ -38,18 +38,45 @@ rm -rf unlimitedOCRvenv
 ```bash
 source env.sh
 
-# One image, high-resolution "gundam" mode
-uv run unlimited-ocr-mlx --image page.png --output-dir results/out
+# PDF or image to clean Markdown
+uv run python ocr_to_md.py doc.pdf -o doc.md
 
-# A PDF, all pages in one request, "base" mode
-uv run unlimited-ocr-mlx --pdf doc.pdf --output-dir results/out
-
-# Long PDF in independent chunks of 8 pages
-uv run unlimited-ocr-mlx --pdf doc.pdf --max-pages-per-request 8 --output-dir results/out
+# Raw model output: one image ("gundam" mode), or a PDF in one request ("base" mode)
+uv run python run_ocr.py --image page.png --output-dir results/out
+uv run python run_ocr.py --pdf doc.pdf --max-pages-per-request 8 --output-dir results/out
 ```
+
+`run_ocr.py` runs the port's CLI with two fixes (see `docs/findings.md`, E-001a and
+E-001b) and accepts all of its options.
 
 Each request writes a Markdown file with the raw model output and a JSON file with
 timing, token counts, peak memory and finish reason.
+
+## Batch runs and OmniDocBench
+
+```bash
+# OCR every PDF/image in a folder; one CSV row per document in results/<exp>/runs.csv
+uv run python run_batch.py --exp E-003 --inputs tests/data --max-pages-per-request 8
+
+# OmniDocBench v1.6 subset (15 pages per document type, seed 42)
+uv run python omnidocbench.py select   --exp E-002
+uv run python omnidocbench.py fetch    --exp E-002
+uv run python omnidocbench.py predict  --exp E-002
+uv run python omnidocbench.py evaluate --exp E-002
+```
+
+`evaluate` needs the official evaluator in its own Python 3.11 environment, also kept in
+`unlimitedOCRvenv/`:
+
+```bash
+git clone https://github.com/opendatalab/OmniDocBench unlimitedOCRvenv/third_party/OmniDocBench
+git -C unlimitedOCRvenv/third_party/OmniDocBench checkout f133a71
+uv venv --python 3.11 unlimitedOCRvenv/omnidocbench-env
+uv pip install --no-config --exclude-newer 2025-09-26 \
+  --python unlimitedOCRvenv/omnidocbench-env/bin/python ./unlimitedOCRvenv/third_party/OmniDocBench
+```
+
+Formula CDM is not computed: it needs Linux, TeX Live, ImageMagick and Ghostscript.
 
 ## Pinned versions
 

@@ -3,3 +3,8 @@ results/raw/
 __pycache__/
 .DS_Store
 results/*/inputs/
+results/*/gt_subset.json
+results/*/eval/result/*_text_block_result.json
+results/*/eval/result/*_table_result.json
+results/*/eval/result/*_display_formula_result.json
+results/*/eval/result/*_reading_order_result.json

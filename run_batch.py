@@ -39,6 +39,7 @@ def summarize(doc, result, started_at):
     metas = [meta for _, meta in result["outputs"]]
     pages = [remove_det(page) for raw, _ in result["outputs"] for page in split_pages(raw)]
     text = "\n\n".join(pages)
+    plain = checks.strip_tags(text)
 
     def total(key):
         return sum(m.get(key, 0) for m in metas)
@@ -60,10 +61,10 @@ def summarize(doc, result, started_at):
         "exit_code": result["exit_code"],
         "complete": bool(metas) and all(m.get("complete") for m in metas),
         "finish_reasons": "|".join(m.get("finish_reason", "") for m in metas),
-        "max_repeated_line": checks.max_repeated_line(text),
-        "compression_ratio": round(checks.compression_ratio(text), 2),
-        "distinct_20": round(checks.distinct_n(text, 20), 4),
-        "distinct_35": round(checks.distinct_n(text, 35), 4),
+        "max_repeated_line": checks.max_repeated_line(plain),
+        "compression_ratio": round(checks.compression_ratio(plain), 2),
+        "distinct_20": round(checks.distinct_n(plain, 20), 4),
+        "distinct_35": round(checks.distinct_n(plain, 35), 4),
         "ragged_tables": checks.ragged_tables(text),
         "empty_pages": checks.empty_pages(pages),
         "error": " ".join(error),

@@ -6,6 +6,12 @@ TABLE_RE = re.compile(r"<table>(.*?)</table>", re.DOTALL | re.IGNORECASE)
 ROW_RE = re.compile(r"<tr[^>]*>(.*?)</tr>", re.DOTALL | re.IGNORECASE)
 CELL_RE = re.compile(r"<t[dh]([^>]*)>", re.IGNORECASE)
 SPAN_RE = re.compile(r'(colspan|rowspan)\s*=\s*"?(\d+)', re.IGNORECASE)
+TAG_RE = re.compile(r"<[^>]+>")
+SPACES_RE = re.compile(r"[ \t]+")
+
+
+def strip_tags(text):
+    return SPACES_RE.sub(" ", TAG_RE.sub(" ", text))
 
 
 def max_repeated_line(text, min_len=10):

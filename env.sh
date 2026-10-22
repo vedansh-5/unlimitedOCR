@@ -13,3 +13,4 @@ export UV_NO_MODIFY_PATH=1
 export HF_HOME="$VENV_HOME/hf"
 export XDG_CACHE_HOME="$VENV_HOME/cache"
 export PATH="$VENV_HOME/uv/bin:$PATH"
+export NLTK_DATA="$VENV_HOME/nltk_data"

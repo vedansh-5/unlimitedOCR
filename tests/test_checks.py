@@ -1,4 +1,4 @@
-from checks import compression_ratio, distinct_n, empty_pages, max_repeated_line, ragged_tables, table_row_widths
+from checks import compression_ratio, distinct_n, empty_pages, max_repeated_line, ragged_tables, strip_tags, table_row_widths
 
 
 def test_max_repeated_line_ignores_short_lines():
@@ -39,3 +39,11 @@ def test_ragged_table_is_flagged():
 
 def test_empty_pages():
     assert empty_pages(["a real page of text here", "", " 10 "]) == 2
+
+
+def test_sparse_table_is_not_mistaken_for_a_loop_once_tags_are_stripped():
+    rows = "".join(f"<tr><td>{i}</td>" + "<td></td>" * 12 + "</tr>" for i in range(60))
+    table = f"<table>{rows}</table>"
+
+    assert compression_ratio(table) > 6
+    assert compression_ratio(strip_tags(table)) < 4
