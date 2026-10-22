@@ -31,3 +31,59 @@ Not yet checked:
 - Whether the port's no-repeat guard and R-SWA cache match the upstream code line for
   line (plan item 1.2).
 - Whether the OmniDocBench evaluator's formula metric (CDM) runs on macOS.
+
+## E-001a: First run crashed on the first generated token (2026-10-23)
+
+- **What:** single page (paper p.10, gundam mode) with the port's CLI, default settings.
+- **Observed:** exit code 2 after 47 s: `ValueError: not enough values to unpack
+  (expected 3, got 2)` in the decoder attention, on the first decode step. Log kept in
+  `results/E-001/a_time_failed.txt`.
+- **Root cause:** the port's `SlidingWindowNoRepeatNgramProcessor.__call__` decides
+  whether the input is batched from the token ids only. mlx-vlm 0.6.16 passes 1-D token
+  ids with `(1, vocab)` logits, so the guard returns `(vocab,)`. Sampling then gives a
+  scalar token, and the next step feeds a 2-D tensor into the model.
+- **Evidence:** `tests/test_ngram_guard_shape.py` fails on the unpatched class
+  (`(10,) != (1, 10)`) and passes with the fix.
+- **Fix:** `run_ocr.py` wraps the guard so its output keeps the shape of the logits it
+  was given, then calls the port's CLI unchanged. The banned-token rule itself is not
+  touched.
+- **Lesson:** the port's tests never load the model, and its end-to-end path did not
+  run with its own pinned versions. Everything downstream of the port needs our own
+  end-to-end check.
+- **Follow-up:** report the bug to the port author (needs approval: outward-facing).
+
+## E-001: Smoke test and cost (2026-10-23)
+
+- **What and why:** two small runs to measure speed and memory on this Mac before
+  sizing any benchmark run. Script: `results/E-001/run.sh`, run through `run_ocr.py`.
+- **Hypothesis:** the model fits in 16 GB and runs at a usable speed.
+- **Configuration:** port `e4c39cd`, model `07dea83`, mlx 0.32.1, mlx-vlm 0.6.16,
+  defaults (temperature 0, 35-gram guard, window 128 gundam / 1024 base, DPI 300).
+
+| Run | Pages | Mode | Prompt tokens | Output tokens | Model time | Output speed | Peak MLX memory | Wall time |
+|---|---|---|---|---|---|---|---|---|
+| a | paper p.10 | gundam | 2,738 | 981 | 16.9 s | 83 tok/s | 9.62 GB | 19.5 s |
+| b | paper p.1-3 | base, one request | 825 | 2,154 | 24.3 s | 93 tok/s | 8.35 GB | 28.9 s |
+
+Both finished normally (`finish_reason: stop`, `complete: true`).
+
+- **Hypothesis supported:** yes. Peak 9.6 GB leaves headroom on 16 GB; about 17 s for
+  a dense gundam page, about 8 s per page in base mode.
+- **Quality, checked by eye against the PDF:**
+  - Run a: all 54 numbers in the table match the PDF. Two-line column headers were
+    merged wrongly ("Colorful Exam Textbook", "Paper" instead of "Colorful Textbook",
+    "Exam Paper").
+  - Run a: the paragraph at the top of the page (4 lines) is missing, and the first
+    output line has no `<|det|>` marker.
+  - Run b: output starts with a date, "2018年1月1日", that is not in the PDF. Pages 1 to 3
+    are otherwise present, separated by `<PAGE>`.
+  - Both content errors are at the very start of the output. Not yet known whether this
+    is the model, the port, or the prompt; to be checked against the paper's own
+    examples and measured at scale in E-002.
+- **Measurement problem:** `/usr/bin/time -l` measured the `uv` launcher, not the model
+  process (it reported a 10 MB footprint). Only the port's MLX peak memory is reliable
+  here. The batch runner must start the venv's Python directly to measure process
+  memory.
+- **Cost estimate update:** OmniDocBench pages run in gundam mode. At 15 to 25 s per
+  page, the full v1.5 set (1,355 pages) takes about 6 to 9.5 h; a 135-page subset about
+  35 to 55 min.

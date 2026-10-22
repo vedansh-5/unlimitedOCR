@@ -9,6 +9,10 @@ dependencies = [
 [dependency-groups]
 dev = ["pytest"]
 
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
 [tool.uv]
 constraint-dependencies = [
   "annotated-doc==0.0.5",

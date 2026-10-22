@@ -1,0 +1,19 @@
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 6243.85it/s]
+       28.85 real         5.53 user         4.35 sys
+          1934983168  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              247870  page reclaims
+                3698  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   1  messages received
+                   1  signals received
+                5484  voluntary context switches
+              332718  involuntary context switches
+           189371709  instructions retired
+            86560776  cycles elapsed
+            10682776  peak memory footprint

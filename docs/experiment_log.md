@@ -57,3 +57,23 @@ Chronological. One entry per meaningful action or decision.
 - **Instruction:** publish the project as a public GitHub repository.
 - **Action:** created `vedansh-5/unlimitedOCR` (public). `rules.md`, the venv folder and
   rendered inputs are not committed.
+
+## 2026-10-23: E-001 first attempt failed; port bug fixed locally
+
+- **Problem:** the first model run crashed on its first generated token.
+- **Action:** traced it to a shape bug in the port's no-repeat guard (details in
+  `findings.md`, E-001a). Added a failing test, then `run_ocr.py`, which fixes the
+  output shape and otherwise runs the port's CLI unchanged.
+- **Decision:** fix in our repo instead of editing installed packages, so the fix is
+  versioned, visible and reproducible. All runs now go through `run_ocr.py`.
+- **Outcome:** test passes; E-001 rerun started.
+
+## 2026-10-23: E-001 done
+
+- **Result:** both runs completed. 17 s for a dense gundam page, about 8 s per page in
+  base mode, peak 9.6 GB. Details and quality notes in `findings.md`, E-001.
+- **Issues found:** text missing or made up at the start of the output in both runs;
+  `/usr/bin/time` around `uv run` does not measure the model process.
+- **Decision:** E-002 (OmniDocBench subset) is affordable at under an hour. The batch
+  runner will launch the venv Python directly so process memory is measured correctly.
+- **Results:** `results/E-001/`.

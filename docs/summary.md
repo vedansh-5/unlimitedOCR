@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-23
+Last updated: 2026-10-23 (after E-001)
 
 ## Objective
 
@@ -12,13 +12,15 @@ the improvement can be measured fairly.
 
 Scope: no training. The released weights are used as published.
 
-Planning. No code written, no model run yet.
+Environment set up; model runs end to end on this Mac (E-001). No benchmark run yet.
 
 | Item | State |
 |---|---|
 | Paper read, reported results recorded | Done (`report.md`, section 2) |
 | Model architecture checked against config | Done: DeepSeek-OCR encoder + 3B MoE decoder (64 experts, top-6, 2 shared) with R-SWA |
-| Environment | Not set up (uv missing) |
+| Environment | Done: contained in `unlimitedOCRvenv/`, versions pinned to the port's lock |
+| Port bug blocking every run | Fixed in `run_ocr.py`, with a test (findings E-001a) |
+| Smoke test (E-001) | Done: 17 s per dense gundam page, about 8 s per base page, peak 9.6 GB |
 | Baseline on this machine | Not run |
 | Improvements | None tried |
 
@@ -48,6 +50,9 @@ None.
 
 ## Outstanding issues
 
+- Content errors at the start of output in E-001 (missing first paragraph, made-up
+  date). Cause unknown.
+
 - Deadline and rubric not yet known.
 - Per-page runtime on this machine unknown; it decides how much of OmniDocBench can
   be run.
@@ -57,7 +62,5 @@ None.
 
 ## Next steps
 
-1. Set up the environment and run one page and one short PDF (E-001: smoke test and
-   cost).
-2. Baseline on a fixed OmniDocBench subset with the official evaluator (E-002).
-3. Choose the first improvement from the ranked list in `plan.md`.
+1. Baseline on a fixed OmniDocBench subset with the official evaluator (E-002).
+2. Choose the first improvement from the ranked list in `plan.md`.

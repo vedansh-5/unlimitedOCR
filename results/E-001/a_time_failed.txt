@@ -1,0 +1,20 @@
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 5621.14it/s]
+error: not enough values to unpack (expected 3, got 2)
+       47.10 real         1.19 user         8.00 sys
+          1403469824  maximum resident set size
+                   0  average shared memory size
+                   0  average unshared data size
+                   0  average unshared stack size
+              265297  page reclaims
+                5570  page faults
+                   0  swaps
+                   0  block input operations
+                   0  block output operations
+                   1  messages sent
+                   1  messages received
+                   1  signals received
+              155689  voluntary context switches
+              131508  involuntary context switches
+           229365408  instructions retired
+           103776708  cycles elapsed
+            10699208  peak memory footprint
