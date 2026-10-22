@@ -68,6 +68,13 @@ Dev: Text Edit 0.042 with I-1 (from 0.053). Test: unchanged within noise.
 - Hugging Face currently serves OmniDocBench v1.6; the v1.5 revision still has to be
   located.
 
+## Waiting on you
+
+- Full OmniDocBench run (1,651 pages, about 8 to 10 h overnight): on hold until you say
+  go. Reminder will come up now and then.
+- Also needing a go (see `plan.md`): formula CDM via Docker, Tesseract fallback,
+  batched R-SWA.
+
 ## Next steps (where to pick up)
 
 1. E-003: long documents (`long_docs.py make` is done; run
