@@ -3,6 +3,7 @@ name = "unlimited-ocr-mac"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
+  "rapidfuzz>=3.14.6",
   "unlimited-ocr-mlx @ git+https://huggingface.co/shubhxho/Unlimited-OCR-MLX@e4c39cde12444991663c8d75a5b8c96d2e78d8e4",
 ]
 
