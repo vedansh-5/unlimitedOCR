@@ -9,8 +9,8 @@ mkdir -p $OUT/inputs
 pdftoppm -r 300 -f 10 -l 10 -png $PDF $OUT/inputs/paper_p10
 vm_stat > $OUT/vm_stat_before.txt
 
-/usr/bin/time -l uv run python run_ocr.py --image $OUT/inputs/paper_p10-10.png \
+/usr/bin/time -l uv run python run_ocr.py --keep-prompt-space --image $OUT/inputs/paper_p10-10.png \
   --output-dir $OUT/a_gundam_p10 2> $OUT/a_time.txt
 
-/usr/bin/time -l uv run python run_ocr.py --pdf $PDF --first-page 1 --last-page 3 \
+/usr/bin/time -l uv run python run_ocr.py --keep-prompt-space --pdf $PDF --first-page 1 --last-page 3 \
   --output-dir $OUT/b_base_p1-3 2> $OUT/b_time.txt

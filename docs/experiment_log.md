@@ -77,3 +77,18 @@ Chronological. One entry per meaningful action or decision.
 - **Decision:** E-002 (OmniDocBench subset) is affordable at under an hour. The batch
   runner will launch the venv Python directly so process memory is measured correctly.
 - **Results:** `results/E-001/`.
+
+## 2026-10-23: E-001b, second port bug; pipeline code
+
+- **Problem:** E-001 output had errors at the very start (missing paragraph, made-up
+  date).
+- **Action:** compared the port's prompt tokens with Baidu's `infer()`; the port adds a
+  trailing space token. Ran E-001b with only that removed.
+- **Outcome:** both errors gone; the rest of the output unchanged (findings E-001b).
+- **Decision:** Baidu's exact prompt is the default from now on. This is a fidelity fix,
+  not an improvement: it brings the setup closer to the paper's conditions.
+- **Instruction:** report both port bugs on the port's Hugging Face page, written
+  plainly. Draft ready; posting waits on a Hugging Face login.
+- **Action:** added `ocr_to_md.py` (runs the model in a separate process, splits pages
+  at `<PAGE>`, strips markers with Baidu's `remove_det`) and `checks.py` (repeat,
+  compression, Distinct-n, ragged tables, empty pages), with tests.

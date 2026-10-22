@@ -87,3 +87,30 @@ Both finished normally (`finish_reason: stop`, `complete: true`).
 - **Cost estimate update:** OmniDocBench pages run in gundam mode. At 15 to 25 s per
   page, the full v1.5 set (1,355 pages) takes about 6 to 9.5 h; a 135-page subset about
   35 to 55 min.
+
+## E-001b: Trailing space in the prompt (2026-10-23)
+
+- **What and why:** both E-001 content errors were at the very start of the output.
+  Comparing prompts showed the port sends one token more than Baidu's code: the
+  mlx-vlm template returns `'<image>document parsing. '`, ending in a space (token 223).
+  Baidu's `infer()` uses the plain template and `.strip()`, giving
+  `[0, 128815, 34030, 76466, 16]`.
+- **Hypothesis:** the stray space puts the model off its trained start, so the first
+  output tokens go wrong. Removing it should fix the start and change nothing else.
+- **Change (one variable):** strip trailing spaces from the formatted prompt.
+  Script: `results/E-001b/run.sh`.
+
+| Run | Prompt tokens | Output tokens | Model time | Start of output |
+|---|---|---|---|---|
+| E-001 a, p.10 | 2,738 | 981 | 16.9 s | first paragraph and first title marker missing |
+| E-001b a, p.10 | 2,737 | 1,096 | 15.9 s | first paragraph present, title marker present |
+| E-001 b, p.1-3 | 825 | 2,154 | 24.3 s | made-up date "2018年1月1日" |
+| E-001b b, p.1-3 | 824 | 2,149 | 26.5 s | `<PAGE>` then the real page header |
+
+- **Result:** after stripping markers, the clean Markdown of each pair differs only in
+  those opening lines; everything else is identical line for line.
+- **Hypothesis supported:** yes, on these two inputs.
+- **Decision:** keep. `run_ocr.py` now uses Baidu's prompt by default;
+  `--keep-prompt-space` reproduces the port's behaviour (used by E-001's script).
+- **Lesson:** a one-token prompt difference changes output. Any MLX-vs-paper gap must be
+  checked against prompt format first.

@@ -89,6 +89,21 @@ once it is selected and tested.
   set built for this project.
 - Metrics: the paper's metrics, plus runtime, peak memory and failure flags per document.
 
+### 4.1 Corrections to the MLX port [verified]
+
+Two defects in the port were found and fixed before any measurement. Both are applied
+in `run_ocr.py`, which otherwise runs the port's code unchanged.
+
+1. **Decoding crash.** The port's no-repeat guard returned logits without their batch
+   dimension when called by mlx-vlm 0.6.16, so every run failed on the first generated
+   token. The fix restores the shape; the banned-token rule is unchanged. A unit test
+   reproduces the defect.
+2. **Prompt mismatch.** The port's prompt ended with a space token that Baidu's
+   reference code strips. On the smoke-test pages this caused a skipped opening
+   paragraph and a hallucinated date at the start of the output; removing the space
+   fixed both and left the rest of the output identical. All runs use Baidu's prompt
+   format.
+
 ## 5. Results [planned]
 
 No results yet.

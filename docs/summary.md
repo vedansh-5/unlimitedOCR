@@ -20,6 +20,8 @@ Environment set up; model runs end to end on this Mac (E-001). No benchmark run 
 | Model architecture checked against config | Done: DeepSeek-OCR encoder + 3B MoE decoder (64 experts, top-6, 2 shared) with R-SWA |
 | Environment | Done: contained in `unlimitedOCRvenv/`, versions pinned to the port's lock |
 | Port bug blocking every run | Fixed in `run_ocr.py`, with a test (findings E-001a) |
+| Port prompt differs from Baidu's (extra trailing space) | Fixed by default in `run_ocr.py`; removed both start-of-output errors (findings E-001b) |
+| `ocr_to_md.py`, `checks.py` | Done, with tests |
 | Smoke test (E-001) | Done: 17 s per dense gundam page, about 8 s per base page, peak 9.6 GB |
 | Baseline on this machine | Not run |
 | Improvements | None tried |
@@ -50,8 +52,7 @@ None.
 
 ## Outstanding issues
 
-- Content errors at the start of output in E-001 (missing first paragraph, made-up
-  date). Cause unknown.
+- Bug report to the port author drafted; posting needs a Hugging Face login.
 
 - Deadline and rubric not yet known.
 - Per-page runtime on this machine unknown; it decides how much of OmniDocBench can
