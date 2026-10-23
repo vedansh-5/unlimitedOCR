@@ -136,7 +136,7 @@ All values are produced by `compare.py score --exp E-002`.
 | Text Edit (lower is better) | 0.036 [0.024, 0.051] | 0.042 | 0.039 |
 | Table TEDS | 92.4 [88.1, 95.9] | 90.2 | 90.2 |
 | Table TEDS-S | 94.9 [91.7, 97.6] | 93.3 | 93.4 |
-| Reading-order Edit (lower is better) | 0.107 [0.078, 0.143] | 0.129 | 0.128 |
+| Reading-order Edit (lower is better) | 0.107 [0.078, 0.142] | 0.129 | 0.128 |
 
 All reference values fall inside the intervals: the MLX implementation, with the two
 corrections in section 4.1, reproduces the published accuracy within sampling error.

@@ -71,7 +71,7 @@ def paired(before, after):
 
 def estimate(stat, groups, scale=1):
     lo, hi = interval(stat, groups)
-    return {"value": round(stat(groups) * scale, 4), "ci95": [round(lo * scale, 4), round(hi * scale, 4)],
+    return {"value": round(stat(groups) * scale, 6), "ci95": [round(lo * scale, 6), round(hi * scale, 6)],
             "n": sum(map(len, groups.values()))}
 
 
