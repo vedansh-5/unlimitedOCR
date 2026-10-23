@@ -1,0 +1,18 @@
+<|det|>header [114, 60, 251, 74]<|/det|>NIST SP 800-63-3
+<|det|>header [677, 60, 884, 75]<|/det|>DIGITAL IDENTITY GUIDELINES
+<|det|>text [111, 105, 882, 333]<|/det|>must provide at least AAL2. However, the identity proofing requirements remain unclear. The entire business process of examining a résumé and ultimately hiring and onboarding a person requires a significant amount of identity proofing. The agency needs a high level of confidence that the job applicant is in fact the subject of the résumé submitted online if a decision to hire is made. Yet this level of proofing is not required to submit the résumé online. Identity proofing is not required to complete the digital portion of the transaction successfully. Identity proofing the submitter would create more risk than required in the online system as excess personal information would be collected when no such information is needed for the portion of the hiring process served by the digital job application portal and may reduce usability. Therefore, the most appropriate IAL selection would be 1. There is no need to identify proof the user to successfully complete the online transaction. This decision for the online portal itself is independent of a seemingly obvious identity proofing requirement for the entire business process, lest a job be offered to a fraudulent applicant.
+<|det|>title [113, 346, 363, 365]<|/det|>5.3.2 Impacts per Category
+<|det|>text [112, 378, 875, 414]<|/det|>This section defines the potential impacts for each category of harm. Each assurance level, IAL, AAL, and FAL (if accepting or asserting a federated identity) SHALL be evaluated separately.
+<|det|>text [167, 426, 809, 464]<|/det|>Note: If an error in the identity system causes no measurable consequences for a category, there is no impact.
+<|det|>text [112, 478, 757, 496]<|/det|>Potential impact of inconvenience, distress, or damage to standing or reputation:
+<|det|>text [140, 513, 884, 530]<|/det|>- Low: at worst, limited, short-term inconvenience, distress, or embarrassment to any party.
+<|det|>text [140, 530, 858, 564]<|/det|>- Moderate: at worst, serious short-term or limited long-term inconvenience, distress, or damage to the standing or reputation of any party.
+<|det|>text [140, 565, 872, 617]<|/det|>- High: severe or serious long-term inconvenience, distress, or damage to the standing or reputation of any party. This is ordinarily reserved for situations with particularly severe effects or which potentially affect many individuals.
+<|det|>text [112, 635, 385, 653]<|/det|>Potential impact of financial loss:
+<|det|>text [140, 669, 875, 703]<|/det|>- Low: at worst, an insignificant or inconsequential financial loss to any party, or at worst, an insignificant or inconsequential agency liability.
+<|det|>text [140, 704, 842, 721]<|/det|>- Moderate: at worst, a serious financial loss to any party, or a serious agency liability.
+<|det|>text [140, 722, 869, 757]<|/det|>- High: severe or catastrophic financial loss to any party, or severe or catastrophic agency liability.
+<|det|>text [112, 775, 631, 793]<|/det|>Potential impact of harm to agency programs or public interests:
+<|det|>text [140, 810, 875, 897]<|/det|>- Low: at worst, a limited adverse effect on organizational operations or assets, or public interests. Examples of limited adverse effects are: (i) mission capability degradation to the extent and duration that the organization is able to perform its primary functions with noticeably reduced effectiveness, or (ii) minor damage to organizational assets or public interests.
+<|det|>aside_text [31, 311, 50, 763]<|/det|>This publication is available free of charge from https://doi.org/10.6028/NIST.SP 800-03-3
+<|det|>page_number [488, 924, 508, 937]<|/det|>21

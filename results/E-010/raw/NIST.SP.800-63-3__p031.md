@@ -1,0 +1,14 @@
+<|det|>aside_text [31, 311, 55, 768]<|/det|>This publication is available free of charge from https://academic.oup.com/ajcn/article-abstract/125/8/802-8033
+<|det|>header [114, 59, 251, 74]<|/det|>NIST SP 800-63-3
+<|det|>header [677, 59, 884, 74]<|/det|>DIGITAL IDENTITY GUIDELINES
+<|det|>text [111, 104, 885, 195]<|/det|>individual assurance levels for identity proofing, authentication, and federation (if applicable); and determined the processes and technologies they will employ to meet each assurance level, agencies SHALL develop a “Digital Identity Acceptance Statement”, in accordance with SP 800-53 IA-1 a.1. See Section 5.5 for more detail on the necessary content of the Digital Identity Acceptance Statement.
+<|det|>title [113, 207, 318, 223]<|/det|>5.2 Assurance Levels
+<|det|>text [112, 239, 799, 258]<|/det|>An agency RP SHALL select, based on risk, the following individual assurance levels:
+<|det|>text [140, 273, 882, 308]<|/det|>- IAL: The robustness of the identity proofing process to confidently determine the identity of an individual. IAL is selected to mitigate potential identity proofing errors.
+<|det|>text [141, 309, 875, 361]<|/det|>- AAL: The robustness of the authentication process itself, and the binding between an authenticator and a specific individual's identifier. AAL is selected to mitigate potential authentication errors (i.e., a false claimant using a credential that is not rightfully theirs).
+<|det|>text [142, 362, 867, 432]<|/det|>- FAL: The robustness of the assertion protocol the federation uses to communicate authentication and attribute information (if applicable) to an RP. FAL is optional as not all digital systems will leverage federated identity architectures. FAL is selected to mitigate potential federation errors (an identity assertion is compromised).
+<|det|>text [111, 448, 851, 482]<|/det|>A summary of each of the identity, authenticator, and federation assurance levels is provided below.
+<|det|>text [371, 497, 628, 512]<|/det|>Table 5-1 Identity Assurance Levels
+<|det|>table [115, 525, 884, 725]<|/det|><table><tr><td>Identity Assurance Level</td></tr><tr><td>IAL1: At IAL1, attributes, if any, are self-asserted or should be treated as self-asserted.</td></tr><tr><td>IAL2: At IAL2, either remote or in-person identity proofing is required. IAL2 requires identifying attributes to have been verified in person or remotely using, at a minimum, the procedures given in SP 800-63A.</td></tr><tr><td>IAL3: At IAL3, in-person identity proofing is required. Identifying attributes must be verified by an authorized CSP representative through examination of physical documentation as described in SP 800-63A.</td></tr></table>
+<|det|>aside_text [31, 311, 50, 770]<|/det|>This publication is available free of charge from https://doi.org/10.6026/NS/TSP.800-63.3
+<|det|>page_number [489, 923, 511, 937]<|/det|>18

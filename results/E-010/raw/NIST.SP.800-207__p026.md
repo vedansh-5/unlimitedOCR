@@ -1,0 +1,11 @@
+<|det|>aside_text [23, 291, 38, 741]<|/det|>This publication is available free of charge from the American Society for Clinical Economics. For permission to post online for profit or commercial advantage, contact the Society at 1-800-NCMP.10.6024.0270.
+<|det|>header [114, 44, 244, 58]<|/det|>NIST SP 800-207
+<|det|>header [684, 44, 884, 58]<|/det|>ZERO TRUST ARCHITECTURE
+<|det|>image [321, 88, 675, 337]<|/det|>
+<|det|>image_caption [380, 351, 615, 366]<|/det|>Figure 6: Application Sandboxes
+<|det|>text [111, 380, 875, 449]<|/det|>In Figure 6, the subject device runs approved, vetted applications in a sandbox. The applications can communicate with the PEP to request access to resources, but the PEP will refuse requests from other applications on the asset. The PEP could be an enterprise local service or a cloud service in this model.
+<|det|>text [111, 465, 885, 587]<|/det|>The main advantage of this model variant is that individual applications are segmented from the rest of the asset. If the asset cannot be scanned for vulnerabilities, these individual, sandboxed applications may be protected from a potential malware infection on the host asset. One of the disadvantages of this model is that enterprises must maintain these sandboxed applications for all assets and may not have full visibility into client assets. The enterprise also needs to make sure each sandboxed application is secure, which may require more effort than simply monitoring devices.
+<|det|>title [113, 601, 303, 619]<|/det|>3.3 Trust Algorithm
+<|det|>text [111, 634, 865, 756]<|/det|>For an enterprise with a ZTA deployment, the policy engine can be thought of as the brain and the PE's trust algorithm as its primary thought process. The trust algorithm (TA) is the process used by the policy engine to ultimately grant or deny access to a resource. The policy engine takes input from multiple sources (see Section 3): the policy database with observable information about subjects, subject attributes and roles, historical subject behavior patterns, threat intelligence sources, and other metadata sources. The process can be grouped into broad categories and visualized in Figure 7.
+<|det|>aside_text [23, 291, 41, 741]<|/det|>This publication is available free of charge from http://dx.doi.org/10.6028/nist.G00-17-0027
+<|det|>page_number [489, 923, 511, 937]<|/det|>17

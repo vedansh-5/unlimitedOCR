@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-23, night (after E-006)
+Last updated: 2026-10-23, afternoon (after E-010)
 
 ## Objective
 
@@ -12,7 +12,7 @@ the improvement can be measured fairly.
 
 Scope: no training. The released weights are used as published.
 
-Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper within sampling error (E-002). Next: E-001c, dev baseline, long documents, then improvements.
+Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper within sampling error (E-002). Long documents measured (E-003) and improved by decoding page by page (E-009, E-010). Next: speed changes (I-2 quantization, I-3 fewer experts) on the dev subset.
 
 | Item | State |
 |---|---|
@@ -27,17 +27,23 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 | Dev baseline (E-004, 45 pages) | Done: Text Edit 0.053, TEDS 93.5, R-order 0.134; 1 runaway loop |
 | I-1 loop repair | Kept. Dev text edit 0.053 to 0.042; neutral on test (its 2 loop pages are unreadable scans) |
 | I-6 broken-marker repair | No effect on scores (E-007); kept as a clean-output option only |
+| Statistics from code (`compare.py`, `make_tables.py`) | Done; reproduces the report; corrected TEDS intervals (R-004) |
+| Long-document baseline (E-003) | Done: wrong page count in 10 of 15 documents, 2 of 3 forty-page documents hit the token cap, recall 0.92 at 40 pages |
+| I-8 page-by-page decoding for long documents (E-009, E-010) | Kept. 40 pages: edit 0.228 to 0.077, recall 0.917 to 0.968, 44% less time (Base); Gundam slightly more accurate, 19% slower |
 
 ## Baseline
 
 | Source | OmniDocBench v1.5 overall | v1.6 overall | Long-doc 40+ pages edit distance |
 |---|---|---|---|
 | Paper (A800 GPUs, reported) | 93.23 | 93.92 | 0.1069 |
-| This project (M5, MLX), E-002 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | not measured yet (E-003) |
+| This project (M5, MLX), E-002 / E-003 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | 0.228 (NIST, text-layer reference; not comparable) |
 
 ## Best result so far
 
-Dev: Text Edit 0.042 with I-1 (from 0.053). Test: unchanged within noise.
+- OmniDocBench dev: Text Edit 0.042 with I-1 (from 0.053, raw mean); the paired
+  interval touches zero, so it is a fix for a rare failure, not an average gain.
+- Long documents: page-by-page decoding (I-8) at 40 pages, edit distance 0.228 to
+  0.062 to 0.077 and recall 0.917 to 0.967, in 44% less time (Base).
 
 ## Key findings so far (from reading, not experiments)
 
@@ -54,19 +60,15 @@ Dev: Text Edit 0.042 with I-1 (from 0.053). Test: unchanged within noise.
 
 ## Outstanding issues
 
-- Repetition loops on 2 of 140 pages, invisible to the 35-gram guard because box
-  coordinates change on every repeat. Target of I-1.
-- mlx-vlm chunked prefill treats the last prompt token as output for prompts over
-  2,048 tokens (R-002); E-001c tests whether it matters.
-
-- Port bugs reported upstream (discussion 1); waiting on the author.
-
+- Loop pages that are unreadable scans (2 of 140 test pages): repair cuts the loop but
+  cannot make the text right. A classic OCR fallback needs your go.
+- Long-document scores use the PDF text layer as reference, which misses text inside
+  images; fine for comparing runs, not for comparing with the paper.
+- Long-document set is three NIST reports; more varied long documents would make I-8
+  more convincing.
+- Formula CDM (and so the Overall score) not computed: needs Docker or Linux TeX.
+- Port bugs reported upstream (discussion 1); no reply yet.
 - Deadline and rubric not yet known.
-- Per-page runtime on this machine unknown; it decides how much of OmniDocBench can
-  be run.
-- OmniDocBench's formula metric (CDM) needs a LaTeX toolchain; not yet checked.
-- Hugging Face currently serves OmniDocBench v1.6; the v1.5 revision still has to be
-  located.
 
 ## Waiting on you
 
@@ -77,8 +79,9 @@ Dev: Text Edit 0.042 with I-1 (from 0.053). Test: unchanged within noise.
 
 ## Next steps (where to pick up)
 
-1. E-003: long documents (`long_docs.py make` is done; run
-   `run_batch.py --exp E-003 --inputs results/E-003/inputs`, then `long_docs.py score`).
-   About 30 to 35 min. Not started overnight on purpose.
-2. Apply I-1 to long documents: per-page retry of looping pages in gundam mode.
-3. Next improvements from `plan.md`: I-2 quantization, I-3 fewer experts.
+1. I-2: quantize to 8-bit and 4-bit (`./quantize.sh 8`), run the dev subset with
+   `--model`, compare with `compare.py diff`.
+2. I-3: `--experts-per-token 4` and `5` on dev.
+3. E-008: decode speed over a long request (`--log-speed`).
+4. I-5 newer mlx, I-7 resolution routing (may be moot after I-8).
+5. Final test-subset run with all kept changes.

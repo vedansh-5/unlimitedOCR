@@ -1,0 +1,31 @@
+Withdrawn NIST Technical Series Publication
+
+<table><tr><td colspan="2">Warning NoticeThe attached publication has been withdrawn (archived), and is provided solely for historical purposes. It may have been superseded by another publication (indicated below).</td></tr><tr><td colspan="2">Withdrawn Publication</td></tr><tr><td>Series/Number</td><td>NIST Special Publication 800-63-3</td></tr><tr><td>Title</td><td>Digital Identity Guidelines</td></tr><tr><td>Publication Date(s)</td><td>June 2017 (includes updates as of 03-02-2020)</td></tr><tr><td>Withdrawal Date</td><td>August 1, 2025</td></tr><tr><td>Withdrawal Note</td><td>NIST SP 800-63-3 is withdrawn and superseded in its entirety by NIST SP 800-63-4.</td></tr><tr><td colspan="2">Superseding Publication(s) (if applicable)</td></tr><tr><td colspan="2">The attached publication has been superseded by the following publication(s):</td></tr><tr><td>Series/Number</td><td>NIST SP 800-63-4</td></tr><tr><td>Title</td><td>Digital Identity Guidelines</td></tr><tr><td>Author(s)</td><td>David Temoshok, et al.</td></tr><tr><td>Publication Date(s)</td><td>July 2025</td></tr><tr><td>URL/DOI</td><td>https://doi.org/10.6028/NIST.SP.800-63-4</td></tr><tr><td colspan="2">Additional Information (if applicable)</td></tr><tr><td>Contact</td><td>Applied Cybersecurity Division (Information Technology Laboratory)</td></tr><tr><td>Latest revision of the attached publication</td><td></td></tr><tr><td>Related Information</td><td>https://csrc.nist.gov/pubs/sp/800/63/4/finalhttps://www.nist.gov/identity-access-management/nist-special-publication-800-63-digital-identity-guidelines</td></tr><tr><td>Withdrawal Announcement Link</td><td></td></tr></table>
+
+Date updated: July 24, 2025
+
+NIST
+
+NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY U.S. DEPARTMENT OF COMMERCE
+
+NIST Special Publication 800-63-3
+
+Digital Identity Guidelines
+
+Paul A. Grassi
+
+Michael E. Garcia
+
+James L. Fenton
+
+This publication is available free of charge from:
+
+https://doi.org/10.6028/NIST.SP.800-63-3
+
+NIST
+
+National Institute of
+
+Standards and Technology
+
+U.S. Department of Commerce

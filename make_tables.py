@@ -58,7 +58,8 @@ def by_bucket(rows):
 
     return [{
         "pages": pages, "docs": len(group),
-        "edit_distance": round(mean(group, "edit_distance"), 4),
+        "edit_distance": round(mean(group, "edit_distance"), 4), "word_recall": round(mean(group, "word_recall"), 4),
+        "shifted": sum(r["pages_out"] != r["pages"] for r in group),
         "distinct_20": round(mean(group, "distinct_20"), 4), "distinct_35": round(mean(group, "distinct_35"), 4),
         "gen_tokens": round(mean(group, "gen_tokens")), "model_s": round(mean(group, "model_s"), 1),
         "peak_mlx_gb": round(max(float(r["peak_mlx_gb"]) for r in group), 2),
@@ -72,7 +73,7 @@ def long_doc_tables():
         with path.open() as f:
             buckets = by_bucket(list(csv.DictReader(f)))
         out.append(f"### {path.parent.name}\n\n" + markdown_table(
-            ["Pages", "Docs", "Edit distance", "Distinct-20", "Distinct-35", "Output tokens", "Model s", "Peak GB", "Incomplete"],
+            ["Pages", "Docs", "Edit distance", "Word recall", "Page count off", "Distinct-20", "Distinct-35", "Output tokens", "Model s", "Peak GB", "Incomplete"],
             [list(b.values()) for b in buckets]))
     return "\n\n".join(out)
 

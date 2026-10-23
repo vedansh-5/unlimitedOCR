@@ -1,0 +1,59 @@
+Date updated: July 24, 2025 
+Withdrawn NIST Technical Series Publication 
+Warning Notice 
+The attached publication has been withdrawn (archived), and is provided solely for historical purposes. 
+It may have been superseded by another publication (indicated below). 
+Withdrawn Publication 
+Series/Number 
+NIST Special Publication 800-63-3 
+Title 
+Digital Identity Guidelines 
+Publication Date(s) 
+June 2017 (includes updates as of 03-02-2020) 
+Withdrawal Date 
+August 1, 2025 
+Withdrawal Note 
+NIST SP 800-63-3 is withdrawn and superseded in its entirety by NIST SP 800-
+63-4.
+Superseding Publication(s) (if applicable) 
+The attached publication has been superseded by the following publication(s): 
+Series/Number 
+NIST SP 800-63-4 
+Title 
+Digital Identity Guidelines 
+Author(s) 
+David Temoshok, et al. 
+Publication Date(s) 
+July 2025 
+URL/DOI 
+https://doi.org/10.6028/NIST.SP.800-63-4 
+Additional Information (if applicable) 
+Contact 
+Applied Cybersecurity Division (Information Technology Laboratory) 
+Latest revision of the 
+attached publication 
+Related Information 
+https://csrc.nist.gov/pubs/sp/800/63/4/final 
+https://www.nist.gov/identity-access-management/nist-special-publication-
+800-63-digital-identity-guidelines
+Withdrawal 
+Announcement Link 
+
+ 
+NIST Special Publication 800-63-3 
+ 
+Digital Identity Guidelines 
+ 
+Paul A. Grassi 
+Michael E. Garcia 
+James L. Fenton 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+This publication is available free of charge from: 
+https://doi.org/10.6028/NIST.SP.800-63-3 
+ 

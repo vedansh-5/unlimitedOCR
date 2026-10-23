@@ -207,7 +207,7 @@ Chronological. One entry per meaningful action or decision.
   empty pages from the base run's output (never from the reference), renders each
   flagged page at 300 dpi, re-runs them in one model call (gundam mode, single page),
   and splices them back in place. Tests for flagging and splicing.
-- **E-003 done** (37.8 min model time): page shifts in 9 of 15 documents, 2 of 3
+- **E-003 done** (37.8 min model time): wrong page count in 10 of 15 documents (corrected from 9), 2 of 3
   40-page documents hit the 32,768-token cap, recall 0.95 to 0.92 with length. Details
   in findings. `run_batch.py` fixed to keep output of capped requests; word recall
   added to `long_docs.py score`.
@@ -224,3 +224,7 @@ Chronological. One entry per meaningful action or decision.
   only `make` reads file names, and `retry` stops when the model run fails. Test added.
   The empty outputs were deleted and E-010 restarted; checked that pages run in Base
   mode.
+- **E-010 done** (23.6 min): page by page in Base mode matches Gundam on recall and
+  nearly on edit distance, and is the fastest (40 pages: 283 s against 337 s Gundam and
+  502 s one request). Page splitting is the gain; mode is a small speed/accuracy
+  trade. Kept as I-8.

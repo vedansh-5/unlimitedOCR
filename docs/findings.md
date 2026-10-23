@@ -345,6 +345,10 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
 | 20 | 0.110 | 0.953 | 2 of 3 | 0 | 194 |
 | 40 | 0.228 | 0.917 | 3 of 3 | 2 of 3 | 502 |
 
+  Correction (same day): the page-count column was first read by eye as 9 of 15 off;
+  `make_tables.py` counts 10 of 15 (2 of them the capped documents). Fixed here and in
+  the log and plan.
+
 - **Failure 1, page shifts:** the model often writes one more or one fewer `<PAGE>`
   than the input has, from 5 pages up. Checked against the PDF on the 5-page AI 100-1
   prefix: after the title page it wrote a page that mixes the top of page 3 with the
@@ -395,7 +399,7 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
 | 20 | 0.110, 0.091 | 0.953, 0.961 | 194, 166 | 11.4, 8.6 |
 | 40 | 0.228, 0.062 | 0.917, 0.967 | 502, 337 | 9.5, 8.6 |
 
-- Page count right in 15 of 15 documents (E-003: 6 of 15); no request hit a cap.
+- Page count right in 15 of 15 documents (E-003: 5 of 15); no request hit a cap.
 - **Hypothesis supported:** yes, and faster than expected from 10 pages up. Likely
   reason: in one request, every output token attends to all prefix tokens (256 per
   page in Base mode), so per-token cost grows with page count; a single page keeps the
@@ -404,4 +408,33 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   instead of Base resolution. E-010 (page by page in Base mode) separates them.
   (2) 15 documents are nested prefixes of 3 sources, so they are not independent; no
   interval is given. (3) Scores are against the text layer (see E-003).
-- **Decision:** pending E-010.
+- **Decision:** see E-010.
+
+## E-010: Page by page in Base mode (2026-10-23)
+
+- **Problem:** E-009 changed two things at once (one page per request, and Gundam
+  resolution). Which one gives the gain?
+- **Change (one variable against E-009):** same 120 pages, each alone, with
+  `--mode base` (one 1024 view, no crops; the Base preset also widens the no-repeat
+  window from 128 to 1024 tokens). 23.6 min model time.
+- **Results at 40 pages (means of 3 documents):**
+
+| Run | Edit distance | Word recall | Page count off | Model s | Peak GB |
+|---|---|---|---|---|---|
+| E-003 one request, Base | 0.228 | 0.917 | 3 of 3 | 502 | 9.5 |
+| E-010 page by page, Base | 0.077 | 0.968 | 0 of 3 | 283 | 8.2 |
+| E-009 page by page, Gundam | 0.062 | 0.967 | 0 of 3 | 337 | 8.6 |
+
+  Full per-bucket tables in `docs/tables.md`.
+- **Reading:** splitting into single-page requests gives almost all of the gain:
+  no page shifts, no token cap, higher recall, and 44% less model time than one
+  request at 40 pages. Gundam adds a small edit-distance gain at 20 and 40 pages (0.091
+  against 0.104, 0.062 against 0.077) for about 19% more time; with three sources this
+  difference is too small to call.
+- **Limits:** three clean, born-digital English reports; the text-layer reference
+  cannot reward cross-page work (a table or paragraph continued over a page break),
+  which is one reason the paper decodes pages together. Multi-page decoding may still
+  win on documents where that matters.
+- **Decision:** keep page-by-page decoding (I-8) as the default for long documents on
+  this machine. Base mode when speed matters, Gundam when accuracy matters; both are
+  in the report.

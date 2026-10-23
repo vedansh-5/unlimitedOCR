@@ -1,0 +1,10 @@
+<|det|>aside_text [23, 291, 38, 741]<|/det|>This publication is available free of charge from https://academic.oup.com/advances/advance-article-abstract/advance-article-abstract/advance-article-abstract/advance-article-abstract/advance-article-abstract/advance-article-article-abstract/advance-article-abstract/advance-article-abstract/advance-article-abstract/advance-article-abstract/adv
+<|det|>header [115, 45, 244, 58]<|/det|>NIST SP 800-207
+<|det|>header [684, 45, 884, 58]<|/det|>ZERO TRUST ARCHITECTURE
+<|det|>image [223, 90, 778, 337]<|/det|>
+<|det|>image_caption [379, 354, 618, 370]<|/det|>Figure 4: Enclave Gateway Model
+<|det|>text [111, 384, 861, 437]<|/det|>It is possible for this model to be a hybrid with the device agent/gateway model. In this model, enterprise assets have a device agent that is used to connect to enclave gateways, but these connections are created using the same process as the basic device agent/gateway model.
+<|det|>text [111, 451, 884, 555]<|/det|>This model is useful for enterprises that have legacy applications or on-premises data centers that cannot have individual gateways in place. The enterprise needs a robust asset and configuration management program in place to install/configure the device agents. The downside is that the gateway protects a collection of resources and may not be able to protect each resource individually. This may also allow for subjects to see resources which they do not have privileges to access.
+<|det|>title [113, 570, 485, 588]<|/det|>3.2.3 Resource Portal-Based Deployment
+<|det|>text [111, 602, 851, 673]<|/det|>In this deployment model, the PEP is a single component that acts as a gateway for subject requests. The gateway portal can be for an individual resource or a secure enclave for a collection of resources used for a single business function. One example would be a gateway portal into a private cloud or data center containing legacy applications as shown in Figure 5.
+<|det|>page_number [489, 923, 510, 937]<|/det|>15

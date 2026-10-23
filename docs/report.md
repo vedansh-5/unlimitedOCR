@@ -84,7 +84,8 @@ released weights. Each is tested alone against a baseline (section 4).
 |---|---|---|---|
 | I-1 | Re-decode pages flagged as loops with a no-repeat guard that ignores `<\|det\|>` box coordinates | Baidu's 35-gram guard compares raw tokens; a loop that opens a new layout block per repeat changes the box tokens each time, so no 35-token sequence repeats exactly | Kept (5.2) |
 | I-6 | Cut unclosed `<\|det\|>` markers in post-processing | A loop cut off by the token cap can leave a marker open, which leaks into the Markdown | Kept as an output option; no score effect |
-| I-1L | For long documents, re-run missing, looping, cut-off or empty pages one at a time in Gundam mode and splice them back | The paper attributes most 40+ page errors to repetition on small text in Base mode (one 1024 view per page); Gundam adds 640 px crops | Code ready |
+| I-1L | Re-run flagged pages of a long document alone and splice them back in place | Targets the paper's stated long-document failure | Dropped: the model adds or drops pages (5.3), so position no longer identifies a page |
+| I-8 | Decode long documents one page per request and join the outputs | Removes page bookkeeping and the output-token cap from the model's job; each token attends to one page's prefix | Kept (5.3) |
 | I-2 | 8-bit and 4-bit weights for the decoder (vision encoders kept in bf16) | Decoding is memory-bandwidth bound; fewer bytes per weight should raise tokens/s and lower peak memory on a 16 GB machine | Code ready |
 | I-3 | 4 or 5 routed experts per token instead of 6 | Routed experts are most of the work per token; experts are picked by softmax score, so the dropped ones carry the least weight | Code ready |
 | I-7 | Route pages with small text to Gundam mode before decoding | Targets the paper's stated cause of long-document errors before it happens, instead of repairing after | Planned |
@@ -183,6 +184,34 @@ the 32,768-token limit repeating one sentence 555 times. Repair recovered the co
 warped scans of vertical classical Chinese that the model cannot read; there the loop is
 a symptom, and repair reduces repetition without making the text correct. Loop repair
 therefore helps when decoding runs away on a readable page, and is neutral otherwise.
+
+### 5.3 Long documents: one request against page by page [verified]
+
+Setup in section 4: page prefixes (2 to 40 pages) of three NIST reports, scored against
+the PDF text layer. The text layer misses text inside images, so absolute values are
+higher than the paper's and not comparable with its Table 3; the runs below are
+compared on the same documents.
+
+| Pages | One request, Base (E-003): edit / recall / s | Page by page, Base (E-010) | Page by page, Gundam (E-009) |
+|---|---|---|---|
+| 2 | 0.138 / 0.934 / 9 | 0.136 / 0.938 / 7 | 0.137 / 0.934 / 10 |
+| 5 | 0.104 / 0.973 / 31 | 0.039 / 0.973 / 25 | 0.038 / 0.977 / 33 |
+| 10 | 0.200 / 0.959 / 86 | 0.101 / 0.958 / 64 | 0.096 / 0.960 / 80 |
+| 20 | 0.110 / 0.953 / 194 | 0.104 / 0.961 / 141 | 0.091 / 0.961 / 166 |
+| 40 | 0.228 / 0.917 / 502 | 0.077 / 0.968 / 283 | 0.062 / 0.967 / 337 |
+
+In one request the model added or dropped a page in 10 of 15 documents (from 5 pages
+up), and two of the three 40-page documents ran into the 32,768-token output limit
+(NIST pages need about 800 tokens each). Splitting into one request per page removes
+both failures, raises recall at 40 pages from 0.917 to 0.968, and cuts model time by
+44%, because each output token then attends to one page's prefix instead of all pages'.
+Gundam resolution adds a small further gain in edit distance at about 19% more time.
+
+R-SWA does what the paper claims for memory: peak memory stayed between 8 and 11.4 GB
+up to 40 pages in one request. On this machine and these documents, though, the
+limits of one long request (output budget, page bookkeeping) cost more than its
+benefit. Cross-page structure, which the text-layer reference cannot score, is the
+case where one request may still be the better choice.
 
 ## 6. Discussion and limitations [draft]
 
