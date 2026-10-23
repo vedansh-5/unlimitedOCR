@@ -14,7 +14,8 @@ LABELS = {
     "E-017": "dev, 8-bit + 4 experts", "E-018": "dev, 8-bit + 4 experts + I-1 (bf16 fallback)", "E-019": "test, 8-bit + 4 experts",
     "E-020": "test, 8-bit + 4 experts + I-1 (bf16 fallback)",
     "E-021": "test, fast setup + empty-page fallback", "E-022": "test, I-1 + furniture dropped",
-    "E-023": "dev, Gundam with confidence log", "E-024": "dev, Base with confidence log",
+    "E-023": "dev, Gundam with confidence log", "E-024": "dev, Base with confidence log", "E-026": "dev, bf16 under 7.5 GB cap",
+    "E-029": "dev, bf16 under cap + I-1", "E-028": "full benchmark, bf16 under cap + I-1",
 }
 METRIC_NAMES = {"text_block": "Text Edit", "reading_order": "R-order Edit", "table_TEDS": "TEDS", "table_TEDS_S": "TEDS-S"}
 

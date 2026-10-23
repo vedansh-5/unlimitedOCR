@@ -55,6 +55,7 @@ E-001b) and accepts all of its options, plus:
 | `--experts-per-token N` | Use N of the 64 routed experts per token instead of 6 (I-3) |
 | `--log-speed FILE` | Write the time at token 1 and every 500 tokens (E-008) |
 | `--log-confidence` | Add the mean log-probability of the chosen tokens to each page's metrics |
+| `--memory-limit-gb N` | Keep memory near N GB: MLX limit, small cache, vision encoders run on a few crops at a time |
 | `--keep-prompt-space` | Keep the port's original prompt with the trailing space |
 | `--model PATH` | A local model folder, e.g. a quantized copy from `./quantize.sh 8` (I-2) |
 
@@ -75,6 +76,9 @@ uv run python omnidocbench.py evaluate --exp E-002
 
 # Re-run only pages flagged as loops, with the coordinate-blind guard
 uv run python omnidocbench.py retry --exp E-005 --base E-004 --content-guard
+
+# Formula CDM in the evaluator's Docker image (needs Docker running)
+uv run python omnidocbench.py evaluate-cdm --exp E-028
 
 # Scores reweighted to the full benchmark's type mix, with 95% bootstrap intervals
 uv run python compare.py score --exp E-002

@@ -1,0 +1,13 @@
+Loading baidu/Unlimited-OCR with MLX-VLM …
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 4519.72it/s]
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 1 OCR request(s).
+[1/1] newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.png
+INCOMPLETE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-029/raw/newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.md | 1 image(s), gundam, 32768 generated tokens, 408.7s, 80.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-029/raw/newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.json
+Generation reached --max-tokens. Output is retained for review but will not be skipped on rerun; increase --max-tokens or split the document.
+Finished 0 complete request(s); 1 incomplete; 0 skipped.

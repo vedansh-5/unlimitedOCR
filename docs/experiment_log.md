@@ -253,3 +253,9 @@ Chronological. One entry per meaningful action or decision.
 - **E-023 to E-025** (best of two by confidence, dev): logging verified harmless
   (identical output); confidence pick 0.0497 against 0.0504 Gundam, ceiling 0.0404.
   Rejected. Single-page accuracy ideas exhausted for now; see findings summary.
+- **Memory cap** (user request: keep under 8 GB): crop grouping, row-chunked SAM
+  attention, 256 MB cache. Footprint 10 GB to 7.75 GB. E-026/E-029 on dev: rounding
+  differences only; one fragile page (crossword) tips worse.
+- **Full run approved** by the user (with formula CDM, under 8 GB). Started as E-027
+  (`results/E-027/run.sh`): select all 1,651 pages, fetch, predict with the cap, retry
+  flagged pages (E-028), local evaluation, then CDM in Docker.

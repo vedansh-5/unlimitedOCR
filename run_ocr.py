@@ -54,6 +54,90 @@ def with_speed_log(guard_class, path, every=500):
     return Timed
 
 
+def set_memory_limit_gb(gb):
+    import mlx.core as mx
+
+    limit = int(gb * 1024**3)
+    mx.set_memory_limit(limit)
+    # Freed buffers are kept for reuse up to the cache limit; a small cache keeps the total near the limit.
+    mx.set_cache_limit(256 * 1024**2)
+
+
+# Runs an encoder over the batch a few images at a time, evaluating each group before the next,
+# so only one group's activations are alive at once.
+def chunked_call(call, size):
+    def run(x, **kwargs):
+        import mlx.core as mx
+
+        if x.shape[0] <= size:
+            return call(x, **kwargs)
+        parts = []
+        for i in range(0, x.shape[0], size):
+            part = call(x[i : i + size], **{k: v[i : i + size] if v is not None else None for k, v in kwargs.items()})
+            mx.eval(part)
+            parts.append(part)
+        return mx.concatenate(parts, axis=0)
+
+    return run
+
+
+def chunked_method(method, size):
+    def call(self, x, *args, **kwargs):
+        if args:
+            return method(self, x, *args, **kwargs)
+        return chunked_call(lambda y, **k: method(self, y, **k), size)(x, **kwargs)
+
+    return call
+
+
+# SAM's global-attention layers build a (heads, HW, HW) position bias; for the 1024 px
+# global view that is 12 x 4096 x 4096. Same computation, a block of query rows at a time.
+def row_chunked_attention(self, x, rows=1024):
+    import mlx.core as mx
+    from mlx_vlm.models.deepseekocr.sam import add_decomposed_rel_pos
+
+    B, H, W, _ = x.shape
+    qkv = self.qkv(x).reshape(B, H * W, 3, self.num_heads, -1).transpose(2, 0, 3, 1, 4)
+    q, k, v = qkv.reshape(3, B * self.num_heads, H * W, -1)
+    rel_h, rel_w = add_decomposed_rel_pos(q, self.rel_pos_h, self.rel_pos_w, (H, W), (H, W))
+    q, k, v = (t.reshape(B, self.num_heads, H * W, -1) for t in (q, k, v))
+    rel_h = rel_h.reshape(B, self.num_heads, H * W, H, 1)
+    rel_w = rel_w.reshape(B, self.num_heads, H * W, 1, W)
+    parts = []
+    for i in range(0, H * W, rows):
+        bias = (rel_h[:, :, i : i + rows] + rel_w[:, :, i : i + rows]).reshape(B, self.num_heads, -1, H * W)
+        part = mx.fast.scaled_dot_product_attention(q[:, :, i : i + rows], k, v, scale=self.scale, mask=bias)
+        mx.eval(part)
+        parts.append(part)
+    x = mx.concatenate(parts, axis=2)
+    x = x.reshape(B, self.num_heads, H, W, -1).transpose(0, 2, 3, 1, 4).reshape(B, H, W, -1)
+    return self.proj(x)
+
+
+def chunk_sam_attention():
+    from mlx_vlm.models.deepseekocr.sam import Attention
+
+    original = Attention.__call__
+
+    def call(self, x):
+        if not self.use_rel_pos or x.shape[1] * x.shape[2] <= 1024:
+            return original(self, x)
+        return row_chunked_attention(self, x)
+
+    Attention.__call__ = call
+
+
+def with_chunked_vision(load_model, size):
+    def load(*args, **kwargs):
+        model, processor = load_model(*args, **kwargs)
+        for encoder in (model.sam_model, model.vision_model):
+            cls = type(encoder)
+            cls.__call__ = chunked_method(cls.__call__, size)
+        return model, processor
+
+    return load
+
+
 _confidence = {}
 
 
@@ -113,6 +197,12 @@ if __name__ == "__main__":
         unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = with_speed_log(
             unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor, path
         )
+    if "--memory-limit-gb" in argv:
+        i = argv.index("--memory-limit-gb")
+        set_memory_limit_gb(float(argv[i + 1]))
+        del argv[i : i + 2]
+        infer_mlx.load_model = with_chunked_vision(infer_mlx.load_model, 4)
+        chunk_sam_attention()
     if "--log-confidence" in argv:
         argv.remove("--log-confidence")
         unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = with_confidence_log(

@@ -175,6 +175,47 @@ def cmd_evaluate(args, out):
         return subprocess.run(cmd, cwd=eval_dir, stdout=log, stderr=subprocess.STDOUT).returncode
 
 
+CDM_IMAGE = "ghcr.io/zeng-weijun/omnidocbench-eval:repro-ubuntu2204"
+
+
+# Formula CDM needs TeX Live, ImageMagick and Ghostscript at the versions the evaluator was
+# verified with, so it runs in the evaluator's own image. Config follows its README.
+def cmd_evaluate_cdm(args, out):
+    import yaml
+
+    config = {"end2end_eval": {
+        "metrics": {
+            "text_block": {"metric": ["Edit_dist"]},
+            "display_formula": {"metric": ["Edit_dist", "CDM"], "cdm_workers": 2},
+            "table": {"metric": ["TEDS", "Edit_dist"], "teds_workers": args.workers},
+            "reading_order": {"metric": ["Edit_dist"]},
+        },
+        "dataset": {
+            "dataset_name": "end2end_dataset",
+            "ground_truth": {"data_path": "./gt/gt.json"},
+            "prediction": {"data_path": "./data_md/predictions"},
+            "match_method": "quick_match",
+            "match_workers": args.workers,
+            "quick_match_truncated_timeout_sec": 300,
+            "timeout_fallback_max_chunk_span": 10,
+            "timeout_fallback_order_penalty": 0.10,
+        },
+    }}
+    eval_dir = out / "eval_cdm"
+    (eval_dir / "result").mkdir(parents=True, exist_ok=True)
+    (eval_dir / "config.yaml").write_text(yaml.safe_dump(config, sort_keys=False))
+    cmd = [
+        "docker", "run", "--rm", "--memory", "6g", "--entrypoint", "bash",
+        "-v", f"{out / 'gt_subset.json'}:/workspace/gt/gt.json:ro",
+        "-v", f"{out / 'pred'}:/workspace/data_md/predictions:ro",
+        "-v", f"{eval_dir / 'config.yaml'}:/workspace/configs/custom.yaml:ro",
+        "-v", f"{eval_dir / 'result'}:/workspace/result",
+        CDM_IMAGE, "-c", "python pdf_validation.py --config configs/custom.yaml",
+    ]
+    with (eval_dir / "evaluate.log").open("w") as log:
+        return subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT).returncode
+
+
 def cmd_summary(args, out):
     result = out / "eval" / "result"
     report = json.loads((result / "pred_quick_match_run_summary.json").read_text())
@@ -192,7 +233,7 @@ def cmd_summary(args, out):
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Run Unlimited-OCR on an OmniDocBench subset and score it.")
-    parser.add_argument("step", choices=["select", "fetch", "predict", "retry", "rescore", "evaluate", "summary"])
+    parser.add_argument("step", choices=["select", "fetch", "predict", "retry", "rescore", "evaluate", "evaluate-cdm", "summary"])
     parser.add_argument("--exp", required=True)
     parser.add_argument("--per-type", type=int, default=15)
     parser.add_argument("--seed", type=int, default=42)
@@ -216,6 +257,8 @@ def main(argv=None):
         return cmd_retry(args, out, extra)
     if args.step == "evaluate":
         return cmd_evaluate(args, out)
+    if args.step == "evaluate-cdm":
+        return cmd_evaluate_cdm(args, out)
     return cmd_summary(args, out)
 
 

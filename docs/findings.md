@@ -618,3 +618,37 @@ limit), ragged-table repair (2 of 37 table pages), best of two by confidence (ga
 too small). On OmniDocBench single pages the released model is close to what
 inference-time changes can reach; the large, measurable gains of this project are
 for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
+
+## Memory cap under 8 GB, E-026 and E-029 (2026-10-23)
+
+- **Problem:** the user needs the machine usable during the full run, so memory must
+  stay under 8 GB. bf16 peaked at 10.0 GB. MLX's `set_memory_limit` is only a
+  guideline: with it alone the peak stayed at 9.9 GB.
+- **Where the memory goes:** weights 6.67 GB after load. The rest was (1) both vision
+  encoders run on all crops of a page in one batch (up to about 30 crops of 640 px), and
+  (2) the global-attention layers of the SAM encoder on the 1024 px global view, which
+  build a 12 x 4096 x 4096 position-bias tensor (two of them, about 400 MB each, alive
+  together).
+- **Change (`run_ocr.py --memory-limit-gb N`):** sets MLX's memory limit, caps its
+  buffer cache at 256 MB, runs the vision encoders 4 crops at a time
+  (`chunked_call`), and computes SAM's global attention 1,024 query rows at a time
+  (`row_chunked_attention`). Tests show the crop grouping is exact against a batch of
+  8 and the row chunking matches the original attention; batch size 1 against batch 8
+  differs in the last bits (bf16 kernels), so outputs are not byte-identical.
+- **Measured on the three heaviest test pages:** process footprint peak 7,753 MB
+  (was about 10 GB), same speed.
+- **E-026 (dev, bf16, cap 7.5) vs E-004:** MLX peak 7.62 GB; model time 19.4 min
+  against 18.3; 20 of 45 pages byte-identical; Text Edit +0.005 [-0.001, 0.012],
+  R-order -0.002, TEDS +0.002.
+- **E-029 (E-026 plus fallback) vs E-005:** Text Edit +0.013 [-0.001, 0.037]. Almost all
+  of it is the Daily Star crossword page: under the cap its fallback writes the grid
+  as an endless table of empty cells and hits the token cap again (+0.63 on that
+  page). Without that page the mean change is +0.002, mostly one textbook page
+  (+0.10). Pages move in both directions; only 5 of 44 changed by more than 0.01.
+- **Reading:** the cap changes rounding, not the model. A few fragile pages tip either
+  way. The full run uses it because the 8 GB limit is a hard requirement; the report
+  says so.
+- **Formula CDM:** `omnidocbench.py evaluate-cdm` runs the evaluator's own Docker
+  image (`ghcr.io/zeng-weijun/omnidocbench-eval:repro-ubuntu2204`, the versions its
+  README verifies) with the container held at 6 GB and 2 CDM workers. It runs only
+  after the model has finished, so the two never add up.
