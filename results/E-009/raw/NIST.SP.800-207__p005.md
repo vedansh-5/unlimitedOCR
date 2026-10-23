@@ -1,0 +1,10 @@
+<|det|>aside_text [26, 293, 45, 742]<|/det|>This publication is available free of charge from: https://doi.org/10.6028/NIST.SP.800-207
+<|det|>header [115, 44, 248, 59]<|/det|>NIST SP 800-207
+<|det|>header [683, 44, 884, 59]<|/det|>ZERO TRUST ARCHITECTURE
+<|det|>title [409, 92, 589, 112]<|/det|>Acknowledgments
+<|det|>text [111, 125, 881, 233]<|/det|>This document is the product of a collaboration between multiple federal agencies and is overseen by the Federal CIO Council. The architecture subgroup is responsible for development of this document, but there are specific individuals who deserve recognition. These include Greg Holden, project manager of the Federal CIO Council ZTA project; Alper Kerman, project manager for the NIST/National Cybersecurity Center of Excellence ZTA effort; and Douglas Montgomery.
+<|det|>title [452, 243, 548, 260]<|/det|>Audience
+<|det|>text [111, 276, 885, 419]<|/det|>This document is intended to describe zero trust for enterprise security architects. It is meant to aid understanding of zero trust for civilian unclassified systems and provide a road map to migrate and deploy zero trust security concepts to an enterprise environment. Agency cybersecurity managers, network administrators, and managers may also gain insight into zero trust and ZTA from this document. It is not intended to be a single deployment plan for ZTA as an enterprise will have unique business use cases and data assets that require safeguards. Starting with a solid understanding of the organization's business and data will result in a strong approach to zero trust.
+<|det|>title [390, 430, 610, 448]<|/det|>Trademark Information
+<|det|>text [119, 463, 757, 483]<|/det|>All registered trademarks or trademarks belong to their respective organizations.
+<|det|>page_number [490, 923, 511, 938]<|/det|>iii

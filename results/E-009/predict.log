@@ -1,0 +1,251 @@
+Loading baidu/Unlimited-OCR with MLX-VLM …
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 3659.69it/s]
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 120 OCR request(s).
+[1/120] NIST.AI.100-1__p001.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p001.md | 1 image(s), gundam, 138 generated tokens, 3.0s, 94.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p001.json
+[2/120] NIST.AI.100-1__p002.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p002.md | 1 image(s), gundam, 252 generated tokens, 3.8s, 95.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p002.json
+[3/120] NIST.AI.100-1__p003.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p003.md | 1 image(s), gundam, 388 generated tokens, 5.2s, 95.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p003.json
+[4/120] NIST.AI.100-1__p004.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p004.md | 1 image(s), gundam, 931 generated tokens, 11.0s, 94.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p004.json
+[5/120] NIST.AI.100-1__p005.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p005.md | 1 image(s), gundam, 544 generated tokens, 6.9s, 94.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p005.json
+[6/120] NIST.AI.100-1__p006.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p006.md | 1 image(s), gundam, 705 generated tokens, 8.6s, 95.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p006.json
+[7/120] NIST.AI.100-1__p007.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p007.md | 1 image(s), gundam, 737 generated tokens, 8.9s, 95.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p007.json
+[8/120] NIST.AI.100-1__p008.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p008.md | 1 image(s), gundam, 486 generated tokens, 6.3s, 95.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p008.json
+[9/120] NIST.AI.100-1__p009.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p009.md | 1 image(s), gundam, 708 generated tokens, 8.6s, 95.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p009.json
+[10/120] NIST.AI.100-1__p010.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p010.md | 1 image(s), gundam, 508 generated tokens, 6.5s, 95.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p010.json
+[11/120] NIST.AI.100-1__p011.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p011.md | 1 image(s), gundam, 654 generated tokens, 8.0s, 95.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p011.json
+[12/120] NIST.AI.100-1__p012.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p012.md | 1 image(s), gundam, 671 generated tokens, 8.2s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p012.json
+[13/120] NIST.AI.100-1__p013.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p013.md | 1 image(s), gundam, 682 generated tokens, 8.4s, 94.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p013.json
+[14/120] NIST.AI.100-1__p014.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p014.md | 1 image(s), gundam, 708 generated tokens, 8.7s, 94.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p014.json
+[15/120] NIST.AI.100-1__p015.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p015.md | 1 image(s), gundam, 466 generated tokens, 6.1s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p015.json
+[16/120] NIST.AI.100-1__p016.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p016.md | 1 image(s), gundam, 83 generated tokens, 2.1s, 94.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p016.json
+[17/120] NIST.AI.100-1__p017.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p017.md | 1 image(s), gundam, 619 generated tokens, 7.7s, 95.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p017.json
+[18/120] NIST.AI.100-1__p018.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p018.md | 1 image(s), gundam, 690 generated tokens, 8.4s, 95.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p018.json
+[19/120] NIST.AI.100-1__p019.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p019.md | 1 image(s), gundam, 733 generated tokens, 8.9s, 95.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p019.json
+[20/120] NIST.AI.100-1__p020.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p020.md | 1 image(s), gundam, 722 generated tokens, 8.8s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p020.json
+[21/120] NIST.AI.100-1__p021.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p021.md | 1 image(s), gundam, 679 generated tokens, 8.3s, 95.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p021.json
+[22/120] NIST.AI.100-1__p022.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p022.md | 1 image(s), gundam, 671 generated tokens, 8.5s, 92.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p022.json
+[23/120] NIST.AI.100-1__p023.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p023.md | 1 image(s), gundam, 391 generated tokens, 5.3s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p023.json
+[24/120] NIST.AI.100-1__p024.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p024.md | 1 image(s), gundam, 559 generated tokens, 7.1s, 94.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p024.json
+[25/120] NIST.AI.100-1__p025.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p025.md | 1 image(s), gundam, 392 generated tokens, 5.3s, 95.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p025.json
+[26/120] NIST.AI.100-1__p026.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p026.md | 1 image(s), gundam, 701 generated tokens, 8.6s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p026.json
+[27/120] NIST.AI.100-1__p027.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p027.md | 1 image(s), gundam, 620 generated tokens, 7.7s, 94.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p027.json
+[28/120] NIST.AI.100-1__p028.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p028.md | 1 image(s), gundam, 584 generated tokens, 7.4s, 94.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p028.json
+[29/120] NIST.AI.100-1__p029.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p029.md | 1 image(s), gundam, 625 generated tokens, 7.9s, 95.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p029.json
+[30/120] NIST.AI.100-1__p030.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p030.md | 1 image(s), gundam, 727 generated tokens, 9.4s, 91.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p030.json
+[31/120] NIST.AI.100-1__p031.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p031.md | 1 image(s), gundam, 531 generated tokens, 7.4s, 93.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p031.json
+[32/120] NIST.AI.100-1__p032.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p032.md | 1 image(s), gundam, 584 generated tokens, 7.9s, 93.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p032.json
+[33/120] NIST.AI.100-1__p033.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p033.md | 1 image(s), gundam, 652 generated tokens, 8.7s, 93.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p033.json
+[34/120] NIST.AI.100-1__p034.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p034.md | 1 image(s), gundam, 553 generated tokens, 7.8s, 93.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p034.json
+[35/120] NIST.AI.100-1__p035.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p035.md | 1 image(s), gundam, 551 generated tokens, 7.8s, 93.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p035.json
+[36/120] NIST.AI.100-1__p036.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p036.md | 1 image(s), gundam, 594 generated tokens, 8.4s, 91.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p036.json
+[37/120] NIST.AI.100-1__p037.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p037.md | 1 image(s), gundam, 618 generated tokens, 8.5s, 92.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p037.json
+[38/120] NIST.AI.100-1__p038.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p038.md | 1 image(s), gundam, 671 generated tokens, 9.2s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p038.json
+[39/120] NIST.AI.100-1__p039.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p039.md | 1 image(s), gundam, 174 generated tokens, 3.6s, 93.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p039.json
+[40/120] NIST.AI.100-1__p040.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p040.md | 1 image(s), gundam, 707 generated tokens, 9.2s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.AI.100-1__p040.json
+[41/120] NIST.SP.800-63-3__p001.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p001.md | 1 image(s), gundam, 516 generated tokens, 7.6s, 89.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p001.json
+[42/120] NIST.SP.800-63-3__p002.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p002.md | 1 image(s), gundam, 245 generated tokens, 3.9s, 93.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p002.json
+[43/120] NIST.SP.800-63-3__p003.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p003.md | 1 image(s), gundam, 416 generated tokens, 6.2s, 93.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p003.json
+[44/120] NIST.SP.800-63-3__p004.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p004.md | 1 image(s), gundam, 752 generated tokens, 9.9s, 93.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p004.json
+[45/120] NIST.SP.800-63-3__p005.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p005.md | 1 image(s), gundam, 249 generated tokens, 4.5s, 89.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p005.json
+[46/120] NIST.SP.800-63-3__p006.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p006.md | 1 image(s), gundam, 771 generated tokens, 9.7s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p006.json
+[47/120] NIST.SP.800-63-3__p007.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p007.md | 1 image(s), gundam, 739 generated tokens, 9.6s, 93.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p007.json
+[48/120] NIST.SP.800-63-3__p008.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p008.md | 1 image(s), gundam, 781 generated tokens, 10.1s, 93.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p008.json
+[49/120] NIST.SP.800-63-3__p009.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p009.md | 1 image(s), gundam, 870 generated tokens, 11.1s, 93.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p009.json
+[50/120] NIST.SP.800-63-3__p010.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p010.md | 1 image(s), gundam, 798 generated tokens, 10.3s, 93.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p010.json
+[51/120] NIST.SP.800-63-3__p011.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p011.md | 1 image(s), gundam, 908 generated tokens, 11.5s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p011.json
+[52/120] NIST.SP.800-63-3__p012.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p012.md | 1 image(s), gundam, 779 generated tokens, 10.2s, 91.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p012.json
+[53/120] NIST.SP.800-63-3__p013.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p013.md | 1 image(s), gundam, 481 generated tokens, 7.0s, 93.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p013.json
+[54/120] NIST.SP.800-63-3__p014.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p014.md | 1 image(s), gundam, 210 generated tokens, 4.3s, 89.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p014.json
+[55/120] NIST.SP.800-63-3__p015.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p015.md | 1 image(s), gundam, 760 generated tokens, 9.6s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p015.json
+[56/120] NIST.SP.800-63-3__p016.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p016.md | 1 image(s), gundam, 841 generated tokens, 11.1s, 89.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p016.json
+[57/120] NIST.SP.800-63-3__p017.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p017.md | 1 image(s), gundam, 717 generated tokens, 9.0s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p017.json
+[58/120] NIST.SP.800-63-3__p018.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p018.md | 1 image(s), gundam, 783 generated tokens, 10.2s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p018.json
+[59/120] NIST.SP.800-63-3__p019.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p019.md | 1 image(s), gundam, 929 generated tokens, 11.8s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p019.json
+[60/120] NIST.SP.800-63-3__p020.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p020.md | 1 image(s), gundam, 275 generated tokens, 4.8s, 93.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p020.json
+[61/120] NIST.SP.800-63-3__p021.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p021.md | 1 image(s), gundam, 160 generated tokens, 3.4s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p021.json
+[62/120] NIST.SP.800-63-3__p022.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p022.md | 1 image(s), gundam, 795 generated tokens, 10.2s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p022.json
+[63/120] NIST.SP.800-63-3__p023.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p023.md | 1 image(s), gundam, 501 generated tokens, 7.2s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p023.json
+[64/120] NIST.SP.800-63-3__p024.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p024.md | 1 image(s), gundam, 831 generated tokens, 10.8s, 92.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p024.json
+[65/120] NIST.SP.800-63-3__p025.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p025.md | 1 image(s), gundam, 868 generated tokens, 11.5s, 89.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p025.json
+[66/120] NIST.SP.800-63-3__p026.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p026.md | 1 image(s), gundam, 889 generated tokens, 11.3s, 89.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p026.json
+[67/120] NIST.SP.800-63-3__p027.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p027.md | 1 image(s), gundam, 799 generated tokens, 10.3s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p027.json
+[68/120] NIST.SP.800-63-3__p028.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p028.md | 1 image(s), gundam, 845 generated tokens, 11.2s, 89.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p028.json
+[69/120] NIST.SP.800-63-3__p029.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p029.md | 1 image(s), gundam, 429 generated tokens, 6.0s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p029.json
+[70/120] NIST.SP.800-63-3__p030.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p030.md | 1 image(s), gundam, 821 generated tokens, 10.7s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p030.json
+[71/120] NIST.SP.800-63-3__p031.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p031.md | 1 image(s), gundam, 617 generated tokens, 8.4s, 92.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p031.json
+[72/120] NIST.SP.800-63-3__p032.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p032.md | 1 image(s), gundam, 635 generated tokens, 8.7s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p032.json
+[73/120] NIST.SP.800-63-3__p033.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p033.md | 1 image(s), gundam, 847 generated tokens, 11.0s, 91.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p033.json
+[74/120] NIST.SP.800-63-3__p034.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p034.md | 1 image(s), gundam, 863 generated tokens, 11.1s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p034.json
+[75/120] NIST.SP.800-63-3__p035.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p035.md | 1 image(s), gundam, 762 generated tokens, 10.0s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p035.json
+[76/120] NIST.SP.800-63-3__p036.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p036.md | 1 image(s), gundam, 872 generated tokens, 11.2s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p036.json
+[77/120] NIST.SP.800-63-3__p037.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p037.md | 1 image(s), gundam, 315 generated tokens, 5.3s, 89.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p037.json
+[78/120] NIST.SP.800-63-3__p038.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p038.md | 1 image(s), gundam, 695 generated tokens, 8.9s, 92.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p038.json
+[79/120] NIST.SP.800-63-3__p039.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p039.md | 1 image(s), gundam, 771 generated tokens, 10.1s, 92.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p039.json
+[80/120] NIST.SP.800-63-3__p040.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p040.md | 1 image(s), gundam, 154 generated tokens, 3.4s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-63-3__p040.json
+[81/120] NIST.SP.800-207__p001.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p001.md | 1 image(s), gundam, 276 generated tokens, 4.6s, 93.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p001.json
+[82/120] NIST.SP.800-207__p002.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p002.md | 1 image(s), gundam, 435 generated tokens, 6.5s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p002.json
+[83/120] NIST.SP.800-207__p003.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p003.md | 1 image(s), gundam, 839 generated tokens, 10.9s, 92.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p003.json
+[84/120] NIST.SP.800-207__p004.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p004.md | 1 image(s), gundam, 605 generated tokens, 8.3s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p004.json
+[85/120] NIST.SP.800-207__p005.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p005.md | 1 image(s), gundam, 422 generated tokens, 6.3s, 93.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p005.json
+[86/120] NIST.SP.800-207__p006.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p006.md | 1 image(s), gundam, 442 generated tokens, 6.6s, 93.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p006.json
+[87/120] NIST.SP.800-207__p007.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p007.md | 1 image(s), gundam, 935 generated tokens, 12.0s, 92.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p007.json
+[88/120] NIST.SP.800-207__p008.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p008.md | 1 image(s), gundam, 957 generated tokens, 12.1s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p008.json
+[89/120] NIST.SP.800-207__p009.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p009.md | 1 image(s), gundam, 709 generated tokens, 9.5s, 91.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p009.json
+[90/120] NIST.SP.800-207__p010.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p010.md | 1 image(s), gundam, 798 generated tokens, 10.4s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p010.json
+[91/120] NIST.SP.800-207__p011.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p011.md | 1 image(s), gundam, 854 generated tokens, 11.0s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p011.json
+[92/120] NIST.SP.800-207__p012.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p012.md | 1 image(s), gundam, 267 generated tokens, 4.6s, 94.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p012.json
+[93/120] NIST.SP.800-207__p013.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p013.md | 1 image(s), gundam, 820 generated tokens, 10.7s, 91.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p013.json
+[94/120] NIST.SP.800-207__p014.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p014.md | 1 image(s), gundam, 704 generated tokens, 9.5s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p014.json
+[95/120] NIST.SP.800-207__p015.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p015.md | 1 image(s), gundam, 840 generated tokens, 10.8s, 92.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p015.json
+[96/120] NIST.SP.800-207__p016.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p016.md | 1 image(s), gundam, 745 generated tokens, 9.9s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p016.json
+[97/120] NIST.SP.800-207__p017.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p017.md | 1 image(s), gundam, 788 generated tokens, 10.4s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p017.json
+[98/120] NIST.SP.800-207__p018.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p018.md | 1 image(s), gundam, 583 generated tokens, 8.2s, 90.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p018.json
+[99/120] NIST.SP.800-207__p019.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p019.md | 1 image(s), gundam, 771 generated tokens, 10.2s, 91.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p019.json
+[100/120] NIST.SP.800-207__p020.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p020.md | 1 image(s), gundam, 785 generated tokens, 10.3s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p020.json
+[101/120] NIST.SP.800-207__p021.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p021.md | 1 image(s), gundam, 882 generated tokens, 11.3s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p021.json
+[102/120] NIST.SP.800-207__p022.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p022.md | 1 image(s), gundam, 732 generated tokens, 9.8s, 91.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p022.json
+[103/120] NIST.SP.800-207__p023.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p023.md | 1 image(s), gundam, 671 generated tokens, 9.1s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p023.json
+[104/120] NIST.SP.800-207__p024.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p024.md | 1 image(s), gundam, 392 generated tokens, 5.9s, 93.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p024.json
+[105/120] NIST.SP.800-207__p025.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p025.md | 1 image(s), gundam, 475 generated tokens, 7.3s, 88.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p025.json
+[106/120] NIST.SP.800-207__p026.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p026.md | 1 image(s), gundam, 491 generated tokens, 6.8s, 92.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p026.json
+[107/120] NIST.SP.800-207__p027.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p027.md | 1 image(s), gundam, 583 generated tokens, 8.0s, 93.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p027.json
+[108/120] NIST.SP.800-207__p028.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p028.md | 1 image(s), gundam, 842 generated tokens, 10.9s, 92.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p028.json
+[109/120] NIST.SP.800-207__p029.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p029.md | 1 image(s), gundam, 871 generated tokens, 11.2s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p029.json
+[110/120] NIST.SP.800-207__p030.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p030.md | 1 image(s), gundam, 827 generated tokens, 10.7s, 92.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p030.json
+[111/120] NIST.SP.800-207__p031.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p031.md | 1 image(s), gundam, 606 generated tokens, 8.3s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p031.json
+[112/120] NIST.SP.800-207__p032.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p032.md | 1 image(s), gundam, 693 generated tokens, 9.4s, 91.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p032.json
+[113/120] NIST.SP.800-207__p033.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p033.md | 1 image(s), gundam, 425 generated tokens, 6.4s, 93.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p033.json
+[114/120] NIST.SP.800-207__p034.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p034.md | 1 image(s), gundam, 476 generated tokens, 7.3s, 89.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p034.json
+[115/120] NIST.SP.800-207__p035.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p035.md | 1 image(s), gundam, 687 generated tokens, 8.8s, 92.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p035.json
+[116/120] NIST.SP.800-207__p036.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p036.md | 1 image(s), gundam, 507 generated tokens, 7.2s, 92.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p036.json
+[117/120] NIST.SP.800-207__p037.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p037.md | 1 image(s), gundam, 833 generated tokens, 10.8s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p037.json
+[118/120] NIST.SP.800-207__p038.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p038.md | 1 image(s), gundam, 822 generated tokens, 10.7s, 92.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p038.json
+[119/120] NIST.SP.800-207__p039.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p039.md | 1 image(s), gundam, 841 generated tokens, 10.9s, 91.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p039.json
+[120/120] NIST.SP.800-207__p040.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p040.md | 1 image(s), gundam, 369 generated tokens, 5.8s, 93.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-009/raw/NIST.SP.800-207__p040.json
+Finished 120 complete request(s); 0 incomplete; 0 skipped.
+All 120 output(s) already exist. Use --overwrite to regenerate.

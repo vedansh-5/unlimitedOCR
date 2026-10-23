@@ -374,3 +374,34 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   because a page shift moves every later page. Replaced by E-009: every page run on
   its own in Gundam mode and joined in order, which has no shifts and no cap by
   construction, and directly tests the paper's case for multi-page decoding.
+
+## E-009: Page-by-page Gundam on the long-document set (2026-10-23)
+
+- **Problem:** E-003 showed page shifts, the token cap at 40 pages, and recall loss
+  with length when all pages go in one request.
+- **Change:** each of the first 40 pages of each NIST source is run alone in Gundam
+  mode (the port's single-image default) and the outputs are joined in page order.
+  Each prefix document reuses the same page outputs. 120 page requests, 31.2 min model
+  time in all.
+- **Hypothesis:** no shifts and no cap by construction; accuracy at least as good
+  (higher resolution per page); time similar, since output length is similar.
+- **Results (means per bucket, E-003 then E-009):**
+
+| Pages | Edit distance | Word recall | Model s | Peak GB |
+|---|---|---|---|---|
+| 2 | 0.138, 0.137 | 0.934, 0.934 | 9, 10 | 8.0, 8.6 |
+| 5 | 0.104, 0.038 | 0.973, 0.977 | 31, 33 | 9.1, 8.6 |
+| 10 | 0.200, 0.096 | 0.959, 0.960 | 85, 80 | 11.3, 8.6 |
+| 20 | 0.110, 0.091 | 0.953, 0.961 | 194, 166 | 11.4, 8.6 |
+| 40 | 0.228, 0.062 | 0.917, 0.967 | 502, 337 | 9.5, 8.6 |
+
+- Page count right in 15 of 15 documents (E-003: 6 of 15); no request hit a cap.
+- **Hypothesis supported:** yes, and faster than expected from 10 pages up. Likely
+  reason: in one request, every output token attends to all prefix tokens (256 per
+  page in Base mode), so per-token cost grows with page count; a single page keeps the
+  prefix short.
+- **Caveats:** (1) two things changed at once: one page per request, and Gundam
+  instead of Base resolution. E-010 (page by page in Base mode) separates them.
+  (2) 15 documents are nested prefixes of 3 sources, so they are not independent; no
+  interval is given. (3) Scores are against the text layer (see E-003).
+- **Decision:** pending E-010.

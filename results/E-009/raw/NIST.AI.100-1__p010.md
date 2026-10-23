@@ -1,0 +1,11 @@
+<|det|>header [144, 45, 248, 59]<|/det|>NIST AI 100-1
+<|det|>header [755, 44, 855, 60]<|/det|>AI RMF 1.0
+<|det|>image [175, 90, 839, 301]<|/det|>
+<|det|>image_caption [141, 317, 855, 368]<|/det|>Fig. 1. Examples of potential harms related to AI systems. Trustworthy AI systems and their responsible use can mitigate negative risks and contribute to benefits for people, organizations, and ecosystems.
+<|det|>title [143, 396, 498, 415]<|/det|>1.2 Challenges for AI Risk Management
+<|det|>text [141, 427, 856, 464]<|/det|>Several challenges are described below. They should be taken into account when managing risks in pursuit of AI trustworthiness.
+<|det|>title [143, 479, 367, 496]<|/det|>1.2.1 Risk Measurement
+<|det|>text [141, 510, 856, 583]<|/det|>AI risks or failures that are not well-defined or adequately understood are difficult to measure quantitatively or qualitatively. The inability to appropriately measure AI risks does not imply that an AI system necessarily poses either a high or low risk. Some risk measurement challenges include:
+<|det|>text [141, 596, 856, 816]<|/det|>Risks related to third-party software, hardware, and data: Third-party data or systems can accelerate research and development and facilitate technology transition. They also may complicate risk measurement. Risk can emerge both from third-party data, software or hardware itself and how it is used. Risk metrics or methodologies used by the organization developing the AI system may not align with the risk metrics or methodologies uses by the organization deploying or operating the system. Also, the organization developing the AI system may not be transparent about the risk metrics or methodologies it used. Risk measurement and management can be complicated by how customers use or integrate third-party data or systems into AI products or services, particularly without sufficient internal governance structures and technical safeguards. Regardless, all parties and AI actors should manage risk in the AI systems they develop, deploy, or use as standalone or integrated components.
+<|det|>text [141, 828, 854, 865]<|/det|>Tracking emergent risks: Organizations' risk management efforts will be enhanced by identifying and tracking emergent risks and considering techniques for measuring them.
+<|det|>page_number [806, 888, 854, 902]<|/det|>Page 5

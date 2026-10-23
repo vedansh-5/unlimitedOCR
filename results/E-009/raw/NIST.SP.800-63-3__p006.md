@@ -1,0 +1,16 @@
+<|det|>aside_text [31, 311, 50, 770]<|/det|>This publication is available free of charge from: https://doi.org/10.6028/NIST.SP.800-63-3
+<|det|>header [115, 60, 251, 75]<|/det|>NIST SP 800-63-3
+<|det|>header [677, 60, 884, 76]<|/det|>DIGITAL IDENTITY GUIDELINES
+<|det|>title [457, 105, 543, 123]<|/det|>Abstract
+<|det|>text [111, 137, 882, 262]<|/det|>These guidelines provide technical requirements for federal agencies implementing digital identity services and are not intended to constrain the development or use of standards outside of this purpose. The guidelines cover identity proofing and authentication of users (such as employees, contractors, or private individuals) interacting with government IT systems over open networks. They define technical requirements in each of the areas of identity proofing, registration, authenticators, management processes, authentication protocols, federation, and related assertions. This publication supersedes NIST Special Publication 800-63-2.
+<|det|>title [449, 274, 550, 294]<|/det|>Keywords
+<|det|>text [112, 307, 859, 343]<|/det|>authentication; authentication assurance; authenticator; assertions; credential service provider; digital authentication; digital credentials; identity proofing; federation; passwords; PKI.
+<|det|>title [409, 355, 589, 374]<|/det|>Acknowledgments
+<|det|>text [112, 388, 866, 459]<|/det|>The authors gratefully acknowledge Kaitlin Boeckl for her artistic graphics contributions to all volumes in the SP 800-63 suite and the contributions of our many reviewers, including Joni Brennan from the Digital ID & Authentication Council of Canada (DIACC), Ellen Nadeau and Ben Piccarreta from NIST, and Danna Gabel O'Rourke from Deloitte & Touche LLP.
+<|det|>text [111, 472, 871, 543]<|/det|>In addition, the authors would like to acknowledge the thought leadership and innovation of the original authors: Donna F. Dodson, Elaine M. Newton, Ray A. Perlner, W. Timothy Polk, Sarbari Gupta, and Emad A. Nabbus. Without their tireless efforts, we would not have had the incredible baseline from which to evolve SP 800-63 to the document it is today.
+<|det|>title [306, 556, 692, 573]<|/det|>Requirements Notation and Conventions
+<|det|>text [112, 588, 868, 625]<|/det|>The terms “SHALL” and “SHALL NOT” indicate requirements to be followed strictly in order to conform to the publication and from which no deviation is permitted.
+<|det|>text [111, 638, 871, 710]<|/det|>The terms “SHOULD” and “SHOULD NOT” indicate that among several possibilities one is recommended as particularly suitable, without mentioning or excluding others, or that a certain course of action is preferred but not necessarily required, or that (in the negative form) a certain possibility or course of action is discouraged but not prohibited.
+<|det|>text [112, 722, 884, 759]<|/det|>The terms “MAY” and “NEED NOT” indicate a course of action permissible within the limits of the publication.
+<|det|>text [112, 773, 831, 810]<|/det|>The terms “CAN” and “CANNOT” indicate a possibility and capability, whether material, physical or causal or, in the negative, the absence of that possibility or capability.
+<|det|>page_number [490, 923, 510, 937]<|/det|>iii

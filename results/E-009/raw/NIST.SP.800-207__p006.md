@@ -1,0 +1,9 @@
+<|det|>header [115, 44, 248, 59]<|/det|>NIST SP 800-207
+<|det|>header [683, 45, 884, 59]<|/det|>ZERO TRUST ARCHITECTURE
+<|det|>title [381, 92, 618, 110]<|/det|>Patent Disclosure Notice
+<|det|>text [111, 125, 881, 220]<|/det|>NOTICE: The Information Technology Laboratory (ITL) has requested that holders of patent claims whose use may be required for compliance with the guidance or requirements of this publication disclose such patent claims to ITL. However, holders of patents are not obligated to respond to ITL calls for patents and ITL has not undertaken a patent search in order to identify which, if any, patents may apply to this publication.
+<|det|>text [111, 237, 875, 293]<|/det|>Following the ITL call for the identification of patent claims whose use may be required for compliance with the guidance or requirements of this publication, notice of one or more such claims has been received.
+<|det|>text [111, 309, 885, 424]<|/det|>By publication, no position is taken by ITL with respect to the validity or scope of any patent claim or of any rights in connection therewith. The known patent holder(s) has (have), however, provided to NIST a letter of assurance stating either (1) a general disclaimer to the effect that it does (they do) not hold and does (do) not currently intend holding any essential patent claim(s), or (2) that it (they) will negotiate royalty-free or royalty-bearing licenses with other parties on a demonstrably nondiscriminatory basis with reasonable terms and conditions.
+<|det|>text [113, 440, 547, 459]<|/det|>Details may be obtained from zerotrust-arch@nist.gov.
+<|det|>text [111, 473, 835, 511]<|/det|>No representation is made or implied that this is the only license that may be required to avoid patent infringement in the use of this publication.
+<|det|>page_number [491, 924, 509, 937]<|/det|>iv

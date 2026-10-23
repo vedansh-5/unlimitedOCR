@@ -33,11 +33,11 @@ def word_recall(prediction, reference):
     return sum((pred & ref).values()) / max(sum(ref.values()), 1)
 
 
-def cmd_make(args, out):
+def cmd_make(sources, out):
     inputs, refs = out / "inputs", out / "reference"
     inputs.mkdir(parents=True, exist_ok=True)
     refs.mkdir(exist_ok=True)
-    for source in args.sources:
+    for source in sources:
         with pymupdf.open(source) as doc:
             for n in (b for b in BUCKETS if b <= doc.page_count):
                 name = f"{source.stem}_p{n:02d}"
@@ -130,6 +130,9 @@ def cmd_retry(args, out, extra):
     total = len(list(images.glob("*.png")))
     print(f"{total} distinct pages to run")
     code = run_images(images, out, extra) if total else 0
+    if code:
+        print(f"model run failed (exit {code}); see {out / 'predict.log'}")
+        return code
 
     (out / "md").mkdir(exist_ok=True)
     retried, rows = [], []
@@ -154,7 +157,7 @@ def cmd_retry(args, out, extra):
             "doc": run["doc"], "pages_in": pages_in, "pages_out": len(pages), "retried": len(flagged[stem]),
             "model_s": round(kept * float(run["model_s"]) + sum(m.get("elapsed_seconds", 0) for m in metas), 2),
             "gen_tokens": kept * int(run["gen_tokens"]) + sum(m.get("generation_tokens", 0) for m in metas),
-            "peak_mlx_gb": max([kept * float(run["peak_mlx_gb"])] + [m.get("peak_memory_gb", 0) for m in metas]),
+            "peak_mlx_gb": round(max([kept * float(run["peak_mlx_gb"])] + [m.get("peak_memory_gb", 0) for m in metas]), 2),
             "distinct_20": round(checks.distinct_n(plain, 20), 4), "distinct_35": round(checks.distinct_n(plain, 35), 4),
             "complete": all(m.get("complete") for m in metas) if metas else run["complete"],
         })
@@ -173,12 +176,13 @@ def main(argv=None):
     parser.add_argument("--exp", required=True)
     parser.add_argument("--base", help="retry: experiment whose flagged pages are re-run one at a time")
     parser.add_argument("--all-pages", action="store_true", help="retry: run every page alone, ignoring the base output")
-    parser.add_argument("sources", nargs="*", type=Path)
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp
     if args.step == "retry":
         return cmd_retry(args, out, extra)
-    return cmd_make(args, out) if args.step == "make" else cmd_score(args, out)
+    if args.step == "make":
+        return cmd_make(map(Path, extra), out)
+    return cmd_score(args, out)
 
 
 if __name__ == "__main__":

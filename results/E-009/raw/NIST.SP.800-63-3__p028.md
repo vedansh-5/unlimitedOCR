@@ -1,0 +1,18 @@
+<|det|>aside_text [31, 311, 50, 768]<|/det|>This publication is available free of charge from: https://doi.org/10.6028/NIST.SP.800-63-3
+<|det|>header [115, 60, 252, 74]<|/det|>NIST SP 800-63-3
+<|det|>header [677, 60, 884, 74]<|/det|>DIGITAL IDENTITY GUIDELINES
+<|det|>text [112, 105, 877, 141]<|/det|>digital authentication scheme according to their own requirements. However, identity federation is preferred over a number of siloed identity systems that each serve a single agency or RP.
+<|det|>text [113, 155, 783, 172]<|/det|>Federated architectures have many significant benefits, including, but not limited to:
+<|det|>text [142, 190, 865, 224]<|/det|>- Enhanced user experience. For example, an individual can be identity proofed once and reuse the issued credential at multiple RPs.
+<|det|>text [142, 225, 874, 259]<|/det|>- Cost reduction to both the user (reduction in authenticators) and the agency (reduction in information technology infrastructure).
+<|det|>text [142, 260, 858, 295]<|/det|>- Data minimization as agencies do not need to pay for collection, storage, disposal, and compliance activities related to storing personal information.
+<|det|>text [142, 295, 868, 329]<|/det|>- Pseudonymous attribute assertions as agencies can request a minimized set of attributes, to include claims, to fulfill service delivery.
+<|det|>text [142, 330, 880, 365]<|/det|>- Mission enablement as agencies can focus on mission, rather than the business of identity management.
+<|det|>text [112, 381, 846, 418]<|/det|>The following sections discuss the components of a federated identity architecture should an agency elect this type of model.
+<|det|>title [113, 431, 271, 448]<|/det|>4.4.1 Assertions
+<|det|>text [111, 463, 875, 552]<|/det|>Upon completion of the authentication process, the verifier generates an assertion containing the result of the authentication and provides it to the RP. The assertion is used to communicate the result of the authentication process, and optionally information about the subscriber, from the verifier to the RP. Assertions may be communicated directly to the RP, or can be forwarded through the subscriber, which has further implications for system design.
+<|det|>text [111, 565, 875, 636]<|/det|>An RP trusts an assertion based on the source, the time of creation, how long the assertion is valid from time of creation, and the corresponding trust framework that governs the policies and processes of CSPs and RPs. The verifier is responsible for providing a mechanism by which the integrity of the assertion can be confirmed.
+<|det|>text [111, 650, 877, 773]<|/det|>The RP is responsible for authenticating the source (the verifier) and for confirming the integrity of the assertion. When the verifier passes the assertion through the subscriber, the verifier must protect the integrity of the assertion in such a way that it cannot be modified. However, if the verifier and the RP communicate directly, a protected session may be used to preserve the integrity of the assertion. When sending assertions across an open network, the verifier is responsible for ensuring that any sensitive subscriber information contained in the assertion can only be extracted by an RP that it trusts to maintain the information's confidentiality.
+<|det|>text [113, 787, 368, 805]<|/det|>Examples of assertions include:
+<|det|>text [142, 822, 865, 893]<|/det|>- Security Assertion Markup Language (SAML) assertions are specified using a mark-up language intended for describing security assertions. They can be used by a verifier to make a statement to an RP about the identity of a claimant. SAML assertions may optionally be digitally signed.
+<|det|>page_number [490, 923, 511, 937]<|/det|>15

@@ -1,0 +1,8 @@
+<|det|>header [115, 60, 252, 75]<|/det|>NIST SP 800-63-3
+<|det|>header [677, 60, 884, 76]<|/det|>DIGITAL IDENTITY GUIDELINES
+<|det|>text [142, 105, 880, 156]<|/det|>- OpenID Connect claims are specified using JavaScript Object Notation (JSON) for describing security, and optionally, user claims. JSON user info claims may optionally be digitally signed.
+<|det|>text [143, 157, 785, 193]<|/det|>- Kerberos tickets allow a ticket-granting authority to issue session keys to two authenticated parties using symmetric key based encapsulation schemes.
+<|det|>title [113, 209, 308, 228]<|/det|>4.4.2 Relying Parties
+<|det|>text [111, 240, 879, 417]<|/det|>An RP relies on results of an authentication protocol to establish confidence in the identity or attributes of a subscriber for the purpose of conducting an online transaction. RPs may use a subscriber's authenticated identity (pseudonymous or non-pseudonymous), the IAL, AAL, and FAL (FAL indicating the strength of the assertion protocol), and other factors to make authorization decisions. The verifier and the RP may be the same entity, or they may be separate entities. If they are separate entities, the RP normally receives an assertion from the verifier. The RP ensures that the assertion came from a verifier trusted by the RP. The RP also processes any additional information in the assertion, such as personal attributes or expiration times. The RP is the final arbiter concerning whether a specific assertion presented by a verifier meets the RP's established criteria for system access regardless of IAL, AAL, or FAL.
+<|det|>aside_text [31, 311, 51, 772]<|/det|>This publication is available free of charge from: https://doi.org/10.6028/NIST.SP.800-63-3
+<|det|>page_number [490, 923, 512, 937]<|/det|>16

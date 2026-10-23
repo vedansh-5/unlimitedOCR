@@ -38,3 +38,13 @@ def test_page_image_name_is_shared_by_all_prefixes_of_a_source():
     from long_docs import page_image_name
 
     assert page_image_name("NIST.SP.800-207_p40", 4) == page_image_name("NIST.SP.800-207_p05", 4) == "NIST.SP.800-207__p005"
+
+
+def test_retry_passes_model_options_through(monkeypatch):
+    import long_docs
+
+    seen = {}
+    monkeypatch.setattr(long_docs, "cmd_retry", lambda args, out, extra: seen.setdefault("extra", extra) and 0)
+    long_docs.main(["retry", "--exp", "X", "--base", "Y", "--all-pages", "--mode", "base"])
+
+    assert seen["extra"] == ["--mode", "base"]

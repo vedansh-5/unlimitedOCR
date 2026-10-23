@@ -214,3 +214,13 @@ Chronological. One entry per meaningful action or decision.
 - **Plan change:** I-1L (positional splice) dropped as unsound under page shifts;
   replaced by E-009, page-by-page Gundam over the first 40 pages of each source
   (`long_docs.py retry --exp E-009 --base E-003 --all-pages`), about 30 to 35 min.
+- **E-009 done** (31.2 min model time): page-by-page Gundam beats one request per
+  document from 5 pages up (40 pages: edit 0.228 to 0.062, recall 0.917 to 0.967,
+  model time 502 to 337 s, no shifts, no cap). Mode and batching changed together, so
+  **E-010** (page by page in Base mode, about 15 min) was started to separate them.
+- **E-010 false start:** `long_docs.py` took the word `base` in `--mode base` as a
+  source file name (catch-all positional argument for `make`), so the model got a bare
+  `--mode` and exited at once; `retry` then assembled and scored empty output. Fixed:
+  only `make` reads file names, and `retry` stops when the model run fails. Test added.
+  The empty outputs were deleted and E-010 restarted; checked that pages run in Base
+  mode.

@@ -61,7 +61,7 @@ def by_bucket(rows):
         "edit_distance": round(mean(group, "edit_distance"), 4),
         "distinct_20": round(mean(group, "distinct_20"), 4), "distinct_35": round(mean(group, "distinct_35"), 4),
         "gen_tokens": round(mean(group, "gen_tokens")), "model_s": round(mean(group, "model_s"), 1),
-        "peak_mlx_gb": max(float(r["peak_mlx_gb"]) for r in group),
+        "peak_mlx_gb": round(max(float(r["peak_mlx_gb"]) for r in group), 2),
         "incomplete": sum(r["complete"] != "True" for r in group),
     } for pages, group in sorted(groups.items())]
 
