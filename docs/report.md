@@ -80,14 +80,30 @@ for DeepSeek-OCR. These numbers are not comparable to a single laptop.
 Ranked candidates are in `docs/plan.md`. Each one gets a technical justification here
 once it is selected and tested.
 
-## 4. Experimental setup [planned]
+## 4. Experimental setup [verified]
 
 - Hardware: MacBook Air, Apple M5, 10 cores, 16 GB unified memory, macOS 27.0.1.
 - Software: MLX port `shubhxho/Unlimited-OCR-MLX` at commit `e4c39cd`, `mlx-vlm==0.6.16`,
-  Python 3.12 via uv. Model `baidu/Unlimited-OCR` at the revision the port pins.
-- Benchmarks: OmniDocBench (official evaluator, version to be fixed) and a long-document
-  set built for this project.
-- Metrics: the paper's metrics, plus runtime, peak memory and failure flags per document.
+  `mlx==0.32.1`, Python 3.12 via uv, all versions pinned to the port's lock file. Model
+  `baidu/Unlimited-OCR` at revision `07dea83`, bf16, greedy decoding.
+- OmniDocBench v1.6: dataset revision `aa1ee96`, official evaluator at commit `f133a71`
+  in its own Python 3.11 environment. Formula CDM is not computed (it needs a Linux TeX
+  toolchain), so the Overall score is not reported.
+- Subsets: a test subset of 140 pages (15 per document type, all 5 historical
+  documents, seed 42) and a disjoint dev subset of 45 pages (5 per type, seed 42, test
+  pages excluded; it has no historical documents, since all 5 are in the test subset).
+  Changes are tried on dev and confirmed on test.
+- Statistics: per-type means are reweighted to the full benchmark's type mix (1,651
+  pages); 95% intervals come from 2,000 stratified bootstrap resamples (pages
+  resampled within type, seed 0). A change is compared with its baseline page by page
+  (paired), and counts as an improvement only if the interval of the difference
+  excludes zero. `compare.py` computes all of these.
+- Long documents: the paper's long-document set is not public. We use page prefixes
+  (2, 5, 10, 20, 40 pages) of three public NIST publications, each sent as one
+  request, scored by normalized edit distance against the PDF text layer and by the
+  paper's distinct-n repetition measure.
+- Logged per document: wall time, model time, prompt and output tokens, tokens/s,
+  peak memory, finish reason, and repetition flags.
 
 ### 4.1 Corrections to the MLX port [verified]
 
@@ -110,14 +126,16 @@ in `run_ocr.py`, which otherwise runs the port's code unchanged.
 
 140 pages (15 per document type, all 5 historical documents; seed 42), official
 evaluator at commit `f133a71`, formula CDM not computed. Because the subset
-over-samples historical documents, per-type means are reweighted to the full
-benchmark's type mix; intervals are 95% stratified bootstrap (2,000 resamples).
+over-samples historical documents, per-type means of the edit metrics are reweighted
+to the full benchmark's type mix; table scores are page averages over the 37 pages with
+tables, as in the evaluator's headline. Intervals are 95% bootstrap (2,000 resamples).
+All values are produced by `compare.py score --exp E-002`.
 
 | Metric | This work (MLX, M5, 16 GB) | Paper (GPU) | Official leaderboard |
 |---|---|---|---|
 | Text Edit (lower is better) | 0.036 [0.024, 0.051] | 0.042 | 0.039 |
-| Table TEDS | 92.4 [88.7, 95.7] | 90.2 | 90.2 |
-| Table TEDS-S | 94.9 [91.9, 97.5] | 93.3 | 93.4 |
+| Table TEDS | 92.4 [88.1, 95.9] | 90.2 | 90.2 |
+| Table TEDS-S | 94.9 [91.7, 97.6] | 93.3 | 93.4 |
 | Reading-order Edit (lower is better) | 0.107 [0.078, 0.143] | 0.129 | 0.128 |
 
 All reference values fall inside the intervals: the MLX implementation, with the two

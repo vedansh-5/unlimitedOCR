@@ -21,3 +21,11 @@ def test_interval_brackets_the_estimate_and_is_repeatable():
 
 def test_paired_keeps_only_shared_pages():
     assert paired({"a": 0.5, "b": 0.2}, {"a": 0.25, "c": 0.9}) == {"a": -0.25}
+
+
+def test_page_means_average_tables_within_a_page_first():
+    from compare import page_means
+
+    tables = {"a.png_[0]": 1.0, "a.png_[1]": 0.0, "a.png_[2]": 0.5, "b.png_[0]": 0.25}
+
+    assert page_means(tables) == {"a.png": 0.5, "b.png": 0.25}

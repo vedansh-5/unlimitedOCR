@@ -13,6 +13,7 @@ FULL_SET = {
     "newspaper": 151, "magazine": 149, "research_report": 132, "note": 118, "historical_document": 5,
 }
 PAGE_METRICS = ("text_block", "reading_order")
+TABLE_METRICS = {"table_TEDS": "TEDS", "table_TEDS_S": "TEDS_structure_only"}
 RESAMPLES = 2000
 
 
@@ -29,8 +30,16 @@ def page_scores(exp, metric):
     return result_file(exp, f"{metric}_per_page_edit")
 
 
-def table_scores(exp):
-    return {k: v["TEDS"] for k, v in result_file(exp, "table_per_table_TEDS").items()}
+# Each page's tables are averaged first, as in the evaluator's page-level headline.
+def page_means(tables):
+    pages = defaultdict(list)
+    for key, value in tables.items():
+        pages[key.rsplit("_[", 1)[0]].append(value)
+    return {page: statistics.mean(values) for page, values in pages.items()}
+
+
+def table_scores(exp, key="TEDS"):
+    return page_means({k: v[key] for k, v in result_file(exp, "table_per_table_TEDS").items()})
 
 
 def by_type(values, types):
@@ -69,7 +78,8 @@ def estimate(stat, groups, scale=1):
 def cmd_score(args):
     types = page_types(args.exp)
     stats = {m: estimate(reweighted, by_type(page_scores(args.exp, m), types)) for m in PAGE_METRICS}
-    stats["table_TEDS"] = estimate(pooled, {"all": list(table_scores(args.exp).values())}, scale=100)
+    for name, key in TABLE_METRICS.items():
+        stats[name] = estimate(pooled, {"all": list(table_scores(args.exp, key).values())}, scale=100)
     return stats
 
 
@@ -77,7 +87,9 @@ def cmd_diff(args):
     types = page_types(args.exp)
     stats = {m: estimate(reweighted, by_type(paired(page_scores(args.base, m), page_scores(args.exp, m)), types))
              for m in PAGE_METRICS}
-    stats["table_TEDS"] = estimate(pooled, {"all": list(paired(table_scores(args.base), table_scores(args.exp)).values())}, scale=100)
+    for name, key in TABLE_METRICS.items():
+        diffs = paired(table_scores(args.base, key), table_scores(args.exp, key))
+        stats[name] = estimate(pooled, {"all": list(diffs.values())}, scale=100)
     return stats
 
 

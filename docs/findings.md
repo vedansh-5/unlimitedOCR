@@ -304,9 +304,16 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   per-page differences between two experiments on the same pages, written to
   `diff_vs_<base>.json`). Same method as before: per-type means weighted by the full
   benchmark's type counts, 2,000 resamples within type, `random.Random(0)`.
-- **Check:** `compare.py score --exp E-002` reproduces every number in the report
-  exactly (Text Edit 0.0362 [0.0243, 0.0510], R-order 0.1069 [0.0784, 0.1425],
-  TEDS 92.37 [88.69, 95.67]).
+- **Check:** `compare.py score --exp E-002` reproduces the report's edit metrics
+  exactly (Text Edit 0.0362 [0.0243, 0.0510], R-order 0.1069 [0.0784, 0.1425]).
+- **Correction to E-002's table intervals:** the one-off script averaged TEDS over
+  tables (51). The evaluator's headline averages over pages (37 pages with tables;
+  each page's tables averaged first). The two match on E-002 (92.37 against 92.35) but
+  not on E-004 (92.40 against 93.50), which is how the mismatch showed up.
+  `compare.py` now uses the evaluator's page average. E-002 TEDS is 92.35
+  [88.14, 95.89] (was [88.69, 95.67]) and TEDS-S 94.91 [91.67, 97.58] (was
+  [91.9, 97.5]). The paper and leaderboard values stay inside both intervals, so the
+  reproduction conclusion is unchanged. Report section 5.1 updated.
 - **Paired results so far (after minus before, reweighted):**
 
 | Change | Subset | Text Edit diff [95% CI] | R-order diff [95% CI] | TEDS diff |
