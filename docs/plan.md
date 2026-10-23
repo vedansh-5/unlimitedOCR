@@ -184,3 +184,23 @@ the test subset (E-002) only if kept.
 | Formula CDM and the Overall score | The paper's headline number includes CDM | Docker plus the evaluator's Linux image (system install) |
 | Tesseract fallback for pages the model cannot read | E-006 showed loop repair cannot fix unreadable scans; a classic OCR fallback might | Tesseract is installed; vertical Chinese language data would need downloading |
 | Batched R-SWA (speed idea 4) | 1.5 to 2x faster runs, and a contribution of its own | about half a day of work |
+
+## After the full run (queued 2026-10-23, night)
+
+The user asked for optimizations and improvements once the full run finishes. All
+model runs stay under 8 GB (`--memory-limit-gb 7.5`).
+
+1. **Results:** headline from `compare.py score --exp E-028` and the CDM summary
+   (`eval_cdm/result/predictions_quick_match_run_summary.json`, which gives Overall).
+   Report section 5.1 becomes the full benchmark against the paper and leaderboard;
+   the 140-page subset stays as the development record.
+2. **Error analysis on 1,651 pages (no model):** worst pages by type, how many pages
+   the retry flagged and whether it fixed them, pages with no flag that still fail
+   badly (silent failures), and the per-type table against the paper's Table 2.
+3. **Model-free fixes** found in step 2, checked with `omnidocbench.py rescore` and
+   `compare.py diff` against E-028.
+4. **Targeted re-runs** of only the pages a new detector flags (under the cap), the same
+   way loop repair works.
+5. **Speed record:** E-008 (decode speed over a long request, `--log-speed`) and I-5
+   (newer mlx in a separate env).
+6. Update all four docs and the README after each step, commit and push.
