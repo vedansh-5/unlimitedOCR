@@ -240,3 +240,6 @@ Chronological. One entry per meaningful action or decision.
   here).
 - **E-016** (4 experts per token, bf16, dev): ties bf16 + loop repair on every metric,
   16% faster per page. Kept. 5 experts skipped (dominated).
+- **E-017/E-018** (8-bit + 4 experts, then bf16 fallback, dev): matches bf16 + loop
+  repair (TEDS +0.9 [0.04, 1.9]), 38% less model time. Candidate final setup.
+- **E-019/E-020** started: final setup on the 140-page test subset, about 30 min.

@@ -11,7 +11,8 @@ LABELS = {
     "E-002": "test baseline", "E-004": "dev baseline", "E-005": "dev, I-1 loop repair",
     "E-006": "test, I-1 loop repair", "E-007": "test, I-1 + I-6 marker repair",
     "E-011": "dev, 8-bit", "E-012": "dev, 8-bit + I-1 (8-bit retry)", "E-013": "dev, 8-bit + I-1 (bf16 fallback)", "E-014": "dev, 4-bit", "E-015": "dev, 4-bit + I-1 (bf16 fallback)", "E-016": "dev, 4 experts per token",
-    "E-017": "dev, 8-bit + 4 experts", "E-018": "dev, 8-bit + 4 experts + I-1 (bf16 fallback)",
+    "E-017": "dev, 8-bit + 4 experts", "E-018": "dev, 8-bit + 4 experts + I-1 (bf16 fallback)", "E-019": "test, 8-bit + 4 experts",
+    "E-020": "test, final: 8-bit + 4 experts + I-1 (bf16 fallback)",
 }
 METRIC_NAMES = {"text_block": "Text Edit", "reading_order": "R-order Edit", "table_TEDS": "TEDS", "table_TEDS_S": "TEDS-S"}
 

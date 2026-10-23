@@ -517,3 +517,20 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
 - **Decision:** keep 4 experts (no measurable loss, modest gain). 5 experts not run:
   4 already shows no loss, so 5 could only save less time. Next: combine with 8-bit
   on dev (E-017) before the final test run.
+
+## E-017, E-018: 8-bit + 4 experts, with bf16 fallback, on dev (2026-10-23)
+
+- **Change:** the two kept speed changes together (`--model` 8-bit,
+  `--experts-per-token 4`), then pages flagged by the loop or token-cap detector re-run
+  with bf16, 6 experts and the coordinate-blind guard.
+- **E-017 vs E-004 (no fallback):** Text Edit +0.011 [-0.015, 0.047], TEDS -4.7
+  [-16.4, 1.7]; the same notes page goes wrong as in E-011.
+- **E-018 vs E-005 (bf16 + loop repair):** Text Edit +0.002 [-0.005, 0.010], R-order
+  -0.000 [-0.007, 0.007], TEDS +0.9 [0.04, 1.9], TEDS-S +0.7 [-0.1, 1.7]. Model time
+  740 s to 462 s (-38%), median page 13.5 s to 7.8 s, output 90 to 161 tokens/s, peak
+  8.6 GB (7.3 GB outside the fallback page).
+- **Reading:** the speed gains add up and accuracy holds. The small TEDS gain matches
+  E-016 (4 experts alone, +0.7) and rests on 17 table pages; treated as no loss, not as
+  an accuracy improvement, until the test subset confirms it.
+- **Decision:** this is the candidate final setup. Confirm on the test subset (E-019
+  first pass, E-020 with fallback) against E-006.
