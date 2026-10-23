@@ -8,3 +8,8 @@ results/*/eval/result/*_text_block_result.json
 results/*/eval/result/*_table_result.json
 results/*/eval/result/*_display_formula_result.json
 results/*/eval/result/*_reading_order_result.json
+results/*/eval_cdm/result/*_text_block_result.json
+results/*/eval_cdm/result/*_table_result.json
+results/*/eval_cdm/result/*_display_formula_result.json
+results/*/eval_cdm/result/*_reading_order_result.json
+results/*/eval_cdm/result/*_display_formula/
