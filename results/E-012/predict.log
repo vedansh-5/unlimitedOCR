@@ -1,0 +1,11 @@
+Loading /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/models/unlimited-ocr-8bit with MLX-VLM …
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 1 OCR request(s).
+[1/1] notes_1ba14cb325bc448f7201b20502ecf2b5_33.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-012/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_33.md | 1 image(s), gundam, 161 generated tokens, 2.5s, 151.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-012/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_33.json
+Finished 1 complete request(s); 0 incomplete; 0 skipped.

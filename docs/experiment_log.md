@@ -228,3 +228,9 @@ Chronological. One entry per meaningful action or decision.
   nearly on edit distance, and is the fastest (40 pages: 283 s against 337 s Gundam and
   502 s one request). Page splitting is the gain; mode is a small speed/accuracy
   trade. Kept as I-8.
+- **E-011** (8-bit on dev): 1.6x output speed, -2.7 GB peak; one page lost to a
+  `[Non-Text]` loop (TEDS -5.6, interval touching zero).
+- **E-012** (8-bit + loop repair with 8-bit): loop stopped, table still missing.
+- **E-013** (8-bit + bf16 fallback on flagged pages): matches bf16 + I-1 on every
+  metric (all paired intervals contain zero, all within 0.003 edit / 0.1 TEDS), 33%
+  less model time. Kept.

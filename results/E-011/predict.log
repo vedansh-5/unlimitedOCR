@@ -1,0 +1,99 @@
+Loading /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/models/unlimited-ocr-8bit with MLX-VLM …
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 45 OCR request(s).
+[1/45] book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0092.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0092.md | 1 image(s), gundam, 993 generated tokens, 8.1s, 155.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0092.json
+[2/45] book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0100.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0100.md | 1 image(s), gundam, 1057 generated tokens, 7.9s, 155.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0100.json
+[3/45] color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_010.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_010.md | 1 image(s), gundam, 403 generated tokens, 3.2s, 162.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_010.json
+[4/45] color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_011.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_011.md | 1 image(s), gundam, 479 generated tokens, 3.7s, 162.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_011.json
+[5/45] docstructbench_enbook-zlib-o.O-17761417.pdf_894.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/docstructbench_enbook-zlib-o.O-17761417.pdf_894.md | 1 image(s), gundam, 1007 generated tokens, 8.7s, 147.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/docstructbench_enbook-zlib-o.O-17761417.pdf_894.json
+[6/45] docstructbench_llm-raw-scihub-o.O-j.ab.2008.05.027.pdf_7.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/docstructbench_llm-raw-scihub-o.O-j.ab.2008.05.027.pdf_7.md | 1 image(s), gundam, 1368 generated tokens, 9.9s, 156.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/docstructbench_llm-raw-scihub-o.O-j.ab.2008.05.027.pdf_7.json
+[7/45] eastmoney_bd6c2b9aa7ca0ebf8672f8f50e3eacab7f67d0ffa15e0d94b1f3c0d1b5f179b8.pdf_19.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/eastmoney_bd6c2b9aa7ca0ebf8672f8f50e3eacab7f67d0ffa15e0d94b1f3c0d1b5f179b8.pdf_19.md | 1 image(s), gundam, 1346 generated tokens, 8.9s, 164.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/eastmoney_bd6c2b9aa7ca0ebf8672f8f50e3eacab7f67d0ffa15e0d94b1f3c0d1b5f179b8.pdf_19.json
+[8/45] exam_paper_en-file-putnam-archive_2008_Problems_2008_page_001.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/exam_paper_en-file-putnam-archive_2008_Problems_2008_page_001.md | 1 image(s), gundam, 1411 generated tokens, 10.2s, 156.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/exam_paper_en-file-putnam-archive_2008_Problems_2008_page_001.json
+[9/45] jiaocaineedrop_jiaocai_needrop_en_155.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_155.md | 1 image(s), gundam, 1624 generated tokens, 13.6s, 144.0 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_155.json
+[10/45] jiaocaineedrop_jiaocai_needrop_en_467.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_467.md | 1 image(s), gundam, 1338 generated tokens, 11.5s, 144.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_467.json
+[11/45] jiaocaineedrop_jiaocai_needrop_en_922.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_922.md | 1 image(s), gundam, 1108 generated tokens, 8.5s, 152.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_922.json
+[12/45] jiaocaineedrop_jiaocai_needrop_en_2017.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_2017.md | 1 image(s), gundam, 769 generated tokens, 5.4s, 164.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_2017.json
+[13/45] jiaocaineedrop_jiaocai_needrop_en_2449.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_2449.md | 1 image(s), gundam, 1009 generated tokens, 7.9s, 153.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_2449.json
+[14/45] jiaocaineedrop_jiaocai_needrop_en_3738.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_3738.md | 1 image(s), gundam, 1625 generated tokens, 14.3s, 139.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/jiaocaineedrop_jiaocai_needrop_en_3738.json
+[15/45] magazine_TheEconomist.2023.12.02_page_028.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/magazine_TheEconomist.2023.12.02_page_028.md | 1 image(s), gundam, 1022 generated tokens, 8.6s, 148.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/magazine_TheEconomist.2023.12.02_page_028.json
+[16/45] magazine_TheEconomist.2024.02.24_page_033.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/magazine_TheEconomist.2024.02.24_page_033.md | 1 image(s), gundam, 1419 generated tokens, 11.5s, 146.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/magazine_TheEconomist.2024.02.24_page_033.json
+[17/45] newspaper_1cddf9d22ca549f3a86cf1512a3110cc_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_1cddf9d22ca549f3a86cf1512a3110cc_1.md | 1 image(s), gundam, 6678 generated tokens, 55.7s, 126.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_1cddf9d22ca549f3a86cf1512a3110cc_1.json
+[18/45] newspaper_06b975dbc47dc2dc2a3a1468293f6a2c_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_06b975dbc47dc2dc2a3a1468293f6a2c_1.md | 1 image(s), gundam, 5534 generated tokens, 46.5s, 128.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_06b975dbc47dc2dc2a3a1468293f6a2c_1.json
+[19/45] newspaper_c8e8e00e1b1a70aa44afd1fbdaf59430_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_c8e8e00e1b1a70aa44afd1fbdaf59430_1.md | 1 image(s), gundam, 4769 generated tokens, 39.9s, 129.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_c8e8e00e1b1a70aa44afd1fbdaf59430_1.json
+[20/45] newspaper_Daily Mirror 2025-1-8@magazinesclubnew_page_029.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_Daily Mirror 2025-1-8@magazinesclubnew_page_029.md | 1 image(s), gundam, 1314 generated tokens, 12.3s, 134.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_Daily Mirror 2025-1-8@magazinesclubnew_page_029.json
+[21/45] newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.md | 1 image(s), gundam, 1292 generated tokens, 11.9s, 135.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.json
+[22/45] notes_1ba14cb325bc448f7201b20502ecf2b5_32.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_32.md | 1 image(s), gundam, 595 generated tokens, 5.1s, 150.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_32.json
+[23/45] notes_1ba14cb325bc448f7201b20502ecf2b5_33.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_33.md | 1 image(s), gundam, 2761 generated tokens, 21.0s, 143.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_33.json
+[24/45] notes_1ba14cb325bc448f7201b20502ecf2b5_57.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_57.md | 1 image(s), gundam, 326 generated tokens, 3.9s, 146.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_1ba14cb325bc448f7201b20502ecf2b5_57.json
+[25/45] notes_f7f010b78016aeebd76e56d9283eb67f_91.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_f7f010b78016aeebd76e56d9283eb67f_91.md | 1 image(s), gundam, 576 generated tokens, 5.2s, 141.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_f7f010b78016aeebd76e56d9283eb67f_91.json
+[26/45] notes_f7f010b78016aeebd76e56d9283eb67f_92.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_f7f010b78016aeebd76e56d9283eb67f_92.md | 1 image(s), gundam, 561 generated tokens, 4.9s, 149.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/notes_f7f010b78016aeebd76e56d9283eb67f_92.json
+[27/45] page-34e4675f-4b7f-4bc3-8624-c399423d2c66.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-34e4675f-4b7f-4bc3-8624-c399423d2c66.md | 1 image(s), gundam, 152 generated tokens, 2.1s, 153.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-34e4675f-4b7f-4bc3-8624-c399423d2c66.json
+[28/45] page-37a801d0-4422-4ddb-8b45-73b259396212.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-37a801d0-4422-4ddb-8b45-73b259396212.md | 1 image(s), gundam, 1562 generated tokens, 12.6s, 142.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-37a801d0-4422-4ddb-8b45-73b259396212.json
+[29/45] page-961a543b-d09d-4fd8-944a-1a38d67bb3bc.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-961a543b-d09d-4fd8-944a-1a38d67bb3bc.md | 1 image(s), gundam, 510 generated tokens, 5.3s, 143.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-961a543b-d09d-4fd8-944a-1a38d67bb3bc.json
+[30/45] page-73432bc8-cd0f-4e14-b119-0a9de73ab141.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-73432bc8-cd0f-4e14-b119-0a9de73ab141.md | 1 image(s), gundam, 1377 generated tokens, 10.7s, 144.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-73432bc8-cd0f-4e14-b119-0a9de73ab141.json
+[31/45] page-572316a1-cdf8-4c50-81d4-2e6dc13dcdce.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-572316a1-cdf8-4c50-81d4-2e6dc13dcdce.md | 1 image(s), gundam, 701 generated tokens, 6.2s, 138.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-572316a1-cdf8-4c50-81d4-2e6dc13dcdce.json
+[32/45] page-7319096f-4c23-42d5-815f-41397976da34.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-7319096f-4c23-42d5-815f-41397976da34.md | 1 image(s), gundam, 488 generated tokens, 5.9s, 120.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-7319096f-4c23-42d5-815f-41397976da34.json
+[33/45] page-b9d507e7-1239-42de-b70a-d7ca65393dc9.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-b9d507e7-1239-42de-b70a-d7ca65393dc9.md | 1 image(s), gundam, 1085 generated tokens, 9.3s, 132.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-b9d507e7-1239-42de-b70a-d7ca65393dc9.json
+[34/45] page-be2ebf31-5f24-4d3e-97f0-4a8df7e773b4.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-be2ebf31-5f24-4d3e-97f0-4a8df7e773b4.md | 1 image(s), gundam, 3758 generated tokens, 30.7s, 130.6 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-be2ebf31-5f24-4d3e-97f0-4a8df7e773b4.json
+[35/45] page-c8a4555b-2c14-40c2-b67f-097dbc77a6b7.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-c8a4555b-2c14-40c2-b67f-097dbc77a6b7.md | 1 image(s), gundam, 574 generated tokens, 5.3s, 138.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/page-c8a4555b-2c14-40c2-b67f-097dbc77a6b7.json
+[36/45] PPT_linear-algebra primer_page_008.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/PPT_linear-algebra primer_page_008.md | 1 image(s), gundam, 478 generated tokens, 5.5s, 131.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/PPT_linear-algebra primer_page_008.json
+[37/45] PPT_MMAT5390Lecture1_page_024.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/PPT_MMAT5390Lecture1_page_024.md | 1 image(s), gundam, 241 generated tokens, 3.8s, 134.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/PPT_MMAT5390Lecture1_page_024.json
+[38/45] scihub_gbe%2Fevaa098.pdf_0.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_gbe%2Fevaa098.pdf_0.md | 1 image(s), gundam, 1369 generated tokens, 12.7s, 127.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_gbe%2Fevaa098.pdf_0.json
+[39/45] scihub_ie102256j.pdf_4.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_ie102256j.pdf_4.md | 1 image(s), gundam, 1657 generated tokens, 14.7s, 128.7 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_ie102256j.pdf_4.json
+[40/45] scihub_jps.21547.pdf_7.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_jps.21547.pdf_7.md | 1 image(s), gundam, 1075 generated tokens, 10.2s, 129.1 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/scihub_jps.21547.pdf_7.json
+[41/45] yanbaopptmerge_c894b375daca22d041c8a35946295d0a73d6589ad7c3d1d39d8664a2666372bf.pdf_10.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_c894b375daca22d041c8a35946295d0a73d6589ad7c3d1d39d8664a2666372bf.pdf_10.md | 1 image(s), gundam, 1088 generated tokens, 9.2s, 137.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_c894b375daca22d041c8a35946295d0a73d6589ad7c3d1d39d8664a2666372bf.pdf_10.json
+[42/45] yanbaopptmerge_yanbaoPPT_4115.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_yanbaoPPT_4115.md | 1 image(s), gundam, 213 generated tokens, 5.5s, 127.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_yanbaoPPT_4115.json
+[43/45] yanbaopptmerge_yanbaoPPT_5620.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_yanbaoPPT_5620.md | 1 image(s), gundam, 95 generated tokens, 4.4s, 124.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaopptmerge_yanbaoPPT_5620.json
+[44/45] yanbaor2_37eeaab2c1abfc6443b9781c9bca92468c4a8a9aac837e2523122b1ae632b74e.pdf_13.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaor2_37eeaab2c1abfc6443b9781c9bca92468c4a8a9aac837e2523122b1ae632b74e.pdf_13.md | 1 image(s), gundam, 536 generated tokens, 5.3s, 129.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaor2_37eeaab2c1abfc6443b9781c9bca92468c4a8a9aac837e2523122b1ae632b74e.pdf_13.json
+[45/45] yanbaor2_yanbaoPPT_4618.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaor2_yanbaoPPT_4618.md | 1 image(s), gundam, 484 generated tokens, 4.7s, 137.8 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-011/raw/yanbaor2_yanbaoPPT_4618.json
+Finished 45 complete request(s); 0 incomplete; 0 skipped.

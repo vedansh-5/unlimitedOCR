@@ -438,3 +438,37 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
 - **Decision:** keep page-by-page decoding (I-8) as the default for long documents on
   this machine. Base mode when speed matters, Gundam when accuracy matters; both are
   in the report.
+
+## E-011 to E-013: I-2 8-bit weights on the dev subset (2026-10-23)
+
+- **Problem:** decoding is memory-bandwidth bound and the machine has 16 GB; bf16
+  weights are 6.3 GB.
+- **Change (E-011, one variable against E-004):** decoder and projector quantized to
+  8 bits (group size 64; vision encoders kept in bf16; 9.4 bits per weight on
+  average, 3.8 GB) with `./quantize.sh 8`, used through `--model`.
+- **Hypothesis:** faster and smaller with no measurable accuracy loss.
+- **Result (E-011 vs E-004, paired, 45 dev pages):** Text Edit +0.009 [-0.019, 0.045],
+  R-order -0.002 [-0.010, 0.008], TEDS -5.6 [-16.9, 0.1]. Median page 13.5 s to 8.6 s,
+  output 90 to 143 tokens/s, peak memory 10.0 to 7.3 GB.
+- **Why TEDS fell:** one page. `notes_1ba14…_33.jpg` (a handwritten-style table of
+  climate types) went wrong from its first block: the 8-bit model wrote `[Non-Text]`
+  headers walking down the page 138 times instead of the table. Every other page moved
+  by 0.01 or less; the dev page that loops in bf16 did not loop in 8-bit.
+- **E-012 (8-bit plus I-1 loop repair with the 8-bit model):** the detector flags the
+  page and the coordinate-blind guard stops the loop after 8 repeats, but the model
+  then ends the page (161 tokens) without the table. Same lesson as E-006: repair
+  stops runaway output, it does not recover a misread page. Scores unchanged.
+- **E-013 (8-bit, with flagged pages re-run in bf16 with the content guard):**
+
+| E-013 vs E-005 (bf16 + I-1), paired | Diff [95% CI] |
+|---|---|
+| Text Edit | -0.0006 [-0.0024, 0.0004] |
+| R-order Edit | -0.0030 [-0.0072, 0.0000] |
+| TEDS | -0.03 [-0.18, 0.10] |
+| TEDS-S | -0.06 [-0.18, 0.00] |
+
+  Model time 740 s to 499 s (-33%), median page 13.5 s to 8.5 s, peak 10.0 to 8.6 GB
+  (8-bit pages stay under 7.3 GB; the bf16 fallback page sets the peak). Not counted:
+  one extra model load for the fallback pass.
+- **Decision:** keep 8-bit with bf16 fallback on flagged pages (I-2 + I-1). Next: the
+  same recipe with 4-bit weights.

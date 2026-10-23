@@ -10,6 +10,7 @@ RESULTS = ROOT / "results"
 LABELS = {
     "E-002": "test baseline", "E-004": "dev baseline", "E-005": "dev, I-1 loop repair",
     "E-006": "test, I-1 loop repair", "E-007": "test, I-1 + I-6 marker repair",
+    "E-011": "dev, 8-bit", "E-012": "dev, 8-bit + I-1 (8-bit retry)", "E-013": "dev, 8-bit + I-1 (bf16 fallback)",
 }
 METRIC_NAMES = {"text_block": "Text Edit", "reading_order": "R-order Edit", "table_TEDS": "TEDS", "table_TEDS_S": "TEDS-S"}
 
