@@ -47,7 +47,15 @@ uv run python run_ocr.py --pdf doc.pdf --max-pages-per-request 8 --output-dir re
 ```
 
 `run_ocr.py` runs the port's CLI with two fixes (see `docs/findings.md`, E-001a and
-E-001b) and accepts all of its options.
+E-001b) and accepts all of its options, plus:
+
+| Option | Effect |
+|---|---|
+| `--content-guard` | No-repeat guard that ignores box coordinates, so a loop with moving boxes is still blocked (I-1) |
+| `--experts-per-token N` | Use N of the 64 routed experts per token instead of 6 (I-3) |
+| `--log-speed FILE` | Write the time at token 1 and every 500 tokens (E-008) |
+| `--keep-prompt-space` | Keep the port's original prompt with the trailing space |
+| `--model PATH` | A local model folder, e.g. a quantized copy from `./quantize.sh 8` (I-2) |
 
 Each request writes a Markdown file with the raw model output and a JSON file with
 timing, token counts, peak memory and finish reason.
@@ -63,6 +71,19 @@ uv run python omnidocbench.py select   --exp E-002
 uv run python omnidocbench.py fetch    --exp E-002
 uv run python omnidocbench.py predict  --exp E-002
 uv run python omnidocbench.py evaluate --exp E-002
+
+# Re-run only pages flagged as loops, with the coordinate-blind guard
+uv run python omnidocbench.py retry --exp E-005 --base E-004 --content-guard
+
+# Scores reweighted to the full benchmark's type mix, with 95% bootstrap intervals
+uv run python compare.py score --exp E-002
+uv run python compare.py diff  --exp E-006 --base E-002
+
+# Long documents: page prefixes of the NIST PDFs, scored against their text layer
+uv run python long_docs.py make  --exp E-003 tests/data/NIST.*.pdf
+uv run python run_batch.py --exp E-003 --inputs results/E-003/inputs
+uv run python long_docs.py score --exp E-003
+uv run python long_docs.py retry --exp E-009 --base E-003 --content-guard
 ```
 
 `evaluate` needs the official evaluator in its own Python 3.11 environment, also kept in

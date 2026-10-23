@@ -160,12 +160,12 @@ the test subset (E-002) only if kept.
 | # | ID | What | Why | Model time | Code to prep before it |
 |---|---|---|---|---|---|
 | 1 | E-003 | Long-document baseline: 15 NIST prefixes (2 to 40 pages), one request each | Our version of the paper's Table 3; first look at loops on long input | 30 to 35 min | none, ready |
-| 2 | I-1L | Loop repair for long docs: split output at `<PAGE>`, re-run flagged or missing pages alone in gundam mode, splice back | The paper blames 40+ page errors on Base-mode resolution | 5 to 15 min (flagged pages only) | per-page retry in `long_docs.py` |
-| 3 | I-2 | Quantized weights, 8-bit then 4-bit, on dev | Speed and memory on 16 GB; accuracy cost measured | about 10 min each | convert script (`mlx_vlm.convert`, into `unlimitedOCRvenv/`), `--model` path |
-| 4 | I-3 | 4 or 5 experts per token instead of 6, on dev | MoE-specific speed lever | about 12 min each | `run_ocr.py --experts-per-token` |
+| 2 | I-1L | Loop repair for long docs: split output at `<PAGE>`, re-run flagged or missing pages alone in gundam mode, splice back | The paper blames 40+ page errors on Base-mode resolution | 5 to 15 min (flagged pages only) | done: `long_docs.py retry` (as E-009) |
+| 3 | I-2 | Quantized weights, 8-bit then 4-bit, on dev | Speed and memory on 16 GB; accuracy cost measured | about 10 min each | done: `quantize.sh 8` / `quantize.sh 4`, then `--model` |
+| 4 | I-3 | 4 or 5 experts per token instead of 6, on dev | MoE-specific speed lever | about 12 min each | done: `run_ocr.py --experts-per-token` |
 | 5 | I-5 | Newer mlx (0.32.1 to 0.32.4), on dev | Free speed if kernels improved | about 15 min | separate env so the pinned one stays intact |
 | 6 | I-7 | Resolution routing on E-003: pages with small text go to gundam, the rest to base | Targets the paper's stated cause of long-doc errors before it happens | 10 to 20 min | small-text detector from the PDF text layer (font sizes) |
-| 7 | E-008 | Constant-speed check: tokens/s over a 40-page decode, logged every 500 tokens | Reproduces the paper's R-SWA speed claim (Table 4, Figure 3) on a Mac | about 6 min | timing hook around the generator |
+| 7 | E-008 | Constant-speed check: tokens/s over a 40-page decode, logged every 500 tokens | Reproduces the paper's R-SWA speed claim (Table 4, Figure 3) on a Mac | about 6 min | done: `run_ocr.py --log-speed` |
 | 8 | Final | Test subset (140 pages) with every kept change together | The number that goes in the report | about 40 min | none |
 
 ### CPU-only work (no runs, fits between runs)
