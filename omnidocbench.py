@@ -56,16 +56,22 @@ def cmd_select(args, out):
 
 
 def cmd_fetch(args, out):
+    from concurrent.futures import ThreadPoolExecutor
+
     from huggingface_hub import hf_hub_download
 
     inputs = out / "inputs"
     inputs.mkdir(exist_ok=True)
-    for name in (out / "subset.txt").read_text().splitlines():
-        path = hf_hub_download(DATASET, f"images/{name}", repo_type="dataset", revision=DATASET_REVISION)
+
+    def fetch(name):
         link = inputs / name
         if not link.exists():
+            path = hf_hub_download(DATASET, f"images/{name}", repo_type="dataset", revision=DATASET_REVISION)
             # A hard link keeps the file extension; the port rejects symlinks to extensionless cache blobs.
             os.link(Path(path).resolve(), link)
+
+    with ThreadPoolExecutor(8) as pool:
+        list(pool.map(fetch, (out / "subset.txt").read_text().splitlines()))
     print(f"{len(list(inputs.iterdir()))} images in {inputs}")
 
 

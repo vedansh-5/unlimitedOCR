@@ -259,3 +259,4 @@ Chronological. One entry per meaningful action or decision.
 - **Full run approved** by the user (with formula CDM, under 8 GB). Started as E-027
   (`results/E-027/run.sh`): select all 1,651 pages, fetch, predict with the cap, retry
   flagged pages (E-028), local evaluation, then CDM in Docker.
+- **Restarted** the full run after making image fetching parallel (8 at a time); the first start was downloading about 30 images a minute.
