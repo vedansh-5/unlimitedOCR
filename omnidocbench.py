@@ -87,7 +87,7 @@ def cmd_retry(args, out, extra):
         shutil.copy(base / name, out / name)
     retried = []
     for md in sorted((base / "raw").glob("*.md")):
-        if is_loop(md.read_text(encoding="utf-8")):
+        if needs_retry(md):
             image = next((base / "inputs").glob(f"{glob_escape(md.stem)}.*"))
             if not (retry_inputs / image.name).exists():
                 os.link(image, retry_inputs / image.name)
@@ -99,6 +99,12 @@ def cmd_retry(args, out, extra):
     print(f"{len(retried)} flagged pages re-run, the rest copied from {args.base}")
     code = run_images(retry_inputs, out, extra) if retried else 0
     return write_predictions(out, code, args.repair_markers)
+
+
+def needs_retry(md):
+    meta = md.with_suffix(".json")
+    capped = meta.exists() and json.loads(meta.read_text()).get("finish_reason") == "length"
+    return capped or is_loop(md.read_text(encoding="utf-8"))
 
 
 def glob_escape(name):

@@ -472,3 +472,26 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   one extra model load for the fallback pass.
 - **Decision:** keep 8-bit with bf16 fallback on flagged pages (I-2 + I-1). Next: the
   same recipe with 4-bit weights.
+
+## E-014, E-015: I-2 4-bit weights on the dev subset (2026-10-23)
+
+- **Change (E-014, one variable against E-004):** `./quantize.sh 4` (5.9 bits per
+  weight on average, 2.4 GB).
+- **Result (E-014 vs E-004, paired):** Text Edit +0.013 [-0.013, 0.048], R-order
+  -0.001 [-0.015, 0.018], **TEDS -10.3 [-23.3, -0.5]**. The Daily Star page hit the
+  32,768-token cap; the notes page looped as in 8-bit.
+- **Detector gap found and fixed:** the Daily Star page was not flagged for retry,
+  because in 4-bit its runaway output has no line repeated 6 times. A request that
+  ends at the token cap is now always flagged (`omnidocbench.needs_retry`, test added).
+  No earlier result changes: in E-004 that page was already flagged as a loop, and no
+  8-bit page hit the cap.
+- **E-015 (4-bit + bf16 fallback on the 2 flagged pages) vs E-005 (bf16 + I-1):** Text
+  Edit -0.008 [-0.018, 0.000], R-order -0.006 [-0.014, 0.001], **TEDS -4.7
+  [-12.3, -0.03]**, TEDS-S -4.4 [-11.5, -0.4]. Model time 395 s (bf16 + I-1: 740 s;
+  8-bit + fallback: 499 s).
+- **Why tables suffer:** the loss is spread over pages that do not loop (one table
+  falls from 0.97 to 0.36, several lose 0.06 to 0.09), so no detector can route them
+  to the fallback. 4-bit changes what the model reads in table cells, not whether it
+  loops.
+- **Decision:** reject 4-bit. Keep 8-bit with bf16 fallback (E-013): it is the only
+  setting whose paired intervals all contain zero.

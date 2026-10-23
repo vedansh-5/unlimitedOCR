@@ -234,3 +234,7 @@ Chronological. One entry per meaningful action or decision.
 - **E-013** (8-bit + bf16 fallback on flagged pages): matches bf16 + I-1 on every
   metric (all paired intervals contain zero, all within 0.003 edit / 0.1 TEDS), 33%
   less model time. Kept.
+- **E-014/E-015** (4-bit on dev, then with bf16 fallback): fastest (395 s against 740 s)
+  but tables lose 4.7 TEDS with an interval excluding zero, from pages that do not
+  loop. Rejected. Retry now also flags pages cut off at the token cap (gap found
+  here).

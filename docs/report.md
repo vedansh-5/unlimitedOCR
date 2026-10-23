@@ -213,6 +213,27 @@ limits of one long request (output budget, page bookkeeping) cost more than its
 benefit. Cross-page structure, which the text-layer reference cannot score, is the
 case where one request may still be the better choice.
 
+### 5.4 Quantized weights, I-2 [verified]
+
+Decoder and projector weights quantized with mlx-vlm's default rule (group size 64);
+vision encoders kept in bf16. Dev subset (45 pages), paired against the same setup in
+bf16. "Fallback" re-runs pages flagged by the loop or token-cap detector with the bf16
+model and the coordinate-blind guard.
+
+| Setting | Text Edit diff | R-order diff | TEDS diff | Model time (45 pages) | Peak memory |
+|---|---|---|---|---|---|
+| bf16 + I-1 (reference, E-005) | 0 | 0 | 0 | 740 s | 10.0 GB |
+| 8-bit, 3.8 GB (E-011, vs E-004) | +0.009 [-0.019, 0.045] | -0.002 [-0.010, 0.008] | -5.6 [-16.9, 0.1] | 512 s | 7.3 GB |
+| 8-bit + fallback (E-013) | -0.001 [-0.002, 0.000] | -0.003 [-0.007, 0.000] | -0.03 [-0.18, 0.10] | 499 s | 8.6 GB |
+| 4-bit, 2.4 GB (E-014, vs E-004) | +0.013 [-0.013, 0.048] | -0.001 [-0.015, 0.018] | -10.3 [-23.3, -0.5] | not comparable (one capped page) | |
+| 4-bit + fallback (E-015) | -0.008 [-0.018, 0.000] | -0.006 [-0.014, 0.001] | -4.7 [-12.3, -0.03] | 395 s | 9.3 GB |
+
+8-bit weights raise output speed from about 90 to 143 tokens/s. Their only failure on
+the dev subset was one page that went wrong from its first block and looped; the
+detector catches it and the bf16 fallback restores it, giving the same accuracy as
+bf16 in a third less time. 4-bit is faster again but loses table accuracy on pages
+that do not loop, which no detector can route to the fallback, so it is not used.
+
 ## 6. Discussion and limitations [draft]
 
 - Training-based improvements are out of reach on this hardware.

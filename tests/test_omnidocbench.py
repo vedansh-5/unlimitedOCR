@@ -29,3 +29,20 @@ def test_select_skips_excluded_pages():
 
     assert not taken & {image_name(p) for p in rest}
     assert len(rest) == 10
+
+
+def test_needs_retry_flags_loops_and_pages_cut_off_at_the_token_cap(tmp_path):
+    import json
+
+    from omnidocbench import needs_retry
+
+    def page(name, text, finish):
+        md = tmp_path / f"{name}.md"
+        md.write_text(text)
+        md.with_suffix(".json").write_text(json.dumps({"finish_reason": finish}))
+        return md
+
+    loop = "\n".join(f"<|det|>text [1, {i}, 3, 4]<|/det|>same line" for i in range(8))
+    assert needs_retry(page("loop", loop, "stop"))
+    assert needs_retry(page("capped", "<|det|>text [1, 2, 3, 4]<|/det|>varied text", "length"))
+    assert not needs_retry(page("fine", "<|det|>text [1, 2, 3, 4]<|/det|>varied text", "stop"))

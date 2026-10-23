@@ -29,6 +29,7 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 | I-6 broken-marker repair | No effect on scores (E-007); kept as a clean-output option only |
 | Statistics from code (`compare.py`, `make_tables.py`) | Done; reproduces the report; corrected TEDS intervals (R-004) |
 | Long-document baseline (E-003) | Done: wrong page count in 10 of 15 documents, 2 of 3 forty-page documents hit the token cap, recall 0.92 at 40 pages |
+| I-2 quantized weights (E-011 to E-015) | 8-bit + bf16 fallback kept: same accuracy as bf16, 33% less model time, peak 8.6 GB. 4-bit rejected (tables -4.7 TEDS) |
 | I-8 page-by-page decoding for long documents (E-009, E-010) | Kept. 40 pages: edit 0.228 to 0.077, recall 0.917 to 0.968, 44% less time (Base); Gundam slightly more accurate, 19% slower |
 
 ## Baseline
@@ -79,8 +80,7 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 
 ## Next steps (where to pick up)
 
-1. I-2: quantize to 8-bit and 4-bit (`./quantize.sh 8`), run the dev subset with
-   `--model`, compare with `compare.py diff`.
+1. Done: I-2 (8-bit + fallback kept, 4-bit rejected).
 2. I-3: `--experts-per-token 4` and `5` on dev.
 3. E-008: decode speed over a long request (`--log-speed`).
 4. I-5 newer mlx, I-7 resolution routing (may be moot after I-8).
