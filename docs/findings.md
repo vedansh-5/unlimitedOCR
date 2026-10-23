@@ -329,3 +329,48 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   the report says so.
 - **Decision:** all future comparisons use `compare.py diff`; a change counts as an
   improvement only if its interval excludes zero.
+
+## E-003: Long-document baseline (2026-10-23)
+
+- **What:** 15 documents, page prefixes (2, 5, 10, 20, 40) of three NIST PDFs, each
+  sent as one request in Base mode with the port's defaults (32,768-token cap). Scored
+  against the PDF text layer. 37.8 min of model time.
+- **Results (`results/E-003/scores.csv`):**
+
+| Pages | Mean edit distance | Mean word recall | Pages out differ from pages in | Hit token cap | Model s (mean) |
+|---|---|---|---|---|---|
+| 2 | 0.138 | 0.934 | 0 of 3 | 0 | 9 |
+| 5 | 0.104 | 0.973 | 2 of 3 | 0 | 31 |
+| 10 | 0.200 | 0.959 | 3 of 3 | 0 | 85 |
+| 20 | 0.110 | 0.953 | 2 of 3 | 0 | 194 |
+| 40 | 0.228 | 0.917 | 3 of 3 | 2 of 3 | 502 |
+
+- **Failure 1, page shifts:** the model often writes one more or one fewer `<PAGE>`
+  than the input has, from 5 pages up. Checked against the PDF on the 5-page AI 100-1
+  prefix: after the title page it wrote a page that mixes the top of page 3 with the
+  bottom of page 2, then the real page 3.
+- **Failure 2, token cap:** NIST pages take about 800 output tokens each, so 40 pages
+  do not fit in 32,768 tokens; two of three 40-page documents stopped at the cap
+  around page 38 to 39. This is a budget limit, not memory: peak memory never went
+  above 11.4 GB (R-SWA keeps the cache flat), and was lower at 40 pages (9.5 GB) than
+  at 10 to 20 (11.3 GB).
+- **Failure 3, slow recall loss:** recall falls from about 0.95 to 0.92 between short
+  and 40-page inputs.
+- **Speed:** output tokens per second (including prefill) drop from about 82 at 2 to
+  10 pages to about 58 at 40 pages. E-008 will separate decode speed from prefill.
+- **Measurement limit:** the text layer lacks text drawn inside images (cover logos,
+  "Check for updates"), so correct output is charged as extra; the 2-page documents
+  already score 0.09 to 0.18. Absolute values are therefore not comparable with the
+  paper's Table 3 (in-house set, human references). Paired comparisons on the same
+  documents are unaffected. Word recall (share of reference words found in the
+  output) was added because it ignores extra text and still catches dropped or
+  truncated pages. Remaining quirk: the text layer spells some headings letter by
+  letter ("C O M P U T E R"), which costs recall on the 2-page SP 800-207 prefix.
+- **Bug found and fixed:** `run_batch.py` saved Markdown only when the request exited
+  with code 0, so the two capped documents had no output to score. It now saves
+  whenever the model produced output; the two files were rebuilt from the saved raw
+  output with `to_markdown` (same conversion, no model run).
+- **Consequence for I-1L:** splicing re-run pages back by position is unsound,
+  because a page shift moves every later page. Replaced by E-009: every page run on
+  its own in Gundam mode and joined in order, which has no shifts and no cap by
+  construction, and directly tests the paper's case for multi-page decoding.

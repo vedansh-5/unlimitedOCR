@@ -1,0 +1,16 @@
+{
+  "exp": "E-003",
+  "inputs": "results/E-003/inputs",
+  "model_args": [],
+  "git": "5eae714-dirty",
+  "python": "3.12.15",
+  "machine": "macOS-27.0.1-arm64-arm-64bit",
+  "packages": {
+    "mlx": "0.32.1",
+    "mlx-vlm": "0.6.16",
+    "unlimited-ocr-mlx": "0.1.0",
+    "pillow": "12.3.0",
+    "transformers": "5.15.1"
+  },
+  "started_at": "2026-10-23T09:05:03+00:00"
+}

@@ -1,0 +1,30 @@
+[1/15] NIST.AI.100-1_p02.pdf
+    12.52 s, 413 tokens, peak 8.04 GB, exit 0
+[2/15] NIST.AI.100-1_p05.pdf
+    33.66 s, 2542 tokens, peak 9.12 GB, exit 0
+[3/15] NIST.AI.100-1_p10.pdf
+    84.87 s, 6554 tokens, peak 11.34 GB, exit 0
+[4/15] NIST.AI.100-1_p20.pdf
+    178.01 s, 12330 tokens, peak 11.36 GB, exit 0
+[5/15] NIST.AI.100-1_p40.pdf
+    404.59 s, 23041 tokens, peak 9.48 GB, exit 0
+[6/15] NIST.SP.800-207_p02.pdf
+    11.67 s, 718 tokens, peak 8.04 GB, exit 0
+[7/15] NIST.SP.800-207_p05.pdf
+    33.41 s, 2487 tokens, peak 9.12 GB, exit 0
+[8/15] NIST.SP.800-207_p10.pdf
+    98.64 s, 7726 tokens, peak 11.34 GB, exit 0
+[9/15] NIST.SP.800-207_p20.pdf
+    245.18 s, 15694 tokens, peak 11.36 GB, exit 0
+[10/15] NIST.SP.800-207_p40.pdf
+    576.73 s, 32768 tokens, peak 9.48 GB, exit 3
+[11/15] NIST.SP.800-63-3_p02.pdf
+    11.94 s, 802 tokens, peak 8.04 GB, exit 0
+[12/15] NIST.SP.800-63-3_p05.pdf
+    34.24 s, 2718 tokens, peak 9.12 GB, exit 0
+[13/15] NIST.SP.800-63-3_p10.pdf
+    83.13 s, 6637 tokens, peak 11.31 GB, exit 0
+[14/15] NIST.SP.800-63-3_p20.pdf
+    173.11 s, 12612 tokens, peak 11.36 GB, exit 0
+[15/15] NIST.SP.800-63-3_p40.pdf
+    543.98 s, 32768 tokens, peak 9.48 GB, exit 3

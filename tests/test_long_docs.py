@@ -25,3 +25,16 @@ def test_splice_puts_retried_pages_back_in_order():
     from long_docs import splice
 
     assert splice(["a", "b"], 4, {1: "B", 3: "D"}) == ["a", "B", "", "D"]
+
+
+def test_word_recall_ignores_extra_words_but_counts_missing_ones():
+    from long_docs import word_recall
+
+    assert word_recall("logo text the cat sat", "the cat sat") == 1.0
+    assert word_recall("the cat", "the cat sat on the mat") == 2 / 6
+
+
+def test_page_image_name_is_shared_by_all_prefixes_of_a_source():
+    from long_docs import page_image_name
+
+    assert page_image_name("NIST.SP.800-207_p40", 4) == page_image_name("NIST.SP.800-207_p05", 4) == "NIST.SP.800-207__p005"

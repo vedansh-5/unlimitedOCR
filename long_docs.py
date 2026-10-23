@@ -3,6 +3,7 @@ import csv
 import json
 import re
 import shutil
+from collections import Counter
 from pathlib import Path
 
 import pymupdf
@@ -23,6 +24,13 @@ def normalize(text):
 
 def edit_distance(prediction, reference):
     return Levenshtein.normalized_distance(normalize(prediction), normalize(reference))
+
+
+# Share of reference words found in the output. Text the PDF's text layer lacks (words
+# inside images) does not count against it; dropped or truncated pages do.
+def word_recall(prediction, reference):
+    pred, ref = Counter(normalize(prediction).split()), Counter(normalize(reference).split())
+    return sum((pred & ref).values()) / max(sum(ref.values()), 1)
 
 
 def cmd_make(args, out):
@@ -47,10 +55,13 @@ def cmd_score(args, out):
     for ref in sorted((out / "reference").glob("*.txt")):
         md = out / "md" / f"{ref.stem}.md"
         run = runs.get(ref.stem, {})
+        prediction, reference = (md.read_text(encoding="utf-8") if md.exists() else ""), ref.read_text(encoding="utf-8")
         rows.append({
             "doc": ref.stem,
             "pages": int(ref.stem.rsplit("_p", 1)[1]),
-            "edit_distance": round(edit_distance(md.read_text(encoding="utf-8"), ref.read_text(encoding="utf-8")), 4) if md.exists() else "",
+            "pages_out": run.get("pages_out", ""),
+            "edit_distance": round(edit_distance(prediction, reference), 4) if md.exists() else "",
+            "word_recall": round(word_recall(prediction, reference), 4) if md.exists() else "",
             "distinct_20": run.get("distinct_20", ""),
             "distinct_35": run.get("distinct_35", ""),
             "gen_tokens": run.get("gen_tokens", ""),
@@ -89,6 +100,10 @@ def read_raw(folder):
     return "\n".join(md.read_text(encoding="utf-8") for md in sorted(folder.glob("*.md")))
 
 
+def page_image_name(stem, i):
+    return f"{stem.rsplit('_p', 1)[0]}__p{i + 1:03d}"
+
+
 def cmd_retry(args, out, extra):
     from omnidocbench import run_images
 
@@ -101,39 +116,48 @@ def cmd_retry(args, out, extra):
     shutil.copytree(base / "reference", out / "reference", dirs_exist_ok=True)
     flagged = {}
     for stem, run in runs.items():
-        finish = run["finish_reasons"].split("|")[-1]
-        flags = flag_pages(read_raw(base / "raw" / stem), int(run["pages_in"]), finish)
-        flagged[stem] = flags
+        pages_in = int(run["pages_in"])
+        if args.all_pages:
+            flagged[stem] = {i: "all" for i in range(pages_in)}
+        else:
+            finish = run["finish_reasons"].split("|")[-1]
+            flagged[stem] = flag_pages(read_raw(base / "raw" / stem), pages_in, finish)
         with pymupdf.open(base / "inputs" / f"{stem}.pdf") as doc:
-            for i in flags:
-                doc[i].get_pixmap(dpi=DPI).save(images / f"{stem}__p{i + 1:03d}.png")
-    total = sum(map(len, flagged.values()))
-    print(f"{total} flagged pages to re-run")
+            for i in flagged[stem]:
+                image = images / f"{page_image_name(stem, i)}.png"
+                if not image.exists():
+                    doc[i].get_pixmap(dpi=DPI).save(image)
+    total = len(list(images.glob("*.png")))
+    print(f"{total} distinct pages to run")
     code = run_images(images, out, extra) if total else 0
 
     (out / "md").mkdir(exist_ok=True)
     retried, rows = [], []
     for stem, run in runs.items():
         pages_in = int(run["pages_in"])
-        replacements, model_s, gen_tokens = {}, float(run["model_s"]), int(run["gen_tokens"])
-        complete = True
+        replacements, metas = {}, []
         for i, reason in flagged[stem].items():
-            md = out / "raw" / f"{stem}__p{i + 1:03d}.md"
+            md = out / "raw" / f"{page_image_name(stem, i)}.md"
             meta = json.loads(md.with_suffix(".json").read_text()) if md.exists() else {}
             if md.exists():
                 replacements[i] = md.read_text(encoding="utf-8")
-            complete = complete and bool(meta.get("complete"))
-            model_s += meta.get("elapsed_seconds", 0)
-            gen_tokens += meta.get("generation_tokens", 0)
+            metas.append(meta)
             retried.append({"doc": stem, "page": i + 1, "reason": reason, "model_s": round(meta.get("elapsed_seconds", 0), 2),
                             "gen_tokens": meta.get("generation_tokens", ""), "finish_reason": meta.get("finish_reason", "")})
-        pages = splice(split_pages(read_raw(base / "raw" / stem)), pages_in, replacements)
+        base_pages = [] if args.all_pages else split_pages(read_raw(base / "raw" / stem))
+        pages = splice(base_pages, pages_in, replacements)
         text = "\n\n".join(p for p in map(remove_det, pages) if p)
         (out / "md" / f"{stem}.md").write_text(text + "\n", encoding="utf-8")
         plain = checks.strip_tags(text)
-        rows.append({**run, "pages_out": len(pages), "model_s": round(model_s, 2), "gen_tokens": gen_tokens,
-                     "distinct_20": round(checks.distinct_n(plain, 20), 4), "distinct_35": round(checks.distinct_n(plain, 35), 4),
-                     "complete": complete if flagged[stem] else run["complete"]})
+        kept = 0 if args.all_pages else 1
+        rows.append({
+            "doc": run["doc"], "pages_in": pages_in, "pages_out": len(pages), "retried": len(flagged[stem]),
+            "model_s": round(kept * float(run["model_s"]) + sum(m.get("elapsed_seconds", 0) for m in metas), 2),
+            "gen_tokens": kept * int(run["gen_tokens"]) + sum(m.get("generation_tokens", 0) for m in metas),
+            "peak_mlx_gb": max([kept * float(run["peak_mlx_gb"])] + [m.get("peak_memory_gb", 0) for m in metas]),
+            "distinct_20": round(checks.distinct_n(plain, 20), 4), "distinct_35": round(checks.distinct_n(plain, 35), 4),
+            "complete": all(m.get("complete") for m in metas) if metas else run["complete"],
+        })
     for name, table in (("retried.csv", retried), ("runs.csv", rows)):
         if table:
             with (out / name).open("w", newline="") as f:
@@ -148,6 +172,7 @@ def main(argv=None):
     parser.add_argument("step", choices=["make", "score", "retry"])
     parser.add_argument("--exp", required=True)
     parser.add_argument("--base", help="retry: experiment whose flagged pages are re-run one at a time")
+    parser.add_argument("--all-pages", action="store_true", help="retry: run every page alone, ignoring the base output")
     parser.add_argument("sources", nargs="*", type=Path)
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp

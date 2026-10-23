@@ -109,7 +109,7 @@ def main(argv=None):
             row, markdown = summarize(doc, result, started_at)
             writer.writerow(row)
             f.flush()
-            if row["exit_code"] == 0:
+            if result["outputs"]:
                 md_path.write_text(markdown + "\n", encoding="utf-8")
             print(f"    {row['wall_s']} s, {row['gen_tokens']} tokens, peak {row['peak_mlx_gb']} GB, exit {row['exit_code']}")
     return 0

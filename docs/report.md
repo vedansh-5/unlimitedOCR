@@ -75,10 +75,19 @@ The authors attribute most 40+ page errors to repetition on small text, caused b
 Speed: 5,580 tokens/s on OmniDocBench at 512 concurrent requests on GPU, versus 4,951
 for DeepSeek-OCR. These numbers are not comparable to a single laptop.
 
-## 3. Proposed modifications [planned]
+## 3. Proposed modifications [draft]
 
-Ranked candidates are in `docs/plan.md`. Each one gets a technical justification here
-once it is selected and tested.
+Training is out of scope (section 6), so every change works at inference time on the
+released weights. Each is tested alone against a baseline (section 4).
+
+| ID | Change | Technical reason | Status |
+|---|---|---|---|
+| I-1 | Re-decode pages flagged as loops with a no-repeat guard that ignores `<\|det\|>` box coordinates | Baidu's 35-gram guard compares raw tokens; a loop that opens a new layout block per repeat changes the box tokens each time, so no 35-token sequence repeats exactly | Kept (5.2) |
+| I-6 | Cut unclosed `<\|det\|>` markers in post-processing | A loop cut off by the token cap can leave a marker open, which leaks into the Markdown | Kept as an output option; no score effect |
+| I-1L | For long documents, re-run missing, looping, cut-off or empty pages one at a time in Gundam mode and splice them back | The paper attributes most 40+ page errors to repetition on small text in Base mode (one 1024 view per page); Gundam adds 640 px crops | Code ready |
+| I-2 | 8-bit and 4-bit weights for the decoder (vision encoders kept in bf16) | Decoding is memory-bandwidth bound; fewer bytes per weight should raise tokens/s and lower peak memory on a 16 GB machine | Code ready |
+| I-3 | 4 or 5 routed experts per token instead of 6 | Routed experts are most of the work per token; experts are picked by softmax score, so the dropped ones carry the least weight | Code ready |
+| I-7 | Route pages with small text to Gundam mode before decoding | Targets the paper's stated cause of long-document errors before it happens, instead of repairing after | Planned |
 
 ## 4. Experimental setup [verified]
 

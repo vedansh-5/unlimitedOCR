@@ -207,3 +207,10 @@ Chronological. One entry per meaningful action or decision.
   empty pages from the base run's output (never from the reference), renders each
   flagged page at 300 dpi, re-runs them in one model call (gundam mode, single page),
   and splices them back in place. Tests for flagging and splicing.
+- **E-003 done** (37.8 min model time): page shifts in 9 of 15 documents, 2 of 3
+  40-page documents hit the 32,768-token cap, recall 0.95 to 0.92 with length. Details
+  in findings. `run_batch.py` fixed to keep output of capped requests; word recall
+  added to `long_docs.py score`.
+- **Plan change:** I-1L (positional splice) dropped as unsound under page shifts;
+  replaced by E-009, page-by-page Gundam over the first 40 pages of each source
+  (`long_docs.py retry --exp E-009 --base E-003 --all-pages`), about 30 to 35 min.
