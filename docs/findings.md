@@ -586,3 +586,35 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   out of place; most damage is misread characters in small print (e.g. 安激 for 安徽).
   Re-sorting blocks by geometry is unlikely to help; higher resolution on small print
   is the better target.
+
+## E-023 to E-025: best of two by model confidence (2026-10-23)
+
+- **Problem:** single-page errors concentrate on newspapers and notes; perhaps a
+  second reading of a page, kept only when the model is more sure of it, recovers
+  some of them without training.
+- **Change:** `run_ocr.py --log-confidence` records the log-probability of each greedy
+  token (after the repeat guard) and writes its mean to the page's metrics.
+  `select_runs.py` keeps, per page, the run with the higher mean. Dev subset, Gundam
+  (E-023) against Base (E-024).
+- **Check:** E-023 is byte-identical to E-004 on all 45 pages and runs at the same
+  speed, so the logging changes nothing.
+- **Results (dev, reweighted Text Edit):** Gundam 0.0504, Base 0.0821, confidence pick
+  0.0497 (Base chosen on 6 pages), perfect pick by true score 0.0404. Reading order:
+  confidence pick equals Gundam (0.1272); perfect pick 0.1241.
+- **Ceilings for other second readings** (perfect pick against E-005, bf16 + loop
+  repair): with 4 experts (E-016) Text Edit 0.0420 to 0.0391 and TEDS 93.5 to 94.2;
+  with 8-bit (E-011) 0.0420 to 0.0412; with Base (E-024) 0.0420 to 0.0404.
+- **Reading:** mean confidence captures under a tenth of the possible gain, and the
+  possible gain is itself about 0.003 Text Edit. A realistic gain of about 0.001 is
+  below what 140 test pages can detect, at twice the reading time.
+- **Decision:** rejected. Confidence logging is kept as a diagnostic.
+
+## Summary of inference-time ideas for single-page accuracy (2026-10-23)
+
+Tried or checked: loop repair (kept; fixes rare runaway pages), marker repair (no
+effect), dropping page furniture (slightly worse), reading-order re-sorting (worst
+pages are a metric quirk), higher resolution (newspapers already near the tile
+limit), ragged-table repair (2 of 37 table pages), best of two by confidence (gain
+too small). On OmniDocBench single pages the released model is close to what
+inference-time changes can reach; the large, measurable gains of this project are
+for long documents (page-by-page decoding) and speed (8-bit, fewer experts).

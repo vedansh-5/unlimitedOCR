@@ -54,6 +54,7 @@ E-001b) and accepts all of its options, plus:
 | `--content-guard` | No-repeat guard that ignores box coordinates, so a loop with moving boxes is still blocked (I-1) |
 | `--experts-per-token N` | Use N of the 64 routed experts per token instead of 6 (I-3) |
 | `--log-speed FILE` | Write the time at token 1 and every 500 tokens (E-008) |
+| `--log-confidence` | Add the mean log-probability of the chosen tokens to each page's metrics |
 | `--keep-prompt-space` | Keep the port's original prompt with the trailing space |
 | `--model PATH` | A local model folder, e.g. a quantized copy from `./quantize.sh 8` (I-2) |
 

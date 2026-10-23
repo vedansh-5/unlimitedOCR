@@ -1,0 +1,46 @@
+image,prompt_tokens,gen_tokens,model_s,gen_tps,peak_mlx_gb,finish_reason,complete,max_repeated_line,compression_ratio,distinct_35,ragged_tables
+PPT_MMAT5390Lecture1_page_024,1507,241,5.13,80.7,9.62,stop,True,1,1.46,1.0,0
+PPT_linear-algebra primer_page_008,1507,478,8.56,76.8,9.62,stop,True,1,1.84,1.0,0
+book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0092,1517,993,13.9,92.4,8.55,stop,True,1,2.34,1.0,0
+book_en_国外数学教材-数论-Melvyn B. Nathanson—Elementary Methods in Number Theory_0100,1517,1059,12.53,93.6,8.55,stop,True,1,2.2,1.0,0
+color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_010,907,403,5.07,93.5,8.55,stop,True,1,1.74,1.0,0
+color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_011,907,479,6.02,92.7,8.55,stop,True,1,1.52,1.0,0
+docstructbench_enbook-zlib-o.O-17761417.pdf_894,2327,1013,13.15,90.6,9.28,stop,True,1,2.29,1.0,0
+docstructbench_llm-raw-scihub-o.O-j.ab.2008.05.027.pdf_7,1517,1368,15.76,93.8,9.28,stop,True,1,2.43,1.0,0
+eastmoney_bd6c2b9aa7ca0ebf8672f8f50e3eacab7f67d0ffa15e0d94b1f3c0d1b5f179b8.pdf_19,907,1345,14.53,97.5,9.28,stop,True,1,1.86,1.0,0
+exam_paper_en-file-putnam-archive_2008_Problems_2008_page_001,1517,1411,16.15,94.1,9.28,stop,True,1,2.18,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_155,2737,1620,20.56,89.3,9.62,stop,True,1,1.66,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_2017,907,769,8.75,95.9,9.62,stop,True,1,1.62,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_2449,1507,1009,11.85,94.2,9.62,stop,True,2,1.61,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_3738,2737,1625,20.77,89.0,9.62,stop,True,1,2.08,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_467,2737,1346,17.39,89.1,9.62,stop,True,1,1.79,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_922,1517,1106,12.89,94.3,9.62,stop,True,1,1.46,1.0,0
+magazine_TheEconomist.2023.12.02_page_028,1517,1022,12.23,94.2,9.62,stop,True,1,1.87,1.0,0
+magazine_TheEconomist.2024.02.24_page_033,1517,1419,16.49,93.9,9.62,stop,True,1,2.02,1.0,0
+newspaper_06b975dbc47dc2dc2a3a1468293f6a2c_1,2737,5556,90.31,67.7,9.62,stop,True,2,2.63,1.0,0
+newspaper_1cddf9d22ca549f3a86cf1512a3110cc_1,2737,6709,87.51,78.6,9.62,stop,True,1,2.08,1.0,0
+newspaper_Daily Mirror 2025-1-8@magazinesclubnew_page_029,2327,1333,19.58,82.0,9.62,stop,True,1,1.92,1.0,0
+newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060,2327,32768,434.55,75.9,9.62,length,False,555,104.27,0.014,0
+newspaper_c8e8e00e1b1a70aa44afd1fbdaf59430_1,2737,4769,102.73,78.1,9.62,stop,True,1,2.13,1.0,0
+notes_1ba14cb325bc448f7201b20502ecf2b5_32,907,595,10.41,69.9,9.62,stop,True,1,1.63,1.0,0
+notes_1ba14cb325bc448f7201b20502ecf2b5_33,1517,588,9.36,84.3,9.62,stop,True,1,1.6,1.0,0
+notes_1ba14cb325bc448f7201b20502ecf2b5_57,1517,326,6.29,78.4,9.62,stop,True,1,1.5,1.0,0
+notes_f7f010b78016aeebd76e56d9283eb67f_91,907,546,8.01,79.0,9.62,stop,True,1,1.74,1.0,0
+notes_f7f010b78016aeebd76e56d9283eb67f_92,907,561,8.35,80.2,9.62,stop,True,1,1.78,1.0,0
+page-34e4675f-4b7f-4bc3-8624-c399423d2c66,907,152,4.0,72.2,9.62,stop,True,1,1.11,1.0,0
+page-37a801d0-4422-4ddb-8b45-73b259396212,1517,1564,22.67,80.1,9.62,stop,True,1,2.57,1.0,0
+page-572316a1-cdf8-4c50-81d4-2e6dc13dcdce,907,701,10.18,79.9,9.62,stop,True,1,1.82,1.0,0
+page-7319096f-4c23-42d5-815f-41397976da34,1517,487,8.52,77.0,9.62,stop,True,1,1.34,1.0,0
+page-73432bc8-cd0f-4e14-b119-0a9de73ab141,907,1377,18.84,79.1,9.62,stop,True,1,1.96,1.0,0
+page-961a543b-d09d-4fd8-944a-1a38d67bb3bc,1507,511,8.9,77.6,9.62,stop,True,1,1.77,1.0,0
+page-b9d507e7-1239-42de-b70a-d7ca65393dc9,907,1085,15.5,77.3,9.62,stop,True,1,2.34,1.0,0
+page-be2ebf31-5f24-4d3e-97f0-4a8df7e773b4,1517,3758,50.97,77.3,9.62,stop,True,1,2.35,1.0,1
+page-c8a4555b-2c14-40c2-b67f-097dbc77a6b7,907,574,7.9,83.9,9.62,stop,True,1,1.73,1.0,0
+scihub_gbe%2Fevaa098.pdf_0,1517,1369,19.01,81.8,9.62,stop,True,1,2.04,1.0,0
+scihub_ie102256j.pdf_4,1517,1659,22.76,79.9,9.62,stop,True,1,2.48,1.0,0
+scihub_jps.21547.pdf_7,1517,1075,15.31,82.4,9.62,stop,True,1,2.08,1.0,0
+yanbaopptmerge_c894b375daca22d041c8a35946295d0a73d6589ad7c3d1d39d8664a2666372bf.pdf_10,907,1087,13.76,86.5,9.62,stop,True,1,1.97,1.0,0
+yanbaopptmerge_yanbaoPPT_4115,3117,213,9.22,75.6,10.07,stop,True,1,1.65,1.0,0
+yanbaopptmerge_yanbaoPPT_5620,3117,95,6.06,83.6,10.07,stop,True,1,0.96,1.0,0
+yanbaor2_37eeaab2c1abfc6443b9781c9bca92468c4a8a9aac837e2523122b1ae632b74e.pdf_13,907,536,7.63,84.8,10.07,stop,True,2,1.96,1.0,0
+yanbaor2_yanbaoPPT_4618,907,484,6.93,84.5,10.07,stop,True,1,1.58,1.0,0

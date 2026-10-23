@@ -250,3 +250,6 @@ Chronological. One entry per meaningful action or decision.
 - **Error analysis:** newspapers and notes dominate text error; worst reading-order
   pages are a metric quirk (single-item pages). Next idea: higher resolution for small
   print.
+- **E-023 to E-025** (best of two by confidence, dev): logging verified harmless
+  (identical output); confidence pick 0.0497 against 0.0504 Gundam, ceiling 0.0404.
+  Rejected. Single-page accuracy ideas exhausted for now; see findings summary.

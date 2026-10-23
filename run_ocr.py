@@ -1,3 +1,4 @@
+import json
 import sys
 import time
 
@@ -53,6 +54,49 @@ def with_speed_log(guard_class, path, every=500):
     return Timed
 
 
+_confidence = {}
+
+
+# Decoding is greedy, so the chosen token is the arg-max of the guarded logits.
+def with_confidence_log(guard_class):
+    class Confident(guard_class):
+        def __call__(self, input_ids, logits):
+            import mlx.core as mx
+
+            out = super().__call__(input_ids, logits)
+            chosen = mx.max(out, axis=-1) - mx.logsumexp(out, axis=-1)
+            mx.async_eval(chosen)
+            self.__dict__.setdefault("logprobs", []).append(chosen)
+            _confidence["last"] = self
+            return out
+
+    return Confident
+
+
+def confidence_summary(guard):
+    values = sorted(float(v.reshape(-1)[0].item()) for v in getattr(guard, "logprobs", []))
+    if not values:
+        return {}
+    return {
+        "confidence_tokens": len(values),
+        "mean_logprob": sum(values) / len(values),
+        "p10_logprob": values[len(values) // 10],
+    }
+
+
+def with_confidence_in_metrics(write_result):
+    def write(result, output):
+        markdown_path, metadata_path = write_result(result, output)
+        guard = _confidence.pop("last", None)
+        if guard is not None:
+            metrics = json.loads(metadata_path.read_text())
+            metrics.update(confidence_summary(guard))
+            metadata_path.write_text(json.dumps(metrics, indent=2) + "\n")
+        return markdown_path, metadata_path
+
+    return write
+
+
 unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor.__call__ = _guard_call_keeping_shape
 
 if __name__ == "__main__":
@@ -69,6 +113,12 @@ if __name__ == "__main__":
         unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = with_speed_log(
             unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor, path
         )
+    if "--log-confidence" in argv:
+        argv.remove("--log-confidence")
+        unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = with_confidence_log(
+            unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor
+        )
+        infer_mlx.write_result = with_confidence_in_metrics(infer_mlx.write_result)
     if "--experts-per-token" in argv:
         i = argv.index("--experts-per-token")
         k = int(argv[i + 1])

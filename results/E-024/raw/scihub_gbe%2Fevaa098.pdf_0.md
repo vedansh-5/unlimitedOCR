@@ -1,0 +1,26 @@
+<|det|>header [822, 15, 917, 44]<|/det|>GBE
+<|det|>title [84, 109, 852, 165]<|/det|>Y-Chromosome Variation in Southern African Khoe-San Populations Based on Whole-Genome Sequences
+<|det|>text [82, 178, 821, 211]<|/det|>Thijessen Naidoo \( ^{1,2,3,4,*} \) , Jingzi Xu \( ^{1,*} \) , Mário Vicente \( ^{1} \) , Helena Malmström \( ^{1,5} \) , Himla Soodyal \( ^{6,7,8} \) , Mattias Jakobsson \( ^{1,3,5} \) , and Carina M. Schlebusch \( ^{1,3,5,*} \)
+<|det|>text [82, 229, 738, 245]<|/det|>\( ^{1} \) Human Evolution, Department of Organismal Biology, Evolutionary Biology Centre, Uppsala University, Sweden
+<|det|>text [82, 247, 565, 262]<|/det|>\( ^{2} \) Department of Archaeology and Classical Studies, Stockholm University, Sweden
+<|det|>text [82, 264, 356, 279]<|/det|>\( ^{3} \) Science for Life Laboratory, Uppsala, Sweden
+<|det|>text [82, 282, 367, 297]<|/det|>\( ^{4} \) Centre for Palaeogenetics, Stockholm, Sweden
+<|det|>text [82, 300, 573, 315]<|/det|>\( ^{5} \) Palaeo-Research Institute, University of Johannesburg, Auckland Park, South Africa
+<|det|>text [82, 317, 895, 333]<|/det|>\( ^{6} \) Division of Human Genetics, School of Pathology, Faculty of Health Sciences, University of the Witwatersrand, Johannesburg, South Africa
+<|det|>text [82, 335, 461, 350]<|/det|>\( ^{7} \) National Health Laboratory Service, Johannesburg, South Africa
+<|det|>text [82, 352, 303, 367]<|/det|>\( ^{8} \) Academy of Science of South Africa
+<|det|>text [82, 382, 445, 396]<|/det|>*Corresponding author: E-mail: carina.schlebusch@ebc.uu.se.
+<|det|>text [82, 401, 236, 415]<|/det|>Accepted: 12 May 2020
+<|det|>text [82, 419, 367, 434]<|/det|>\( ^{†} \) These authors contributed equally to this work.
+<|det|>text [81, 438, 918, 468]<|/det|>Data deposition: The complete Y-chromosome sequences were deposited on the European Genome Phenome Archive (https://www.ebi.ac.uk/ega/), accession number EGAS00001004459, and are available for research use under controlled access policies.
+<|det|>title [82, 501, 170, 517]<|/det|>Abstract
+<|det|>text [81, 525, 918, 709]<|/det|>Although the human Y chromosome has effectively shown utility in uncovering facets of human evolution and population histories, the ascertainment bias present in early Y-chromosome variant data sets limited the accuracy of diversity and TMRCA estimates obtained from them. The advent of next-generation sequencing, however, has removed this bias and allowed for the discovery of thousands of new variants for use in improving the Y-chromosome phylogeny and computing estimates that are more accurate. Here, we describe the high-coverage sequencing of the whole Y chromosome in a data set of 19 male Khoe-San individuals in comparison with existing whole Y-chromosome sequence data. Due to the increased resolution, we potentially resolve the source of haplogroup B-P70 in the Khoe-San, and reconcile recently published haplogroup A-M51 data with the most recent version of the ISOGG Y-chromosome phylogeny. Our results also improve the positioning of tentatively placed new branches of the ISOGG Y-chromosome phylogeny. The distribution of major Y-chromosome haplogroups in the Khoe-San and other African groups coincide with the emerging picture of African demographic history; with E-M2 linked to the agriculturalist Bantu expansion, E-M35 linked to pastoralist eastern African migrations, B-M112 linked to earlier east-south gene flow, A-M14 linked to shared ancestry with central African rainforest hunter-gatherers, and A-M51 potentially unique to the Khoe-San.
+<|det|>text [81, 711, 768, 727]<|/det|>Key words: Y chromosome, next-generation sequencing, haplogroups, Khoe-San, southern Africa.
+<|det|>title [82, 757, 205, 772]<|/det|>Introduction
+<|det|>text [81, 777, 488, 854]<|/det|>The male-specific portion of the Y chromosome (MSY) has long been regarded as an effective tool in the study of human evolutionary history (Underhill and Kivisild 2007). It has proved useful mainly due to a lack of recombination along its length, making it the longest
+<|det|>text [515, 763, 918, 855]<|/det|>haplotypic block in the human genome (Soczzari et al. 2012); and its paternal mode of inheritance. The transmission of an intact haplotype from father to son, changing only through mutation, preserves a simpler record of its history and allows us to study the male contribution to the shaping of humanity.
+<|det|>page_footnote [81, 887, 917, 923]<|/det|>© The Author(s) 2020. Published by Oxford University Press on behalf of the Society for Molecular Biology and Evolution.
+This is an Open Access article distributed under the terms of the Creative Commons Attribution Non-Commercial License (http://creativecommons.org/licenses/by-nc/4.0/), which permits non-commercial re-use, distribution, and reproduction in any medium, provided the original work is properly cited. For commercial re-use, please contact journals.permissions@oup.com
+<|det|>footer [84, 952, 486, 966]<|/det|>Genome Biol. Evol. 12(7):1031–1039. doi:10.1093/gbe/evaa098
+<|det|>page_number [877, 952, 915, 965]<|/det|>1031
+<|det|>aside_text [955, 253, 976, 747]<|/det|>Downloaded from https://academic.oup.com/genbio/article/12/7/1031/5942969 by guest on 23 January 2020
