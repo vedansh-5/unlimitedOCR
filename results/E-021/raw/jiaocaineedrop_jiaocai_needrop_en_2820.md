@@ -1,0 +1,47 @@
+<|det|>text [198, 128, 536, 143]<|/det|>(Ⅱ) 当 x=8 时， \( \hat{y}=0.85\times8+0.6=7.4 \)
+<|det|>text [198, 148, 854, 163]<|/det|>∴ 当补贴额达到 8 百万元时,该项目的经济回报为 7.4 千万元. ……12 分
+<|det|>text [145, 168, 603, 183]<|/det|>19. 解: (I) ∵ D, E 分别为 AB, AC 的中点, ∴ DE // BC.
+<|det|>text [202, 188, 435, 203]<|/det|>∵ AD ⊥ BC，∴ AD ⊥ DE.
+<|det|>text [202, 208, 854, 223]<|/det|>∴A'D ⊥ DE. ……2分
+<|det|>text [202, 228, 777, 243]<|/det|>∵  \( A^{\prime}D \perp BD \) ,  \( DE \subset \)  平面 BDEC,  \( DE \subset \)  平面  \( BD = D \) ,
+<|det|>text [202, 248, 854, 263]<|/det|>∴  \( A^{\prime}D \perp \)  平面 BDEC. ……4 分
+<|det|>text [202, 268, 388, 283]<|/det|>又  \( A^{\prime}D \subset \)  平面  \( A^{\prime}DB \) ，
+<|det|>text [202, 288, 854, 303]<|/det|>∴ 平面  \( A^{\prime}DB \perp \)  平面 BDEC. ……5 分
+<|det|>text [202, 308, 281, 323]<|/det|>(Ⅱ)选①.
+<|det|>text [202, 329, 503, 343]<|/det|>\(\because BM = BE, \angle BDM = \angle BDE = 90^{\circ}\)
+<|det|>text [202, 349, 524, 363]<|/det|>\(\therefore \triangle BDM \cong \triangle BDE. \therefore DE = DM = 2.\)
+<|det|>text [202, 369, 854, 384]<|/det|>∴ M 为  \( A^{\prime}D \)  的中点. ……7 分
+<|det|>text [202, 389, 246, 404]<|/det|>选②.
+<|det|>text [202, 410, 314, 424]<|/det|>\( \because BC \parallel DE, \)
+<|det|>text [202, 430, 495, 444]<|/det|>∴ 直线 EM 与 BC 所成角为  \( \angle MED \) .
+<|det|>text [201, 450, 758, 464]<|/det|>又直线 EM 与 BC 所成角的大小为  \( 45^{\circ} \) ，∴  \( \angle MED = 45^{\circ} \) 。∵  \( A'D \perp DE \) 。
+<|det|>text [202, 470, 341, 484]<|/det|>∴ DE = DM = 2.
+<|det|>text [202, 489, 854, 504]<|/det|>∴ M 为  \( A^{\prime}D \)  的中点. ……7 分
+<|det|>text [202, 510, 245, 524]<|/det|>选③.
+<|det|>equation [202, 530, 854, 559]<|/det|>\[
+\because V _ {E - A ^ {\prime} B C} = V _ {A ^ {\prime} - E B C} = \frac {1}{3} S _ {\triangle E B C} \cdot A ^ {\prime} D, V _ {M - B D E} = \frac {1}{3} S _ {\triangle B D E} \cdot M D, V _ {M - B D E} = \frac {1}{4} V _ {E - A ^ {\prime} B C},
+\]
+<|det|>text [202, 568, 482, 595]<|/det|>又 \(DE = \frac{1}{2} BC\) ，即 \(S_{\triangle BDE} = \frac{1}{2} S_{\triangle EBC}\)
+<|det|>equation [208, 602, 336, 617]<|/det|>\[
+\therefore A ^ {\prime} D = 2 M D.
+\]
+<|det|>text [202, 622, 615, 638]<|/det|>∴ M 为  \( A^{\prime}D \)  的中点. ……7 分
+<|det|>text [202, 643, 597, 658]<|/det|>∵过 B, C, M 三点的平面与线段  \( A^{\prime}E \)  相交于点 N，
+<|det|>text [201, 662, 452, 677]<|/det|>DE // BC, BC ⊂ 平面  \( A^{\prime}DE \) ,
+<|det|>text [202, 683, 374, 698]<|/det|>∴ BC // 平面  \( A^{\prime}DE \) .
+<|det|>text [201, 703, 498, 718]<|/det|>又平面 BMNC ∩ 平面  \( A^{\prime}DE = MN \) ，
+<|det|>text [202, 723, 321, 738]<|/det|>∴ BC // MN .
+<|det|>text [202, 743, 369, 758]<|/det|>∴ N 为  \( A^{\prime}E \)  的中点.
+<|det|>text [202, 763, 545, 779]<|/det|>\( \because V_{A^{\prime}-BCN}=V_{N-A^{\prime}BC} \) ，又MN//平面 \( A^{\prime}BC \) ，
+<|det|>equation [202, 784, 443, 799]<|/det|>\[
+\therefore V _ {N - A ^ {\prime} B C} = V _ {M - A ^ {\prime} B C} = V _ {C - A ^ {\prime} B M},
+\]
+<|det|>text [201, 805, 848, 834]<|/det|>易知 \(BC \perp\) 平面 \(A^{\prime}BD\). \(\therefore V_{C - A^{\prime}BM} = \frac{1}{3} S_{\triangle A^{\prime}BD} \cdot BC = \frac{1}{6} S_{\triangle A^{\prime}BD} \cdot BC = \frac{1}{6} \times 8 \times 4 = \frac{16}{3}\).
+<|det|>text [202, 841, 471, 869]<|/det|>∴三棱锥  \( A^{\prime}-BCN \)  的体积为  \( \frac{16}{3} \) .
+<|det|>image [633, 583, 855, 723]<|/det|>
+<|det|>text [777, 745, 852, 758]<|/det|>……8分
+<|det|>text [777, 785, 852, 799]<|/det|>……10分
+<|det|>text [777, 808, 848, 833]<|/det|>\(\frac{16}{3}\).
+<|det|>text [777, 849, 852, 863]<|/det|>……12分
+<|det|>footer [344, 878, 530, 892]<|/det|>数学(文科)“一诊”参考答案
+<|det|>page_number [542, 878, 653, 892]<|/det|>第2页(共5页)

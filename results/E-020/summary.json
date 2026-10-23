@@ -1,0 +1,51 @@
+{
+  "headline": {
+    "text_block_Edit_dist": 0.06602266629800575,
+    "display_formula_CDM": null,
+    "table_TEDS": 90.85566735000977,
+    "table_TEDS_structure_only": 92.51742751563367,
+    "reading_order_Edit_dist": 0.14246623337634437
+  },
+  "edit_by_type": {
+    "PPT2PDF": {
+      "text_block": 0.0728,
+      "reading_order": 0.0889
+    },
+    "academic_literature": {
+      "text_block": 0.0168,
+      "reading_order": 0.0819
+    },
+    "book": {
+      "text_block": 0.0175,
+      "reading_order": 0.0894
+    },
+    "colorful_textbook": {
+      "text_block": 0.0861,
+      "reading_order": 0.1641
+    },
+    "exam_paper": {
+      "text_block": 0.0474,
+      "reading_order": 0.1024
+    },
+    "historical_document": {
+      "text_block": 0.467,
+      "reading_order": 0.3669
+    },
+    "magazine": {
+      "text_block": 0.019,
+      "reading_order": 0.0423
+    },
+    "newspaper": {
+      "text_block": 0.0956,
+      "reading_order": 0.2073
+    },
+    "note": {
+      "text_block": 0.0924,
+      "reading_order": 0.1644
+    },
+    "research_report": {
+      "text_block": 0.0009,
+      "reading_order": 0.2668
+    }
+  }
+}

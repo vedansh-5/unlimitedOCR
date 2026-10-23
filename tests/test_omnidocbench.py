@@ -45,4 +45,5 @@ def test_needs_retry_flags_loops_and_pages_cut_off_at_the_token_cap(tmp_path):
     loop = "\n".join(f"<|det|>text [1, {i}, 3, 4]<|/det|>same line" for i in range(8))
     assert needs_retry(page("loop", loop, "stop"))
     assert needs_retry(page("capped", "<|det|>text [1, 2, 3, 4]<|/det|>varied text", "length"))
-    assert not needs_retry(page("fine", "<|det|>text [1, 2, 3, 4]<|/det|>varied text", "stop"))
+    assert needs_retry(page("whole_page_image", "<|det|>image [0, 0, 999, 999]<|/det|>", "stop"))
+    assert not needs_retry(page("fine", "<|det|>text [1, 2, 3, 4]<|/det|>A normal paragraph of page text.", "stop"))

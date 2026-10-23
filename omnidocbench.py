@@ -11,9 +11,11 @@ from pathlib import Path
 
 import checks
 from loops import is_loop
-from ocr_to_md import ROOT, to_markdown
+from ocr_to_md import PAGE_FURNITURE, ROOT, to_markdown
 
 DATASET = "opendatalab/OmniDocBench"
+# Output with less text than this is treated as a failed page (e.g. the whole page read as one image).
+MIN_TEXT_CHARS = 20
 DATASET_REVISION = "aa1ee96d106dbe53d0ae59474d75c6e6d9b53fec"
 EVALUATOR = ROOT / "unlimitedOCRvenv" / "third_party" / "OmniDocBench"
 EVALUATOR_PYTHON = ROOT / "unlimitedOCRvenv" / "omnidocbench-env" / "bin" / "python"
@@ -75,7 +77,7 @@ def run_images(images_dir, out, extra):
 
 def cmd_predict(args, out, extra):
     (out / "raw").mkdir(exist_ok=True)
-    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers)
+    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture)
 
 
 def cmd_retry(args, out, extra):
@@ -98,13 +100,14 @@ def cmd_retry(args, out, extra):
     (out / "retried.txt").write_text("".join(n + "\n" for n in retried))
     print(f"{len(retried)} flagged pages re-run, the rest copied from {args.base}")
     code = run_images(retry_inputs, out, extra) if retried else 0
-    return write_predictions(out, code, args.repair_markers)
+    return write_predictions(out, code, args.repair_markers, args.drop_furniture)
 
 
 def needs_retry(md):
     meta = md.with_suffix(".json")
     capped = meta.exists() and json.loads(meta.read_text()).get("finish_reason") == "length"
-    return capped or is_loop(md.read_text(encoding="utf-8"))
+    raw = md.read_text(encoding="utf-8")
+    return capped or is_loop(raw) or len(to_markdown(raw)) < MIN_TEXT_CHARS
 
 
 def glob_escape(name):
@@ -116,16 +119,16 @@ def cmd_rescore(args, out):
     shutil.copytree(base / "raw", out / "raw", dirs_exist_ok=True)
     for name in ("subset.txt", "gt_subset.json"):
         shutil.copy(base / name, out / name)
-    return write_predictions(out, 0, args.repair_markers)
+    return write_predictions(out, 0, args.repair_markers, args.drop_furniture)
 
 
-def write_predictions(out, code, repair=False):
+def write_predictions(out, code, repair=False, drop_furniture=False):
     raw, pred = out / "raw", out / "pred"
     pred.mkdir(exist_ok=True)
     rows = []
     for md in sorted(raw.glob("*.md")):
         meta = json.loads(md.with_suffix(".json").read_text())
-        text = to_markdown(md.read_text(encoding="utf-8"), repair)
+        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else ())
         (pred / md.name).write_text(text + "\n", encoding="utf-8")
         plain = checks.strip_tags(text)
         rows.append({
@@ -196,6 +199,7 @@ def main(argv=None):
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--base", help="Baseline experiment for retry or rescore")
     parser.add_argument("--repair-markers", action="store_true", help="Cut unclosed <|det|> markers from the Markdown")
+    parser.add_argument("--drop-furniture", action="store_true", help="Leave headers, footers, page numbers and page footnotes out of the Markdown")
     parser.add_argument("--exclude", nargs="*", default=[], help="Experiments whose subset pages must not be selected")
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp

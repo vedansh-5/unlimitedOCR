@@ -34,3 +34,12 @@ def test_unclosed_markers_leak_without_repair():
 
 def test_repair_cuts_unclosed_markers():
     assert to_markdown(BROKEN, repair=True) == "fine\nmore"
+
+
+def test_remove_det_can_drop_page_furniture():
+    from ocr_to_md import PAGE_FURNITURE, remove_det
+
+    raw = "<|det|>header [1, 2, 3, 4]<|/det|>Journal 12\n<|det|>text [1, 9, 3, 12]<|/det|>Body.\n<|det|>page_number [5, 6, 7, 8]<|/det|>10"
+
+    assert remove_det(raw) == "Journal 12\n\nBody.\n\n10"
+    assert remove_det(raw, skip=PAGE_FURNITURE) == "Body."

@@ -534,3 +534,55 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   an accuracy improvement, until the test subset confirms it.
 - **Decision:** this is the candidate final setup. Confirm on the test subset (E-019
   first pass, E-020 with fallback) against E-006.
+
+## E-019 to E-021: fast setup on the test subset (2026-10-23)
+
+- **Change:** the dev candidate (8-bit, 4 experts, bf16 fallback on flagged pages) on
+  the 140 test pages, against E-006 (bf16 + loop repair).
+- **E-019 (no fallback) vs E-002:** Text Edit +0.017 [0.002, 0.043], R-order +0.027
+  [0.007, 0.053]: clearly worse. 7 pages flagged (4 newspapers, 3 others), one at the
+  token cap.
+- **New silent failure:** `yanbaoPPT_485` came out as a single `image [0, 0, 999, 999]`
+  block with no text (bf16 reads its three lines). Added to the retry rule: output with
+  under 20 characters of text is flagged (`omnidocbench.MIN_TEXT_CHARS`, test added).
+  On the bf16 runs (E-002, E-004) the rule flags no new pages, so no earlier result
+  changes.
+- **E-020 (fallback, old rule) vs E-006:** Text Edit +0.013 [-0.002, 0.038], R-order
+  +0.017 [0.001, 0.041].
+- **E-021 (fallback, new rule, 8 pages) vs E-006:** Text Edit +0.002 [-0.003, 0.010],
+  R-order +0.007 [-0.001, 0.017], TEDS -1.5 [-8.3, 3.8]. Model time 41.9 to 31.2 min
+  (-26%).
+- **Reading:** every interval contains zero, but every estimate leans worse. Most of
+  the remaining gap is one colour-textbook page that drops some blocks (text +0.48,
+  reading order +0.63) without looping or emptying, so no cheap check can route it to
+  the fallback. The speed gain on test (26%) is smaller than on dev (38%) because test
+  time is dominated by a few long, dense pages.
+- **Lesson:** 45 dev pages were too few to show rare silent failures; dev even showed
+  a small TEDS gain.
+- **Decision:** accuracy runs (report headline, full benchmark) use bf16 + loop repair.
+  The fast setup is kept as an option for speed, reported with its cost.
+
+## E-022: leave page furniture out of the Markdown (2026-10-23)
+
+- **Problem:** the model writes headers, footers, page numbers and page footnotes
+  (374 blocks on the test pages); OmniDocBench sets these categories aside, and the
+  question was whether unmatched ones count as extra text.
+- **Change (no model run):** `omnidocbench.py rescore --base E-006 --drop-furniture`.
+- **Result vs E-006:** Text Edit +0.0008 [0.0001, 0.0017] (slightly worse), R-order
+  +0.0014 [-0.0010, 0.0046], tables unchanged.
+- **Reading:** the evaluator already removes predicted furniture that matches its
+  ignored ground truth; dropping the rest loses text that the ground truth counts.
+- **Decision:** rejected. Keep Baidu's post-processing.
+
+## Error analysis of the test subset (2026-10-23)
+
+- **Where the reweighted text error comes from:** newspaper (mean 0.093) and note
+  (0.095) pages, then exam papers and textbooks. **Reading order:** research reports
+  (0.267) and newspapers (0.220).
+- **Research reports:** the two worst pages score 1.0 because their ground truth has
+  a single ordered item (a table); our output split it into two tables, so nothing
+  matched. A metric quirk on near-empty pages, not a reading-order error; not pursued.
+- **Newspapers:** predicted order mostly follows the ground truth, with a few blocks
+  out of place; most damage is misread characters in small print (e.g. 安激 for 安徽).
+  Re-sorting blocks by geometry is unlikely to help; higher resolution on small print
+  is the better target.

@@ -1,0 +1,24 @@
+Loading baidu/Unlimited-OCR with MLX-VLM …
+Fetching 12 files:   0%|          | 0/12 [00:00<?, ?it/s]Fetching 12 files: 100%|██████████| 12/12 [00:00<00:00, 4474.72it/s]
+Add pad token = ['<｜▁pad▁｜>'] to the tokenizer
+<｜▁pad▁｜>:2
+Add image token = ['<image>'] to the tokenizer
+<image>:128815
+Added grounding-related tokens
+Added chat tokens
+Loaded. Processing 7 OCR request(s).
+[1/7] newspaper_02912feb79994ae24665509d964ad9ce_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_02912feb79994ae24665509d964ad9ce_1.md | 1 image(s), gundam, 8976 generated tokens, 107.3s, 86.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_02912feb79994ae24665509d964ad9ce_1.json
+[2/7] newspaper_a105e3b0ddb10be6a596f76407c79180_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_a105e3b0ddb10be6a596f76407c79180_1.md | 1 image(s), gundam, 12117 generated tokens, 148.4s, 83.5 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_a105e3b0ddb10be6a596f76407c79180_1.json
+[3/7] newspaper_c3c88b76543e2caf044c9f7689f23ec9_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_c3c88b76543e2caf044c9f7689f23ec9_1.md | 1 image(s), gundam, 7834 generated tokens, 99.2s, 81.9 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_c3c88b76543e2caf044c9f7689f23ec9_1.json
+[4/7] newspaper_e62730aaeb9b509119e0c3699ac18201_1.jpg
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_e62730aaeb9b509119e0c3699ac18201_1.md | 1 image(s), gundam, 6685 generated tokens, 81.7s, 85.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/newspaper_e62730aaeb9b509119e0c3699ac18201_1.json
+[5/7] page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.md | 1 image(s), gundam, 1331 generated tokens, 15.2s, 94.4 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64.json
+[6/7] page-ab4f331b-e8f3-41fb-ba6b-8da5ade54983.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-ab4f331b-e8f3-41fb-ba6b-8da5ade54983.md | 1 image(s), gundam, 3380 generated tokens, 36.9s, 94.3 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-ab4f331b-e8f3-41fb-ba6b-8da5ade54983.json
+[7/7] page-dad79c54-8125-4927-9988-ee1d2a139d7b.png
+DONE  /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-dad79c54-8125-4927-9988-ee1d2a139d7b.md | 1 image(s), gundam, 846 generated tokens, 13.4s, 86.2 tok/s | metrics: /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-020/raw/page-dad79c54-8125-4927-9988-ee1d2a139d7b.json
+Finished 7 complete request(s); 0 incomplete; 0 skipped.

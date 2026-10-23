@@ -11,6 +11,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DET_RE = re.compile(r"<\|det\|>([^<\s]+)(?:\s*\[[^\]]*\])?\s*<\|/det\|>(.*)", re.DOTALL)
 PAGE_RE = re.compile(r"<page>", re.IGNORECASE)
+# Block types OmniDocBench sets aside when scoring.
+PAGE_FURNITURE = ("header", "footer", "page_number", "page_footnote")
 
 
 def cut_unclosed_marker(line):
@@ -19,9 +21,10 @@ def cut_unclosed_marker(line):
 
 
 # Adapted from remove_det in the Unlimited-OCR README (github.com/baidu/Unlimited-OCR, MIT).
-def remove_det(raw, repair=False):
+def remove_det(raw, repair=False, skip=()):
     blocks = []
     cur = None
+    skipping = False
     for line in raw.splitlines():
         line = (cut_unclosed_marker(line) if repair else line).rstrip()
         if not line:
@@ -29,11 +32,14 @@ def remove_det(raw, repair=False):
         m = DET_RE.match(line)
         if m:
             category, content = m.group(1).strip(), m.group(2).strip()
-            if category == "image":
+            skipping = category in skip
+            if category == "image" or skipping:
                 continue
             if cur is not None:
                 blocks.append(cur)
             cur = [content] if content else []
+            continue
+        if skipping:
             continue
         if cur is None:
             cur = []
@@ -48,8 +54,8 @@ def split_pages(raw):
     return pages[1:] if len(pages) > 1 and not pages[0].strip() else pages
 
 
-def to_markdown(raw, repair=False):
-    return "\n\n".join(page for page in (remove_det(p, repair) for p in split_pages(raw)) if page)
+def to_markdown(raw, repair=False, skip=()):
+    return "\n\n".join(page for page in (remove_det(p, repair, skip) for p in split_pages(raw)) if page)
 
 
 def run_model(source, out_dir, extra_args=()):

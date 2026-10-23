@@ -31,6 +31,8 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 | Long-document baseline (E-003) | Done: wrong page count in 10 of 15 documents, 2 of 3 forty-page documents hit the token cap, recall 0.92 at 40 pages |
 | I-2 quantized weights (E-011 to E-015) | 8-bit + bf16 fallback kept: same accuracy as bf16, 33% less model time, peak 8.6 GB. 4-bit rejected (tables -4.7 TEDS) |
 | I-3 four experts per token (E-016) | Kept: ties bf16 + loop repair, 16% faster per page; combined with 8-bit in E-017/E-018 |
+| Fast setup on test (E-019 to E-021) | Within noise of bf16 but leaning worse, 26% faster; option only. Accuracy runs stay bf16 + loop repair |
+| Drop page furniture (E-022) | Rejected (slightly worse) |
 | I-8 page-by-page decoding for long documents (E-009, E-010) | Kept. 40 pages: edit 0.228 to 0.077, recall 0.917 to 0.968, 44% less time (Base); Gundam slightly more accurate, 19% slower |
 
 ## Baseline

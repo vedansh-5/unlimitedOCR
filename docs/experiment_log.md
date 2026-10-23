@@ -243,3 +243,10 @@ Chronological. One entry per meaningful action or decision.
 - **E-017/E-018** (8-bit + 4 experts, then bf16 fallback, dev): matches bf16 + loop
   repair (TEDS +0.9 [0.04, 1.9]), 38% less model time. Candidate final setup.
 - **E-019/E-020** started: final setup on the 140-page test subset, about 30 min.
+- **E-019 to E-021** (fast setup on test): worse before fallback; with fallback and a
+  new empty-page rule, within noise of bf16 but leaning worse, 26% faster. Decision:
+  bf16 + loop repair for accuracy runs; fast setup as a speed option.
+- **E-022** (drop page furniture): slightly worse. Rejected.
+- **Error analysis:** newspapers and notes dominate text error; worst reading-order
+  pages are a metric quirk (single-item pages). Next idea: higher resolution for small
+  print.
