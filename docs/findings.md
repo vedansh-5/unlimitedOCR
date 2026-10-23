@@ -495,3 +495,25 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   loops.
 - **Decision:** reject 4-bit. Keep 8-bit with bf16 fallback (E-013): it is the only
   setting whose paired intervals all contain zero.
+
+## E-016: I-3 four experts per token on the dev subset (2026-10-23)
+
+- **Problem:** routed experts are most of the work per output token (6 of 64 per token
+  in each of 11 MoE layers).
+- **Change (one variable against E-004):** `--experts-per-token 4`: the gate keeps the
+  4 highest-scoring experts instead of 6. Weights unchanged; scores not renormalized,
+  as in the model's own routing.
+- **Hypothesis:** about 15% faster decoding with no measurable accuracy loss.
+- **Result vs E-004 (paired):** Text Edit -0.006 [-0.015, -0.000], R-order -0.002
+  [-0.006, 0.000], TEDS +0.7 [-0.1, 1.7]. The Daily Star page did not loop, which is
+  most of the text gain.
+- **Result vs E-005 (bf16 + loop repair, the fair reference):** Text Edit +0.002
+  [-0.005, 0.012], R-order +0.001 [-0.006, 0.009], TEDS +0.7 [-0.1, 1.7]. All intervals
+  contain zero. One page is clearly worse: the Daily Star page scores 0.26 worse than
+  its repaired bf16 version (no loop, so nothing flags it). All other pages moved by
+  0.06 or less, in both directions.
+- **Speed:** median page 13.5 s to 11.3 s (-16%), output 90 to 104 tokens/s; model time
+  740 s to 661 s against E-005.
+- **Decision:** keep 4 experts (no measurable loss, modest gain). 5 experts not run:
+  4 already shows no loss, so 5 could only save less time. Next: combine with 8-bit
+  on dev (E-017) before the final test run.

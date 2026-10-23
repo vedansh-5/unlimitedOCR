@@ -1,0 +1,20 @@
+<|det|>page_number [37, 31, 54, 40]<|/det|>28
+<|det|>header [68, 29, 132, 50]<|/det|>Asia
+<|det|>header [702, 28, 931, 40]<|/det|>The Economist December 2nd 2023
+<|det|>image [62, 85, 937, 491]<|/det|>
+<|det|>title [60, 504, 206, 518]<|/det|>Indian military power
+<|det|>title [59, 521, 347, 548]<|/det|>Gunning for the top
+<|det|>title [58, 615, 567, 631]<|/det|>India's military modernisation is promising, but China is still far ahead
+<|det|>text [57, 637, 342, 795]<|/det|>NARENDRA MODI, India's prime minister, often don't fatigue while visiting troops in Kashmir. On November 25th he went one better by squeezing into a flight suit and taking a sortie over Bangalore in Tejas fighter jet. The Indian-designed plane embodies Mr Modi's push for India to make more of its own weapons. It also embodies much of what has gone wrong with the country's defence. The jet is 20 years behind schedule, underpowered, and disdained by Indian pilots.
+<|det|>text [57, 796, 342, 968]<|/det|>India's growing geopolitical clout is based in large part on a hope that it can balance Chinese power. That makes the modernisation of the partly antiquated Indian armed forces—the second biggest of any country, with 1.4m full-time personnel—a matter of global interest. Follies like the Tejas make it easy to be pessimistic. The forces are also heavily reliant on Soviet-legacy hardware. Successful modernisation, assuming it happens, is likely to take decades. Yet a close look at India's defence efforts reveals several areas of significant
+<|det|>text [357, 637, 603, 651]<|/det|>and underappreciated progress.
+<|det|>text [356, 651, 643, 824]<|/det|>This starts with a striking shift in focus. Indian leaders have talked about China as the main enemy for 25 years. But deployments told a different story. Only 12 of the Indian army's 38 divisions historically faced China. Terrorist attacks emanating from Pakistan and domestic insurgencies absorbed most of the army's attention. The trigger for change came in June 2020 when, after years of rising tensions, Indian and Chinese troops clashed violently, with clubs and machetes, in the Galwan valley in the mountains of eastern Ladakh.
+<|det|>title [371, 849, 516, 862]<|/det|>→ Also in this section
+<|det|>text [368, 869, 562, 882]<|/det|>30 Monument wars in India...
+<|det|>text [370, 888, 509, 901]<|/det|>31 ...and in Sri Lanka
+<|det|>text [370, 908, 504, 921]<|/det|>31 Taiwan's election
+<|det|>text [369, 928, 542, 942]<|/det|>32 Japanese baby-making
+<|det|>text [370, 948, 494, 961]<|/det|>— Banyan is away
+<|det|>text [655, 504, 941, 649]<|/det|>After that skirmish, which resulted in the deaths of 20 Indian soldiers and at least four Chinese ones, India swiftly moved 68,000 troops and a bevy of tanks to the area, where a lone infantry division had previously covered 800km (500 miles) of front line. Jets and helicopters were sent to northern bases. A push for new roads, tunnels and bridges was accelerated—60% of border roads built in the past three years have been in states bordering China.
+<|det|>text [655, 649, 941, 821]<|/det|>The most important change was that units which were once “dual-tasked”—in-structured to keep an eye on both China and Pakistan—were told to focus on China. The Indian Army’s I Corps—one of the three armour-heavy “strike corps” originally built to scythe through Pakistan—was taken away from the Pakistan-facing western command and placed under the northern command, responsible for Ladakh. “I spent two-thirds of my career looking at Pakistan,” says Raj Shukla, a retired general. “Today the posture reflects the threat.”
+<|det|>text [655, 821, 941, 968]<|/det|>The second change is the biggest re-organisation of India's military command structure since the country's independence in 1947. In 2020, six months before Galwan, Mr Modi created a new post: a chief of defence staff, or CDS, to sit above the army, navy and air-force chiefs and push them to become more joined up. Previous governments had shied away from this move, fearing that a too powerful general would threaten civilian supremacy.

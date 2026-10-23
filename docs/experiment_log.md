@@ -238,3 +238,5 @@ Chronological. One entry per meaningful action or decision.
   but tables lose 4.7 TEDS with an interval excluding zero, from pages that do not
   loop. Rejected. Retry now also flags pages cut off at the token cap (gap found
   here).
+- **E-016** (4 experts per token, bf16, dev): ties bf16 + loop repair on every metric,
+  16% faster per page. Kept. 5 experts skipped (dominated).

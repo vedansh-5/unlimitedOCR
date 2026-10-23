@@ -86,8 +86,8 @@ released weights. Each is tested alone against a baseline (section 4).
 | I-6 | Cut unclosed `<\|det\|>` markers in post-processing | A loop cut off by the token cap can leave a marker open, which leaks into the Markdown | Kept as an output option; no score effect |
 | I-1L | Re-run flagged pages of a long document alone and splice them back in place | Targets the paper's stated long-document failure | Dropped: the model adds or drops pages (5.3), so position no longer identifies a page |
 | I-8 | Decode long documents one page per request and join the outputs | Removes page bookkeeping and the output-token cap from the model's job; each token attends to one page's prefix | Kept (5.3) |
-| I-2 | 8-bit and 4-bit weights for the decoder (vision encoders kept in bf16) | Decoding is memory-bandwidth bound; fewer bytes per weight should raise tokens/s and lower peak memory on a 16 GB machine | Code ready |
-| I-3 | 4 or 5 routed experts per token instead of 6 | Routed experts are most of the work per token; experts are picked by softmax score, so the dropped ones carry the least weight | Code ready |
+| I-2 | 8-bit and 4-bit weights for the decoder (vision encoders kept in bf16) | Decoding is memory-bandwidth bound; fewer bytes per weight should raise tokens/s and lower peak memory on a 16 GB machine | 8-bit kept with bf16 fallback on flagged pages; 4-bit rejected (5.4) |
+| I-3 | 4 or 5 routed experts per token instead of 6 | Routed experts are most of the work per token; experts are picked by softmax score, so the dropped ones carry the least weight | 4 experts kept on dev (E-016); 5 not run |
 | I-7 | Route pages with small text to Gundam mode before decoding | Targets the paper's stated cause of long-document errors before it happens, instead of repairing after | Planned |
 
 ## 4. Experimental setup [verified]
