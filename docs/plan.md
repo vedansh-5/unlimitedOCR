@@ -171,7 +171,7 @@ the test subset (E-002) only if kept.
 ### CPU-only work (no runs, fits between runs)
 
 - `compare.py`: paired bootstrap of per-page differences between two experiments, so
-  each "better" or "worse" comes with a confidence interval.
+  each "better" or "worse" comes with a confidence interval. **Done (R-004).**
 - `make_tables.py`: builds the report's tables and plots straight from `results/`, so
   no number is typed by hand.
 - Report sections 3 (method) and 6 (discussion) from the findings so far.

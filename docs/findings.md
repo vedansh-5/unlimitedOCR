@@ -292,3 +292,33 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
 - **Decision:** keep the option (it makes the Markdown clean for users) but it is not a
   benchmark improvement; not counted as one in the report. Dev has no broken markers,
   so there is nothing to measure there.
+
+## R-004: reweighted scores and paired differences from code (2026-10-23)
+
+- **Problem:** the reweighted E-002 scores and their intervals in `report.md` were
+  computed by a one-off script that was not saved, so they could not be regenerated.
+  Changes were also judged by comparing two separate means, which hides how much of
+  the difference is noise.
+- **Change:** `compare.py score` (reweighted mean and 95% stratified bootstrap
+  interval per metric, written to `stats.json`) and `compare.py diff` (the same for
+  per-page differences between two experiments on the same pages, written to
+  `diff_vs_<base>.json`). Same method as before: per-type means weighted by the full
+  benchmark's type counts, 2,000 resamples within type, `random.Random(0)`.
+- **Check:** `compare.py score --exp E-002` reproduces every number in the report
+  exactly (Text Edit 0.0362 [0.0243, 0.0510], R-order 0.1069 [0.0784, 0.1425],
+  TEDS 92.37 [88.69, 95.67]).
+- **Paired results so far (after minus before, reweighted):**
+
+| Change | Subset | Text Edit diff [95% CI] | R-order diff [95% CI] | TEDS diff |
+|---|---|---|---|---|
+| I-1 loop repair (E-005 vs E-004) | dev, 45 | -0.0084 [-0.0252, 0.0000] | -0.0031 [-0.0092, 0.0000] | 0 |
+| I-1 loop repair (E-006 vs E-002) | test, 140 | -0.0000 [-0.0000, 0.0000] | +0.0001 [0.0000, 0.0004] | 0 |
+| I-6 marker repair (E-007 vs E-006) | test, 140 | 0.0000 | -0.0001 [-0.0004, 0.0000] | 0 |
+
+- **Reading:** I-1 changes one dev page a lot and nothing else, so the interval touches
+  zero (resamples that miss that page show no change). The test pages it changes are
+  historical documents, which are 5 of 1,651 pages in the full set and so carry almost
+  no weight. I-1 is a fix for a rare failure, not a measurable gain in the average;
+  the report says so.
+- **Decision:** all future comparisons use `compare.py diff`; a change counts as an
+  improvement only if its interval excludes zero.

@@ -197,3 +197,13 @@ Chronological. One entry per meaningful action or decision.
   metric. Kept as an output-cleaning option, not reported as an improvement.
 - **Correction:** E-006 per-page values were first attributed to the wrong pages;
   fixed after re-checking by page name. Totals unchanged.
+
+## 2026-10-23 (morning): E-003 started, compare.py, I-1L code
+
+- **E-003** (long-document baseline, 15 NIST prefixes, defaults) started.
+- **compare.py** added (R-004). Reproduces the report's E-002 numbers exactly. Paired
+  differences for I-1 and I-6 recorded in findings.
+- **I-1L code:** `long_docs.py retry --base E-003` flags missing, looping, cut-off and
+  empty pages from the base run's output (never from the reference), renders each
+  flagged page at 300 dpi, re-runs them in one model call (gundam mode, single page),
+  and splices them back in place. Tests for flagging and splicing.
