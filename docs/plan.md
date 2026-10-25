@@ -198,7 +198,8 @@ model runs stay under 8 GB (`--memory-limit-gb 7.5`).
    the retry flagged and whether it fixed them, pages with no flag that still fail
    badly (silent failures), and the per-type table against the paper's Table 2.
 3. **Model-free fixes** found in step 2, checked with `omnidocbench.py rescore` and
-   `compare.py diff` against E-028.
+   `compare.py diff` against E-028. Every fix idea, its target pages and its status
+   are kept in `fixes.md`.
 4. **Targeted re-runs** of only the pages a new detector flags (under the cap), the same
    way loop repair works.
 5. **Speed record:** E-008 (decode speed over a long request, `--log-speed`) and I-5
