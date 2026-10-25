@@ -13,3 +13,4 @@ results/*/eval_cdm/result/*_table_result.json
 results/*/eval_cdm/result/*_display_formula_result.json
 results/*/eval_cdm/result/*_reading_order_result.json
 results/*/eval_cdm/result/*_display_formula/
+results/match_cache/

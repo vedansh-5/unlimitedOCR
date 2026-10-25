@@ -19,6 +19,8 @@ MIN_TEXT_CHARS = 20
 DATASET_REVISION = "aa1ee96d106dbe53d0ae59474d75c6e6d9b53fec"
 EVALUATOR = ROOT / "unlimitedOCRvenv" / "third_party" / "OmniDocBench"
 EVALUATOR_PYTHON = ROOT / "unlimitedOCRvenv" / "omnidocbench-env" / "bin" / "python"
+# Per-page matches shared by all experiments; keyed by content, so a changed page is matched again.
+MATCH_CACHE = ROOT / "results" / "match_cache"
 
 
 def ground_truth():
@@ -176,7 +178,7 @@ def cmd_evaluate(args, out):
     eval_dir = out / "eval"
     (eval_dir / "result").mkdir(parents=True, exist_ok=True)
     (eval_dir / "config.yaml").write_text(yaml.safe_dump(config, sort_keys=False))
-    cmd = [str(EVALUATOR_PYTHON), str(EVALUATOR / "pdf_validation.py"), "--config", "config.yaml"]
+    cmd = [str(EVALUATOR_PYTHON), str(ROOT / "match_cache.py"), str(EVALUATOR), str(MATCH_CACHE), "--config", "config.yaml"]
     with (eval_dir / "evaluate.log").open("w") as log:
         return subprocess.run(cmd, cwd=eval_dir, stdout=log, stderr=subprocess.STDOUT).returncode
 
