@@ -40,8 +40,19 @@ and `newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018`.
 **P-3: the Daily Star crossword page.** Under the memory cap its fallback writes the
 grid as an endless table of empty cells and hits the token cap (E-029).
 
-**P-4: worst pages per type** from the error analysis of E-028. To fill in once its
-scores are in.
+**P-4: the 36 pages with Text Edit 0.5 or worse in E-028.** They are 2% of the pages
+and carry 37% of the text error; without them the mean is 0.033 instead of 0.051.
+Fifteen are newspapers. The list comes from
+`eval/result/pred_quick_match_text_block_per_page_edit.json` (pages at 0.5 or above).
+Most overlap P-1.
+
+**P-5: test pages that got worse under the memory cap.** On the 140 test pages E-028 is
+0.014 worse than E-006. Four pages make up the gap:
+`newspaper_e62730aaeb9b509119e0c3699ac18201_1` (stops early),
+`newspaper_02912feb79994ae24665509d964ad9ce_1` (`[Non-Text]` loop, the retry made it longer),
+`newspaper_a105e3b0ddb10be6a596f76407c79180_1` (loop, unchanged by the retry), and
+textbook page 055 of the 人教新起点英语5A set (cut short). They show whether a fix
+recovers what the cap lost.
 
 ## Scoring (no effect on scores)
 

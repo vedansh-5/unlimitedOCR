@@ -1,0 +1,16 @@
+<|det|>title [68, 55, 280, 73]<|/det|>[PDF] No Safe Place
+<|det|>image [70, 82, 160, 171]<|/det|>
+<|det|>text [161, 88, 932, 158]<|/det|>There's nothing more dangerous than a familiar face... As funeral mourners stand in silence at Ragmullin cemetery, a deafening cry cuts through the air. Lying crumpled at the bottom of an open grave is the bloodied body of a young woman, and Detective Lottie Parker is called in to investi... Read More...
+<|det|>title [68, 217, 485, 236]<|/det|>[PDF] Portrait of an Unknown Woman
+<|det|>image [73, 244, 163, 337]<|/det|>
+<|det|>text [163, 248, 931, 318]<|/det|>In a spellbinding new masterpiece by #1 New York Times bestselling author Daniel Silva, Gabriel Allon undertakes a high-stakes search for the greatest art forger who ever lived Legendary spy and art restorer Gabriel Allon has at long last severed ties with Israeli intelligence and settled quietly in... Read More...
+<|det|>title [68, 378, 280, 396]<|/det|>[PDF] The 6:20 Man
+<|det|>image [70, 404, 163, 500]<|/det|>
+<|det|>text [163, 410, 931, 480]<|/det|>A cryptic murder pulls a former soldier turned financial analyst deep into the corruption and menace that prowl beneath the opulent world of finance, in this #1 New York Times bestselling thriller from David Baldacci. Every day without fail, Travis Devine puts on a cheap suit, grabs his faux-leather... Read More...
+<|det|>title [68, 539, 297, 557]<|/det|>[PDF] It Ends with Us
+<|det|>image [70, 566, 163, 660]<|/det|>
+<|det|>text [163, 572, 931, 641]<|/det|>In this “brave and heartbreaking novel that digs its claws into you and doesn’t let go, long after you’ve finished it” (Anna Todd, New York Times bestselling author) from the #1 New York Times bestselling author of All Your Perfects, a workaholic with a too-good-to-be-true romance can’t stop th... Read More...
+<|det|>title [68, 701, 270, 721]<|/det|>[PDF] Thunder Bay
+<|det|>image [70, 725, 163, 822]<|/det|>
+<|det|>text [163, 733, 931, 802]<|/det|>Stoirm Island's secrets are worth killing for in this immersive, unrelenting thriller for readers of All the Missing Girls and Neon Prey —"this crime novel has it all" (Publishers Weekly, starred review). When reporter Rebecca Connolly gets a tip that suspected murderer Roddie Drummond ... Read More...
+<|det|>footer [68, 956, 222, 969]<|/det|>PDF File: Eating Purely

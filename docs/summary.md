@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-23, afternoon (after E-010)
+Last updated: 2026-10-26 (after the full run, E-028)
 
 ## Objective
 
@@ -12,7 +12,7 @@ the improvement can be measured fairly.
 
 Scope: no training. The released weights are used as published.
 
-Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper within sampling error (E-002). Long documents measured (E-003) and improved by decoding page by page (E-009, E-010). Next: speed changes (I-2 quantization, I-3 fewer experts) on the dev subset.
+Full run done (E-028, 1,651 pages, under the 8 GB cap, no CDM): Text Edit 0.051, TEDS 87.8, R-order 0.137, worse than the paper (0.042, 90.2, 0.129); 36 pages, mostly loops, carry 37% of the text error. Fixes for them are in `fixes.md`. Earlier: on 140 OmniDocBench v1.6 pages the Mac setup matched the paper within sampling error (E-002). Long documents measured (E-003) and improved by decoding page by page (E-009, E-010). Next: speed changes (I-2 quantization, I-3 fewer experts) on the dev subset.
 
 | Item | State |
 |---|---|
@@ -40,6 +40,7 @@ Baseline done: on 140 OmniDocBench v1.6 pages the Mac setup matches the paper wi
 | Source | OmniDocBench v1.5 overall | v1.6 overall | Long-doc 40+ pages edit distance |
 |---|---|---|---|
 | Paper (A800 GPUs, reported) | 93.23 | 93.92 | 0.1069 |
+| This project, full run E-028 (1,651 pages, 8 GB cap) | not measured | Text Edit 0.051, TEDS 87.8, R-order 0.137 (CDM and Overall not measured) | - |
 | This project (M5, MLX), E-002 / E-003 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | 0.228 (NIST, text-layer reference; not comparable) |
 
 ## Best result so far

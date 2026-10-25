@@ -1,0 +1,17 @@
+1651 pages -> /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/subset.txt
+1651 images in /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/inputs
+=== resumed Fri Oct 23 23:36:13 IST 2026 ===
+1651 pages -> /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/subset.txt
+1651 images in /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/inputs
+=== restart Sat Oct 24 12:32:40 IST 2026 ===
+1651 pages -> /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/subset.txt
+1651 images in /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/inputs
+exit 2; 1083 pages predicted
+34 flagged pages re-run, the rest copied from E-027
+exit 3; 1083 pages predicted
+=== restart Sat Oct 24 18:37:19 IST 2026 ===
+1651 pages -> /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/subset.txt
+1651 images in /Users/vedansh/Codes/Projects/unlimitedOCR/results/E-027/inputs
+exit 3; 1651 pages predicted
+50 flagged pages re-run, the rest copied from E-027
+exit 3; 1651 pages predicted

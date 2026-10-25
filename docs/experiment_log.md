@@ -260,3 +260,13 @@ Chronological. One entry per meaningful action or decision.
   (`results/E-027/run.sh`): select all 1,651 pages, fetch, predict with the cap, retry
   flagged pages (E-028), local evaluation, then CDM in Docker.
 - **Restarted** the full run after making image fetching parallel (8 at a time); the first start was downloading about 30 images a minute.
+- **Stops and resumes** (user requests): scoring has no saved progress, so the first stop
+  lost 3 h of matching. Added `match_cache.py` (per-page match cache). The last two pages
+  then took over an hour: the evaluator starts a fresh Python process for every
+  LaTeX-to-text call, about 2 s each on macOS, and both pages are counting loops. Short
+  formulas are now converted in place and results kept: E-004 rescored in 13 s instead of
+  4 min 19 s, result files identical.
+- **E-028 scored** (1,651 pages, no CDM): Text Edit 0.051, TEDS 87.8, TEDS-S 91.5,
+  R-order 0.137. Worse than the paper (0.042, 90.2, 93.3, 0.129) and worse than our
+  140-page test runs on the same pages (+0.014 Text Edit). 36 pages scoring 0.5 or worse
+  carry 37% of the text error. CDM deferred by the user. Fix ideas in `fixes.md`.

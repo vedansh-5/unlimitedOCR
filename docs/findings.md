@@ -652,3 +652,28 @@ for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
   image (`ghcr.io/zeng-weijun/omnidocbench-eval:repro-ubuntu2204`, the versions its
   README verifies) with the container held at 6 GB and 2 CDM workers. It runs only
   after the model has finished, so the two never add up.
+
+## E-028: Full OmniDocBench v1.6, 1,651 pages (2026-10-26)
+
+- **Setup:** bf16 under the 7.5 GB cap (E-027), then loop repair with the
+  coordinate-blind guard on the 50 flagged pages (E-028). Official evaluator at
+  `f133a71`, no formula CDM, so no Overall score.
+- **Headline (evaluator):** Text Edit 0.051, Table TEDS 87.8, TEDS-S 91.5, Reading-order
+  Edit 0.137. `compare.py score` (95% bootstrap): Text Edit 0.050 [0.044, 0.057],
+  R-order 0.137 [0.125, 0.149], TEDS 87.8 [85.9, 89.7], TEDS-S 91.5 [89.7, 93.0].
+- **Against the paper (v1.6):** Text Edit 0.042, TEDS 90.2, TEDS-S 93.3, R-order 0.129.
+  The paper's Text Edit and TEDS fall outside our intervals; reading order is inside.
+- **Against our test runs, same 137 pages** (`compare.py diff --base E-006`): Text Edit
+  +0.014 [0.003, 0.027], R-order +0.010 [0.002, 0.021], tables unchanged. 111 of 137
+  pages have identical Markdown. Four pages make up the gap: three newspapers that now
+  loop or stop early (+0.64, +0.56, +0.54) and a textbook page cut short (+0.46). The
+  memory cap changes rounding (E-026), and these fragile pages tip under it. So the
+  140-page estimate (0.036) was low partly by chance and partly because of the cap.
+- **Where the error is:** newspapers carry 25% of the text error (151 pages, mean 0.131).
+  36 pages (2%) score 0.5 or worse and carry 37% of it; without them the mean is
+  0.033. Most of those 36 are loops, including counting loops that the retry's guard
+  does not stop (`fixes.md`, P-1, P-2).
+- **Cost:** 10.4 h of model time for the 1,651 pages (22.6 s per page), plus 0.5 h of
+  retries; peak MLX memory 7.74 GB; 14 pages still end at the token cap.
+- **Scoring on macOS:** see `fixes.md` S-1 and S-2. With both, a full rescore that only
+  changes a few pages takes minutes, not 7 hours.
