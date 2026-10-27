@@ -130,9 +130,15 @@ def cmd_retry(args, out, extra):
     candidates = [
         md for md in (out / "raw").glob("*.md")
         if any(md.stem == Path(n).stem for n in retried)
-        and (is_cut_short_or_misclassified(md.read_text(encoding="utf-8")) or is_loop(md.read_text(encoding="utf-8")))
+        and should_fallback_to_base(md.read_text(encoding="utf-8"))
     ]
     if candidates:
+        raw_gundam = out / "raw_gundam"
+        raw_gundam.mkdir(exist_ok=True)
+        for md in candidates:
+            for f in (md, md.with_suffix(".json")):
+                if f.exists():
+                    shutil.copy(f, raw_gundam / f.name)
         base_inputs = out / "inputs_base"
         base_inputs.mkdir(exist_ok=True)
         for md in candidates:
@@ -142,6 +148,16 @@ def cmd_retry(args, out, extra):
         print(f"{len(candidates)} looping or cut-short pages retried in base mode")
         run_images(base_inputs, out, [*extra, "--mode", "base", "--overwrite"])
     return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines, args.unwrap_prose_tables)
+
+
+def should_fallback_to_base(raw, max_chars_for_base=500):
+    if is_cut_short_or_misclassified(raw):
+        return True
+    categories = re.findall(r"<\|det\|>([^<\s]+)", raw)
+    body_cats = {"text", "title", "table", "equation"}
+    if not any(c in body_cats for c in categories):
+        return True
+    return len(to_markdown(raw)) < max_chars_for_base and is_loop(raw)
 
 
 def is_cut_short_or_misclassified(raw, min_chars=120):

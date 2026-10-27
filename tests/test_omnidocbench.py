@@ -125,3 +125,37 @@ def test_is_cut_short_or_misclassified_flags_aside_only_and_slide_pages():
     assert not is_cut_short_or_misclassified(valid_doc)
 
 
+def test_should_fallback_to_base_guards_dense_looping_pages():
+    from omnidocbench import should_fallback_to_base
+
+    # Long page with a small loop at the end: must NOT fall back to Base
+    long_with_loop = (
+        "<|det|>text [1, 2, 3, 4]<|/det|>"
+        + ("Detailed paragraph of valid prose text explaining something at length. " * 15)
+        + "\n"
+        + "\n".join(f"<|det|>text [5, {i}, 7, 8]<|/det|>looping margin phrase" for i in range(8))
+    )
+    assert not should_fallback_to_base(long_with_loop)
+
+    # Short page that loops: must fall back to Base
+    short_loop = "\n".join(f"<|det|>text [1, {i}, 3, 4]<|/det|>short loop" for i in range(8))
+    assert should_fallback_to_base(short_loop)
+
+    # Empty page (e.g. misclassified PPT slide image): must fall back to Base
+    empty_page = "<|det|>image [0, 0, 999, 999]<|/det|>\n"
+    assert should_fallback_to_base(empty_page)
+
+    # Aside-only page (e.g. exam paper margin text): must fall back to Base
+    aside_page = "<|det|>aside_text [0, 0, 51, 999]<|/det|>学校 班级 姓名 密封线"
+    assert should_fallback_to_base(aside_page)
+
+    # Long page with only aside_text tags (e.g. jiaocai_2839 math margin loop): must fall back to Base
+    long_aside_only = "\n".join(
+        f"<|det|>aside_text [80, 0, 95, 7]<|/det|>\\( \\therefore m=\\frac{{{i}}}{{11}} \\)"
+        for i in range(50)
+    )
+    assert should_fallback_to_base(long_aside_only)
+
+
+
+
