@@ -298,4 +298,48 @@ Chronological. One entry per meaningful action or decision.
   2 s total. Diff vs E-030 baseline: Text Edit -0.1845 [-0.3272, -0.0613] (0.6846 -> 0.5001),
   Reading-order Edit -0.1300 [-0.2386, -0.0227] (0.5910 -> 0.4610). PPT2PDF text edit halved
   from 0.9595 to 0.5448. Kept.
+- **E-044** (I-16 table splitting and repeat truncation on problem set): rescored E-043 with
+  `--split-merged-tables` and `--cut-repeated-lines`.
+  - Paired page average (`compare.py score` / `stats.json`): Text Edit 0.5001 [0.3788, 0.6244] (n=46),
+    Reading-order Edit 0.4339 [0.3309, 0.5375] (n=49), Table TEDS 35.3780 [23.0574, 47.5578] (n=22),
+    Table TEDS-S 43.1911 [29.3837, 56.6922] (n=22).
+  - Pooled headline (`summary.json`): Text Edit 0.5704, Reading-order Edit 0.5395, Table TEDS 36.2346,
+    Table TEDS-S 43.2008.
+  - Diff vs E-030 baseline (`compare.py diff`): Text Edit -0.1845 [-0.3272, -0.0613] (n=46),
+    Reading-order Edit -0.1546 [-0.2610, -0.0460] (n=49), Table TEDS +6.9037 [1.1431, 14.0382] (n=22),
+    Table TEDS-S +7.9539 [1.4837, 14.9912] (n=22).
+  - Diff vs E-043: Table TEDS +5.6750 [0.3703, 12.6512] (n=22), Reading-order Edit -0.0246 [-0.0490, -0.0058] (n=49). Kept.
+- **E-045** (I-16 table splitting and repeat truncation on 45-page dev subset): rescored E-041 with
+  `--split-merged-tables` and `--cut-repeated-lines`.
+  - Paired page average (`compare.py score`): Text Edit 0.0542 [0.0209, 0.0984] (n=44),
+    Reading-order Edit 0.1251 [0.0696, 0.1920] (n=45), Table TEDS 93.5020 [89.4641, 96.7235] (n=17),
+    Table TEDS-S 95.5853 [91.4287, 98.6931] (n=17).
+  - Pooled headline (`summary.json`): Text Edit 0.0574, Reading-order Edit 0.1317, Table TEDS 93.5020,
+    Table TEDS-S 95.5853.
+  - Diff vs E-041: 0.0000 across Text Edit [0.0, 0.0] (n=44), Reading order [0.0, 0.0] (n=45),
+    Table TEDS [0.0, 0.0] (n=17), Table TEDS-S [0.0, 0.0] (n=17). Zero regressions on normal pages. Kept.
+- **E-046** (margin cut-short detection and Base ladder fallback on problem set): retried flagged pages from E-044
+  with `is_cut_short_or_misclassified` and `box_repeats`, falling back to Base mode for cut-short/looping pages.
+  Exam papers recovered (jiaocai_1349 from 58 chars to 2,037 chars; jiaocai_2839 from math loop to 1,629 tokens).
+  - Paired page average (`compare.py score` / `stats.json`): Text Edit 0.4380 [0.3060, 0.5640] (n=46),
+    Reading-order Edit 0.3926 [0.2929, 0.4880] (n=49), Table TEDS 40.3413 [26.6773, 54.6423] (n=22),
+    Table TEDS-S 48.1757 [34.4286, 62.2959] (n=22).
+  - Pooled headline (`summary.json`): Text Edit 0.5673, Reading-order Edit 0.5406, Table TEDS 40.3413,
+    Table TEDS-S 48.1757.
+  - Diff vs E-030 baseline (`compare.py diff`): Text Edit -0.2466 [-0.4010, -0.0949] (n=46),
+    Reading-order Edit -0.1985 [-0.3160, -0.0788] (n=49), Table TEDS +11.0104 [-4.9907, 26.7591] (n=22),
+    Table TEDS-S +12.9288 [-1.6990, 28.5820] (n=22).
+  - Diff vs E-044: Text Edit -0.0621 [-0.1041, 0.0072] (n=46), Table TEDS +4.1067 [-9.9685, 19.2624] (n=22). Kept.
+- **E-047** (single-row prose table unwrapping on problem set): rescored E-046 with `--unwrap-prose-tables`.
+  Abstract and bibliography entries wrapped in 1-row fake tables unwrapped back to plain paragraphs.
+  - Paired page average (`compare.py score` / `stats.json`): Text Edit 0.4076 [0.2827, 0.5306] (n=46),
+    Reading-order Edit 0.3709 [0.2800, 0.4628] (n=49), Table TEDS 40.3413 [26.6773, 54.6423] (n=22),
+    Table TEDS-S 48.1757 [34.4286, 62.2959] (n=22).
+  - Pooled headline (`summary.json`): Text Edit 0.5470, Reading-order Edit 0.5202, Table TEDS 40.3413,
+    Table TEDS-S 48.1757.
+  - Diff vs E-030 baseline (`compare.py diff`): Text Edit -0.2770 [-0.4328, -0.1269] (n=46),
+    Reading-order Edit -0.2202 [-0.3401, -0.0946] (n=49), Table TEDS +11.0104 [-4.9907, 26.7591] (n=22),
+    Table TEDS-S +12.9288 [-1.6990, 28.5820] (n=22).
+  - Diff vs E-046: Text Edit -0.0304 [-0.0911, 0.0] (n=46), Reading-order Edit -0.0217 [-0.0651, 0.0] (n=49),
+    Table TEDS 0.0000 (n=22). Academic literature text edit dropped from 0.4110 to 0.1778. Kept.
 

@@ -786,5 +786,30 @@ for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
   - PPT2PDF text edit dropped from 0.9595 to 0.5448.
 - **Decision:** keep.
 
+## Bug A: Base-ladder regression on dense documents (2026-10-27)
+
+- **Problem:** in E-046, `cmd_retry` in `omnidocbench.py` routed any retried page that
+  still triggered `is_loop()` into Base mode (`--mode base`). While effective for
+  near-empty presentation slides, Base mode downsizes the entire canvas to 1024x1024
+  without cropping (`cropping=False`).
+- **Impact on newspapers:** broadsheet newspapers are high-resolution scans (typically
+  2800x4734 px) with tiny fonts across 4 to 6 columns. Downsampling without cropping turns
+  the text into illegible noise. The model either hallucinates boilerplate Chinese financial
+  text or outputs that the image is too blurry.
+- **Specific regressions:** four newspaper pages that scored reasonably in Gundam mode
+  suffered severe regressions when forced into Base mode:
+  1. `newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025`: Text Edit worsened
+     from 0.2089 (E-030 Gundam) to 0.9428 (E-047 Base).
+  2. `newspaper_TheWashingtonPost-2025-01-08@magazinesclubnew_page_042`: Text Edit worsened
+     from 0.6534 (E-030 Gundam) to 0.9887 (E-047 Base).
+  3. `newspaper_b615618f3cdb0f2c13ffb5865dea799c_1`: Text Edit worsened from 0.5289 (E-030
+     Gundam) to 0.9146 (E-047 Base).
+  4. `newspaper_ef5c785d9cc21ccf6b73d143f231b5c5_1`: Text Edit worsened from 0.6883 (E-030
+     Gundam) to 0.9709 (E-047 Base).
+- **Lesson:** high-density documents that generate hundreds of characters must never fall
+  back to Base mode simply because they contain a localized phrase repetition loop. Base mode
+  must be guarded to only accept truly cut-short or misclassified pages.
+
+
 
 
