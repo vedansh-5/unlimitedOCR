@@ -90,14 +90,14 @@ two, see the error analysis in `findings.md`). Listed by
 
 | ID | Change | Targets | Status |
 |---|---|---|---|
-| I-9 | Cut counting loops in the Markdown: find a block that repeats with only its numbers changing, keep the first few repeats, drop the rest | P-1, P-2 | Idea. Try on P-1, then rescore E-028 in full (cheap with S-1 and S-2) |
-| I-10 | Cut runaway empty tables: a table that goes on with rows of empty cells past the point where the page could hold them | P-3 | Idea |
+| I-9 | Cut counting loops in the Markdown: find a block that repeats with only its numbers changing, keep the first few repeats, drop the rest | P-1, P-2 | Done / kept. Tested in E-031 on problem set (Text Edit -0.0024 [-0.0057, 0.0000]) and E-034 full run |
+| I-10 | Cut runaway empty tables: a table that goes on with rows of empty cells past the point where the page could hold them | P-3 | Done / kept. Tested in E-032 on problem set (Daily Star -0.6282, Text Edit -0.0032 [-0.0096, 0.0000]), E-033 dev (-0.0115), and E-034 full run |
 
 ## Accuracy, model run on flagged pages only
 
 | ID | Change | Targets | Status |
 |---|---|---|---|
-| I-11 | Number-blind loop check and repeat guard: `loops.py` and `--content-guard` treat digits as equal, so counting loops are flagged for the retry and blocked during it | P-1, P-2; also the two never flagged | Idea. Retry P-1 only, then dev |
+| I-11 | Number-blind loop check and repeat guard: `loops.py` and `--content-guard` treat digits as equal, so counting loops are flagged for the retry and blocked during it | P-1, P-2; also the two never flagged | Code done and tested. Adds 8 newly flagged pages in E-028 (57 vs 49); flags 22 pages in the 50-page problem set. Awaiting run go |
 | I-12 | Retry looping pages in the other resolution mode (Base for Gundam) and keep the reading that does not loop | P-1 | Idea. The paper blames resolution for loops |
 | I-13 | Retry ladder: a flagged page tries the guard, then the other mode (I-12), then split reading (I-14), and keeps the first reading that passes the checks (no loop, not cut short, not at the token cap) | P-4, P-5 | Idea. Needs I-11, I-15 first |
 | I-14 | Split reading for dense pages: cut the page into overlapping strips or columns, read each, join in order. Each piece has fewer, larger characters and its own token budget | Newspapers (25% of the text error), the 14 pages still at the token cap | Idea. Join order and overlap removal are the hard part |

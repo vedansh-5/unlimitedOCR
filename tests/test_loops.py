@@ -1,11 +1,17 @@
 from loops import broken_marker, is_loop, max_repeat
 
 WALKING_LOOP = "\n".join(f"<|det|>text [875, {190 + 50 * i}, 902, {220 + 50 * i}]<|/det|>m = 3/11" for i in range(8))
+COUNTING_LOOP = "\n".join(f"<|det|>text [1, 2, 3, 4]<|/det|>item {i} value" for i in range(8))
 
 
 def test_loop_that_walks_down_the_page_is_caught():
     assert max_repeat(WALKING_LOOP) == 8
     assert is_loop(WALKING_LOOP)
+
+
+def test_counting_loop_with_changing_digits_is_flagged():
+    assert max_repeat(COUNTING_LOOP) == 8
+    assert is_loop(COUNTING_LOOP)
 
 
 def test_normal_page_is_not_a_loop():
@@ -42,6 +48,18 @@ def test_content_guard_bans_a_repeat_that_only_changes_coordinates():
 
     assert guard.banned_tokens(sequence) == {42}
     assert guard.banned_tokens(block(190) + [DET_OPEN, 5, 240, DET_CLOSE]) == set()
+
+
+def test_content_guard_bans_a_repeat_that_only_changes_digits():
+    from loops import ContentNoRepeatGuard
+
+    sequence = [40, 41, 19, 42, 40, 41, 20]
+    guard = ContentNoRepeatGuard(ngram_size=4, window=64)
+
+    assert guard.banned_tokens(sequence) == {42}
+
+    sequence2 = [40, 41, 42, 19, 40, 41, 42]
+    assert set(range(18, 28)).issubset(guard.banned_tokens(sequence2))
 
 
 def test_content_guard_keeps_logits_shape_and_masks_banned():

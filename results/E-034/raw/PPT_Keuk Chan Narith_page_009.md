@@ -1,0 +1,2 @@
+<|det|>header [120, 100, 878, 152]<|/det|>An Emergence of English language Variety in Cambodia
+<|det|>text [57, 242, 919, 760]<|/det|>- Littlewood (1994): constructivist view: Second [or foreign] language learners, similar to children of their first language, are actively constructing rules of the target language they are exposed to and gradually adapting these rules in order to form the target language system.

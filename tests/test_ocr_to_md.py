@@ -43,3 +43,28 @@ def test_remove_det_can_drop_page_furniture():
 
     assert remove_det(raw) == "Journal 12\n\nBody.\n\n10"
     assert remove_det(raw, skip=PAGE_FURNITURE) == "Body."
+
+
+COUNTING_LOOP = "<|det|>text [1, 2, 3, 4]<|/det|>" + " ".join(f"( {i} ) item" for i in range(20))
+
+
+def test_counting_loops_leak_without_cut():
+    assert "( 19 ) item" in to_markdown(COUNTING_LOOP)
+
+
+def test_cut_counting_loops_keeps_first_repeats():
+    md = to_markdown(COUNTING_LOOP, cut_counting_loops=True)
+    assert "( 0 ) item" in md
+    assert "( 19 ) item" not in md
+
+
+RUNAWAY_TABLE = "<|det|>table [1, 2, 3, 4]<|/det|><table>" + "".join("<tr><td></td><td></td></tr>" for _ in range(50))
+
+
+def test_runaway_empty_tables_leak_without_cut():
+    assert "<tr><td></td><td></td></tr>" * 10 in to_markdown(RUNAWAY_TABLE)
+
+
+def test_cut_empty_tables_removes_runaway():
+    md = to_markdown(RUNAWAY_TABLE, cut_empty_tables=True)
+    assert "<tr><td></td><td></td></tr>" * 10 not in md

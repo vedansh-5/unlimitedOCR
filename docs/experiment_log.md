@@ -270,3 +270,15 @@ Chronological. One entry per meaningful action or decision.
   R-order 0.137. Worse than the paper (0.042, 90.2, 93.3, 0.129) and worse than our
   140-page test runs on the same pages (+0.014 Text Edit). 36 pages scoring 0.5 or worse
   carry 37% of the text error. CDM deferred by the user. Fix ideas in `fixes.md`.
+- **E-030** (problem set baseline, 50 pages): explicit selection added (`select --pages`),
+  50 problem pages populated from E-028 output and scored. Text Edit 0.6846, Table TEDS 29.33.
+- **E-031** (I-9 `--cut-counting-loops` on problem set): Text Edit -0.0024 [-0.0057, 0.0000],
+  three severe loop pages improved (-0.053, -0.024, -0.014), none degraded. Kept.
+- **E-032** (I-10 `--cut-empty-tables` on problem set): Daily Star page 60 drops from 0.9996
+  to 0.3714 (-0.6282). Text Edit -0.0032 [-0.0096, 0.0000]. Kept.
+- **E-033** (dev E-029 rescored with kept fixes): Text Edit -0.0115 [-0.0346, 0.0000] down to
+  0.0438 [0.0206, 0.0756]. Recovers memory cap regression on dev.
+- **E-034** (full E-028 rescored with kept fixes): Text Edit -0.0004 [-0.0012, -0.0000] down
+  to 0.0496. 1,639 pages byte-identical, only 12 changed.
+- **I-11 code** (number-blind loop check and repeat guard): implemented and unit tested.
+  Adds 8 newly flagged pages on E-028 (57 vs 49). 22 problem-set pages flagged for retry.

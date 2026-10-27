@@ -677,3 +677,68 @@ for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
   retries; peak MLX memory 7.74 GB; 14 pages still end at the token cap.
 - **Scoring on macOS:** see `fixes.md` S-1 and S-2. With both, a full rescore that only
   changes a few pages takes minutes, not 7 hours.
+
+## E-030: Problem set baseline, 50 pages (2026-10-27)
+
+- **Setup:** 50 pages from E-028 output, representing the hardest failures: 36 pages
+  with Text Edit >= 0.5 (P-4), 17 pages with a zero-TEDS table (P-6), 4 pages that
+  regressed under the 7.5 GB memory cap (P-5), and 2 never-flagged timeout pages (P-2).
+  Selected using `omnidocbench.py select --pages FILE`.
+- **Baseline score (`compare.py score`):** Text Edit 0.6846 [0.6146, 0.7616],
+  Reading-order Edit 0.5910 [0.4764, 0.7065], Table TEDS 29.33 [18.34, 40.64],
+  Table TEDS-S 35.25 [22.50, 48.39].
+
+## E-031: I-9 cut counting loops on the problem set (2026-10-27)
+
+- **Change:** `omnidocbench.py rescore --exp E-031 --base E-030 --cut-counting-loops`.
+  Post-processing option detecting blocks repeating with only digits changing, keeping
+  the first few repeats and dropping runaway tails. No model run.
+- **Diff vs E-030 (`compare.py diff`):** Text Edit -0.0024 [-0.0057, 0.0000],
+  Reading-order Edit +0.0009 [-0.0025, 0.0053], Table TEDS 0.0000.
+- **Per-page:** scihub page 3 drops from 0.9668 to 0.9137 (-0.0531), Chicago Tribune
+  page 19 from 1.0000 to 0.9756 (-0.0244), Yanbao PPT 4570 from 0.9998 to 0.9861 (-0.0136).
+  No pages degraded.
+- **Decision:** keep.
+
+## E-032: I-10 cut runaway empty tables on the problem set (2026-10-27)
+
+- **Change:** `omnidocbench.py rescore --exp E-032 --base E-030 --cut-empty-tables`.
+  Post-processing option detecting tables exceeding single-page capacity with mostly
+  empty rows, dropping the runaway grid. No model run.
+- **Diff vs E-030 (`compare.py diff`):** Text Edit -0.0032 [-0.0096, 0.0000],
+  Reading-order Edit -0.0008 [-0.0025, 0.0000], Table TEDS 0.0000.
+- **Per-page:** Daily Star crossword page 60 drops from 0.9996 to 0.3714 (-0.6282),
+  recovering the cap regression on P-3.
+- **Decision:** keep.
+
+## E-033: Dev subset with kept post-processing fixes (2026-10-27)
+
+- **Change:** `omnidocbench.py rescore --exp E-033 --base E-029 --cut-counting-loops --cut-empty-tables`.
+  45 pages rescored against E-029 (dev under 7.5 GB cap).
+- **Diff vs E-029 (`compare.py diff`):** Text Edit -0.0115 [-0.0346, 0.0000],
+  Reading-order Edit -0.0031 [-0.0092, 0.0000], Table TEDS 0.0000.
+- **Score:** Text Edit 0.0438 [0.0206, 0.0756], Reading-order Edit 0.1220 [0.0677, 0.1883].
+  44 of 45 pages byte-identical to E-029; Daily Star page 60 alone recovers from 0.9996
+  to 0.3714. Fully closes the dev gap caused by the memory cap.
+
+## E-034: Full OmniDocBench v1.6 with kept post-processing fixes (2026-10-27)
+
+- **Change:** `omnidocbench.py rescore --exp E-034 --base E-028 --cut-counting-loops --cut-empty-tables`.
+  All 1,651 pages rescored using match cache.
+- **Diff vs E-028 (`compare.py diff`):** Text Edit -0.0004 [-0.0012, -0.0000],
+  Reading-order Edit +0.0001 [-0.0003, 0.0005], Table TEDS -0.0014 [-0.0043, 0.0000].
+- **Result:** 1,639 of 1,651 pages are byte-identical. Only 12 pages changed, all
+  severe loops. Text Edit drops from 0.0500 to 0.0496.
+
+## I-11: Number-blind loop check and repeat guard (2026-10-27)
+
+- **Problem:** `loops.is_loop` compared exact line content, and `--content-guard` compared
+  exact token sequences. Runaway counting loops where numbers increment were neither flagged
+  for retry nor blocked during retry.
+- **Change:** `loops.contents` masks digits before line comparison; `loops.ContentNoRepeatGuard`
+  normalizes digit tokens (token IDs 18 to 27) to a canonical digit token during n-gram
+  matching, banning all digit continuations when a digit continuation repeats.
+- **Verification:** Unit tests added in `tests/test_loops.py`. On existing E-028 raw outputs,
+  `is_loop` flags 36 pages (up from 28, +8 pages) and `needs_retry` flags 57 pages (up from 49).
+- **Run plan:** 22 pages in the 50-page problem set are flagged for retry (11 length-capped).
+  Model time estimate: 10 to 16 minutes under `--memory-limit-gb 7.5`.

@@ -31,6 +31,13 @@ def test_select_skips_excluded_pages():
     assert len(rest) == 10
 
 
+def test_select_pages_picks_named_pages():
+    from omnidocbench import select_pages
+
+    chosen = select_pages(PAGES, ["book_002.png", "note_005.png"])
+    assert [image_name(p) for p in chosen] == ["book_002.png", "note_005.png"]
+
+
 def test_needs_retry_flags_loops_and_pages_cut_off_at_the_token_cap(tmp_path):
     import json
 

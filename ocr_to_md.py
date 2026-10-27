@@ -54,8 +54,91 @@ def split_pages(raw):
     return pages[1:] if len(pages) > 1 and not pages[0].strip() else pages
 
 
-def to_markdown(raw, repair=False, skip=()):
-    return "\n\n".join(page for page in (remove_det(p, repair, skip) for p in split_pages(raw)) if page)
+def is_empty_row(row_html):
+    clean = re.sub(r"<[^>]+>", "", row_html).strip()
+    return not clean or clean == "&nbsp;"
+
+
+def cut_empty_tables(text, max_empty_rows=10, max_page_rows=40):
+    def replace_table(match):
+        tbl = match.group(0)
+        rows = re.findall(r"<tr\b[^>]*>.*?</tr>", tbl, re.DOTALL | re.IGNORECASE)
+        if not rows:
+            rows = [f"<tr>{r}" for r in re.split(r"<tr\b[^>]*>", tbl, flags=re.IGNORECASE)[1:]]
+        empty_count = sum(1 for r in rows if is_empty_row(r))
+        if len(rows) > max_page_rows and empty_count / len(rows) > 0.7:
+            non_empty = [r for r in rows if not is_empty_row(r)]
+            if len(non_empty) <= 3:
+                return ""
+            return "<table>" + "".join(rows[:max_page_rows]) + "</table>"
+        consecutive_empty = 0
+        cutoff = None
+        for idx, r in enumerate(rows):
+            if is_empty_row(r):
+                consecutive_empty += 1
+                if consecutive_empty > max_empty_rows and cutoff is None:
+                    cutoff = idx
+            else:
+                consecutive_empty = 0
+        if cutoff is not None and len(rows) > max_page_rows:
+            return "<table>" + "".join(rows[:cutoff]) + "</table>"
+        return tbl
+
+    pattern = re.compile(r"<table\b[^>]*>(?:.*?</table>|.*?$)", re.DOTALL | re.IGNORECASE)
+    return pattern.sub(replace_table, text)
+
+
+def cut_counting_loops(text, min_repeats=10, keep=3, max_k=10):
+    parts = re.split(r"(\d+)", text)
+    non_digits = parts[0::2]
+    n = len(non_digits)
+    i = 0
+    kept_parts = []
+    while i < n:
+        best_k, best_reps = None, 0
+        for k in range(1, max_k + 1):
+            if i + 2 * k > n:
+                continue
+            chunk = non_digits[i : i + k]
+            raw_chunk = "".join(chunk)
+            if any(t in raw_chunk.lower() for t in ("<td", "<tr", "<table")):
+                continue
+            stripped = raw_chunk.strip()
+            if not stripped:
+                continue
+            thresh = 25 if not any(c.isalnum() for c in stripped) else min_repeats
+            reps = 1
+            idx = i + k
+            while idx + k <= n and non_digits[idx : idx + k] == chunk:
+                reps += 1
+                idx += k
+            if reps >= thresh and reps > best_reps:
+                best_k = k
+                best_reps = reps
+        if best_k is not None:
+            keep_count = min(keep, best_reps)
+            for j in range(i, i + best_k * keep_count):
+                kept_parts.append(parts[2 * j])
+                if 2 * j + 1 < len(parts):
+                    kept_parts.append(parts[2 * j + 1])
+            i += best_k * best_reps
+        else:
+            kept_parts.append(parts[2 * i])
+            if 2 * i + 1 < len(parts):
+                kept_parts.append(parts[2 * i + 1])
+            i += 1
+    return "".join(kept_parts)
+
+
+def to_markdown(raw, repair=False, skip=(), cut_counting_loops_opt=False, cut_empty_tables_opt=False, **kwargs):
+    cut_loops = cut_counting_loops_opt or kwargs.get("cut_counting_loops", False)
+    cut_tables = cut_empty_tables_opt or kwargs.get("cut_empty_tables", False)
+    text = "\n\n".join(page for page in (remove_det(p, repair, skip) for p in split_pages(raw)) if page)
+    if cut_loops:
+        text = cut_counting_loops(text)
+    if cut_tables:
+        text = cut_empty_tables(text)
+    return text
 
 
 def run_model(source, out_dir, extra_args=()):

@@ -1,0 +1,229 @@
+{
+    "save_name": "pred_quick_match",
+    "runtime_environment": {
+        "system": {
+            "platform": "macOS-27.0.1-arm64-arm-64bit",
+            "python_version": "3.11.17 (main, Oct 21 2026, 17:46:23) [Clang 23.1.3 ]",
+            "python_executable": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env/bin/python",
+            "python_prefix": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env",
+            "conda_env": "",
+            "conda_prefix": "",
+            "libc": "",
+            "uname": "Darwin Vedanshs-MacBook.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64 arm",
+            "os_release": {}
+        },
+        "system_packages": {
+            "package_manager": "unavailable",
+            "tracked_packages": {
+                "ghostscript": "unavailable (no supported package manager found)",
+                "imagemagick": "unavailable (no supported package manager found)",
+                "fontconfig": "unavailable (no supported package manager found)",
+                "python3": "unavailable (no supported package manager found)",
+                "python3-pip": "unavailable (no supported package manager found)",
+                "python3-setuptools": "unavailable (no supported package manager found)",
+                "python3-wheel": "unavailable (no supported package manager found)",
+                "texlive-base": "unavailable (no supported package manager found)",
+                "texlive-binaries": "unavailable (no supported package manager found)",
+                "texlive-lang-chinese": "unavailable (no supported package manager found)",
+                "texlive-lang-cjk": "unavailable (no supported package manager found)",
+                "texlive-latex-base": "unavailable (no supported package manager found)",
+                "texlive-latex-extra": "unavailable (no supported package manager found)",
+                "texlive-fonts-recommended": "unavailable (no supported package manager found)",
+                "texlive-plain-generic": "unavailable (no supported package manager found)",
+                "latexml": "unavailable (no supported package manager found)"
+            }
+        },
+        "python_packages": {
+            "apted": "1.0.3",
+            "beautifulsoup4": "4.11.1",
+            "evaluate": "0.4.3",
+            "func-timeout": "4.3.5",
+            "Levenshtein": "0.25.1",
+            "loguru": "0.7.2",
+            "lxml": "4.9.1",
+            "matplotlib": "3.7.5",
+            "nltk": "3.9.1",
+            "numpy": "1.24.4",
+            "pandas": "2.0.3",
+            "Pillow": "10.4.0",
+            "pylatexenc": "2.10",
+            "PyYAML": "6.0.2",
+            "scipy": "1.10.1",
+            "tabulate": "0.9.0",
+            "tqdm": "4.67.1",
+            "pip": "unavailable",
+            "setuptools": "unavailable",
+            "wheel": "unavailable"
+        },
+        "external_tools": {
+            "pdflatex": {
+                "path": "/Library/TeX/texbin/pdflatex",
+                "returncode": 0,
+                "output": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) | kpathsea version 6.4.2 | Copyright 2026 Han The Thanh (pdfTeX) et al. | There is NO warranty.  Redistribution of this software is | covered by the terms of both the pdfTeX copyright and"
+            },
+            "kpsewhich": {
+                "path": "/Library/TeX/texbin/kpsewhich",
+                "returncode": 0,
+                "output": "kpathsea version 6.4.2 | Copyright 2026 Karl Berry & Olaf Weber. | License LGPLv2.1+: GNU Lesser GPL version 2.1 or later <https://gnu.org/licenses/lgpl.html> | This is free software: you are free to change and redistribute it. | There is NO WARRANTY, to the extent permitted by law."
+            },
+            "tlmgr": {
+                "path": "/Library/TeX/texbin/tlmgr",
+                "returncode": 0,
+                "output": "tlmgr revision 79591 (2026-07-05 13:56:20 +0200) | tlmgr using installation: /usr/local/texlive/2026basic | TeX Live (https://tug.org/texlive) version 2026"
+            },
+            "ghostscript": {
+                "path": "/opt/homebrew/bin/gs",
+                "returncode": 0,
+                "output": "10.07.1"
+            },
+            "magick": {
+                "path": "/opt/homebrew/bin/magick",
+                "returncode": 0,
+                "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd"
+            },
+            "convert": {
+                "path": "/opt/homebrew/bin/convert",
+                "returncode": 0,
+                "output": "WARNING: The convert command is deprecated in IMv7, use \"magick\" instead of \"convert\" or \"magick convert\" | Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules"
+            },
+            "identify": {
+                "path": "/opt/homebrew/bin/identify",
+                "returncode": 0,
+                "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd"
+            },
+            "latexmlc": {
+                "path": "latexmlc",
+                "returncode": null,
+                "output": "unavailable (FileNotFoundError: [Errno 2] No such file or directory: 'latexmlc')"
+            }
+        },
+        "texlive": {
+            "cjk_font_family": "gkai",
+            "cjk_sty": {
+                "path": "",
+                "version": "unavailable",
+                "date": "",
+                "header": "",
+                "status": "missing"
+            },
+            "cjk_font_fd": {
+                "path": "",
+                "version": "unavailable",
+                "date": "",
+                "header": "",
+                "status": "missing"
+            }
+        }
+    },
+    "stage_execution": {
+        "page_match": {
+            "workers": 4,
+            "page_count": 50,
+            "quick_match_truncated_timeout_sec": 300,
+            "match_timeout_sec": 420,
+            "fallbacks": {
+                "quick_match_timeout": {
+                    "count": 2,
+                    "cases": [
+                        "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png",
+                        "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png"
+                    ]
+                },
+                "page_timeout": {
+                    "count": 3,
+                    "cases": [
+                        "jiaocaineedrop_jiaocai_needrop_en_2839.jpg",
+                        "jiaocaineedrop_jiaocai_needrop_en_349.jpg",
+                        "newspaper_eb569707cf5621d4c71d5898216cdb17_1.jpg"
+                    ]
+                }
+            }
+        },
+        "metrics": {
+            "table": {
+                "TEDS": {
+                    "workers": 4,
+                    "timeout_sec": 120.0,
+                    "sample_count": 83,
+                    "timeout_case_count": 0,
+                    "timeout_cases": [],
+                    "error_case_count": 1,
+                    "error_cases": [
+                        {
+                            "case_name": "page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png[gt=[0], pred=[3]]",
+                            "img_id": "page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png",
+                            "gt_idx": [
+                                0
+                            ],
+                            "pred_idx": [
+                                3
+                            ],
+                            "reason": "ValueError: invalid literal for int() with base 10: '2</td><td>0</td><td></td><td colspan='"
+                        }
+                    ],
+                    "exception_case_count": 0,
+                    "exception_cases": []
+                }
+            }
+        }
+    },
+    "page_denominators": {
+        "text_block": {
+            "Edit_dist": {
+                "ALL": 46
+            }
+        },
+        "display_formula": {
+            "Edit_dist": {
+                "ALL": 3
+            }
+        },
+        "table": {
+            "TEDS": {
+                "ALL": 22
+            },
+            "Edit_dist": {
+                "ALL": 22
+            },
+            "TEDS_structure_only": {
+                "ALL": 22
+            }
+        },
+        "reading_order": {
+            "Edit_dist": {
+                "ALL": 49
+            }
+        }
+    },
+    "notebook_metric_summary": {
+        "source": "tools/generate_result_tables.ipynb#cell-2",
+        "metrics": {
+            "text_block_Edit_dist": {
+                "raw": 0.6655278305291846,
+                "page_denominator": 46,
+                "notebook_value": 0.6655278305291846
+            },
+            "display_formula_CDM": {
+                "raw": null,
+                "page_denominator": null,
+                "notebook_value": null
+            },
+            "table_TEDS": {
+                "raw": 0.29330900202645527,
+                "page_denominator": 22,
+                "notebook_value": 29.330900202645527
+            },
+            "table_TEDS_structure_only": {
+                "raw": 0.35246912777374173,
+                "page_denominator": 22,
+                "notebook_value": 35.24691277737417
+            },
+            "reading_order_Edit_dist": {
+                "raw": 0.6609583525834111,
+                "page_denominator": 49,
+                "notebook_value": 0.6609583525834111
+            }
+        },
+        "overall_notebook": null
+    }
+}

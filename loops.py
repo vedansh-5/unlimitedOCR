@@ -1,15 +1,19 @@
+import re
 from collections import Counter
 
 from ocr_to_md import DET_RE
 
 MAX_REPEAT = 6
 MIN_CHARS = 3
+DIGIT_TOKENS = set(range(18, 28))
+CANONICAL_DIGIT = 18
 
 
 def contents(raw):
     for line in raw.splitlines():
         m = DET_RE.match(line.strip())
         text = (m.group(2) if m else line).strip()
+        text = re.sub(r"\d", "#", text)
         if len(text) >= MIN_CHARS:
             yield text
 
@@ -52,7 +56,13 @@ class ContentNoRepeatGuard:
         from unlimited_ocr_mlx import _banned_tokens
 
         kept, inside = content_tokens(sequence)
-        return set() if inside else _banned_tokens(kept, self.ngram_size, self.window, set())
+        if inside:
+            return set()
+        norm_kept = [CANONICAL_DIGIT if t in DIGIT_TOKENS else t for t in kept]
+        banned = _banned_tokens(norm_kept, self.ngram_size, self.window, set())
+        if CANONICAL_DIGIT in banned:
+            banned = (banned - {CANONICAL_DIGIT}) | DIGIT_TOKENS
+        return banned
 
     def __call__(self, input_ids, logits):
         import mlx.core as mx

@@ -47,11 +47,20 @@ def select(pages, per_type, seed, exclude=()):
     return sorted(chosen, key=image_name)
 
 
+def select_pages(pages, names):
+    wanted = set(names)
+    return sorted([p for p in pages if image_name(p) in wanted or Path(image_name(p)).stem in wanted], key=image_name)
+
+
 def cmd_select(args, out):
-    exclude = set()
-    for other in args.exclude:
-        exclude |= set((ROOT / "results" / other / "subset.txt").read_text().splitlines())
-    subset = select(ground_truth(), args.per_type, args.seed, exclude)
+    if args.pages:
+        names = [line.strip() for line in Path(args.pages).read_text().splitlines() if line.strip()]
+        subset = select_pages(ground_truth(), names)
+    else:
+        exclude = set()
+        for other in args.exclude:
+            exclude |= set((ROOT / "results" / other / "subset.txt").read_text().splitlines())
+        subset = select(ground_truth(), args.per_type, args.seed, exclude)
     (out / "gt_subset.json").write_text(json.dumps(subset, ensure_ascii=False))
     (out / "subset.txt").write_text("".join(image_name(p) + "\n" for p in subset))
     print(f"{len(subset)} pages -> {out / 'subset.txt'}")
@@ -85,7 +94,7 @@ def run_images(images_dir, out, extra):
 
 def cmd_predict(args, out, extra):
     (out / "raw").mkdir(exist_ok=True)
-    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture)
+    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables)
 
 
 def cmd_retry(args, out, extra):
@@ -108,7 +117,7 @@ def cmd_retry(args, out, extra):
     (out / "retried.txt").write_text("".join(n + "\n" for n in retried))
     print(f"{len(retried)} flagged pages re-run, the rest copied from {args.base}")
     code = run_images(retry_inputs, out, extra) if retried else 0
-    return write_predictions(out, code, args.repair_markers, args.drop_furniture)
+    return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables)
 
 
 def needs_retry(md):
@@ -127,16 +136,16 @@ def cmd_rescore(args, out):
     shutil.copytree(base / "raw", out / "raw", dirs_exist_ok=True)
     for name in ("subset.txt", "gt_subset.json"):
         shutil.copy(base / name, out / name)
-    return write_predictions(out, 0, args.repair_markers, args.drop_furniture)
+    return write_predictions(out, 0, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables)
 
 
-def write_predictions(out, code, repair=False, drop_furniture=False):
+def write_predictions(out, code, repair=False, drop_furniture=False, cut_counting_loops=False, cut_empty_tables=False):
     raw, pred = out / "raw", out / "pred"
     pred.mkdir(exist_ok=True)
     rows = []
     for md in sorted(raw.glob("*.md")):
         meta = json.loads(md.with_suffix(".json").read_text())
-        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else ())
+        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else (), cut_counting_loops, cut_empty_tables)
         (pred / md.name).write_text(text + "\n", encoding="utf-8")
         plain = checks.strip_tags(text)
         rows.append({
@@ -250,6 +259,9 @@ def main(argv=None):
     parser.add_argument("--repair-markers", action="store_true", help="Cut unclosed <|det|> markers from the Markdown")
     parser.add_argument("--drop-furniture", action="store_true", help="Leave headers, footers, page numbers and page footnotes out of the Markdown")
     parser.add_argument("--exclude", nargs="*", default=[], help="Experiments whose subset pages must not be selected")
+    parser.add_argument("--pages", help="Explicit page list file")
+    parser.add_argument("--cut-counting-loops", action="store_true", help="Cut counting loops from the Markdown")
+    parser.add_argument("--cut-empty-tables", action="store_true", help="Cut runaway empty tables from the Markdown")
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp
     out.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,553 @@
+2026-10-27 13:06:56.766 | INFO     | src.dataset.end2end_dataset:_collect_page_matches:2054 - [quick-match] using page workers=4
+Matching pages:   0%|                                                                                                | 0/50 [00:00<?, ?it/s]Matching pages:  32%|###########################5                                                          | 16/50 [00:00<00:00, 122.81it/s]Matching pages:  58%|##################################################4                                    | 29/50 [00:03<00:02,  8.13it/s]Matching pages:  70%|############################################################9                          | 35/50 [00:03<00:01,  8.94it/s]Matching pages:  78%|###################################################################8                   | 39/50 [00:03<00:01,  9.55it/s]Matching pages:  84%|#########################################################################              | 42/50 [00:04<00:00,  9.28it/s]Matching pages:  88%|############################################################################5          | 44/50 [00:04<00:00,  9.67it/s]Matching pages:  92%|################################################################################       | 46/50 [00:04<00:00,  9.94it/s]Matching pages:  96%|###################################################################################5   | 48/50 [00:04<00:00, 10.64it/s]Matching pages:  98%|#####################################################################################2 | 49/50 [00:20<00:00, 10.64it/s]Matching pages: 100%|#######################################################################################| 50/50 [00:59<00:00,  6.08s/it]Matching pages: 100%|#######################################################################################| 50/50 [00:59<00:00,  1.19s/it]
+###### Process:  pred_quick_match
+【text_block】
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.663546
+edit_whole       0.827822
+edit_sample_avg  0.613137
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  --------
+ALL                               0.663546
+None                              0.679506
+colorful_backgroud                0.746528
+data_source: PPT2PDF              0.958066
+data_source: academic_literature  0.638757
+data_source: book                 0.868223
+data_source: colorful_textbook    0.509443
+data_source: exam_paper           0.90229
+data_source: historical_document  0.816588
+data_source: magazine             0.273954
+data_source: newspaper            0.709571
+data_source: note                 0.6855
+data_source: research_report      0.143312
+fuzzy_content                     0.950298
+fuzzy_scan                        0.996387
+geometric_deformation             0.816588
+handwriting                       0.518519
+language: en_ch_mixed             0.903077
+language: english                 0.572817
+language: simplified_chinese      0.685807
+language: traditional_chinese     0.74748
+layout: 1andmore_column           0
+layout: double_column             0.856209
+layout: other_layout              0.670974
+layout: single_column             0.63931
+subset: equation_hard             0.518519
+subset: layout_hard               0.749791
+subset: table_hard                0.423077
+subset: v1.5                      0.668671
+transparent_pages                 0.73913
+watermark                         0.996387
+with_watermark                    0.73913
+--------------------------------  --------
+====================================================================================================
+【display_formula】
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.437964
+edit_whole       0.292593
+edit_sample_avg  0.26948
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+------------------------------  ---------
+ALL                             0.437964
+data_source: colorful_textbook  0.245399
+data_source: exam_paper         1
+data_source: note               0.0684932
+fuzzy_scan                      1
+handwriting                     0.0684932
+language: simplified_chinese    0.437964
+layout: double_column           1
+layout: other_layout            0.245399
+layout: single_column           0.0684932
+subset: equation_hard           0.0684932
+subset: layout_hard             0.245399
+subset: v1.5                    1
+watermark                       1
+------------------------------  ---------
+====================================================================================================
+[TEDS] workers=4 samples=83 timeout=120.0
+TEDS:   0%|                                                                                                          | 0/83 [00:00<?, ?it/s]TEDS:   1%|#1                                                                                                | 1/83 [00:03<04:22,  3.20s/it]TEDS:   4%|###5                                                                                              | 3/83 [00:04<01:36,  1.21s/it]TEDS:   5%|####7                                                                                             | 4/83 [00:05<01:48,  1.37s/it]TEDS:   6%|#####9                                                                                            | 5/83 [00:07<01:45,  1.35s/it]TEDS:   8%|########2                                                                                         | 7/83 [00:08<01:25,  1.13s/it]TEDS:  10%|#########4                                                                                        | 8/83 [00:09<01:19,  1.05s/it]TEDS:  11%|##########6                                                                                       | 9/83 [00:10<01:04,  1.16it/s]TEDS:  13%|############8                                                                                    | 11/83 [00:11<01:02,  1.15it/s]TEDS:  14%|##############                                                                                   | 12/83 [00:12<01:00,  1.18it/s]TEDS:  16%|###############1                                                                                 | 13/83 [00:13<00:54,  1.28it/s]TEDS:  17%|################3                                                                                | 14/83 [00:14<01:06,  1.04it/s]TEDS:  18%|#################5                                                                               | 15/83 [00:15<00:56,  1.20it/s]TEDS:  19%|##################6                                                                              | 16/83 [00:16<00:57,  1.17it/s]TEDS:  20%|###################8                                                                             | 17/83 [00:18<01:17,  1.17s/it]TEDS:  23%|######################2                                                                          | 19/83 [00:19<00:54,  1.17it/s]TEDS:  24%|#######################3                                                                         | 20/83 [00:20<01:08,  1.09s/it]TEDS:  27%|#########################7                                                                       | 22/83 [00:21<00:52,  1.17it/s]TEDS:  28%|##########################8                                                                      | 23/83 [00:23<01:01,  1.03s/it]TEDS:  29%|############################                                                                     | 24/83 [00:23<00:48,  1.21it/s]TEDS:  30%|#############################2                                                                   | 25/83 [00:24<00:49,  1.17it/s]TEDS:  31%|##############################3                                                                  | 26/83 [00:26<01:08,  1.20s/it]TEDS:  33%|###############################5                                                                 | 27/83 [00:26<00:50,  1.10it/s]TEDS:  34%|################################7                                                                | 28/83 [00:28<00:52,  1.05it/s]TEDS:  35%|#################################8                                                               | 29/83 [00:29<00:58,  1.08s/it]TEDS:  36%|###################################                                                              | 30/83 [00:29<00:47,  1.11it/s]TEDS:  37%|####################################2                                                            | 31/83 [00:30<00:46,  1.11it/s]TEDS:  39%|#####################################3                                                           | 32/83 [00:32<00:59,  1.17s/it]TEDS:  40%|######################################5                                                          | 33/83 [00:33<00:51,  1.04s/it]TEDS:  41%|#######################################7                                                         | 34/83 [00:34<00:55,  1.13s/it]TEDS:  42%|########################################9                                                        | 35/83 [00:35<00:53,  1.12s/it]TEDS:  43%|##########################################                                                       | 36/83 [00:37<00:55,  1.18s/it]TEDS:  45%|###########################################2                                                     | 37/83 [00:38<00:58,  1.28s/it]TEDS:  46%|############################################4                                                    | 38/83 [00:39<00:51,  1.14s/it]TEDS:  47%|#############################################5                                                   | 39/83 [00:40<00:44,  1.01s/it]TEDS:  48%|##############################################7                                                  | 40/83 [00:41<00:43,  1.00s/it]TEDS:  49%|###############################################9                                                 | 41/83 [00:42<00:47,  1.12s/it]TEDS:  51%|#################################################                                                | 42/83 [00:43<00:43,  1.06s/it]TEDS:  52%|##################################################2                                              | 43/83 [00:43<00:35,  1.12it/s]TEDS:  53%|###################################################4                                             | 44/83 [00:44<00:36,  1.07it/s]TEDS:  54%|####################################################5                                            | 45/83 [00:45<00:36,  1.05it/s]TEDS:  55%|#####################################################7                                           | 46/83 [00:46<00:30,  1.21it/s]TEDS:  57%|######################################################9                                          | 47/83 [00:47<00:26,  1.35it/s]TEDS:  58%|########################################################                                         | 48/83 [00:48<00:29,  1.19it/s]TEDS:  59%|#########################################################2                                       | 49/83 [00:49<00:29,  1.14it/s]TEDS:  60%|##########################################################4                                      | 50/83 [00:49<00:28,  1.16it/s]TEDS:  61%|###########################################################6                                     | 51/83 [00:50<00:29,  1.08it/s]TEDS:  64%|#############################################################9                                   | 53/83 [00:52<00:23,  1.29it/s]TEDS:  65%|###############################################################1                                 | 54/83 [00:53<00:24,  1.21it/s]TEDS:  66%|################################################################2                                | 55/83 [00:53<00:23,  1.22it/s]TEDS:  67%|#################################################################4                               | 56/83 [00:54<00:18,  1.47it/s]TEDS:  69%|##################################################################6                              | 57/83 [00:55<00:19,  1.35it/s]TEDS:  70%|###################################################################7                             | 58/83 [00:56<00:20,  1.25it/s]TEDS:  71%|####################################################################9                            | 59/83 [00:57<00:20,  1.15it/s]TEDS:  72%|######################################################################1                          | 60/83 [00:57<00:16,  1.42it/s]TEDS:  73%|#######################################################################2                         | 61/83 [00:58<00:17,  1.27it/s]TEDS:  75%|########################################################################4                        | 62/83 [00:59<00:16,  1.28it/s]TEDS:  76%|#########################################################################6                       | 63/83 [01:00<00:18,  1.08it/s]TEDS:  77%|##########################################################################7                      | 64/83 [01:00<00:14,  1.28it/s]TEDS:  78%|###########################################################################9                     | 65/83 [01:01<00:12,  1.42it/s]TEDS:  80%|#############################################################################1                   | 66/83 [01:02<00:12,  1.37it/s]TEDS:  81%|##############################################################################3                  | 67/83 [01:03<00:15,  1.01it/s]TEDS:  82%|###############################################################################4                 | 68/83 [01:04<00:12,  1.22it/s]TEDS:  83%|################################################################################6                | 69/83 [01:04<00:10,  1.32it/s]TEDS:  84%|#################################################################################8               | 70/83 [01:05<00:10,  1.30it/s]TEDS:  86%|##################################################################################9              | 71/83 [01:07<00:11,  1.05it/s]TEDS:  87%|####################################################################################1            | 72/83 [01:07<00:08,  1.32it/s]TEDS:  88%|#####################################################################################3           | 73/83 [01:07<00:06,  1.48it/s]TEDS:  89%|######################################################################################4          | 74/83 [01:09<00:09,  1.04s/it]TEDS:  90%|#######################################################################################6         | 75/83 [01:10<00:07,  1.11it/s]TEDS:  92%|########################################################################################8        | 76/83 [01:10<00:05,  1.28it/s]TEDS:  93%|#########################################################################################9       | 77/83 [01:12<00:05,  1.03it/s]TEDS score error for table [0] in page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png: ValueError: invalid literal for int() with base 10: '2</td><td>0</td><td></td><td colspan='. The score is set to 0.
+TEDS:  94%|###########################################################################################1     | 78/83 [01:12<00:03,  1.38it/s]TEDS:  95%|############################################################################################3    | 79/83 [01:13<00:03,  1.25it/s]TEDS:  96%|#############################################################################################4   | 80/83 [01:13<00:02,  1.48it/s]TEDS:  98%|##############################################################################################6  | 81/83 [01:14<00:01,  1.23it/s]TEDS:  99%|###############################################################################################8 | 82/83 [01:15<00:00,  1.61it/s]TEDS: 100%|#################################################################################################| 83/83 [01:15<00:00,  1.85it/s]TEDS: 100%|#################################################################################################| 83/83 [01:15<00:00,  1.10it/s]
+【table】
+TEDS:
+---  --------
+all  0.428874
+---  --------
+====================================================================================================
+TEDS_structure_only:
+---  --------
+all  0.543497
+---  --------
+====================================================================================================
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.615042
+edit_whole       0.503909
+edit_sample_avg  0.488745
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  --------
+ALL                               0.615042
+None                              0.869781
+colorful_backgroud                1
+data_source: PPT2PDF              0.606208
+data_source: academic_literature  0.608515
+data_source: book                 1
+data_source: exam_paper           1
+data_source: magazine             0.634709
+data_source: newspaper            0.45187
+data_source: research_report      0.580301
+fuzzy_scan                        1
+language: en_ch_mixed             0.606208
+language: english                 0.501934
+language: simplified_chinese      0.766834
+layout: 1andmore_column           1
+layout: double_column             0.835909
+layout: other_layout              0.50965
+layout: single_column             0.604039
+subset: table_hard                0.462515
+subset: v1.5                      0.659903
+watermark                         1
+--------------------------------  --------
+====================================================================================================
+TEDS:
+--------------------------------  ---------
+ALL                               0.293309
+None                              0.0979868
+colorful_backgroud                0
+data_source: PPT2PDF              0.362094
+data_source: academic_literature  0.21462
+data_source: book                 0
+data_source: exam_paper           0
+data_source: magazine             0.272302
+data_source: newspaper            0.476468
+data_source: research_report      0.322838
+fuzzy_scan                        0
+language: en_ch_mixed             0.362094
+language: english                 0.373043
+language: simplified_chinese      0.179354
+layout: 1andmore_column           0
+layout: double_column             0.14086
+layout: other_layout              0.41839
+layout: single_column             0.251634
+subset: table_hard                0.310925
+subset: v1.5                      0.288128
+watermark                         0
+--------------------------------  ---------
+====================================================================================================
+TEDS_structure_only:
+--------------------------------  --------
+ALL                               0.352469
+None                              0.129859
+colorful_backgroud                0
+data_source: PPT2PDF              0.618182
+data_source: academic_literature  0.2988
+data_source: book                 0
+data_source: exam_paper           0
+data_source: magazine             0.298838
+data_source: newspaper            0.555705
+data_source: research_report      0.342047
+fuzzy_scan                        0
+language: en_ch_mixed             0.618182
+language: english                 0.452159
+language: simplified_chinese      0.190026
+layout: 1andmore_column           0
+layout: double_column             0.250936
+layout: other_layout              0.505565
+layout: single_column             0.27238
+subset: table_hard                0.3835
+subset: v1.5                      0.343342
+watermark                         0
+--------------------------------  --------
+====================================================================================================
+【reading_order】
+Edit_dist:
+---------------  --------
+ALL_page_avg     0.662341
+edit_whole       0.750139
+edit_sample_avg  0.662341
+---------------  --------
+====================================================================================================
+----Anno Attribute---------------
+sample_count:
+
+====================================================================================================
+Edit_dist:
+--------------------------------  --------
+ALL                               0.662341
+None                              0.638928
+colorful_backgroud                0.662903
+data_source: PPT2PDF              0.845461
+data_source: academic_literature  0.688889
+data_source: book                 0.375
+data_source: colorful_textbook    0.602941
+data_source: exam_paper           0.589286
+data_source: historical_document  0.645614
+data_source: magazine             0.439683
+data_source: newspaper            0.789703
+data_source: note                 0.395833
+data_source: research_report      0.511548
+fuzzy_content                     0.928571
+fuzzy_scan                        0.729167
+geometric_deformation             0.645614
+handwriting                       0.4375
+language: en_ch_mixed             0.840116
+language: english                 0.659798
+language: simplified_chinese      0.640385
+language: traditional_chinese     0.82326
+layout: 1andmore_column           0.0625
+layout: double_column             0.564583
+layout: other_layout              0.697659
+layout: single_column             0.662463
+subset: equation_hard             0.4375
+subset: layout_hard               0.528545
+subset: table_hard                0.832558
+subset: v1.5                      0.667801
+transparent_pages                 0
+watermark                         0.729167
+with_watermark                    0
+--------------------------------  --------
+====================================================================================================
+========== RUNTIME_ENVIRONMENT pred_quick_match ==========
+save_name: pred_quick_match
+[system]
+platform: macOS-27.0.1-arm64-arm-64bit
+python_version: 3.11.17 (main, Oct 21 2026, 17:46:23) [Clang 23.1.3 ]
+python_executable: /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env/bin/python
+python_prefix: /Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env
+conda_env: 
+conda_prefix: 
+libc: 
+uname: Darwin Vedanshs-MacBook.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64 arm
+[system_packages]
+package_manager: unavailable
+fontconfig: unavailable (no supported package manager found)
+ghostscript: unavailable (no supported package manager found)
+imagemagick: unavailable (no supported package manager found)
+latexml: unavailable (no supported package manager found)
+python3: unavailable (no supported package manager found)
+python3-pip: unavailable (no supported package manager found)
+python3-setuptools: unavailable (no supported package manager found)
+python3-wheel: unavailable (no supported package manager found)
+texlive-base: unavailable (no supported package manager found)
+texlive-binaries: unavailable (no supported package manager found)
+texlive-fonts-recommended: unavailable (no supported package manager found)
+texlive-lang-chinese: unavailable (no supported package manager found)
+texlive-lang-cjk: unavailable (no supported package manager found)
+texlive-latex-base: unavailable (no supported package manager found)
+texlive-latex-extra: unavailable (no supported package manager found)
+texlive-plain-generic: unavailable (no supported package manager found)
+[python_packages]
+Levenshtein: 0.25.1
+Pillow: 10.4.0
+PyYAML: 6.0.2
+apted: 1.0.3
+beautifulsoup4: 4.11.1
+evaluate: 0.4.3
+func-timeout: 4.3.5
+loguru: 0.7.2
+lxml: 4.9.1
+matplotlib: 3.7.5
+nltk: 3.9.1
+numpy: 1.24.4
+pandas: 2.0.3
+pip: unavailable
+pylatexenc: 2.10
+scipy: 1.10.1
+setuptools: unavailable
+tabulate: 0.9.0
+tqdm: 4.67.1
+wheel: unavailable
+[external_tools]
+convert: path=/opt/homebrew/bin/convert returncode=0 output=WARNING: The convert command is deprecated in IMv7, use "magick" instead of "convert" or "magick convert" | Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules
+ghostscript: path=/opt/homebrew/bin/gs returncode=0 output=10.07.1
+identify: path=/opt/homebrew/bin/identify returncode=0 output=Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd
+kpsewhich: path=/Library/TeX/texbin/kpsewhich returncode=0 output=kpathsea version 6.4.2 | Copyright 2026 Karl Berry & Olaf Weber. | License LGPLv2.1+: GNU Lesser GPL version 2.1 or later <https://gnu.org/licenses/lgpl.html> | This is free software: you are free to change and redistribute it. | There is NO WARRANTY, to the extent permitted by law.
+latexmlc: path=latexmlc returncode=None output=unavailable (FileNotFoundError: [Errno 2] No such file or directory: 'latexmlc')
+magick: path=/opt/homebrew/bin/magick returncode=0 output=Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd
+pdflatex: path=/Library/TeX/texbin/pdflatex returncode=0 output=pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) | kpathsea version 6.4.2 | Copyright 2026 Han The Thanh (pdfTeX) et al. | There is NO warranty.  Redistribution of this software is | covered by the terms of both the pdfTeX copyright and
+tlmgr: path=/Library/TeX/texbin/tlmgr returncode=0 output=tlmgr revision 79591 (2026-07-05 13:56:20 +0200) | tlmgr using installation: /usr/local/texlive/2026basic | TeX Live (https://tug.org/texlive) version 2026
+[texlive]
+cjk_font_family: gkai
+cjk_sty: status=missing path= version=unavailable date= header=
+cjk_font_fd: status=missing path= version=unavailable date= header=
+
+========== END_RUNTIME_ENVIRONMENT pred_quick_match ==========
+========== STAGE_EXECUTION pred_quick_match ==========
+save_name: pred_quick_match
+[page_match]
+workers: 4
+page_count: 50
+quick_match_truncated_timeout_sec: 300
+match_timeout_sec: 420
+fallbacks:
+  - page_timeout: count=3
+    case: jiaocaineedrop_jiaocai_needrop_en_2839.jpg
+    case: jiaocaineedrop_jiaocai_needrop_en_349.jpg
+    case: newspaper_eb569707cf5621d4c71d5898216cdb17_1.jpg
+  - quick_match_timeout: count=1
+    case: newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png
+[table.TEDS]
+workers: 4
+timeout_sec: 120.0
+sample_count: 83
+timeout_case_count: 0
+error_case_count: 1
+  error_case: page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png[gt=[0], pred=[3]] reason=ValueError: invalid literal for int() with base 10: '2</td><td>0</td><td></td><td colspan='
+exception_case_count: 0
+
+========== END_STAGE_EXECUTION pred_quick_match ==========
+========== FINAL_EVAL_RUN_REPORT pred_quick_match ==========
+{
+  "notebook_metric_summary": {
+    "metrics": {
+      "display_formula_CDM": {
+        "notebook_value": null,
+        "page_denominator": null,
+        "raw": null
+      },
+      "reading_order_Edit_dist": {
+        "notebook_value": 0.6623408410626738,
+        "page_denominator": 49,
+        "raw": 0.6623408410626738
+      },
+      "table_TEDS": {
+        "notebook_value": 29.330900202645527,
+        "page_denominator": 22,
+        "raw": 0.29330900202645527
+      },
+      "table_TEDS_structure_only": {
+        "notebook_value": 35.24691277737417,
+        "page_denominator": 22,
+        "raw": 0.35246912777374173
+      },
+      "text_block_Edit_dist": {
+        "notebook_value": 0.6635464840181626,
+        "page_denominator": 46,
+        "raw": 0.6635464840181626
+      }
+    },
+    "overall_notebook": null,
+    "source": "tools/generate_result_tables.ipynb#cell-2"
+  },
+  "page_denominators": {
+    "display_formula": {
+      "Edit_dist": {
+        "ALL": 3
+      }
+    },
+    "reading_order": {
+      "Edit_dist": {
+        "ALL": 49
+      }
+    },
+    "table": {
+      "Edit_dist": {
+        "ALL": 22
+      },
+      "TEDS": {
+        "ALL": 22
+      },
+      "TEDS_structure_only": {
+        "ALL": 22
+      }
+    },
+    "text_block": {
+      "Edit_dist": {
+        "ALL": 46
+      }
+    }
+  },
+  "runtime_environment": {
+    "external_tools": {
+      "convert": {
+        "output": "WARNING: The convert command is deprecated in IMv7, use \"magick\" instead of \"convert\" or \"magick convert\" | Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules",
+        "path": "/opt/homebrew/bin/convert",
+        "returncode": 0
+      },
+      "ghostscript": {
+        "output": "10.07.1",
+        "path": "/opt/homebrew/bin/gs",
+        "returncode": 0
+      },
+      "identify": {
+        "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd",
+        "path": "/opt/homebrew/bin/identify",
+        "returncode": 0
+      },
+      "kpsewhich": {
+        "output": "kpathsea version 6.4.2 | Copyright 2026 Karl Berry & Olaf Weber. | License LGPLv2.1+: GNU Lesser GPL version 2.1 or later <https://gnu.org/licenses/lgpl.html> | This is free software: you are free to change and redistribute it. | There is NO WARRANTY, to the extent permitted by law.",
+        "path": "/Library/TeX/texbin/kpsewhich",
+        "returncode": 0
+      },
+      "latexmlc": {
+        "output": "unavailable (FileNotFoundError: [Errno 2] No such file or directory: 'latexmlc')",
+        "path": "latexmlc",
+        "returncode": null
+      },
+      "magick": {
+        "output": "Version: ImageMagick 7.1.2-27 Q16-HDRI aarch64 e4c2b403b:20260705 https://imagemagick.org | Copyright: (C) 1999 ImageMagick Studio LLC | License: https://imagemagick.org/license/ | Features: Cipher DPC HDRI Modules | Delegates (built-in): bzlib freetype heic jng jpeg lcms ltdl lzma png tiff webp xml zlib zstd",
+        "path": "/opt/homebrew/bin/magick",
+        "returncode": 0
+      },
+      "pdflatex": {
+        "output": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026) | kpathsea version 6.4.2 | Copyright 2026 Han The Thanh (pdfTeX) et al. | There is NO warranty.  Redistribution of this software is | covered by the terms of both the pdfTeX copyright and",
+        "path": "/Library/TeX/texbin/pdflatex",
+        "returncode": 0
+      },
+      "tlmgr": {
+        "output": "tlmgr revision 79591 (2026-07-05 13:56:20 +0200) | tlmgr using installation: /usr/local/texlive/2026basic | TeX Live (https://tug.org/texlive) version 2026",
+        "path": "/Library/TeX/texbin/tlmgr",
+        "returncode": 0
+      }
+    },
+    "python_packages": {
+      "Levenshtein": "0.25.1",
+      "Pillow": "10.4.0",
+      "PyYAML": "6.0.2",
+      "apted": "1.0.3",
+      "beautifulsoup4": "4.11.1",
+      "evaluate": "0.4.3",
+      "func-timeout": "4.3.5",
+      "loguru": "0.7.2",
+      "lxml": "4.9.1",
+      "matplotlib": "3.7.5",
+      "nltk": "3.9.1",
+      "numpy": "1.24.4",
+      "pandas": "2.0.3",
+      "pip": "unavailable",
+      "pylatexenc": "2.10",
+      "scipy": "1.10.1",
+      "setuptools": "unavailable",
+      "tabulate": "0.9.0",
+      "tqdm": "4.67.1",
+      "wheel": "unavailable"
+    },
+    "system": {
+      "conda_env": "",
+      "conda_prefix": "",
+      "libc": "",
+      "os_release": {},
+      "platform": "macOS-27.0.1-arm64-arm-64bit",
+      "python_executable": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env/bin/python",
+      "python_prefix": "/Users/vedansh/Codes/Projects/unlimitedOCR/unlimitedOCRvenv/omnidocbench-env",
+      "python_version": "3.11.17 (main, Oct 21 2026, 17:46:23) [Clang 23.1.3 ]",
+      "uname": "Darwin Vedanshs-MacBook.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64 arm"
+    },
+    "system_packages": {
+      "package_manager": "unavailable",
+      "tracked_packages": {
+        "fontconfig": "unavailable (no supported package manager found)",
+        "ghostscript": "unavailable (no supported package manager found)",
+        "imagemagick": "unavailable (no supported package manager found)",
+        "latexml": "unavailable (no supported package manager found)",
+        "python3": "unavailable (no supported package manager found)",
+        "python3-pip": "unavailable (no supported package manager found)",
+        "python3-setuptools": "unavailable (no supported package manager found)",
+        "python3-wheel": "unavailable (no supported package manager found)",
+        "texlive-base": "unavailable (no supported package manager found)",
+        "texlive-binaries": "unavailable (no supported package manager found)",
+        "texlive-fonts-recommended": "unavailable (no supported package manager found)",
+        "texlive-lang-chinese": "unavailable (no supported package manager found)",
+        "texlive-lang-cjk": "unavailable (no supported package manager found)",
+        "texlive-latex-base": "unavailable (no supported package manager found)",
+        "texlive-latex-extra": "unavailable (no supported package manager found)",
+        "texlive-plain-generic": "unavailable (no supported package manager found)"
+      }
+    },
+    "texlive": {
+      "cjk_font_family": "gkai",
+      "cjk_font_fd": {
+        "date": "",
+        "header": "",
+        "path": "",
+        "status": "missing",
+        "version": "unavailable"
+      },
+      "cjk_sty": {
+        "date": "",
+        "header": "",
+        "path": "",
+        "status": "missing",
+        "version": "unavailable"
+      }
+    }
+  },
+  "save_name": "pred_quick_match",
+  "stage_execution": {
+    "metrics": {
+      "table": {
+        "TEDS": {
+          "error_case_count": 1,
+          "error_cases": [
+            {
+              "case_name": "page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png[gt=[0], pred=[3]]",
+              "gt_idx": [
+                0
+              ],
+              "img_id": "page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png",
+              "pred_idx": [
+                3
+              ],
+              "reason": "ValueError: invalid literal for int() with base 10: '2</td><td>0</td><td></td><td colspan='"
+            }
+          ],
+          "exception_case_count": 0,
+          "exception_cases": [],
+          "sample_count": 83,
+          "timeout_case_count": 0,
+          "timeout_cases": [],
+          "timeout_sec": 120.0,
+          "workers": 4
+        }
+      }
+    },
+    "page_match": {
+      "fallbacks": {
+        "page_timeout": {
+          "cases": [
+            "jiaocaineedrop_jiaocai_needrop_en_2839.jpg",
+            "jiaocaineedrop_jiaocai_needrop_en_349.jpg",
+            "newspaper_eb569707cf5621d4c71d5898216cdb17_1.jpg"
+          ],
+          "count": 3
+        },
+        "quick_match_timeout": {
+          "cases": [
+            "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png"
+          ],
+          "count": 1
+        }
+      },
+      "match_timeout_sec": 420,
+      "page_count": 50,
+      "quick_match_truncated_timeout_sec": 300,
+      "workers": 4
+    }
+  }
+}
+========== END_FINAL_EVAL_RUN_REPORT pred_quick_match ==========
+[final-eval-run-report] saved to ./result/pred_quick_match_run_summary.json
+[runtime-environment-json] saved to ./result/pred_quick_match_runtime_environment.json
+[runtime-environment-log] saved to ./result/pred_quick_match_runtime_environment.log
+[stage-execution-json] saved to ./result/pred_quick_match_stage_execution.json
+[stage-execution-log] saved to ./result/pred_quick_match_stage_execution.log
