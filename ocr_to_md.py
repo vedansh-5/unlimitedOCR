@@ -244,7 +244,58 @@ def split_merged_tables(text):
     return pattern.sub(replace_table, text)
 
 
-def to_markdown(raw, repair=False, skip=(), cut_loops=False, cut_tables=False, split_tables=False, cut_repeated_lines=False):
+# Minimum character count in a cell for it to be considered prose, not a label.
+_PROSE_MIN_CHARS = 60
+# Prose cells must not look like typical table content: numbers, short codes, dates.
+_SHORT_CODE_RE = re.compile(r"^[A-Z0-9 /\-\.,:;]{1,20}$")
+
+
+def _is_prose_cell(text):
+    """Return True if the cell text reads like a prose sentence rather than tabular data."""
+    text = text.strip()
+    if len(text) < _PROSE_MIN_CHARS:
+        return False
+    # Genuine tables often have pipe separators or are all caps/numbers.
+    if "|" in text or _SHORT_CODE_RE.match(text):
+        return False
+    # Prose has lowercase letters and spaces.
+    has_lower = any(c.islower() for c in text)
+    has_space = " " in text
+    return has_lower and has_space
+
+
+def unwrap_single_row_tables(text):
+    """Convert false 1-row tables that wrap prose paragraphs back to plain text.
+
+    The model occasionally wraps an abstract or bibliography entry in a
+    single-row HTML table (e.g. <table><tr><td>R 0120</td><td>Long prose...</td></tr></table>).
+    When the table has at most 2 rows (one optional header, one data row) and at least
+    one cell contains prose text, the table is replaced by the cell texts joined with
+    newlines, preserving the content without the false table structure.
+    """
+    def replace_table(match):
+        tbl = match.group(0)
+        rows = re.findall(r"<tr\b[^>]*>.*?</tr>", tbl, re.DOTALL | re.IGNORECASE)
+        # Only target tables with 1 or 2 rows.
+        if not (1 <= len(rows) <= 2):
+            return tbl
+        # Use the last row as the data row (if 2 rows, first may be a header).
+        data_row = rows[-1]
+        cells = re.findall(r"<t[dh]\b[^>]*>(.*?)</t[dh]>", data_row, re.DOTALL | re.IGNORECASE)
+        cell_texts = [re.sub(r"<[^>]+>", "", c).strip() for c in cells]
+        # Must have at least one prose cell to qualify for unwrapping.
+        if not any(_is_prose_cell(c) for c in cell_texts):
+            return tbl
+        # Do not unwrap if every cell is short (that is a real 1-row table, e.g. a key-value pair).
+        if all(len(c) < _PROSE_MIN_CHARS for c in cell_texts):
+            return tbl
+        return "\n\n".join(c for c in cell_texts if c)
+
+    pattern = re.compile(r"<table\b[^>]*>.*?</table>", re.DOTALL | re.IGNORECASE)
+    return pattern.sub(replace_table, text)
+
+
+def to_markdown(raw, repair=False, skip=(), cut_loops=False, cut_tables=False, split_tables=False, cut_repeated_lines=False, unwrap_prose_tables=False):
     text = "\n\n".join(page for page in (remove_det(p, repair, skip) for p in split_pages(raw)) if page)
     if cut_loops:
         text = cut_counting_loops(text)
@@ -252,6 +303,8 @@ def to_markdown(raw, repair=False, skip=(), cut_loops=False, cut_tables=False, s
         text = cut_empty_tables(text)
     if split_tables:
         text = split_merged_tables(text)
+    if unwrap_prose_tables:
+        text = unwrap_single_row_tables(text)
     if cut_repeated_lines:
         text = cut_consecutive_repeats(text)
     return text

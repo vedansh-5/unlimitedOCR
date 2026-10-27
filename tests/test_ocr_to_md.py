@@ -146,3 +146,37 @@ def test_split_merged_tables_leaves_normal_table():
     )
     assert split_merged_tables(tbl) == tbl
 
+
+def test_unwrap_single_row_tables_removes_false_table():
+    """1-row table with a short code cell and a long prose cell is unwrapped."""
+    from ocr_to_md import unwrap_single_row_tables
+
+    prose = "Anti-HIV-1 Activity of Pyrryl Aryl Sulfone (PAS) Derivatives: Synthesis and SAR Studies of Novel Esters and Amides at the Position 2 of the Pyrrole Nucleus."
+    tbl = f"<table><tr><td>R 0120</td><td>{prose}</td></tr></table>"
+    result = unwrap_single_row_tables(tbl)
+    assert "<table>" not in result
+    assert prose in result
+    assert "R 0120" in result
+
+
+def test_unwrap_single_row_tables_leaves_short_cell_table():
+    """1-row table whose every cell is short (real key-value table) is NOT unwrapped."""
+    from ocr_to_md import unwrap_single_row_tables
+
+    tbl = "<table><tr><td>Name</td><td>Value</td></tr></table>"
+    assert unwrap_single_row_tables(tbl) == tbl
+
+
+def test_unwrap_single_row_tables_leaves_multirow_table():
+    """Multi-row table with a prose-like cell is NOT unwrapped."""
+    from ocr_to_md import unwrap_single_row_tables
+
+    prose = "Anti-HIV-1 Activity of Pyrryl Aryl Sulfone derivatives with long description text here."
+    tbl = (
+        "<table>"
+        f"<tr><td>R 0120</td><td>{prose}</td></tr>"
+        "<tr><td>R 0121</td><td>Another entry with enough characters to be considered prose content here.</td></tr>"
+        "<tr><td>R 0122</td><td>Yet another bibliographic entry about some chemical compounds studied.</td></tr>"
+        "</table>"
+    )
+    assert unwrap_single_row_tables(tbl) == tbl

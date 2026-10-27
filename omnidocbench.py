@@ -95,7 +95,7 @@ def run_images(images_dir, out, extra):
 
 def cmd_predict(args, out, extra):
     (out / "raw").mkdir(exist_ok=True)
-    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines)
+    return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines, args.unwrap_prose_tables)
 
 
 def find_image(base, stem):
@@ -141,7 +141,7 @@ def cmd_retry(args, out, extra):
                 os.link(img, base_inputs / img.name)
         print(f"{len(candidates)} looping or cut-short pages retried in base mode")
         run_images(base_inputs, out, [*extra, "--mode", "base", "--overwrite"])
-    return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines)
+    return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines, args.unwrap_prose_tables)
 
 
 def is_cut_short_or_misclassified(raw, min_chars=120):
@@ -172,10 +172,10 @@ def cmd_rescore(args, out):
     shutil.copytree(base / "raw", out / "raw", dirs_exist_ok=True)
     for name in ("subset.txt", "gt_subset.json"):
         shutil.copy(base / name, out / name)
-    return write_predictions(out, 0, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines)
+    return write_predictions(out, 0, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines, args.unwrap_prose_tables)
 
 
-def write_predictions(out, code, repair=False, drop_furniture=False, cut_counting_loops=False, cut_empty_tables=False, split_merged_tables=False, cut_repeated_lines=False):
+def write_predictions(out, code, repair=False, drop_furniture=False, cut_counting_loops=False, cut_empty_tables=False, split_merged_tables=False, cut_repeated_lines=False, unwrap_prose_tables=False):
     raw, pred = out / "raw", out / "pred"
     pred.mkdir(exist_ok=True)
     rows = []
@@ -184,7 +184,7 @@ def write_predictions(out, code, repair=False, drop_furniture=False, cut_countin
         # Counting loops are cut only on pages that ran to the token cap: a page that stopped by
         # itself can hold real runs that differ only in their numbers, such as a sheet of sums.
         capped = meta["finish_reason"] == "length"
-        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else (), cut_counting_loops and capped, cut_empty_tables, split_merged_tables, cut_repeated_lines)
+        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else (), cut_counting_loops and capped, cut_empty_tables, split_merged_tables, cut_repeated_lines, unwrap_prose_tables)
         (pred / md.name).write_text(text + "\n", encoding="utf-8")
         plain = checks.strip_tags(text)
         rows.append({
@@ -303,6 +303,7 @@ def main(argv=None):
     parser.add_argument("--cut-empty-tables", action="store_true", help="Cut runaway empty tables from the Markdown")
     parser.add_argument("--split-merged-tables", action="store_true", help="Split stacked sub-tables inside single <table> blocks")
     parser.add_argument("--cut-repeated-lines", action="store_true", help="Truncate consecutive line-level repetitions of non-text markers and spam tokens")
+    parser.add_argument("--unwrap-prose-tables", action="store_true", help="Unwrap 1-row tables whose cells contain prose paragraphs (false table pattern)")
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp
     out.mkdir(parents=True, exist_ok=True)
