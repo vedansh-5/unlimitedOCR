@@ -102,3 +102,9 @@ def test_content_guard_keeps_logits_shape_and_masks_banned():
     assert out.shape == (1, 10)
     assert out[0, 6].item() == float("-inf")
     assert out[0, 7].item() == 0
+
+
+def test_repeated_bounding_boxes_are_flagged_as_loop():
+    raw = "\n".join("<|det|>image [510, 340, 510, 3]<|/det|>" for _ in range(5))
+    assert is_loop(raw)
+

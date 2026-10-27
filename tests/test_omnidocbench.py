@@ -111,3 +111,17 @@ def test_write_predictions_supports_split_merged_tables_and_cut_repeated_lines(t
     assert pred_text.count("[Non-Text]") == 2
     assert (tmp_path / "pages.csv").exists()
 
+
+def test_is_cut_short_or_misclassified_flags_aside_only_and_slide_pages():
+    from omnidocbench import is_cut_short_or_misclassified
+
+    aside_only = "<|det|>aside_text [0, 0, 51, 999]<|/det|>学校 班级 姓名 密封线"
+    assert is_cut_short_or_misclassified(aside_only)
+
+    slide_img = "<|det|>image [0, 0, 999, 999]<|/det|>"
+    assert is_cut_short_or_misclassified(slide_img)
+
+    valid_doc = "<|det|>title [1, 2, 3, 4]<|/det|>Document Title\n<|det|>text [5, 6, 7, 8]<|/det|>A normal body text paragraph with sufficient length."
+    assert not is_cut_short_or_misclassified(valid_doc)
+
+

@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import random
+import re
 import shutil
 import subprocess
 import sys
@@ -97,6 +98,15 @@ def cmd_predict(args, out, extra):
     return write_predictions(out, run_images(out / "inputs", out, extra), args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines)
 
 
+def find_image(base, stem):
+    candidates = list((base / "inputs").glob(f"{glob_escape(stem)}.*")) if (base / "inputs").exists() else []
+    if candidates:
+        return candidates[0]
+    for inp in ROOT.glob(f"results/*/inputs/{glob_escape(stem)}.*"):
+        return inp
+    raise FileNotFoundError(f"Image for {stem} not found in any results/*/inputs")
+
+
 def cmd_retry(args, out, extra):
     base = ROOT / "results" / args.base
     (out / "raw").mkdir(exist_ok=True)
@@ -107,7 +117,7 @@ def cmd_retry(args, out, extra):
     retried = []
     for md in sorted((base / "raw").glob("*.md")):
         if needs_retry(md):
-            image = next((base / "inputs").glob(f"{glob_escape(md.stem)}.*"))
+            image = find_image(base, md.stem)
             if not (retry_inputs / image.name).exists():
                 os.link(image, retry_inputs / image.name)
             retried.append(image.name)
@@ -117,24 +127,40 @@ def cmd_retry(args, out, extra):
     (out / "retried.txt").write_text("".join(n + "\n" for n in retried))
     print(f"{len(retried)} flagged pages re-run, the rest copied from {args.base}")
     code = run_images(retry_inputs, out, extra) if retried else 0
-    empty = [md for md in (out / "raw").glob("*.md") if any(md.stem == Path(n).stem for n in retried) and len(to_markdown(md.read_text(encoding="utf-8"))) < MIN_TEXT_CHARS]
-    if empty:
+    candidates = [
+        md for md in (out / "raw").glob("*.md")
+        if any(md.stem == Path(n).stem for n in retried)
+        and (is_cut_short_or_misclassified(md.read_text(encoding="utf-8")) or is_loop(md.read_text(encoding="utf-8")))
+    ]
+    if candidates:
         base_inputs = out / "inputs_base"
         base_inputs.mkdir(exist_ok=True)
-        for md in empty:
-            img = next(retry_inputs.glob(f"{glob_escape(md.stem)}.*"))
+        for md in candidates:
+            img = find_image(retry_inputs, md.stem)
             if not (base_inputs / img.name).exists():
                 os.link(img, base_inputs / img.name)
-        print(f"{len(empty)} near-empty pages retried in base mode")
+        print(f"{len(candidates)} looping or cut-short pages retried in base mode")
         run_images(base_inputs, out, [*extra, "--mode", "base", "--overwrite"])
     return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables, args.split_merged_tables, args.cut_repeated_lines)
+
+
+def is_cut_short_or_misclassified(raw, min_chars=120):
+    md = to_markdown(raw)
+    if len(md) < MIN_TEXT_CHARS:
+        return True
+    if len(md) < min_chars:
+        categories = re.findall(r"<\|det\|>([^<\s]+)", raw)
+        body_cats = {"text", "title", "table", "equation"}
+        if not any(c in body_cats for c in categories):
+            return True
+    return False
 
 
 def needs_retry(md):
     meta = md.with_suffix(".json")
     capped = meta.exists() and json.loads(meta.read_text()).get("finish_reason") == "length"
     raw = md.read_text(encoding="utf-8")
-    return capped or is_loop(raw) or len(to_markdown(raw)) < MIN_TEXT_CHARS
+    return capped or is_loop(raw) or is_cut_short_or_misclassified(raw)
 
 
 def glob_escape(name):

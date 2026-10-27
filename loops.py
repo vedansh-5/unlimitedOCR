@@ -22,8 +22,19 @@ def broken_marker(raw):
     return raw.count("<|det|>") != raw.count("<|/det|>")
 
 
+def box_repeats(raw):
+    import re
+
+    boxes = [
+        m.group(1)
+        for line in raw.splitlines()
+        if (m := re.search(r"<\|det\|>image\s*(\[[^\]]+\])<\|/det\|>", line.strip()))
+    ]
+    return max(Counter(boxes).values(), default=0) if boxes else 0
+
+
 def is_loop(raw, limit=MAX_REPEAT):
-    return max_repeat(raw) >= limit or broken_marker(raw)
+    return max_repeat(raw) >= limit or broken_marker(raw) or box_repeats(raw) >= 4
 
 
 DET_OPEN, DET_CLOSE = 128818, 128819
