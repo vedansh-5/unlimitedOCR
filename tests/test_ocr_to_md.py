@@ -87,3 +87,62 @@ def test_cut_counting_loops_needs_many_copies_of_a_line_with_no_number():
 
     assert cut_counting_loops(lines) == lines
     assert cut_counting_loops("\n\n".join(["Provincial Government"] * 60)).count("Government") < 5
+
+
+def test_cut_consecutive_repeats_truncates_non_text_placeholders():
+    from ocr_to_md import cut_consecutive_repeats
+
+    text = "\n".join(["[Non-Text]"] * 10)
+    res = cut_consecutive_repeats(text)
+    assert res.count("[Non-Text]") == 2
+
+
+def test_cut_consecutive_repeats_truncates_single_char_spams():
+    from ocr_to_md import cut_consecutive_repeats
+
+    text = "\n".join(["B"] * 40)
+    res = cut_consecutive_repeats(text)
+    assert res.count("B") == 1
+
+
+def test_cut_consecutive_repeats_preserves_normal_lines():
+    from ocr_to_md import cut_consecutive_repeats
+
+    text = "First paragraph\n\nSecond paragraph\n\nThird paragraph"
+    assert cut_consecutive_repeats(text) == text
+
+
+def test_split_merged_tables_splits_stacked_tables():
+    from ocr_to_md import split_merged_tables
+
+    tbl = (
+        "<table>"
+        "<tr><td>Year</td><td>Revenue</td><td>Profit</td></tr>"
+        "<tr><td>2021</td><td>100</td><td>10</td></tr>"
+        "<tr><td>2022</td><td>120</td><td>15</td></tr>"
+        "<tr><td>2023</td><td>150</td><td>20</td></tr>"
+        "<tr><td colspan=\"3\">Cash Flow</td></tr>"
+        "<tr><td>Year</td><td>Operating</td><td>Investing</td></tr>"
+        "<tr><td>2021</td><td>50</td><td>-20</td></tr>"
+        "<tr><td>2022</td><td>60</td><td>-25</td></tr>"
+        "<tr><td>2023</td><td>70</td><td>-30</td></tr>"
+        "</table>"
+    )
+    res = split_merged_tables(tbl)
+    assert res.count("<table>") == 2
+    assert "Cash Flow" in res
+
+
+def test_split_merged_tables_leaves_normal_table():
+    from ocr_to_md import split_merged_tables
+
+    tbl = (
+        "<table>"
+        "<tr><td>Year</td><td>Revenue</td><td>Profit</td></tr>"
+        "<tr><td>2021</td><td>100</td><td>10</td></tr>"
+        "<tr><td>2022</td><td>120</td><td>15</td></tr>"
+        "<tr><td>2023</td><td>150</td><td>20</td></tr>"
+        "</table>"
+    )
+    assert split_merged_tables(tbl) == tbl
+

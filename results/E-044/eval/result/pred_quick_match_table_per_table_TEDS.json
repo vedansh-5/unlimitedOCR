@@ -1,0 +1,334 @@
+{
+    "docstructbench_dianzishu_zhongwenzaixian-o.O-61518266.pdf_149.jpg_[0]": {
+        "TEDS": 0.2779433681073026,
+        "TEDS_structure_only": 0.293591654247392
+    },
+    "docstructbench_dianzishu_zhongwenzaixian-o.O-61518266.pdf_149.jpg_[1]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "docstructbench_llm-raw-scihub-o.O-ijc.22994.pdf_3.jpg_[0]": {
+        "TEDS": 0.8504985754985755,
+        "TEDS_structure_only": 0.8653846153846154
+    },
+    "docstructbench_llm-raw-scihub-o.O-ijc.22994.pdf_3.jpg_[1]": {
+        "TEDS": 0.8417562724014337,
+        "TEDS_structure_only": 0.8709677419354839
+    },
+    "docstructbench_llm-raw-scihub-o.O-ijc.22994.pdf_3.jpg_[2]": {
+        "TEDS": 0.6720883534136546,
+        "TEDS_structure_only": 0.7228915662650602
+    },
+    "eastmoney_34d623c64d12b5f02ffe4bff74f464b368270b1d6930192876bfe353d8fd6c30.pdf_0.jpg_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2.jpg_[0]": {
+        "TEDS": 0.5244755244755245,
+        "TEDS_structure_only": 0.5244755244755245
+    },
+    "eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2.jpg_[1]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2.jpg_[2]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2.jpg_[3]": {
+        "TEDS": 0.43137254901960786,
+        "TEDS_structure_only": 0.5989304812834224
+    },
+    "jiaocaineedrop_jiaocai_needrop_en_1349.jpg_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "jiaocaineedrop_jiaocai_needrop_en_2839.jpg_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "magazine_TheEconomist.2024.02.24_page_076.png_[0]": {
+        "TEDS": 0.5319734449666971,
+        "TEDS_structure_only": 0.7655860349127181
+    },
+    "magazine_TheEconomist.2024.02.24_page_076.png_[1]": {
+        "TEDS": 0.9809426229508197,
+        "TEDS_structure_only": 0.9836065573770492
+    },
+    "magazine_TheEconomist.2024.02.24_page_076.png_[2]": {
+        "TEDS": 0.6758377425044091,
+        "TEDS_structure_only": 0.6944444444444444
+    },
+    "magazine_TheEconomist.2024.02.24_page_076.png_[3]": {
+        "TEDS": 0.5144927536231884,
+        "TEDS_structure_only": 0.5217391304347826
+    },
+    "magazine_TheEconomist.2024.02.24_page_076.png_[4]": {
+        "TEDS": 0.1655092592592592,
+        "TEDS_structure_only": 0.20833333333333337
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[0]": {
+        "TEDS": 0.7168632952052489,
+        "TEDS_structure_only": 0.8994082840236687
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[1]": {
+        "TEDS": 0.24820900518865052,
+        "TEDS_structure_only": 0.6666666666666667
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[2]": {
+        "TEDS": 0.5367635601249047,
+        "TEDS_structure_only": 0.5904761904761905
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[3]": {
+        "TEDS": 0.988167701863354,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[4]": {
+        "TEDS": 0.9514444444444444,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[5]": {
+        "TEDS": 0.9885283060592658,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[6]": {
+        "TEDS": 0.9810763888888889,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[7]": {
+        "TEDS": 0.9968055555555555,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[8]": {
+        "TEDS": 1.0,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[9]": {
+        "TEDS": 0.9625,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[10]": {
+        "TEDS": 0.928030303030303,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[11]": {
+        "TEDS": 0.9115646258503401,
+        "TEDS_structure_only": 0.9183673469387755
+    },
+    "newspaper_Chicago Tribune_0801@magazinesclubnew_page_019.png_[12]": {
+        "TEDS": 0.052594830663773906,
+        "TEDS_structure_only": 0.4819672131147541
+    },
+    "newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.png_[0]": {
+        "TEDS": 0.9,
+        "TEDS_structure_only": 0.9
+    },
+    "newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060.png_[1]": {
+        "TEDS": 0.9,
+        "TEDS_structure_only": 0.9
+    },
+    "newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014.png_[0]": {
+        "TEDS": 0.7671940928270042,
+        "TEDS_structure_only": 0.7763713080168777
+    },
+    "newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014.png_[1]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014.png_[2]": {
+        "TEDS": 0.8991668987283022,
+        "TEDS_structure_only": 0.9883040935672515
+    },
+    "newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014.png_[3]": {
+        "TEDS": 0.10486891385767783,
+        "TEDS_structure_only": 0.5617977528089888
+    },
+    "newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014.png_[4]": {
+        "TEDS": 0.96,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_The Times UK_0801@magazinesclubnew_page_031.png_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[0]": {
+        "TEDS": 0.18857549073564495,
+        "TEDS_structure_only": 0.21518987341772156
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[1]": {
+        "TEDS": 0.06829155575273582,
+        "TEDS_structure_only": 0.12857142857142856
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[2]": {
+        "TEDS": 0.09080634920634922,
+        "TEDS_structure_only": 0.12
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[3]": {
+        "TEDS": 0.397432670037712,
+        "TEDS_structure_only": 0.7428571428571429
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[4]": {
+        "TEDS": 0.3506501547987617,
+        "TEDS_structure_only": 0.6060606060606061
+    },
+    "newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png_[5]": {
+        "TEDS": 0.3072735426282337,
+        "TEDS_structure_only": 0.5714285714285714
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[1]": {
+        "TEDS": 0.375,
+        "TEDS_structure_only": 0.375
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[2]": {
+        "TEDS": 0.5326388888888889,
+        "TEDS_structure_only": 0.5333333333333333
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[3]": {
+        "TEDS": 0.39583333333333337,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[4]": {
+        "TEDS": 0.23787674313990104,
+        "TEDS_structure_only": 0.8
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[5]": {
+        "TEDS": 0.7127659574468085,
+        "TEDS_structure_only": 0.75
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[6]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[7]": {
+        "TEDS": 0.24033189033189029,
+        "TEDS_structure_only": 0.8571428571428572
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[8]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[9]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[10]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[11]": {
+        "TEDS": 0.20353778874187034,
+        "TEDS_structure_only": 0.5714285714285714
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[12]": {
+        "TEDS": 0.044642857142857095,
+        "TEDS_structure_only": 0.1071428571428571
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[13]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[14]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[15]": {
+        "TEDS": 0.22074175824175823,
+        "TEDS_structure_only": 0.8571428571428572
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[16]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[17]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.375
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[18]": {
+        "TEDS": 0.7636612266926565,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[19]": {
+        "TEDS": 0.9477163461538461,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[20]": {
+        "TEDS": 0.8741258741258742,
+        "TEDS_structure_only": 1.0
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[21]": {
+        "TEDS": 0.744842616533793,
+        "TEDS_structure_only": 0.8888888888888888
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[22]": {
+        "TEDS": 0.5798618048618047,
+        "TEDS_structure_only": 0.8
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[23]": {
+        "TEDS": 0.7042483660130718,
+        "TEDS_structure_only": 0.8
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[24]": {
+        "TEDS": 0.23333333333333328,
+        "TEDS_structure_only": 0.8
+    },
+    "newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025.png_[25]": {
+        "TEDS": 0.8798076923076923,
+        "TEDS_structure_only": 1.0
+    },
+    "page-00b6ac57-4466-4eb0-937d-bb29a44fa0d3.png_[0]": {
+        "TEDS": 0.3620943856139285,
+        "TEDS_structure_only": 0.6181818181818182
+    },
+    "page-9a25d716-f3a8-42e6-9a4d-e5e49a71ab41.png_[0]": {
+        "TEDS": 0.9488961038961039,
+        "TEDS_structure_only": 1.0
+    },
+    "page-9a25d716-f3a8-42e6-9a4d-e5e49a71ab41.png_[1]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "page-c7771a62-5b6b-48f0-b591-6b657d26e125.png_[0]": {
+        "TEDS": 0.8252667809999941,
+        "TEDS_structure_only": 0.8979591836734694
+    },
+    "page-c7771a62-5b6b-48f0-b591-6b657d26e125.png_[1]": {
+        "TEDS": 0.9330157551047285,
+        "TEDS_structure_only": 0.9883720930232558
+    },
+    "page-d5a3ea83-5427-4f90-a157-7b39b784b26e.png_[0]": {
+        "TEDS": 0.9986504723346828,
+        "TEDS_structure_only": 1.0
+    },
+    "page-d5a3ea83-5427-4f90-a157-7b39b784b26e.png_[1]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png_[0]": {
+        "TEDS": 0.22931443677842933,
+        "TEDS_structure_only": 0.3054919908466819
+    },
+    "scihub_j.1528-1167.2008.01552.x.pdf_3.jpg_[0]": {
+        "TEDS": 0.42258040637871574,
+        "TEDS_structure_only": 0.752808988764045
+    },
+    "scihub_s12237-014-9873-7.pdf_4.jpg_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    },
+    "yanbaopptmerge_70a45bf10fb90ae0c91d44a11e0a97a8f9515d85626b54eb50a80b6146e5c2bf.pdf_10.jpg_[0]": {
+        "TEDS": 0.19444444444444442,
+        "TEDS_structure_only": 0.33333333333333337
+    },
+    "yanbaopptmerge_70a45bf10fb90ae0c91d44a11e0a97a8f9515d85626b54eb50a80b6146e5c2bf.pdf_10.jpg_[1]": {
+        "TEDS": 0.9278273809523809,
+        "TEDS_structure_only": 0.9285714285714286
+    },
+    "yanbaor2_89c3718f5a45179ef57a5063c6df36fc2c9b7e3ab4275f4905ed89f1c17232ea.pdf_14.jpg_[0]": {
+        "TEDS": 0.0,
+        "TEDS_structure_only": 0.0
+    }
+}

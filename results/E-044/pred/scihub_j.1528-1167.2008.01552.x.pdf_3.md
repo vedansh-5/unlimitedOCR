@@ -1,0 +1,30 @@
+1216
+
+H. S. White et al.
+
+Table 1. Antimicrobial activity and protective index of intraperitoneal AEDs in mice
+
+<table><tr><td rowspan="2"></td><td rowspan="2">Rootrod test</td><td rowspan="2">ED50 test (95% CI) mg/kg</td><td rowspan="2">ED50/95% CI) mg/kg</td><td colspan="2">Peroxisone</td><td rowspan="2">Edo (95% CI) mg/kg</td><td rowspan="2">Pyrroline mg/kg</td><td rowspan="2">Erythrine mg/kg</td><td rowspan="2">P</td><td rowspan="2">ED50 (95% CI) mg/kg</td><td rowspan="2">P</td><td rowspan="2">P</td></tr><tr><td>Peroxisone</td><td>Pyroline</td></tr><tr><td>AED</td><td>&lt;5.00 (95% CI) mg/kg</td><td>1.55 (1.25–1.81)</td><td>&gt;3.22</td><td>54.0 (38.1–74.9) mg/kg</td><td>&gt;9.3</td><td>5.03 (2.39–87.8) mg/kg</td><td>&gt;9.9</td><td>76.3 (64.0–90.7)</td><td>&gt;6.6</td><td>&lt;2.0</td><td>P1</td></tr><tr><td>Rafinamide</td><td>6.55 (2.5–72.1) mg/kg</td><td>9.15 (1.0–16.4)</td><td>6.9</td><td>300 no protection</td><td>&lt;0.2</td><td>37.0 protection</td><td>&lt;0.7</td><td>100 no protection</td><td>&lt;0.7</td><td>P1</td><td></td></tr><tr><td>Phenytoin</td><td>9.21 (8.0–225.5) mg/kg</td><td>21.8 (0.5–25.5) mg/kg</td><td>3.2</td><td>132 (15–159) mg/kg</td><td>5.2</td><td>37.7 (25–47.4) mg/kg</td><td>1.8</td><td>257.5 (20.9–344.8) mg/kg</td><td>2.5</td><td>P1</td><td></td></tr><tr><td>Phenobarbital</td><td>425.8 (369–450) mg/kg</td><td>272.4–7380</td><td>1.6</td><td>148.6 (13–177) mg/kg</td><td>2.9</td><td>359.9 (294–433) mg/kg</td><td>1.2</td><td>387.2 (341–445) mg/kg</td><td>1.1</td><td>P1</td><td></td></tr><tr><td>Valproate</td><td>400.0 mg/kg</td><td>1000 mg/kg</td><td>&lt;0.4</td><td>&lt;0.4</td><td>3.4</td><td>450.0 (354–631) mg/kg</td><td>0.1</td><td>362.1 (321–425) mg/kg</td><td>1.1</td><td>P1</td><td></td></tr></table>
+
+\( ^{a} \) Maximum protection, 37.5% b. maximum protection, 150% c. electroshock,  \( TD_{50} \) , the dose exhibiting evidence of minimal neurotoxicity of animals;  \( CI_{50} \) , confidence interval;  \( ED_{50} \) , the dose of drug maximum protection, 50.0% c. maximum protection, 272.0–473.3W (n=1,151–1,171) d. protection index of PD,  \( PD_{1} \) , protective index of PD,  \( PD_{1} \) , protective index of PD,  \( PD_{1} \) , protective index of PD,  \( PD_{i} \) , protective index of PD,  \( PD_{i} \) , protective index of PD,  \( PD_{i} \) , protective index of PD, <0.45, 100.0% e. protection index of PD, 100.0% e. protection index of PD, 100.0% e. protection index of PD, 100.0% e. protection index
+
+Pentylenetetrazol-induced seizure test
+
+Rank order for relative potencies of the intraperitoneal administration of AEDs in the pentylenetetrazol-induced clonic seizure test in mice was phenobarbital > rufinamide >> valproate = ethosuximide >> phenytoin (Table 1). Phenytoin was ineffective up to a dose of 300 mg/kg. In slight contrast, the rank order for relative anticonvulsant potency in this test with oral administration in mice was phenobarbital > rufinamide > ethosuximide >> valproate >>> phenytoin (Table 2).
+
+Oral rufinamide ( \( \geq \) 1,000 mg/kg) and phenytoin (800 mg/kg) did not inhibit pentylenetetrazol-induced seizures in rats (Table 3). Phenobarbital achieved the best anticonvulsive potency of the remaining three AEDs.
+
+Bicuculline-, picrotin-, and strychnine-induced seizure tests in mice
+
+Intraperitoneal rufinamide was effective at nontoxic doses in the bicuculline and picrotoxin clonic seizure tests (ED\( _{50} \) ~50–75 mg/kg) and showed partial protection from strychnine-induced tonic seizures (37.5% protection; Table 1). Overall, the general order of potency in these chemically induced seizure tests was phenobarbital ≥ rufinamide > valproate = ethosuximide > phenytoin (Table 1). In the strychnine-induced tonic seizure test, phenytoin had the lowest ED\( _{50} \) value, suggesting the greatest potency. However, it is important to note that 50% protection was the maximum achieved with this AED. Phenytoin failed to provide protection against bicuculline- and picrotoxin-induced clonic seizures in mice.
+
+Evaluation of behavioral toxicity in mice
+
+The median toxic dose of intraperitoneal rufinamide  \( \left(\mathrm{TD}_{50}\right) \)  in the rotorotated test of behavioral impairment was 500–1,000 mg/kg. The  \( TD_{50} \)  for rufinamide was higher than that for comparator AEDs (Table 1), indicating a lower toxicity. Higher doses of rufinamide were not assessed due the low  \( ED_{50} \)  values and high protective index (>40).
+
+Neurological side effects of very high-dose intraperitoneal rufinamide (1,000 mg/kg, n = 2; ED \( _{50} \) 15–100 mg/kg) included decreased motor activity, ataxia, muscle relaxation, decreased respiration, and death (one animal died; the other appeared normal). Higher doses of the comparator drugs induced increased side effects (2 × TD \( _{50} \)) and resulted in death (all animals) in 3–24 h (4 × TD \( _{50} \)). The safety ratio for rufinamide in mice (TD \( _{3} \)/ED \( _{97} \) >19.2 [intraperitoneal] and >23.8 [oral]) was consistently greater than for phenytoin, phenobarbital, and valproate (Table 4).
+
+The median dose of intraperitoneal rufinamide required to produce loss of righting reflex in mice ( \( HD_{50} \) ) was >500 and <1,000 mg/kg (Table 5). Rufinamide had a numerically greater  \( HD_{50} \)  value than phenytoin or phenobarbital ( \( HD_{50} \)  values of 178 and 135 mg/kg, respectively). Rufinamide, ethosuximide, and valproate had comparable
+
+Epilepsia, 49(7):1213–1220, 2008
+doi: 10.1111/j.1528-1167.2008.01552.x

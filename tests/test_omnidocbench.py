@@ -83,3 +83,31 @@ def test_retry_identifies_empty_pages_for_base_mode(tmp_path):
 
     assert len(to_markdown(empty_raw)) < MIN_TEXT_CHARS
     assert len(to_markdown(valid_raw)) >= MIN_TEXT_CHARS
+
+
+def test_write_predictions_supports_split_merged_tables_and_cut_repeated_lines(tmp_path):
+    import json
+
+    from omnidocbench import write_predictions
+
+    content = (
+        "<|det|>table [1, 2, 3, 4]<|/det|>"
+        "<table>"
+        "<tr><td>H1</td><td>H2</td></tr>"
+        "<tr><td>1</td><td>2</td></tr>"
+        "<tr><td>H1</td><td>H2</td></tr>"
+        "<tr><td>3</td><td>4</td></tr>"
+        "</table>\n"
+        "<|det|>text [5, 6, 7, 8]<|/det|>"
+        + "\n".join(["[Non-Text]"] * 10)
+    )
+    meta = {"prompt_tokens": 1, "generation_tokens": 1, "elapsed_seconds": 1, "generation_tps": 1, "peak_memory_gb": 1, "finish_reason": "stop", "complete": True}
+    (tmp_path / "raw").mkdir()
+    (tmp_path / "raw" / "sample.md").write_text(content)
+    (tmp_path / "raw" / "sample.json").write_text(json.dumps(meta))
+
+    write_predictions(tmp_path, 0, split_merged_tables=True, cut_repeated_lines=True)
+    pred_text = (tmp_path / "pred" / "sample.md").read_text()
+    assert pred_text.count("[Non-Text]") == 2
+    assert (tmp_path / "pages.csv").exists()
+
