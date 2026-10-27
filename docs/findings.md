@@ -736,9 +736,39 @@ for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
   exact token sequences. Runaway counting loops where numbers increment were neither flagged
   for retry nor blocked during retry.
 - **Change:** `loops.contents` masks digits before line comparison; `loops.ContentNoRepeatGuard`
-  normalizes digit tokens (token IDs 18 to 27) to a canonical digit token during n-gram
-  matching, banning all digit continuations when a digit continuation repeats.
-- **Verification:** Unit tests added in `tests/test_loops.py`. On existing E-028 raw outputs,
-  `is_loop` flags 36 pages (up from 28, +8 pages) and `needs_retry` flags 57 pages (up from 49).
-- **Run plan:** 22 pages in the 50-page problem set are flagged for retry (11 length-capped).
-  Model time estimate: 10 to 16 minutes under `--memory-limit-gb 7.5`.
+  extracts all number tokens from the model vocabulary and normalizes them during n-gram
+  matching. Table row numbers are kept exact for small tables, but bounded to at most
+  `MAX_ROW_CELLS = 35` to stop unclosed runaway table rows. Expanded `--ngram-window 512`
+  enables catching multi-column periodic loops up to ~477 tokens.
+- **Verification:** Unit tests in `tests/test_loops.py` (66 passing). 22 pages in the 50-page
+  problem set flagged for retry.
+
+## E-039: I-11 retry on 50-page problem set (2026-10-27)
+
+- **Change:** `omnidocbench.py retry --exp E-039 --base E-030 --content-guard --ngram-window 512 --memory-limit-gb 7.5`.
+  22 flagged problem pages re-run, remaining 28 copied from E-030. No post-processing flags.
+- **Result:** all 22 pages completed with `finish_reason: stop` (zero length caps).
+  Peak memory 7.30 GB to 7.74 GB, strictly held below the 8 GB limit.
+- **Diff vs E-030 (`compare.py diff`):**
+  - Text Edit: -0.1210 [-0.2384, -0.0044] (0.6846 -> 0.5636, n=46)
+  - Table TEDS: +1.2287 [-1.0787, 4.0413] (29.33 -> 30.56, n=22)
+  - Reading Order: -0.0534 [-0.1175, 0.0105] (0.5910 -> 0.5376, n=49)
+- **Key per-page recoveries:**
+  - `docstructbench...149`: Text Edit 0.9973 -> 0.0000 (-0.9973)
+  - `scihub_j.1528...pdf_3`: Text Edit 0.9668 -> 0.0027 (-0.9641)
+  - `newspaper_Chicago Tribune...019`: Text Edit 1.0000 -> 0.1266 (-0.8734)
+- **Decision:** keep.
+
+## E-041: I-11 retry on 45-page dev subset (2026-10-27)
+
+- **Change:** `omnidocbench.py retry --exp E-041 --base E-029 --content-guard --ngram-window 512 --memory-limit-gb 7.5`.
+  1 flagged page re-run (Daily Star page 60), remaining 44 copied from E-029.
+- **Result:** peak memory 7.58 GB.
+- **Diff vs E-029 (`compare.py diff`):**
+  - Text Edit: -0.0011 [-0.0033, 0.0000] (0.0553 -> 0.0542, n=44)
+  - Reading Order: 0.0000 (0.1251, n=45)
+  - Table TEDS: 0.0000 (93.50, n=17)
+  - Table TEDS-S: 0.0000 (95.59, n=17)
+- **Regression check:** zero regressions on normal pages. All 44 copied pages identical.
+- **Decision:** keep.
+

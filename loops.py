@@ -1,19 +1,15 @@
-import re
 from collections import Counter
 
 from ocr_to_md import DET_RE
 
 MAX_REPEAT = 6
 MIN_CHARS = 3
-DIGIT_TOKENS = set(range(18, 28))
-CANONICAL_DIGIT = 18
 
 
 def contents(raw):
     for line in raw.splitlines():
         m = DET_RE.match(line.strip())
         text = (m.group(2) if m else line).strip()
-        text = re.sub(r"\d", "#", text)
         if len(text) >= MIN_CHARS:
             yield text
 
@@ -31,6 +27,10 @@ def is_loop(raw, limit=MAX_REPEAT):
 
 
 DET_OPEN, DET_CLOSE = 128818, 128819
+CELL_OPEN, CELL_CLOSE = 128821, 128822
+ROW_OPEN, ROW_CLOSE = 128823, 128824
+MAX_ROW_CELLS = 35
+NUMBER = -1
 
 
 def content_tokens(sequence):
@@ -47,7 +47,11 @@ def content_tokens(sequence):
 
 class ContentNoRepeatGuard:
     # Baidu's n-gram rule applied to the text with <|det|> type [box] <|/det|> spans removed,
-    # so a repeat with new box coordinates still counts as a repeat.
+    # so a repeat with new box coordinates still counts as a repeat. Outside table rows every
+    # number token counts as the same token, so a block that repeats with a count going up is a
+    # repeat too; inside a row numbers stay exact, since rows of figures share one shape.
+    number_tokens = frozenset()
+
     def __init__(self, ngram_size=35, window=128):
         self.ngram_size = ngram_size
         self.window = window
@@ -58,10 +62,19 @@ class ContentNoRepeatGuard:
         kept, inside = content_tokens(sequence)
         if inside:
             return set()
-        norm_kept = [CANONICAL_DIGIT if t in DIGIT_TOKENS else t for t in kept]
-        banned = _banned_tokens(norm_kept, self.ngram_size, self.window, set())
-        if CANONICAL_DIGIT in banned:
-            banned = (banned - {CANONICAL_DIGIT}) | DIGIT_TOKENS
+        shape, in_row, cells = [], False, 0
+        for token in kept:
+            if token in (ROW_OPEN, ROW_CLOSE, DET_OPEN):
+                in_row = token == ROW_OPEN
+                cells = 0
+            elif in_row and token == CELL_OPEN:
+                cells += 1
+                if cells > MAX_ROW_CELLS:
+                    in_row = False
+            shape.append(NUMBER if token in self.number_tokens and not in_row else token)
+        banned = _banned_tokens(shape, self.ngram_size, self.window, set())
+        if NUMBER in banned:
+            banned = (banned - {NUMBER}) | self.number_tokens
         return banned
 
     def __call__(self, input_ids, logits):
@@ -79,3 +92,7 @@ class ContentNoRepeatGuard:
                 row = mx.where(mask, mx.array(float("-inf"), dtype=row.dtype), row)
             out.append(row)
         return mx.stack(out).reshape(logits.shape)
+
+
+def number_tokens(vocab):
+    return frozenset(i for text, i in vocab.items() if text.isascii() and text.isdigit())

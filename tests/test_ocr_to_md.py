@@ -1,4 +1,4 @@
-from ocr_to_md import remove_det, split_pages, to_markdown
+from ocr_to_md import cut_counting_loops, remove_det, split_pages, to_markdown
 
 RAW = """<|det|>title [115, 101, 212, 117]<|/det|>Contents
 <|det|>text [112, 215, 886, 378]<|/det|>First line
@@ -53,7 +53,7 @@ def test_counting_loops_leak_without_cut():
 
 
 def test_cut_counting_loops_keeps_first_repeats():
-    md = to_markdown(COUNTING_LOOP, cut_counting_loops=True)
+    md = to_markdown(COUNTING_LOOP, cut_loops=True)
     assert "( 0 ) item" in md
     assert "( 19 ) item" not in md
 
@@ -66,5 +66,24 @@ def test_runaway_empty_tables_leak_without_cut():
 
 
 def test_cut_empty_tables_removes_runaway():
-    md = to_markdown(RUNAWAY_TABLE, cut_empty_tables=True)
+    md = to_markdown(RUNAWAY_TABLE, cut_tables=True)
     assert "<tr><td></td><td></td></tr>" * 10 not in md
+
+
+def test_cut_counting_loops_keeps_whole_copies_only():
+    cell = "; ".join(f"{i // 10 + 1}.{i % 10 + 1}" for i in range(30)) + "</td>"
+
+    assert cut_counting_loops(cell) == "1.1; 1.2; 1.3; </td>"
+
+
+def test_cut_counting_loops_leaves_table_rows():
+    rows = "".join(f"<tr><td>{i}</td><td>{2 * i}</td></tr>" for i in range(30))
+
+    assert cut_counting_loops(rows) == rows
+
+
+def test_cut_counting_loops_needs_many_copies_of_a_line_with_no_number():
+    lines = "\n\n".join(["Provincial Government"] * 12)
+
+    assert cut_counting_loops(lines) == lines
+    assert cut_counting_loops("\n\n".join(["Provincial Government"] * 60)).count("Government") < 5

@@ -88,51 +88,41 @@ def cut_empty_tables(text, max_empty_rows=10, max_page_rows=40):
     return pattern.sub(replace_table, text)
 
 
-def cut_counting_loops(text, min_repeats=10, keep=3, max_k=10):
-    parts = re.split(r"(\d+)", text)
-    non_digits = parts[0::2]
-    n = len(non_digits)
-    i = 0
-    kept_parts = []
-    while i < n:
-        best_k, best_reps = None, 0
-        for k in range(1, max_k + 1):
-            if i + 2 * k > n:
-                continue
-            chunk = non_digits[i : i + k]
-            raw_chunk = "".join(chunk)
-            if any(t in raw_chunk.lower() for t in ("<td", "<tr", "<table")):
-                continue
-            stripped = raw_chunk.strip()
-            if not stripped:
-                continue
-            thresh = 25 if not any(c.isalnum() for c in stripped) else min_repeats
-            reps = 1
-            idx = i + k
-            while idx + k <= n and non_digits[idx : idx + k] == chunk:
-                reps += 1
-                idx += k
-            if reps >= thresh and reps > best_reps:
-                best_k = k
-                best_reps = reps
-        if best_k is not None:
-            keep_count = min(keep, best_reps)
-            for j in range(i, i + best_k * keep_count):
-                kept_parts.append(parts[2 * j])
-                if 2 * j + 1 < len(parts):
-                    kept_parts.append(parts[2 * j + 1])
-            i += best_k * best_reps
+NUMBER_OR_CHAR = re.compile(r"(\d+)|\D", re.DOTALL)
+REPEATED_UNIT = re.compile(r"(.{4,200}?)\1{9,}", re.DOTALL)
+
+
+def cut_counting_loops(text, keep=3, min_repeats=10, min_bare_repeats=25, min_plain_repeats=50):
+    # A block written over and over with only its numbers changing. Compare with every number
+    # as #, keep the first few whole copies and drop the rest. Table rows are left alone, and a
+    # block with no number in it must repeat many more times, since short lines can repeat for real.
+    shape, where = [], []
+    for m in NUMBER_OR_CHAR.finditer(text):
+        shape.append("#" if m.group(1) else m.group())
+        where.append(m.start())
+    where.append(len(text))
+    shape = "".join(shape)
+    out, last, pos = [], 0, 0
+    while m := REPEATED_UNIT.search(shape, pos):
+        unit = m.group(1)
+        copies = (m.end() - m.start()) // len(unit)
+        if "#" not in unit:
+            needed = min_plain_repeats
         else:
-            kept_parts.append(parts[2 * i])
-            if 2 * i + 1 < len(parts):
-                kept_parts.append(parts[2 * i + 1])
-            i += 1
-    return "".join(kept_parts)
+            needed = min_repeats if any(c.isalnum() for c in unit) else min_bare_repeats
+        end = m.end()
+        if "<t" not in unit.lower() and copies >= needed:
+            # The last copy is often unfinished; it goes too.
+            while end < len(shape) and end - m.end() < len(unit) and shape[end] == unit[end - m.end()]:
+                end += 1
+            out.append(text[where[last] : where[m.start() + keep * len(unit)]])
+            last = end
+        pos = end
+    out.append(text[where[last] :])
+    return "".join(out)
 
 
-def to_markdown(raw, repair=False, skip=(), cut_counting_loops_opt=False, cut_empty_tables_opt=False, **kwargs):
-    cut_loops = cut_counting_loops_opt or kwargs.get("cut_counting_loops", False)
-    cut_tables = cut_empty_tables_opt or kwargs.get("cut_empty_tables", False)
+def to_markdown(raw, repair=False, skip=(), cut_loops=False, cut_tables=False):
     text = "\n\n".join(page for page in (remove_det(p, repair, skip) for p in split_pages(raw)) if page)
     if cut_loops:
         text = cut_counting_loops(text)

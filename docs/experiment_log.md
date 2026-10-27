@@ -282,3 +282,15 @@ Chronological. One entry per meaningful action or decision.
   to 0.0496. 1,639 pages byte-identical, only 12 changed.
 - **I-11 code** (number-blind loop check and repeat guard): implemented and unit tested.
   Adds 8 newly flagged pages on E-028 (57 vs 49). 22 problem-set pages flagged for retry.
+- **E-039** (I-11 retry on problem set, 50 pages, `--memory-limit-gb 7.5`): retried 22 flagged pages
+  with number-blind guard, bounded row cells (`MAX_ROW_CELLS = 35`), and `--ngram-window 512`.
+  All 22 pages stopped cleanly without length cap. Peak memory 7.30 to 7.74 GB.
+  Text Edit -0.1210 [-0.2384, -0.0044] (0.6846 -> 0.5636). Table TEDS +1.2287 [-1.0787, 4.0413] (29.33 -> 30.56).
+  Reading-order Edit -0.0534 (0.5910 -> 0.5376). Kept.
+- **E-040** (E-039 rescored with kept post-processing): confirms stability with `--cut-counting-loops`
+  and `--cut-empty-tables`.
+- **E-041** (I-11 retry on dev set E-029, 45 pages, `--memory-limit-gb 7.5`): retried 1 flagged page
+  (Daily Star page 60). Text Edit -0.0011 [-0.0033, 0.0000] (0.0553 -> 0.0542), Reading order 0.0000,
+  TEDS 0.0000. Confirmed zero regressions across all 44 non-flagged dev pages. Kept.
+- **E-042** (E-041 rescored with kept post-processing): Text Edit -0.0011 [-0.0033, 0.0000].
+

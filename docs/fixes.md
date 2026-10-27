@@ -97,7 +97,7 @@ two, see the error analysis in `findings.md`). Listed by
 
 | ID | Change | Targets | Status |
 |---|---|---|---|
-| I-11 | Number-blind loop check and repeat guard: `loops.py` and `--content-guard` treat digits as equal, so counting loops are flagged for the retry and blocked during it | P-1, P-2; also the two never flagged | Code done and tested. Adds 8 newly flagged pages in E-028 (57 vs 49); flags 22 pages in the 50-page problem set. Awaiting run go |
+| I-11 | Number-blind loop check and repeat guard: `loops.py` and `--content-guard` treat digits as equal, so counting loops are flagged for the retry and blocked during it | P-1, P-2; also the two never flagged | Tested on problem set (E-039: Text Edit -0.1210 [-0.2384, -0.0044], Table TEDS +1.23) and dev (E-041: Text Edit -0.0011, zero regressions). Kept |
 | I-12 | Retry looping pages in the other resolution mode (Base for Gundam) and keep the reading that does not loop | P-1 | Idea. The paper blames resolution for loops |
 | I-13 | Retry ladder: a flagged page tries the guard, then the other mode (I-12), then split reading (I-14), and keeps the first reading that passes the checks (no loop, not cut short, not at the token cap) | P-4, P-5 | Idea. Needs I-11, I-15 first |
 | I-14 | Split reading for dense pages: cut the page into overlapping strips or columns, read each, join in order. Each piece has fewer, larger characters and its own token budget | Newspapers (25% of the text error), the 14 pages still at the token cap | Idea. Join order and overlap removal are the hard part |

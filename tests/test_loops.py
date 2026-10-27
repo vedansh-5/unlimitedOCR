@@ -1,7 +1,6 @@
 from loops import broken_marker, is_loop, max_repeat
 
 WALKING_LOOP = "\n".join(f"<|det|>text [875, {190 + 50 * i}, 902, {220 + 50 * i}]<|/det|>m = 3/11" for i in range(8))
-COUNTING_LOOP = "\n".join(f"<|det|>text [1, 2, 3, 4]<|/det|>item {i} value" for i in range(8))
 
 
 def test_loop_that_walks_down_the_page_is_caught():
@@ -9,9 +8,10 @@ def test_loop_that_walks_down_the_page_is_caught():
     assert is_loop(WALKING_LOOP)
 
 
-def test_counting_loop_with_changing_digits_is_flagged():
-    assert max_repeat(COUNTING_LOOP) == 8
-    assert is_loop(COUNTING_LOOP)
+def test_numbered_lines_are_not_a_loop():
+    raw = "\n".join(f"<|det|>title [1, {i}, 3, 4]<|/det|>2.{i}.1" for i in range(9))
+
+    assert not is_loop(raw)
 
 
 def test_normal_page_is_not_a_loop():
@@ -50,16 +50,46 @@ def test_content_guard_bans_a_repeat_that_only_changes_coordinates():
     assert guard.banned_tokens(block(190) + [DET_OPEN, 5, 240, DET_CLOSE]) == set()
 
 
-def test_content_guard_bans_a_repeat_that_only_changes_digits():
+def test_content_guard_bans_a_repeat_that_only_changes_its_numbers():
     from loops import ContentNoRepeatGuard
 
-    sequence = [40, 41, 19, 42, 40, 41, 20]
     guard = ContentNoRepeatGuard(ngram_size=4, window=64)
+    guard.number_tokens = frozenset({22, 23, 24, 14843, 14844})
+    # "(2354) x (2355) x (2356" with "235" and "4" as separate tokens, as the tokenizer writes it
+    sequence = [10, 14843, 22, 11, 40, 10, 14843, 23, 11, 40, 10, 14843]
 
-    assert guard.banned_tokens(sequence) == {42}
+    assert guard.banned_tokens(sequence) == guard.number_tokens
+    assert guard.banned_tokens(sequence[:-1] + [14844, 24, 11]) == {40}
 
-    sequence2 = [40, 41, 42, 19, 40, 41, 42]
-    assert set(range(18, 28)).issubset(guard.banned_tokens(sequence2))
+
+def test_content_guard_keeps_numbers_exact_inside_table_rows():
+    from loops import ROW_CLOSE, ROW_OPEN, ContentNoRepeatGuard
+
+    guard = ContentNoRepeatGuard(ngram_size=4, window=64)
+    guard.number_tokens = frozenset({736, 2012, 3661})
+    row = lambda a, b: [ROW_OPEN, 128821, a, 16, b, 128822, ROW_CLOSE]
+
+    assert guard.banned_tokens(row(736, 2012) + row(3661, 2012)[:3]) == set()
+
+
+def test_content_guard_bans_runaway_cells_inside_unclosed_row():
+    from loops import CELL_CLOSE, CELL_OPEN, ROW_OPEN, ContentNoRepeatGuard
+
+    guard = ContentNoRepeatGuard(ngram_size=4, window=64)
+    guard.number_tokens = frozenset(range(100, 200))
+    # An unclosed row with 40 cells where only numbers increment
+    seq = [ROW_OPEN]
+    for i in range(100, 140):
+        seq.extend([CELL_OPEN, i, CELL_CLOSE])
+
+    # After MAX_ROW_CELLS (35 cells), numbers are normalized and repeats are banned
+    assert guard.banned_tokens(seq + [CELL_OPEN]) == guard.number_tokens
+
+
+def test_number_tokens_are_the_all_digit_ones():
+    from loops import number_tokens
+
+    assert number_tokens({"0": 18, "235": 14843, "x2": 5, "²": 6, "Ġ12": 7}) == {18, 14843}
 
 
 def test_content_guard_keeps_logits_shape_and_masks_banned():

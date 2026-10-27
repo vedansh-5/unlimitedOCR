@@ -30,6 +30,18 @@ def set_experts_per_token(model, k):
     return len(gates)
 
 
+def with_number_tokens(load_model, guard):
+    def load(*args, **kwargs):
+        model, processor = load_model(*args, **kwargs)
+        guard.number_tokens = number_tokens(getattr(processor, "tokenizer", processor).get_vocab())
+        if not guard.number_tokens:
+            raise RuntimeError("content guard: no number tokens found in the vocabulary")
+        print(f"content guard: {len(guard.number_tokens)} number tokens", file=sys.stderr)
+        return model, processor
+
+    return load
+
+
 def with_experts_per_token(load_model, k):
     def load(*args, **kwargs):
         model, processor = load_model(*args, **kwargs)
@@ -187,9 +199,10 @@ if __name__ == "__main__":
     argv = sys.argv[1:]
     if "--content-guard" in argv:
         argv.remove("--content-guard")
-        from loops import ContentNoRepeatGuard
+        from loops import ContentNoRepeatGuard, number_tokens
 
         unlimited_ocr_mlx.SlidingWindowNoRepeatNgramProcessor = ContentNoRepeatGuard
+        infer_mlx.load_model = with_number_tokens(infer_mlx.load_model, ContentNoRepeatGuard)
     if "--log-speed" in argv:
         i = argv.index("--log-speed")
         path = argv[i + 1]

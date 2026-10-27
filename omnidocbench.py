@@ -145,7 +145,10 @@ def write_predictions(out, code, repair=False, drop_furniture=False, cut_countin
     rows = []
     for md in sorted(raw.glob("*.md")):
         meta = json.loads(md.with_suffix(".json").read_text())
-        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else (), cut_counting_loops, cut_empty_tables)
+        # Counting loops are cut only on pages that ran to the token cap: a page that stopped by
+        # itself can hold real runs that differ only in their numbers, such as a sheet of sums.
+        capped = meta["finish_reason"] == "length"
+        text = to_markdown(md.read_text(encoding="utf-8"), repair, PAGE_FURNITURE if drop_furniture else (), cut_counting_loops and capped, cut_empty_tables)
         (pred / md.name).write_text(text + "\n", encoding="utf-8")
         plain = checks.strip_tags(text)
         rows.append({
@@ -260,7 +263,7 @@ def main(argv=None):
     parser.add_argument("--drop-furniture", action="store_true", help="Leave headers, footers, page numbers and page footnotes out of the Markdown")
     parser.add_argument("--exclude", nargs="*", default=[], help="Experiments whose subset pages must not be selected")
     parser.add_argument("--pages", help="Explicit page list file")
-    parser.add_argument("--cut-counting-loops", action="store_true", help="Cut counting loops from the Markdown")
+    parser.add_argument("--cut-counting-loops", action="store_true", help="Cut counting loops from the Markdown of pages that ran to the token cap")
     parser.add_argument("--cut-empty-tables", action="store_true", help="Cut runaway empty tables from the Markdown")
     args, extra = parser.parse_known_args(argv)
     out = ROOT / "results" / args.exp
