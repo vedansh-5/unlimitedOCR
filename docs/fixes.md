@@ -98,7 +98,7 @@ two, see the error analysis in `findings.md`). Listed by
 | ID | Change | Targets | Status |
 |---|---|---|---|
 | I-11 | Number-blind loop check and repeat guard: `loops.py` and `--content-guard` treat digits as equal, so counting loops are flagged for the retry and blocked during it | P-1, P-2; also the two never flagged | Tested on problem set (E-039: Text Edit -0.1210 [-0.2384, -0.0044], Table TEDS +1.23) and dev (E-041: Text Edit -0.0011, zero regressions). Kept |
-| I-12 | Retry looping pages in the other resolution mode (Base for Gundam) and keep the reading that does not loop | P-1 | Idea. The paper blames resolution for loops |
+| I-12 | Base mode fallback: retried pages that remain near-empty in Gundam mode are retried in Base mode | P-1, P-5, empty slides | Tested on problem set (E-043: Text Edit drops further to -0.1845 [-0.3272, -0.0613], PPT2PDF error halved). Kept |
 | I-13 | Retry ladder: a flagged page tries the guard, then the other mode (I-12), then split reading (I-14), and keeps the first reading that passes the checks (no loop, not cut short, not at the token cap) | P-4, P-5 | Idea. Needs I-11, I-15 first |
 | I-14 | Split reading for dense pages: cut the page into overlapping strips or columns, read each, join in order. Each piece has fewer, larger characters and its own token budget | Newspapers (25% of the text error), the 14 pages still at the token cap | Idea. Join order and overlap removal are the hard part |
 | I-15 | Cut-short check: flag a page whose output is much shorter than its text should be (from a Base reading, or ink density) so it is retried | P-5 (early stop, textbook page 055) | Idea |

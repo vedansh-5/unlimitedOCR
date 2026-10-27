@@ -72,3 +72,14 @@ def test_counting_loops_are_cut_only_on_pages_at_the_token_cap(tmp_path):
 
     assert "29 \\div" in (tmp_path / "pred" / "stopped.md").read_text()
     assert "29 \\div" not in (tmp_path / "pred" / "capped.md").read_text()
+
+
+def test_retry_identifies_empty_pages_for_base_mode(tmp_path):
+    from ocr_to_md import to_markdown
+    from omnidocbench import MIN_TEXT_CHARS
+
+    empty_raw = "<|det|>image [0, 0, 999, 999]<|/det|>\n"
+    valid_raw = "<|det|>title [1, 2, 3, 4]<|/det|>Actual slide title with sufficient content\n"
+
+    assert len(to_markdown(empty_raw)) < MIN_TEXT_CHARS
+    assert len(to_markdown(valid_raw)) >= MIN_TEXT_CHARS

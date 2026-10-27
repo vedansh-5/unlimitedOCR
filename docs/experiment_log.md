@@ -293,4 +293,9 @@ Chronological. One entry per meaningful action or decision.
   (Daily Star page 60). Text Edit -0.0011 [-0.0033, 0.0000] (0.0553 -> 0.0542), Reading order 0.0000,
   TEDS 0.0000. Confirmed zero regressions across all 44 non-flagged dev pages. Kept.
 - **E-042** (E-041 rescored with kept post-processing): Text Edit -0.0011 [-0.0033, 0.0000].
+- **E-043** (I-12 Base mode fallback on problem set): pages that produced fewer than 20 markdown
+  characters in Gundam mode (PPT slides 770 and 4330) retried in Base mode. Both succeeded in under
+  2 s total. Diff vs E-030 baseline: Text Edit -0.1845 [-0.3272, -0.0613] (0.6846 -> 0.5001),
+  Reading-order Edit -0.1300 [-0.2386, -0.0227] (0.5910 -> 0.4610). PPT2PDF text edit halved
+  from 0.9595 to 0.5448. Kept.
 

@@ -117,6 +117,16 @@ def cmd_retry(args, out, extra):
     (out / "retried.txt").write_text("".join(n + "\n" for n in retried))
     print(f"{len(retried)} flagged pages re-run, the rest copied from {args.base}")
     code = run_images(retry_inputs, out, extra) if retried else 0
+    empty = [md for md in (out / "raw").glob("*.md") if any(md.stem == Path(n).stem for n in retried) and len(to_markdown(md.read_text(encoding="utf-8"))) < MIN_TEXT_CHARS]
+    if empty:
+        base_inputs = out / "inputs_base"
+        base_inputs.mkdir(exist_ok=True)
+        for md in empty:
+            img = next(retry_inputs.glob(f"{glob_escape(md.stem)}.*"))
+            if not (base_inputs / img.name).exists():
+                os.link(img, base_inputs / img.name)
+        print(f"{len(empty)} near-empty pages retried in base mode")
+        run_images(base_inputs, out, [*extra, "--mode", "base", "--overwrite"])
     return write_predictions(out, code, args.repair_markers, args.drop_furniture, args.cut_counting_loops, args.cut_empty_tables)
 
 

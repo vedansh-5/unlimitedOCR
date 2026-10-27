@@ -1,0 +1,18 @@
+save_name: pred_quick_match
+[page_match]
+workers: 4
+page_count: 50
+quick_match_truncated_timeout_sec: 300
+match_timeout_sec: 420
+fallbacks:
+  - page_timeout: count=1
+    case: jiaocaineedrop_jiaocai_needrop_en_349.jpg
+  - quick_match_timeout: count=1
+    case: newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png
+[table.TEDS]
+workers: 4
+timeout_sec: 120.0
+sample_count: 83
+timeout_case_count: 0
+error_case_count: 0
+exception_case_count: 0

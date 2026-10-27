@@ -772,3 +772,19 @@ for long documents (page-by-page decoding) and speed (8-bit, fewer experts).
 - **Regression check:** zero regressions on normal pages. All 44 copied pages identical.
 - **Decision:** keep.
 
+## E-043: I-12 Base mode fallback on problem set (2026-10-27)
+
+- **Problem:** Gundam mode misclassifies full-slide presentation layouts as whole-page
+  images (`<|det|>image [0, 0, 999, 999]<|/det|>`), emitting zero text (1.0000 error).
+- **Change:** `omnidocbench.py cmd_retry` automatically falls back to Base mode
+  (`--mode base`) for retried pages that remain near-empty (`< 20` characters).
+- **Result:** PPT slides `yanbaoPPT_770` and `4330` recovered completely in 1.8 s total.
+- **Diff vs E-030 baseline (`compare.py diff`):**
+  - Text Edit: -0.1845 [-0.3272, -0.0613] (0.6846 -> 0.5001, n=46)
+  - Reading Order: -0.1300 [-0.2386, -0.0227] (0.5910 -> 0.4610, n=49)
+  - Table TEDS: +1.2287 [-1.0787, 4.0413] (29.33 -> 30.56, n=22)
+  - PPT2PDF text edit dropped from 0.9595 to 0.5448.
+- **Decision:** keep.
+
+
+
