@@ -11,12 +11,14 @@ Silicon laptop through MLX. On a 140-page sample it matched the paper within sam
 error. On the full 1,651-page benchmark, run under an 8 GB memory cap, it was behind the
 paper (text edit 0.051 against 0.042), and most of the gap came from a few dozen pages
 where the model loops, stops early or merges layouts. We built inference-time fixes for
-those failures. On the 50 worst pages, text edit fell from 0.685 to 0.397 and table
-TEDS rose from 29.3 to 45.3, with no page made worse on a separate 45-page dev set.
-With kept post-processing fixes on the full 1,651-page benchmark (E-052), stratified
-text edit reached 0.0494 (pooled 0.0504), reading order 0.1366 and table TEDS 87.82.
-The full set remains behind the paper (0.042 text edit, 90.2 TEDS), as full-set model
-retries on all flagged pages have not yet been run.
+those failures. On the 50 worst pages, text edit fell from 0.685 to 0.427 and table
+TEDS rose from 29.3 to 45.2 under kept fixes (E-055), with no page made worse on a
+separate 45-page dev set. Earlier E-049 reached 0.397 by including prose unwrapping and
+the unconstrained splitter, which both caused full-set regressions and were rejected.
+With kept post-processing fixes and safer table splitter on the full 1,651-page
+benchmark (E-053), stratified text edit reached 0.0494 (pooled 0.0504), reading order
+0.1355 and table TEDS 88.09. The full set remains behind the paper (0.042 text edit,
+90.2 TEDS), as full-set model retries on all flagged pages have not yet been run.
 
 ## 1. The paper and what it claims
 
@@ -66,7 +68,7 @@ reach on a laptop: the paper used 128 A800 GPUs.
 | Base-mode fallback | Pages that come back empty or cut short in high-resolution mode are re-read in the low-resolution mode. | Kept |
 | Fallback guard | Stops dense newspapers from being sent to the low-resolution mode, which blurs them. | Kept |
 | Clean-up of output | Cuts counting loops, runaway empty tables, and repeated lines. | Kept |
-| Table splitting & prose unwrapping | Splits wrongly merged tables, unwraps false 1-row prose tables. | Kept on the problem set, rejected on the full set: hurt tables |
+| Safer table splitter | Splits stacked tables only when column count changes or next row repeats header words. | Kept: +0.26 TEDS on full set, zero regressions |
 | Page-by-page long documents | Reads a long document one page per request instead of all at once. | Kept |
 | 8-bit weights with a bf16 fallback | Faster decoder. Pages it gets wrong are re-run in bf16. | Kept as a speed option |
 | 4 experts per token instead of 6 | Less work per token. | Kept as a speed option |
@@ -91,11 +93,16 @@ the paper within sampling error: text edit 0.036 [0.024, 0.051] against the pape
 | + Base fallback for cut-short pages (E-046) | 0.438 | 40.3 |
 | + prose-table unwrapping (E-047) | 0.408 | 40.3 |
 | + fallback guard (E-049) | 0.397 | 45.3 |
+| kept fixes only, safer splitter (E-055) | 0.427 | 45.2 |
 
-- Text edit improved by 0.288 [0.138, 0.443]. Reading order improved by 0.224
-  [0.097, 0.347]. Tables gained 16.0 TEDS [4.5, 30.1].
-- The last two steps (E-048, E-049) are replays: they reuse earlier model output rather
-  than a fresh retry.
+- Under kept fixes (E-055), text edit improved by 0.258 [0.107, 0.412] (down to 0.427),
+  reading order improved by 0.198 [0.080, 0.317], and tables gained 15.9 TEDS [4.3, 30.1]
+  (up to 45.2).
+- E-049 reached lower text edit (0.397) by including prose-table unwrapping and the
+  unconstrained table splitter, which were both rejected after failing on the full set,
+  whereas E-055 reflects only the validated, kept fixes.
+- The last two exploratory steps (E-048, E-049) are replays: they reuse earlier model
+  output rather than a fresh retry.
 - The table gains from E-044 do not carry over to the full set (see section 5).
 
 **Dev set (45 normal pages).** The same fixes changed only one page, which got better.
@@ -108,11 +115,11 @@ time. In one request the model added or dropped pages in 10 of 15 documents.
 **Speed.** 8-bit weights with a bf16 fallback gave the same accuracy as bf16 on the dev
 set in a third less time.
 
-**Full set with kept clean-up fixes (E-052, no model retry).** Rescored E-034 with kept post-processing flags (`--cut-counting-loops`, `--cut-empty-tables`, `--cut-repeated-lines`):
-- Stratified reweighted score: text edit 0.0494 [0.0433, 0.0561] (pooled headline 0.0504), reading order 0.1366 [0.1251, 0.1486], table TEDS 87.82 [85.88, 89.66], structure TEDS 91.46 [89.71, 93.03].
-- Weighted paired diff vs E-028 baseline: text edit -0.0006 [-0.0016, -0.0000] (plain paired mean -0.0007), reading order -0.0000 [-0.0003, 0.0002], table TEDS 0.0000 [0.0000, 0.0000].
-- Weighted paired diff vs E-034: text edit -0.0002 [-0.0006, 0.0000] (plain paired mean -0.0002), reading order -0.0001 [-0.0004, 0.0001], table TEDS +0.0014 [0.0000, 0.0043].
-- E-051 added table splitting and prose-table unwrapping on the full set, but was rejected because it dropped table TEDS by 3.6 points (84.20 vs 87.82).
+**Full set with kept clean-up fixes and safer table splitter (E-053, no model retry).** Rescored E-034 with kept post-processing flags and safer table splitter (`--cut-counting-loops`, `--cut-empty-tables`, `--cut-repeated-lines`, `--split-merged-tables`):
+- Stratified reweighted score: text edit 0.0494 [0.0435, 0.0558] (pooled headline 0.0504), reading order 0.1355 [0.1256, 0.1458], table TEDS 88.09 [85.58, 90.31], structure TEDS 91.74 [89.70, 93.54].
+- Weighted paired diff vs E-028 baseline: text edit -0.0006 [-0.0016, -0.0000] (plain paired mean -0.0007), reading order -0.0010 [-0.0021, -0.0002], table TEDS +0.2621 [0.0053, 0.6441].
+- Weighted paired diff vs E-052: text edit -0.0000 [-0.0000, 0.0000] (plain paired mean -0.000002), reading order -0.0009 [-0.0021, -0.0001], table TEDS +0.2621 [0.0053, 0.6441].
+- E-051 tested earlier splitter and prose unwrapping on the full set, but was rejected after dropping table TEDS by 3.6 points (84.20 vs 87.82). The safer rule splits only on column count changes or header repeats, yielding zero table regressions.
 - Full-set model retry for all flagged pages has not been run.
 
 ## 5. What we lost, and limits

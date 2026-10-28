@@ -401,3 +401,67 @@ Chronological. One entry per meaningful action or decision.
   - Weighted paired diff vs E-028 baseline (`compare.py diff`): Text Edit -0.0006 [-0.0016, -0.0000] (n=1557),
     Reading-order Edit -0.0000 [-0.0003, 0.0002] (n=1638), Table TEDS 0.0000 [0.0000, 0.0000] (n=458),
     Table TEDS-S 0.0000 [0.0000, 0.0000] (n=458). Plain paired mean vs E-028: -0.0007 (n=1557). Kept.
+- **E-053** (safer table splitter on full 1,651-page OmniDocBench run): rescored E-034
+  with `--cut-counting-loops`, `--cut-empty-tables`, `--cut-repeated-lines`, and `--split-merged-tables` (safer rule: splits only when column count changes or next row repeats header words; banner rows with matching columns do not split).
+  Evaluated with match cache. Exactly 4 pages changed prediction vs E-052.
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0494 [0.0435, 0.0558] (n=1557),
+    Reading-order Edit 0.1355 [0.1256, 0.1458] (n=1638), Table TEDS 88.0859 [85.5849, 90.3129] (n=458),
+    Table TEDS-S 91.7366 [89.7029, 93.5350] (n=458).
+  - Pooled headline (`summary.json`): Text Edit 0.0504, Reading-order Edit 0.1359, Table TEDS 88.0859,
+    Table TEDS-S 91.7366.
+  - Weighted paired diff vs E-052 (`compare.py diff`): Text Edit -0.0000 [-0.0000, 0.0000] (n=1557),
+    Reading-order Edit -0.0009 [-0.0021, -0.0001] (n=1638), Table TEDS +0.2621 [0.0053, 0.6441] (n=458),
+    Table TEDS-S +0.2811 [0.0140, 0.6747] (n=458). Plain paired mean vs E-052: Text Edit -0.000002 (n=1557).
+  - Weighted paired diff vs E-028 baseline (`compare.py diff`): Text Edit -0.0006 [-0.0016, -0.0000] (n=1557),
+    Reading-order Edit -0.0010 [-0.0021, -0.0002] (n=1638), Table TEDS +0.2621 [0.0053, 0.6441] (n=458),
+    Table TEDS-S +0.2811 [0.0140, 0.6747] (n=458). Plain paired mean vs E-028: -0.0007 (n=1557).
+  - Changed table pages (all 4 gained TEDS, 0 pages worsened):
+    1. page-c7771a62-5b6b-48f0-b591-6b657d26e125.png: 0.2188 -> 0.8791 (+0.6604)
+    2. docstructbench_llm-raw-scihub-o.O-ijc.22994.pdf_3.jpg: 0.4318 -> 0.7881 (+0.3564)
+    3. eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2.jpg: 0.0793 -> 0.2390 (+0.1597)
+    4. newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png: 0.1960 -> 0.2201 (+0.0241)
+  - Decision: Passed gate (Table TEDS interval strictly above zero [0.0053, 0.6441], zero pages losing >0.05 TEDS). Kept.
+- **E-054** (problem set honest baseline with E-052 kept flags): rescored E-049 raw output
+  with `--cut-counting-loops`, `--cut-empty-tables`, and `--cut-repeated-lines` (no split, no unwrap).
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.4271 [0.2942, 0.5518] (n=46),
+    Reading-order Edit 0.4134 [0.3139, 0.5095] (n=49), Table TEDS 39.6505 [27.4319, 53.4404] (n=22),
+    Table TEDS-S 45.5699 [32.0972, 59.1797] (n=22).
+  - Pooled headline (`summary.json`): Text Edit 0.5232, Reading-order Edit 0.5471, Table TEDS 39.6505,
+    Table TEDS-S 45.5699.
+  - Weighted paired diff vs E-030 baseline (`compare.py diff`): Text Edit -0.2575 [-0.4116, -0.1074] (n=46),
+    Reading-order Edit -0.1777 [-0.2982, -0.0560] (n=49), Table TEDS +10.3196 [-4.8193, 26.0683] (n=22),
+    Table TEDS-S +10.3230 [-4.4079, 25.8675] (n=22).
+  - Plain paired mean: vs E-030: -0.142285 (n=46); vs E-049: +0.020299 (n=46). Kept as baseline.
+- **E-055** (safer table splitter on 50-page problem set): rescored E-049 raw output
+  with `--cut-counting-loops`, `--cut-empty-tables`, `--cut-repeated-lines`, and `--split-merged-tables` (safer rule).
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.4271 [0.2942, 0.5518] (n=46),
+    Reading-order Edit 0.3929 [0.2972, 0.4869] (n=49), Table TEDS 45.2308 [32.0737, 58.4186] (n=22),
+    Table TEDS-S 51.4816 [37.8659, 64.8574] (n=22).
+  - Pooled headline (`summary.json`): Text Edit 0.5232, Reading-order Edit 0.5166, Table TEDS 45.2308,
+    Table TEDS-S 51.4816.
+  - Weighted paired diff vs E-054 (`compare.py diff`): Text Edit -0.0000 [-0.0000, 0.0000] (n=46),
+    Reading-order Edit -0.0205 [-0.0432, -0.0027] (n=49), Table TEDS +5.5803 [0.2330, 12.5474] (n=22),
+    Table TEDS-S +5.9117 [0.3513, 12.8385] (n=22).
+  - Weighted paired diff vs E-030 baseline (`compare.py diff`): Text Edit -0.2575 [-0.4116, -0.1074] (n=46),
+    Reading-order Edit -0.1982 [-0.3169, -0.0795] (n=49), Table TEDS +15.8999 [4.3178, 30.0915] (n=22),
+    Table TEDS-S +16.2347 [4.6417, 30.6425] (n=22).
+  - Plain paired mean: vs E-054: -0.000064 (n=46); vs E-030: -0.142349 (n=46). Kept.
+- **E-056** (dev set baseline with E-052 kept flags): rescored E-041 raw output
+  with `--cut-counting-loops`, `--cut-empty-tables`, and `--cut-repeated-lines`.
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0542 [0.0209, 0.0984] (n=44),
+    Reading-order Edit 0.1251 [0.0696, 0.1920] (n=45), Table TEDS 93.5020 [89.4641, 96.7235] (n=17),
+    Table TEDS-S 95.5853 [91.4287, 98.6931] (n=17).
+  - Pooled headline (`summary.json`): Text Edit 0.0574, Reading-order Edit 0.1317, Table TEDS 93.5020,
+    Table TEDS-S 95.5853.
+  - Weighted paired diff vs E-041 (`compare.py diff`): 0.0000 across all four metrics.
+  - Plain paired mean vs E-041: 0.000000 (n=44). Kept as baseline.
+- **E-057** (safer table splitter on 45-page dev subset): rescored E-041 raw output
+  with `--cut-counting-loops`, `--cut-empty-tables`, `--cut-repeated-lines`, and `--split-merged-tables` (safer rule).
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0542 [0.0209, 0.0984] (n=44),
+    Reading-order Edit 0.1251 [0.0696, 0.1920] (n=45), Table TEDS 93.5020 [89.4641, 96.7235] (n=17),
+    Table TEDS-S 95.5853 [91.4287, 98.6931] (n=17).
+  - Pooled headline (`summary.json`): Text Edit 0.0574, Reading-order Edit 0.1317, Table TEDS 93.5020,
+    Table TEDS-S 95.5853.
+  - Weighted paired diff vs E-056 (`compare.py diff`): 0.0000 across all four metrics.
+  - Plain paired mean vs E-056: 0.000000 (n=44). Zero pages changed. Zero regressions. Kept.
+

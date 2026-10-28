@@ -1,0 +1,27 @@
+<|det|>header [324, 72, 610, 85]<|/det|>Available online at www.sciencedirect.com
+<|det|>header [375, 87, 560, 115]<|/det|>SCIENCE @DIRECT®
+<|det|>header [70, 123, 162, 137]<|/det|>ELSEVIER
+<|det|>header [307, 126, 625, 139]<|/det|>Materials Science and Engineering C 24 (2004) 217–220
+<|det|>header [736, 66, 914, 126]<|/det|>MATERIALS SCIENCE & ENGINEERING
+<|det|>header [750, 139, 916, 150]<|/det|>www.elsevier.com/locate/msec
+<|det|>title [92, 184, 895, 211]<|/det|>Synthesis and electro-optical properties of conjugated ionic polymers
+<|det|>text [186, 221, 792, 261]<|/det|>Tai-Long Gui \( ^{a} \) , Sung-Ho Jin \( ^{b} \) , Jong-Wook Park \( ^{c} \) , Kwon-Taek Lim \( ^{d} \) , Sang-Youl Kim \( ^{e} \) , Yeong-Soon Gal \( ^{f,*} \)
+<|det|>text [206, 268, 777, 280]<|/det|>\( ^{a} \) Department of Material Physics, Harbin University of Science and Technology, Harbin 150080, China
+<|det|>text [230, 281, 746, 293]<|/det|>\( ^{b} \) Department of Chemistry Education, Pusan National University, Pusan 609-735, South Korea
+<|det|>text [157, 293, 827, 305]<|/det|>\(^{c}\)Department of Chemistry, Center for Nanotechnology Research, The Catholic University, Bucheon 420-743, South Korea
+<|det|>text [192, 306, 792, 317]<|/det|>\( ^{d} \) Division of Image and Information Engineering, Pukyong National University, Pusan 608-739, South Korea
+<|det|>text [188, 318, 796, 330]<|/det|>\( ^{e} \) Department of Chemistry, Korea Advanced Institute of Science and Technology, Taejon 305-701, South Korea
+<|det|>text [119, 331, 867, 344]<|/det|>\( ^{f} \) Polymer Chemistry Laboratory, College of General Education, Kyungil University, Kyungsangbuk-Do, Kyungsan 712-701, South Korea
+<|det|>title [68, 375, 128, 388]<|/det|>Abstract
+<|det|>text [65, 402, 920, 500]<|/det|>A new ionic conjugated polymer, poly(2-ethynyl-N-methylpyridinium iodide) (PEMPI), was synthesized by the direct polymerization of 2-ethynylpyridine and methyl iodide under mild reaction condition. Another similar conjugated polymer with different counter-ion, poly(2-ethynyl-N-methylpyridinium tetraphenylborate) (PEMTPPB) was also prepared by the ion-exchange reaction of poly(2-ethynyl-N-methylpyridinium iodide) using sodium tetraphenylborate. The polymer structures were characterized by various instrumental methods to have conjugated polymer system with pyridyl moieties of different counter-ion. The photoluminescence spectra of these polymers having different counter-anions indicated that there is no different inductive and size effects of counter-anion between iodide and tetraphenylborate anions in this conjugated polymer backbone.
+<|det|>text [67, 500, 325, 514]<|/det|>© 2003 Elsevier B.V. All rights reserved.
+<|det|>text [66, 526, 610, 540]<|/det|>Keywords: Polyacetylene; 2-Ethynylpyridine; Ionic polymer; Ion-exchange reaction; Luminescence
+<|det|>title [70, 583, 184, 597]<|/det|>1. Introduction
+<|det|>text [65, 612, 475, 718]<|/det|>Polyacetylene and its homologues have been studied as organic semiconductors  \( [1-3] \) , membranes for gas separation and for liquid-mixture separation  \( [4] \) , chiro-optical materials  \( [5,6] \) , side-chain liquid crystals  \( [7-9] \) , materials for chemical sensors  \( [10] \) , and materials for nonlinear optical property  \( [11,12] \)  and photoluminescence and electroluminescence properties  \( [13-17] \) .
+<|det|>text [65, 719, 477, 886]<|/det|>Polyacetylenes with ionic nature have potential as materials for mixed ionic and electronic conductivities, energy storage devices such as batteries and permselective membrane, and light-emitting devices due to the their extensive conjugation and various functionalities  \( [2,18] \) . The synthesis of simple mono- and disubstituted ionic polyacetylenes from ethynylpyridines had been carried out with the activation of the acetylene bond in ethynylpyridines  \( [18,19] \) . We have also studied on the synthesis and characterization of the poly(2-ethynylpyridine)-based conjugated polymers having various functionalities  \( [2,9,14] \) .
+<|det|>text [507, 583, 918, 645]<|/det|>In this paper, we report the synthesis of novel ionic conjugated polymers having different counter-anion (iodide, tetraphenylborate) and the characterization of resulting ionic conjugated polymers.
+<|det|>title [510, 674, 634, 689]<|/det|>2. Experimental
+<|det|>text [507, 703, 919, 931]<|/det|>The conjugated ionic polymer, poly(2-ethynyl-N-methylpyridinium iodide) (PEMPI) was prepared by the direct polymerization of 2-ethynylpyridine with methyl iodide without any initiator system in methanol solvent. The polymerization was performed at 70 °C after standing for 1 h because of the low boiling temperature of methyl iodide. Another ionic polymer, poly(2-ethynyl-N-methylpyridinium tetraphenylborate) (PEMPTPB) was easily prepared by the ion-exchange reaction of PEMPI with sodium tetraphenylborate in methanol solvent. FT-IR spectra were obtained with a Bruker EQUINOX 55 spectrometer using a KBr pellet. NMR spectra were recorded on a Varian 500 MHz FT-NMR spectrometer (Model: Unity INOVA) in DMSO- \( d_{6} \) . X-ray diffractograms were obtained with a Phillips X-ray diffractometer (Model: XPert-APD). The
+<|det|>page_footnote [87, 902, 474, 915]<|/det|>* Corresponding author. Tel.: +82-53-850-7115; fax: +82-53-850-7600.
+<|det|>page_footnote [89, 916, 335, 929]<|/det|>E-mail address: ysgal@kiu.ac.kr (Y.-S. Gal).
+<|det|>footer [67, 943, 468, 968]<|/det|>0928-4931/$ - see front matter © 2003 Elsevier B.V. All rights reserved. doi:10.1016/j.msce.2003.09.055

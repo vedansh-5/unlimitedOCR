@@ -1,0 +1,8 @@
+<|det|>header [344, 34, 591, 49]<|/det|>2020 Global Private Equity Survey
+<|det|>header [849, 34, 955, 48]<|/det|>Chapter 1
+<|det|>text [76, 167, 391, 456]<|/det|>But are CFOs ready? Do they have the requisite skills, tactical as well as technical, to serve as a strategic leader in tomorrow's private equity firm? As the industry continues to mature and evolve and contend with the forces of disruption, the CFO will increasingly be looked upon to up his or her game and become a leader for the firm. In addition to technical skills, CFOs will also need to display the emotional intelligence required to be effective strategic leaders, for the people on their team as well as the entire organization. That means they will need to balance self-awareness with self-regulation and empathy as they make the tough decisions necessary to remain competitive with other funds.
+<|det|>text [419, 167, 841, 303]<|/det|>Private equity managers continue to have high expectations for the years ahead, continuing a trend we have seen in this survey for the better part of a decade. More than half of the managers surveyed expect to raise a new fund in the coming year, with more than three of four of those who do expecting that fund to be larger than their last. This is the highest proportion we have seen since we began asking the question in 2013.
+<|det|>image_caption [420, 321, 833, 380]<|/det|>If you are you planning to raise a fund in 2020, will the fund be equal to, smaller than or larger than your last fund raised?
+<|det|>chart [414, 434, 770, 725]<|/det|>
+<|det|>footer [414, 709, 692, 721]<|/det|>Firms raising a larger fund Firms raising a fund
+<|det|>page_number [945, 954, 955, 964]<|/det|>3

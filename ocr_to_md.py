@@ -1,4 +1,5 @@
 import argparse
+from collections import Counter
 import json
 import os
 import re
@@ -166,6 +167,21 @@ def _parse_row_cells(row_html):
     return cells
 
 
+def _is_numeric(text):
+    try:
+        float(text.replace(",", ""))
+        return True
+    except ValueError:
+        return False
+
+
+def _get_col_count(parsed_rows):
+    cols = [sum(c[1] for c in pr) for pr in parsed_rows if len(pr) > 1]
+    if not cols:
+        return 0
+    return Counter(cols).most_common(1)[0][0]
+
+
 def _find_table_splits(table_html):
     rows = re.findall(r"<tr\b[^>]*>.*?</tr>", table_html, re.DOTALL | re.IGNORECASE)
     if len(rows) < 8:
@@ -175,37 +191,60 @@ def _find_table_splits(table_html):
     total_cols = max((sum(c[1] for c in pr) for pr in parsed_rows if pr), default=1)
 
     h_tokens = set()
-    for pr in parsed_rows[:2]:
+    h_rows = [parsed_rows[0]]
+    if any(c[1] > 1 for c in parsed_rows[0]) and len(parsed_rows[0]) >= 2:
+        r1_cells = [c[0].strip() for c in parsed_rows[1] if c[0].strip()]
+        if r1_cells and all(len(c) <= 40 and "/" not in c for c in r1_cells):
+            words = [c for c in r1_cells if not _is_numeric(c) and not re.search(r"^\d", c) and "\\(" not in c and "$" not in c]
+            if len(words) >= len(r1_cells) * 0.5:
+                h_rows.append(parsed_rows[1])
+
+    for pr in h_rows:
+        if len(pr) == 1:
+            continue
         for content, _, _ in pr:
             clean = content.lower().strip()
-            if len(clean) >= 2 and not clean.isdigit():
-                h_tokens.add(clean)
+            if 2 <= len(clean) <= 60 and not _is_numeric(clean):
+                if clean not in ("-", "\u2014", "--", "\u2013", "n/a", "na") and not re.search(r"[。；，;]", clean) and "\\(" not in clean and "$" not in clean:
+                    h_tokens.add(clean)
 
     splits = []
     i = 3
     while i < len(rows) - 2:
         pr = parsed_rows[i]
-        if not pr:
+        if not pr or any(c[2] > 2 for c in pr):
             i += 1
             continue
 
-        # Skip if any cell has a large rowspan (> 2) indicating data grouping
-        if any(c[2] > 2 for c in pr):
-            i += 1
-            continue
-
-        # Full-width banner or section header (e.g. US corporate bonds)
-        if len(pr) == 1 and pr[0][1] >= total_cols - 1:
-            next_pr = parsed_rows[i + 1] if i + 1 < len(rows) else []
-            if len(next_pr) >= 2 and not any(c[2] > 2 for c in next_pr):
-                splits.append(i)
-                i += 3
-                continue
-
-        # Multi-level header restart: pr has title cells with colspan >= 3 and next row has matching sub-headers
         next_pr = parsed_rows[i + 1] if i + 1 < len(rows) else []
         next_matched = sum(1 for c, _, _ in next_pr if c.lower().strip() in h_tokens)
-        if any(c[1] >= 3 and c[2] <= 2 for c in pr) and next_matched >= 2 and not any(c[2] > 2 for c in next_pr):
+        next_left_has_header = any(c[0].lower().strip() in h_tokens or "表" in c[0] for c in next_pr[:2])
+
+        # Full-width banner: only split if column count changes or next row repeats header words
+        if len(pr) == 1 and pr[0][1] >= total_cols - 1:
+            if len(next_pr) >= 2 and not any(c[2] > 2 for c in next_pr):
+                before_window = parsed_rows[max(0, i - 10):i]
+                after_window = parsed_rows[i + 1:min(len(rows), i + 11)]
+                cols_before = _get_col_count(before_window)
+                cols_after = _get_col_count(after_window)
+                diff_cols = (cols_before > 0 and cols_after > 0 and cols_before != cols_after)
+
+                next_repeats_headers = next_left_has_header and (
+                    next_matched >= 3 or
+                    (next_matched >= 2 and len(next_pr) <= 5) or
+                    (next_matched >= 1 and len(next_pr) <= 3)
+                )
+
+                if diff_cols or next_repeats_headers:
+                    splits.append(i)
+                    i += 3
+                    continue
+            i += 1
+            continue
+
+        # Multi-level header restart: pr has title cells with colspan >= 3 and next row has matching sub-headers
+        pr_matched = any(c[0].lower().strip() in h_tokens for c in pr)
+        if any(c[1] >= 3 and c[2] <= 2 for c in pr) and (next_matched >= 2 or (pr_matched and next_matched >= 1)) and not any(c[2] > 2 for c in next_pr):
             splits.append(i)
             i += 3
             continue
