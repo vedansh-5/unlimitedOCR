@@ -1,0 +1,22 @@
+save_name: pred_quick_match
+[page_match]
+workers: 4
+page_count: 1651
+quick_match_truncated_timeout_sec: 300
+match_timeout_sec: 420
+fallbacks:
+  - page_timeout: count=4
+    case: docstructbench_llm-raw-scihub-o.O-chem.200701981.pdf_9.jpg
+    case: jiaocaineedrop_jiaocai_needrop_en_2839.jpg
+    case: jiaocaineedrop_jiaocai_needrop_en_349.jpg
+    case: newspaper_eb569707cf5621d4c71d5898216cdb17_1.jpg
+  - quick_match_timeout: count=1
+    case: newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018.png
+[table.TEDS]
+workers: 4
+timeout_sec: 120.0
+sample_count: 665
+timeout_case_count: 0
+error_case_count: 1
+  error_case: page-dca64e05-1ce6-49ee-857a-9b5d05a87357.png[gt=[0], pred=[3]] reason=ValueError: invalid literal for int() with base 10: '2</td><td>0</td><td></td><td colspan='
+exception_case_count: 0

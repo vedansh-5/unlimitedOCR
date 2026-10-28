@@ -1,0 +1,12 @@
+{
+  "elapsed_seconds": 30.020776999997906,
+  "prompt_tokens": 1507,
+  "generation_tokens": 2008,
+  "prompt_tps": 620.0659958489562,
+  "generation_tps": 76.33393528048673,
+  "peak_memory_gb": 7.62092711,
+  "finish_reason": "stop",
+  "image_count": 1,
+  "mode": "gundam",
+  "complete": true
+}

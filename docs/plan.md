@@ -192,7 +192,7 @@ model runs stay under 8 GB (`--memory-limit-gb 7.5`).
 
 1. **Results:** headline from `compare.py score --exp E-028` and the CDM summary
    (`eval_cdm/result/predictions_quick_match_run_summary.json`, which gives Overall).
-   Report section 5.1 becomes the full benchmark against the paper and leaderboard;
+   `report_detailed.md`, section 5.1 becomes the full benchmark against the paper and leaderboard;
    the 140-page subset stays as the development record.
 2. **Error analysis on 1,651 pages (no model):** worst pages by type, how many pages
    the retry flagged and whether it fixed them, pages with no flag that still fail

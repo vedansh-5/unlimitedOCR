@@ -1,0 +1,9 @@
+TABLE 4. Uncorrected p-distances (percentage) of mitochondrial H\( _{1} \) fragment species and lineages of Pardziauchena dulcis, Intraspecific or intra-lineage distances are highlighted in gray (in diagonal). Interspecific or inter-lineage distances are shown under the diagonal. Data are shown as range (mean) where appropriate. NC = not calculated, because there was only one individual. Lin = Lineage.
+
+<table><tr><td rowspan="2">P. cardiosoi</td><td colspan="2">P. cardiosoi</td><td colspan="2">P. gidgeae</td><td colspan="2">P. pseudogunneri Lin B</td><td colspan="2">P. ctc sylvicola</td><td colspan="2">P. seigellai</td></tr><tr><td>0 (n = 3)</td><td>0 (n = 3)</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>P. ctc cardiosoi</td><td>2.5</td><td>11.1</td><td>0.4</td><td>NC</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>P. gidgeae</td><td>10.7</td><td>11.5–17.1(1.6)</td><td>6.4</td><td>0.0–0.1 (0.1, n = 3)</td><td></td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>P. pseudogaster Lin A</td><td>11.2–11.3 (1.13)</td><td>11.3</td><td>6.7</td><td></td><td>4.0</td><td>11.5–11.9 (1.6)</td><td></td><td></td><td></td><td></td></tr><tr><td>P. pseudogaster Lin B</td><td>11.0</td><td>7.7–7.9 (7.8)</td><td>11.5–11.8 (1.16)</td><td>12.0–12.4 (2.2)</td><td>11.7–11.8 (1.8)</td><td></td><td></td><td>0.0–1.3 (0.6, n = 7)</td><td></td><td></td></tr><tr><td>P. pseudogaster Lin B</td><td>7.5</td><td>7.8–8.0 (7.9)</td><td>11.2</td><td>11.7–11.9 (1.18)</td><td></td><td></td><td></td><td>2.9–3.1 (3.0)</td><td></td><td>0.0 (n = 9)</td></tr></table>
+
+488
+
+• Zootaxa 4648 (3) © 2019 Magnolia Press
+
+SANTOS ET AL.

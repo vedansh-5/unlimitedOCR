@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-26 (after the full run, E-028)
+Last updated: 2026-10-28 (after full-set clean-up rescore, E-052)
 
 ## Objective
 
@@ -12,11 +12,19 @@ the improvement can be measured fairly.
 
 Scope: no training. The released weights are used as published.
 
-Full run done (E-028, 1,651 pages, under the 8 GB cap, no CDM): Text Edit 0.051, TEDS 87.8, R-order 0.137, worse than the paper (0.042, 90.2, 0.129); 36 pages, mostly loops, carry 37% of the text error. Fixes for them are in `fixes.md`. Earlier: on 140 OmniDocBench v1.6 pages the Mac setup matched the paper within sampling error (E-002). Long documents measured (E-003) and improved by decoding page by page (E-009, E-010). Next: speed changes (I-2 quantization, I-3 fewer experts) on the dev subset.
+Full benchmark (E-028, 1,651 pages under 7.5 GB cap): Text Edit 0.0500 (pooled 0.0511),
+TEDS 87.82, R-order 0.1366, behind the paper (0.042, 90.2, 0.129). Kept post-processing
+clean-up on the full run (E-052) reduced text edit to 0.0494 (pooled 0.0504) while
+preserving table TEDS (87.82). E-051 tested table splitting and prose unwrapping on the
+full set but was rejected after dropping table TEDS by 3.6 points (87.82 to 84.20). On
+the 50-page problem set, the retry ladder (E-049) cut text edit from 0.6846 to 0.3968
+(-0.2878) and raised table TEDS from 29.33 to 45.33 (+15.99). Dev set checks (E-041,
+E-045, E-050) confirmed zero regressions on normal pages. Full-set model retry for all
+flagged pages is pending.
 
 | Item | State |
 |---|---|
-| Paper read, reported results recorded | Done (`report.md`, section 2) |
+| Paper read, reported results recorded | Done (`report_detailed.md`, section 2) |
 | Model architecture checked against config | Done: DeepSeek-OCR encoder + 3B MoE decoder (64 experts, top-6, 2 shared) with R-SWA |
 | Environment | Done: contained in `unlimitedOCRvenv/`, versions pinned to the port's lock |
 | Port bug blocking every run | Fixed in `run_ocr.py`, with a test (findings E-001a) |
@@ -34,21 +42,24 @@ Full run done (E-028, 1,651 pages, under the 8 GB cap, no CDM): Text Edit 0.051,
 | Fast setup on test (E-019 to E-021) | Within noise of bf16 but leaning worse, 26% faster; option only. Accuracy runs stay bf16 + loop repair |
 | Drop page furniture (E-022) | Rejected (slightly worse) |
 | I-8 page-by-page decoding for long documents (E-009, E-010) | Kept. 40 pages: edit 0.228 to 0.077, recall 0.917 to 0.968, 44% less time (Base); Gundam slightly more accurate, 19% slower |
+| Problem set repair ladder (E-030 to E-049) | Kept. 50 pages: Text Edit 0.6846 to 0.3968 (-0.2878), Table TEDS 29.33 to 45.33 (+15.99) |
+| Full run table splitting & prose unwrapping (E-051) | Rejected: dropped full-set table TEDS by 3.6 points (87.82 to 84.20) |
+| Full run clean-up rescore (E-052) | Kept. 1,651 pages: Text Edit 0.0500 to 0.0494 (-0.0006), TEDS 87.82 (preserved) |
 
 ## Baseline
 
 | Source | OmniDocBench v1.5 overall | v1.6 overall | Long-doc 40+ pages edit distance |
 |---|---|---|---|
 | Paper (A800 GPUs, reported) | 93.23 | 93.92 | 0.1069 |
-| This project, full run E-028 (1,651 pages, 8 GB cap) | not measured | Text Edit 0.051, TEDS 87.8, R-order 0.137 (CDM and Overall not measured) | - |
+| This project, full run E-028 (1,651 pages, 8 GB cap) | not measured | Text Edit 0.0500, TEDS 87.82, R-order 0.1366 (CDM and Overall not measured) | - |
+| This project, full run clean-up E-052 (1,651 pages) | not measured | Text Edit 0.0494, TEDS 87.82, R-order 0.1366 (CDM and Overall not measured) | - |
 | This project (M5, MLX), E-002 / E-003 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | 0.228 (NIST, text-layer reference; not comparable) |
 
 ## Best result so far
 
-- OmniDocBench dev: Text Edit 0.042 with I-1 (from 0.053, raw mean); the paired
-  interval touches zero, so it is a fix for a rare failure, not an average gain.
-- Long documents: page-by-page decoding (I-8) at 40 pages, edit distance 0.228 to
-  0.062 to 0.077 and recall 0.917 to 0.967, in 44% less time (Base).
+- OmniDocBench problem set (50 worst pages): Text Edit 0.3968 with E-049 (down from 0.6846 baseline, delta -0.2878 [-0.4430, -0.1379]), Table TEDS 45.33 (up from 29.33, +15.99 points), Reading order 0.3671 (down from 0.5910, delta -0.2240).
+- OmniDocBench full run (1,651 pages): Text Edit 0.0494 with E-052 (down from 0.0500 baseline, delta -0.0006 [-0.0016, -0.0000]), Table TEDS 87.82.
+- Dev subset (45 pages): Text Edit 0.0542, TEDS 93.50, zero regressions across 44 non-flagged pages.
 
 ## Key findings so far (from reading, not experiments)
 
@@ -77,15 +88,12 @@ Full run done (E-028, 1,651 pages, under the 8 GB cap, no CDM): Text Edit 0.051,
 
 ## Waiting on you
 
-- Full OmniDocBench run (1,651 pages, about 8 to 10 h overnight): on hold until you say
-  go. Reminder will come up now and then.
-- Also needing a go (see `plan.md`): formula CDM via Docker, Tesseract fallback,
-  batched R-SWA.
+- Full-set retry run: retrying all flagged pages across the 1,651 pages with
+  the number-blind loop guard and Base ladder fallback.
+- Formula CDM via Docker container to produce the official Overall score.
 
 ## Next steps (where to pick up)
 
-1. Done: I-2 (8-bit + fallback kept, 4-bit rejected).
-2. Done: I-3 (4 experts kept). Running: 8-bit + 4 experts + fallback on dev (E-017/E-018).
-3. E-008: decode speed over a long request (`--log-speed`).
-4. I-5 newer mlx, I-7 resolution routing (may be moot after I-8).
-5. Final test-subset run with all kept changes.
+1. Full-set retry run: execute the retry ladder across all flagged full-set pages.
+2. Official Docker CDM evaluation for formula recognition and Overall benchmark score.
+3. Gutter-aware column slicing for broadsheet newspapers.

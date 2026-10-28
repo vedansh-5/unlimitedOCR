@@ -1,0 +1,316 @@
+# Unlimited-OCR on Apple Silicon: Reproduction and Improvements
+
+Status of each section is marked: **[verified]** (from a source we checked or our own
+measurement), **[planned]** (not yet done), **[draft]** (preliminary).
+
+## 1. Problem statement and objectives [draft]
+
+End-to-end OCR models with an LLM decoder keep a key-value (KV) cache that grows with
+every output token. Long documents therefore get slower and use more memory as
+decoding goes on. Unlimited-OCR addresses this with Reference Sliding Window Attention
+(R-SWA), which keeps the cache at a fixed size.
+
+The official release targets NVIDIA GPUs only. This project:
+
+1. runs the released model on a 16 GB Apple Silicon laptop through the MLX framework;
+2. checks how closely that setup reproduces the paper's reported results;
+3. tests changes that improve accuracy, robustness or efficiency, and reports each
+   against a measured baseline.
+
+## 2. Original method and reported results [verified: taken from the paper]
+
+Source: Baidu, "Unlimited OCR Works", arXiv 2606.23050 (2026); code and weights at
+github.com/baidu/Unlimited-OCR (MIT).
+
+### 2.1 Architecture
+
+| Part | Detail |
+|---|---|
+| Vision encoder | DeepEncoder from DeepSeek-OCR: SAM ViT-B (window attention) then CLIP-L (global attention), 16x token compression; a 1024x1024 page becomes 256 visual tokens |
+| Projector | Linear, 2048 to 1280 |
+| Decoder | DeepSeek-V2-style MoE, 12 layers, hidden size 1280, 64 routed experts, 6 active per token, 2 shared experts, first layer dense; about 3B total and 0.5B active parameters |
+| Attention | R-SWA in every decoder layer: each output token attends to all prefix tokens (image and prompt) plus the previous n = 128 output tokens |
+| Image modes | "Gundam" (1024 global view plus 640 crops) for single pages; "Base" (one 1024 view per page) for multi-page input |
+| Decoding | Greedy; a no-repeat guard bans any 35-token sequence already seen in the last 128 (single page) or 1024 (multi-page) tokens |
+
+The KV cache after T output tokens is L_m + min(n, T), where L_m is the prefix length,
+instead of L_m + T for standard attention.
+
+### 2.2 Training (not reproducible here)
+
+Continued training from DeepSeek-OCR: about 2M samples (90% single page, 10% synthetic
+multi-page of 2 to 50 pages), 4,000 steps, global batch 256, 32K sequence length,
+8x16 A800 GPUs, AdamW, cosine schedule, learning rate 1e-4. Encoder frozen.
+
+### 2.3 Reported results
+
+OmniDocBench (Table 1 of the paper):
+
+| Version | Overall up | Text Edit down | Formula CDM up | Table TEDS up | Table TEDS-S up | Read-order Edit down |
+|---|---|---|---|---|---|---|
+| v1.5, DeepSeek-OCR | 87.01 | 0.073 | 83.37 | 84.97 | 88.80 | 0.086 |
+| v1.5, Unlimited-OCR | 93.23 | 0.038 | 92.61 | 90.93 | 94.07 | 0.045 |
+| v1.6, Unlimited-OCR | 93.92 | 0.042 | 95.79 | 90.16 | 93.32 | 0.129 |
+
+Text edit distance per document type, v1.5 (Table 2):
+
+| Type | PPT | Academic paper | Book | Colorful textbook | Exam paper | Magazine | Newspaper | Note | Research report |
+|---|---|---|---|---|---|---|---|---|---|
+| Text | 0.025 | 0.023 | 0.019 | 0.046 | 0.049 | 0.020 | 0.081 | 0.066 | 0.008 |
+| Reading order | 0.023 | 0.012 | 0.025 | 0.051 | 0.049 | 0.061 | 0.134 | 0.018 | 0.013 |
+
+Column order checked against the rendered PDF page.
+
+Long-document parsing on an in-house set (Table 3, not released):
+
+| Pages | 2 | 5 | 10 | 15 | 20 | 40+ |
+|---|---|---|---|---|---|---|
+| Distinct-20 up | 99.76% | 99.78% | 97.49% | 99.92% | 98.73% | 96.08% |
+| Distinct-35 up | 99.87% | 99.98% | 99.83% | 99.99% | 99.89% | 96.90% |
+| Edit distance down | 0.0362 | 0.0452 | 0.0526 | 0.0787 | 0.0572 | 0.1069 |
+
+The authors attribute most 40+ page errors to repetition on small text, caused by the
+1024x1024 "Base" mode used for multi-page input.
+
+Speed: 5,580 tokens/s on OmniDocBench at 512 concurrent requests on GPU, versus 4,951
+for DeepSeek-OCR. These numbers are not comparable to a single laptop.
+
+## 3. Proposed modifications [draft]
+
+Training is out of scope (section 6), so every change works at inference time on the
+released weights. Each is tested alone against a baseline (section 4).
+
+| ID | Change | Technical reason | Status |
+|---|---|---|---|
+| I-1 | Re-decode pages flagged as loops with a no-repeat guard that ignores `<\|det\|>` box coordinates | Baidu's 35-gram guard compares raw tokens; a loop that opens a new layout block per repeat changes the box tokens each time, so no 35-token sequence repeats exactly | Kept (5.2) |
+| I-6 | Cut unclosed `<\|det\|>` markers in post-processing | A loop cut off by the token cap can leave a marker open, which leaks into the Markdown | Kept as an output option; no score effect |
+| I-1L | Re-run flagged pages of a long document alone and splice them back in place | Targets the paper's stated long-document failure | Dropped: the model adds or drops pages (5.3), so position no longer identifies a page |
+| I-8 | Decode long documents one page per request and join the outputs | Removes page bookkeeping and the output-token cap from the model's job; each token attends to one page's prefix | Kept (5.3) |
+| I-2 | 8-bit and 4-bit weights for the decoder (vision encoders kept in bf16) | Decoding is memory-bandwidth bound; fewer bytes per weight should raise tokens/s and lower peak memory on a 16 GB machine | 8-bit kept with bf16 fallback on flagged pages; 4-bit rejected (5.4) |
+| I-3 | 4 or 5 routed experts per token instead of 6 | Routed experts are most of the work per token; experts are picked by softmax score, so the dropped ones carry the least weight | 4 experts kept on dev (E-016); 5 not run |
+| I-7 | Route pages with small text to Gundam mode before decoding | Targets the paper's stated cause of long-document errors before it happens, instead of repairing after | Planned |
+
+## 4. Experimental setup [verified]
+
+- Hardware: MacBook Air, Apple M5, 10 cores, 16 GB unified memory, macOS 27.0.1.
+- Software: MLX port `shubhxho/Unlimited-OCR-MLX` at commit `e4c39cd`, `mlx-vlm==0.6.16`,
+  `mlx==0.32.1`, Python 3.12 via uv, all versions pinned to the port's lock file. Model
+  `baidu/Unlimited-OCR` at revision `07dea83`, bf16, greedy decoding.
+- OmniDocBench v1.6: dataset revision `aa1ee96`, official evaluator at commit `f133a71`
+  in its own Python 3.11 environment. Formula CDM is not computed (it needs a Linux TeX
+  toolchain), so the Overall score is not reported.
+- Subsets: a test subset of 140 pages (15 per document type, all 5 historical
+  documents, seed 42) and a disjoint dev subset of 45 pages (5 per type, seed 42, test
+  pages excluded; it has no historical documents, since all 5 are in the test subset).
+  Changes are tried on dev and confirmed on test.
+- Statistics: per-type means are reweighted to the full benchmark's type mix (1,651
+  pages); 95% intervals come from 2,000 stratified bootstrap resamples (pages
+  resampled within type, seed 0). A change is compared with its baseline page by page
+  (paired), and counts as an improvement only if the interval of the difference
+  excludes zero. `compare.py` computes all of these.
+- Long documents: the paper's long-document set is not public. We use page prefixes
+  (2, 5, 10, 20, 40 pages) of three public NIST publications, each sent as one
+  request, scored by normalized edit distance against the PDF text layer and by the
+  paper's distinct-n repetition measure.
+- Logged per document: wall time, model time, prompt and output tokens, tokens/s,
+  peak memory, finish reason, and repetition flags.
+
+### 4.1 Corrections to the MLX port [verified]
+
+Two defects in the port were found and fixed before any measurement. Both are applied
+in `run_ocr.py`, which otherwise runs the port's code unchanged.
+
+1. **Decoding crash.** The port's no-repeat guard returned logits without their batch
+   dimension when called by mlx-vlm 0.6.16, so every run failed on the first generated
+   token. The fix restores the shape; the banned-token rule is unchanged. A unit test
+   reproduces the defect.
+2. **Prompt mismatch.** The port's prompt ended with a space token that Baidu's
+   reference code strips. On the smoke-test pages this caused a skipped opening
+   paragraph and a hallucinated date at the start of the output; removing the space
+   fixed both and left the rest of the output identical. All runs use Baidu's prompt
+   format.
+
+## 5. Results
+
+### 5.1 Reproduction on OmniDocBench v1.6 [verified]
+
+140 pages (15 per document type, all 5 historical documents; seed 42), official
+evaluator at commit `f133a71`, formula CDM not computed. Because the subset
+over-samples historical documents, per-type means of the edit metrics are reweighted
+to the full benchmark's type mix; table scores are page averages over the 37 pages with
+tables, as in the evaluator's headline. Intervals are 95% bootstrap (2,000 resamples).
+All values are produced by `compare.py score --exp E-002`.
+
+| Metric | This work (MLX, M5, 16 GB) | Paper (GPU) | Official leaderboard |
+|---|---|---|---|
+| Text Edit (lower is better) | 0.036 [0.024, 0.051] | 0.042 | 0.039 |
+| Table TEDS | 92.4 [88.1, 95.9] | 90.2 | 90.2 |
+| Table TEDS-S | 94.9 [91.7, 97.6] | 93.3 | 93.4 |
+| Reading-order Edit (lower is better) | 0.107 [0.078, 0.142] | 0.129 | 0.128 |
+
+All reference values fall inside the intervals: the MLX implementation, with the two
+corrections in section 4.1, reproduces the published accuracy within sampling error.
+Inference took 18.1 s per page on average at 75 output tokens/s, with peak memory of
+10.0 GB.
+
+Two of 140 pages (both historical documents) ended in repetition loops. In both, each
+repeated line is a separate layout block with new box coordinates, so no 35-token
+sequence repeats exactly and the decode-time n-gram guard never triggers.
+
+### 5.2 Loop repair, I-1 [verified]
+
+**Problem.** Some pages end in repetition loops (2 of 140 test pages, 1 of 45 dev
+pages). In every case the model starts a new layout block for each repeat, with new
+box coordinates. Because the decode-time guard bans only exact 35-token repeats, the
+changing coordinates hide the loop from it.
+
+**Method.** (1) A detector flags a page when one block's text, with the
+`<|det|> type [box] <|/det|>` prefix removed, repeats 6 or more times, or when a marker
+is left unclosed. The threshold was fixed before looking at test pages. (2) Flagged
+pages are re-decoded with the same 35-token rule applied to the text with marker spans
+removed, so a repeat that only changes coordinates is blocked. All other pages are left
+untouched.
+
+**Results.**
+
+| Subset | Pages re-run | Text Edit before, after | Read-order Edit before, after | Time on re-run pages |
+|---|---|---|---|---|
+| Dev (45) | 1 | 0.0526, 0.0422 | 0.1343, 0.1306 | 377 s, 19 s |
+| Test (140) | 2 | 0.0589, 0.0587 | 0.1271, 0.1286 | 45 s, 23 s |
+
+On the dev page (a newspaper puzzles page) the loop was the failure: the page ran into
+the 32,768-token limit repeating one sentence 555 times. Repair recovered the content
+(page text edit 0.829 to 0.371) and cut its decoding time by 95%. The two test pages are
+warped scans of vertical classical Chinese that the model cannot read; there the loop is
+a symptom, and repair reduces repetition without making the text correct. Loop repair
+therefore helps when decoding runs away on a readable page, and is neutral otherwise.
+
+### 5.3 Long documents: one request against page by page [verified]
+
+Setup in section 4: page prefixes (2 to 40 pages) of three NIST reports, scored against
+the PDF text layer. The text layer misses text inside images, so absolute values are
+higher than the paper's and not comparable with its Table 3; the runs below are
+compared on the same documents.
+
+| Pages | One request, Base (E-003): edit / recall / s | Page by page, Base (E-010) | Page by page, Gundam (E-009) |
+|---|---|---|---|
+| 2 | 0.138 / 0.934 / 9 | 0.136 / 0.938 / 7 | 0.137 / 0.934 / 10 |
+| 5 | 0.104 / 0.973 / 31 | 0.039 / 0.973 / 25 | 0.038 / 0.977 / 33 |
+| 10 | 0.200 / 0.959 / 86 | 0.101 / 0.958 / 64 | 0.096 / 0.960 / 80 |
+| 20 | 0.110 / 0.953 / 194 | 0.104 / 0.961 / 141 | 0.091 / 0.961 / 166 |
+| 40 | 0.228 / 0.917 / 502 | 0.077 / 0.968 / 283 | 0.062 / 0.967 / 337 |
+
+In one request the model added or dropped a page in 10 of 15 documents (from 5 pages
+up), and two of the three 40-page documents ran into the 32,768-token output limit
+(NIST pages need about 800 tokens each). Splitting into one request per page removes
+both failures, raises recall at 40 pages from 0.917 to 0.968, and cuts model time by
+44%, because each output token then attends to one page's prefix instead of all pages'.
+Gundam resolution adds a small further gain in edit distance at about 19% more time.
+
+R-SWA does what the paper claims for memory: peak memory stayed between 8 and 11.4 GB
+up to 40 pages in one request. On this machine and these documents, though, the
+limits of one long request (output budget, page bookkeeping) cost more than its
+benefit. Cross-page structure, which the text-layer reference cannot score, is the
+case where one request may still be the better choice.
+
+### 5.4 Quantized weights, I-2 [verified]
+
+Decoder and projector weights quantized with mlx-vlm's default rule (group size 64);
+vision encoders kept in bf16. Dev subset (45 pages), paired against the same setup in
+bf16. "Fallback" re-runs pages flagged by the loop or token-cap detector with the bf16
+model and the coordinate-blind guard.
+
+| Setting | Text Edit diff | R-order diff | TEDS diff | Model time (45 pages) | Peak memory |
+|---|---|---|---|---|---|
+| bf16 + I-1 (reference, E-005) | 0 | 0 | 0 | 740 s | 10.0 GB |
+| 8-bit, 3.8 GB (E-011, vs E-004) | +0.009 [-0.019, 0.045] | -0.002 [-0.010, 0.008] | -5.6 [-16.9, 0.1] | 512 s | 7.3 GB |
+| 8-bit + fallback (E-013) | -0.001 [-0.002, 0.000] | -0.003 [-0.007, 0.000] | -0.03 [-0.18, 0.10] | 499 s | 8.6 GB |
+| 4-bit, 2.4 GB (E-014, vs E-004) | +0.013 [-0.013, 0.048] | -0.001 [-0.015, 0.018] | -10.3 [-23.3, -0.5] | not comparable (one capped page) | |
+| 4-bit + fallback (E-015) | -0.008 [-0.018, 0.000] | -0.006 [-0.014, 0.001] | -4.7 [-12.3, -0.03] | 395 s | 9.3 GB |
+
+8-bit weights raise output speed from about 90 to 143 tokens/s. Their only failure on
+the dev subset was one page that went wrong from its first block and looped; the
+detector catches it and the bf16 fallback restores it, giving the same accuracy as
+bf16 in a third less time. 4-bit is faster again but loses table accuracy on pages
+that do not loop, which no detector can route to the fallback, so it is not used.
+
+### 5.5 Full benchmark baseline (E-028) [verified]
+
+Run across the complete 1,651-page OmniDocBench v1.6 under the 7.5 GB memory limit.
+Greedy decoding, bf16 weights. Evaluated with official quick_match evaluator without
+Docker CDM formulas.
+
+| Metric | Paper (reported) | E-028 (stratified) | E-028 (pooled headline) |
+|---|---|---|---|
+| Text Edit (lower is better) | 0.042 | 0.0500 [0.0440, 0.0570] | 0.0511 |
+| Reading Order Edit (lower is better) | 0.129 | 0.1366 [0.1253, 0.1487] | 0.1368 |
+| Table TEDS (higher is better) | 90.16 | 87.8238 [85.8793, 89.6606] | 87.8238 |
+| Table TEDS-S (higher is better) | 93.32 | 91.4555 [89.7128, 93.0335] | 91.4555 |
+
+The full run is slightly behind the paper. Analysis revealed that 36 pages (mostly
+token-cap repetition loops and truncated broadsheet newspapers) accounted for over 37%
+of the total text edit error.
+
+### 5.6 Problem set repair ladder (E-030 to E-049) [verified]
+
+A 50-page problem set was extracted from E-028, containing the 36 worst text-edit pages
+(edit >= 0.5), 17 zero-TEDS table pages, 4 memory-cap regressed pages, and 2 normal
+controls. Progressive inference-time fixes were developed and evaluated:
+
+| Experiment / Step | Text Edit (stratified) | Reading Order | Table TEDS | Table TEDS-S |
+|---|---|---|---|---|
+| E-030 Baseline | 0.6846 [0.6146, 0.7616] | 0.5910 [0.4764, 0.7065] | 29.33 [18.34, 40.64] | 35.25 [22.50, 48.39] |
+| E-039 Number-blind loop guard | 0.5636 [0.4357, 0.6868] | 0.5376 [0.4312, 0.6409] | 30.56 [19.86, 41.56] | 36.48 [24.16, 49.33] |
+| E-043 Base fallback for empty pages | 0.5001 [0.3788, 0.6244] | 0.4610 [0.3546, 0.5670] | 30.56 [19.86, 41.56] | 36.48 [24.16, 49.33] |
+| E-044 Table split, repeated lines | 0.5001 [0.3788, 0.6244] | 0.4339 [0.3309, 0.5375] | 35.38 [23.06, 47.56] | 43.19 [29.38, 56.69] |
+| E-046 Cut-short margin fallback | 0.4380 [0.3060, 0.5640] | 0.3926 [0.2929, 0.4880] | 40.34 [26.68, 54.64] | 48.18 [34.43, 62.30] |
+| E-047 Single-row prose unwrap | 0.4076 [0.2827, 0.5306] | 0.3709 [0.2800, 0.4628] | 40.34 [26.68, 54.64] | 48.18 [34.43, 62.30] |
+| E-049 Guarded Base ladder fallback | 0.3968 [0.2722, 0.5178] | 0.3671 [0.2742, 0.4599] | 45.33 [32.06, 58.56] | 52.29 [38.60, 65.89] |
+
+Overall net gain on the problem set (E-049 vs E-030 baseline):
+- Text Edit: -0.2878 [-0.4430, -0.1379] (plain paired mean -0.1626 across 46 paired text pages).
+- Reading Order: -0.2240 [-0.3465, -0.0968].
+- Table TEDS: +15.9946 [4.5295, 30.1440].
+- Table TEDS-S: +17.0448 [5.3860, 31.1310].
+
+### 5.7 Dev subset safety checks (E-041, E-045) [verified]
+
+Every fix developed on the problem set was verified against the 45-page dev subset:
+- E-041 (I-11 loop guard): retried 1 flagged page (Daily Star page 60); text edit improved
+  from 0.0553 to 0.0542 (-0.0011 [-0.0033, 0.0000]), with 0 regressions across all 44 copied pages.
+- E-045 (table split and repeated lines clean-up): measured 0.0000 diff across text edit,
+  reading order, and table TEDS (93.5020 TEDS, 95.5853 TEDS-S). Zero regressions on normal pages.
+- Task 3 verification: confirmed 0 Base pages in E-045 dev set.
+
+### 5.8 Full benchmark table split & prose unwrap (E-051) [rejected]
+
+Tested `--split-merged-tables` and `--unwrap-prose-tables` alongside earlier clean-up flags on all 1,651 pages.
+While text edit dropped slightly (0.0487 stratified vs 0.0496 in E-034), table TEDS dropped significantly from
+87.82 to 84.20 (-3.6262 [-5.1710, -2.2831]). Analysis showed table splitting broke valid tables at full-width section
+headers (33 pages worse, 6 better) and prose unwrapping converted valid 1-row tables to text (6 pages worse, 0 better).
+Rejected on the full set.
+
+### 5.9 Full benchmark rescore with kept fixes (E-052) [verified]
+
+Rescored the full 1,651-page E-034 baseline with only the safe kept post-processing flags (`--cut-counting-loops`,
+`--cut-empty-tables`, `--cut-repeated-lines`). Exactly 15 pages changed prediction vs E-034.
+
+| Metric | E-052 (stratified) | E-052 (pooled headline) | Diff vs E-028 Baseline | Diff vs E-034 |
+|---|---|---|---|---|
+| Text Edit (lower is better) | 0.0494 [0.0433, 0.0561] | 0.0504 | -0.0006 [-0.0016, -0.0000] | -0.0002 [-0.0006, 0.0000] |
+| Reading Order (lower is better) | 0.1366 [0.1251, 0.1486] | 0.1368 | -0.0000 [-0.0003, 0.0002] | -0.0001 [-0.0004, 0.0001] |
+| Table TEDS (higher is better) | 87.8238 [85.8793, 89.6606] | 87.8238 | 0.0000 [0.0000, 0.0000] | +0.0014 [0.0000, 0.0043] |
+| Table TEDS-S (higher is better) | 91.4555 [89.7128, 93.0335] | 91.4555 | 0.0000 [0.0000, 0.0000] | 0.0000 [0.0000, 0.0000] |
+
+Plain paired mean text edit diff vs E-028: -0.0007 (n=1557); vs E-034: -0.0002 (n=1557).
+Table TEDS is preserved at 87.82, safely avoiding the 3.6 point drop from E-051.
+
+## 6. Discussion and limitations [draft]
+
+- Training-based improvements are out of reach on this hardware.
+- The paper's long-document test set is not public, so long-document comparisons are by
+  trend only.
+- The MLX port has not been independently checked against the official CUDA model;
+  any gap we measure may come from the port rather than the model.
+
+## 7. Conclusions [planned]

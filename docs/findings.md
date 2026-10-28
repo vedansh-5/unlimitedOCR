@@ -313,7 +313,7 @@ textbook 0.050, exam 0.052, historical 0.558, magazine 0.019, newspaper 0.093, n
   `compare.py` now uses the evaluator's page average. E-002 TEDS is 92.35
   [88.14, 95.89] (was [88.69, 95.67]) and TEDS-S 94.91 [91.67, 97.58] (was
   [91.9, 97.5]). The paper and leaderboard values stay inside both intervals, so the
-  reproduction conclusion is unchanged. Report section 5.1 updated.
+  reproduction conclusion is unchanged. `report_detailed.md`, section 5.1 updated.
 - **Paired results so far (after minus before, reweighted):**
 
 | Change | Subset | Text Edit diff [95% CI] | R-order diff [95% CI] | TEDS diff |

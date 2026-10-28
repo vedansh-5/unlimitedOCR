@@ -362,5 +362,42 @@ Chronological. One entry per meaningful action or decision.
     Table TEDS-S 52.2918.
   - Weighted paired diff vs E-047 (`compare.py diff`): Text Edit -0.0108 [-0.0195, -0.0037] (n=46), Reading-order Edit -0.0038 [-0.0135, 0.0068] (n=49), Table TEDS +4.9842 [0.0000, 13.4333] (n=22).
   - Plain paired mean vs E-047: -0.0441 (n=46).
-  - Weighted paired diff vs E-030 baseline (`compare.py diff`): Text Edit -0.2878 [-0.4430, -0.1379] (n=46), Reading-order Edit -0.2240 [-0.3465, -0.0968] (n=49), Table TEDS +15.9946 [4.5295, 30.1440] (n=22). Plain paired mean vs E-030: -0.1626 (n=46). Kept.
-
+- **E-050** (prose-table unwrapping on 45-page dev subset): rescored E-045 with
+  `--unwrap-prose-tables` added to existing post-processing flags.
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0542 [0.0209, 0.0984] (n=44),
+    Reading-order Edit 0.1251 [0.0696, 0.1920] (n=45), Table TEDS 93.5020 [89.4641, 96.7235] (n=17),
+    Table TEDS-S 95.5853 [91.4287, 98.6931] (n=17).
+  - Pooled headline (`summary.json`): Text Edit 0.0574, Reading-order Edit 0.1317, Table TEDS 93.5020,
+    Table TEDS-S 95.5853.
+  - Weighted paired diff vs E-045 (`compare.py diff`): 0.0000 across Text Edit [0.0, 0.0] (n=44),
+    Reading order [0.0, 0.0] (n=45), Table TEDS [0.0, 0.0] (n=17), Table TEDS-S [0.0, 0.0] (n=17).
+    Zero pages changed. Zero regressions. Kept.
+- **E-051** (full 1,651-page OmniDocBench run rescored with all post-processing fixes): rescored E-034
+  with `--cut-counting-loops`, `--cut-empty-tables`, `--split-merged-tables`, `--cut-repeated-lines`, and `--unwrap-prose-tables`.
+  62 pages changed prediction vs E-034.
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0487 [0.0428, 0.0554] (n=1557),
+    Reading-order Edit 0.1321 [0.1210, 0.1441] (n=1638), Table TEDS 84.1962 [81.9804, 86.3919] (n=458),
+    Table TEDS-S 87.8352 [85.7652, 89.8105] (n=458).
+  - Pooled headline (`summary.json`): Text Edit 0.0498, Reading-order Edit 0.1323, Table TEDS 84.1962,
+    Table TEDS-S 87.8352.
+  - Weighted paired diff vs E-034 (`compare.py diff`): Text Edit -0.0008 [-0.0025, -0.0000] (n=1557),
+    Reading-order Edit -0.0046 [-0.0074, -0.0022] (n=1638), Table TEDS -3.6262 [-5.1710, -2.2831] (n=458),
+    Table TEDS-S -3.6203 [-5.1458, -2.2650] (n=458). Plain paired mean vs E-034: -0.0008 (n=1557).
+  - Weighted paired diff vs E-028 baseline (`compare.py diff`): Text Edit -0.0013 [-0.0030, -0.0001] (n=1557),
+    Reading-order Edit -0.0045 [-0.0073, -0.0022] (n=1638), Table TEDS -3.6276 [-5.1739, -2.2845] (n=458),
+    Table TEDS-S -3.6203 [-5.1458, -2.2650] (n=458). Plain paired mean vs E-028: -0.0013 (n=1557).
+  - Decision: Rejected on full set because Table TEDS fell by 3.6 points. Table splitting and prose unwrapping overfit to small sets.
+- **E-052** (full 1,651-page OmniDocBench run rescored with safe kept fixes only): rescored E-034
+  with `--cut-counting-loops`, `--cut-empty-tables`, and `--cut-repeated-lines` (no table split, no prose unwrap).
+  Exactly 15 pages changed prediction vs E-034.
+  - Stratified reweighted score (`compare.py score` / `stats.json`): Text Edit 0.0494 [0.0433, 0.0561] (n=1557),
+    Reading-order Edit 0.1366 [0.1251, 0.1486] (n=1638), Table TEDS 87.8238 [85.8793, 89.6606] (n=458),
+    Table TEDS-S 91.4555 [89.7128, 93.0335] (n=458).
+  - Pooled headline (`summary.json`): Text Edit 0.0504, Reading-order Edit 0.1368, Table TEDS 87.8238,
+    Table TEDS-S 91.4555.
+  - Weighted paired diff vs E-034 (`compare.py diff`): Text Edit -0.0002 [-0.0006, 0.0000] (n=1557),
+    Reading-order Edit -0.0001 [-0.0004, 0.0001] (n=1638), Table TEDS +0.0014 [0.0000, 0.0043] (n=458),
+    Table TEDS-S 0.0000 [0.0000, 0.0000] (n=458). Plain paired mean vs E-034: -0.0002 (n=1557).
+  - Weighted paired diff vs E-028 baseline (`compare.py diff`): Text Edit -0.0006 [-0.0016, -0.0000] (n=1557),
+    Reading-order Edit -0.0000 [-0.0003, 0.0002] (n=1638), Table TEDS 0.0000 [0.0000, 0.0000] (n=458),
+    Table TEDS-S 0.0000 [0.0000, 0.0000] (n=458). Plain paired mean vs E-028: -0.0007 (n=1557). Kept.

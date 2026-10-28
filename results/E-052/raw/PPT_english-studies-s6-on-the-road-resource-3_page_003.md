@@ -1,0 +1,2 @@
+<|det|>title [250, 82, 750, 176]<|/det|>Rubric (continued)
+<|det|>text [50, 242, 938, 810]<|/det|>Students experience, engage with and critique literary texts that communicate, through an imaginative use of language, the profound effects that travel and journeying can have on human lives, and appreciate how literature can teach us about distant and different places and cultures. Texts may include longer works, such as novels, autobiographies, films, anthologies, television series, websites and plays.

@@ -1,0 +1,51 @@
+image,prompt_tokens,gen_tokens,model_s,gen_tps,peak_mlx_gb,finish_reason,complete,max_repeated_line,compression_ratio,distinct_35,ragged_tables
+color_textbook_zhonggaokao_小学_13.人教新起点英语（4-5年级）_人教新起点五年级英语上册_课本_人教新起点英语5A电子课本_page_055,907,317,4.76,92.2,7.74,stop,True,1,0.95,1.0,0
+docstructbench_dianzishu_zhongwenzaixian-o.O-61518266.pdf_149,907,3961,57.93,72.9,7.3,stop,True,1,2.48,1.0,1
+docstructbench_llm-raw-scihub-o.O-chin.200427104.pdf_1,907,253,5.39,66.2,7.74,stop,True,2,1.46,1.0,0
+docstructbench_llm-raw-scihub-o.O-ijc.22994.pdf_3,1517,2858,36.47,83.8,7.74,stop,True,1,2.48,1.0,0
+docstructbench_llm-raw-scihub-o.O-s00395-011-0222-8.pdf_10,1517,459,7.63,84.2,7.74,stop,True,1,1.74,1.0,0
+eastmoney_34d623c64d12b5f02ffe4bff74f464b368270b1d6930192876bfe353d8fd6c30.pdf_0,907,1218,14.63,91.8,7.74,stop,True,1,1.81,1.0,0
+eastmoney_6e1cdb75430fe7d7a7757754d163d1a4a8a1c2a3fca38b74a8a2e8df009f2ce0.pdf_2,907,2510,28.82,92.1,7.74,stop,True,1,2.01,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_1349,277,2169,25.86,86.2,7.1,stop,True,1,1.98,1.0,0
+jiaocaineedrop_jiaocai_needrop_en_2839,1507,4427,62.03,73.9,7.58,stop,True,66,9.7,0.8322,0
+jiaocaineedrop_jiaocai_needrop_en_349,1507,8429,119.51,71.9,7.74,stop,True,1,3.84,1.0,0
+magazine_TheEconomist.2024.02.24_page_076,1517,5545,68.5,85.0,7.62,stop,True,1,2.05,1.0,1
+newspaper_02912feb79994ae24665509d964ad9ce_1,2717,6819,102.53,71.0,7.58,stop,True,1,2.77,0.538,0
+newspaper_0b1bb8d03b4287eb95f67b68c2cf9f92_1,2717,7183,101.6,73.6,7.58,stop,True,11,2.94,1.0,0
+newspaper_0ce88e1e131aef7a59d0533be36870de_1,2737,1656,23.7,82.7,7.62,stop,True,1,2.29,1.0,0
+newspaper_6fa919bfb48695bc785d9f326e3cdd36_1,2737,6622,98.67,70.3,7.58,stop,True,2,7.69,1.0,0
+newspaper_7746db2ad2ea24c827eac60244375bbf_1,2737,1593,23.24,81.3,7.62,stop,True,5,1.86,1.0,0
+newspaper_Chicago Tribune_0801@magazinesclubnew_page_015,3557,18305,263.07,71.1,7.62,stop,True,1,2.86,0.9926,0
+newspaper_Chicago Tribune_0801@magazinesclubnew_page_019,3557,8920,150.43,61.2,7.58,stop,True,2,2.21,0.9962,1
+newspaper_Daily Star 2025-1-8@magazinesclubnew_page_060,2327,1864,26.52,79.3,7.58,stop,True,1,1.51,1.0,2
+newspaper_The Globe and Mail - 2025-1-8@magazinesclubnew_page_014,2137,4319,57.41,80.1,7.62,stop,True,2,1.88,1.0,0
+newspaper_The Times UK_0801@magazinesclubnew_page_031,2327,4080,55.08,79.1,7.62,stop,True,2,2.47,0.9083,0
+newspaper_The Wall Street Journal - 2025-01-08@magazinesclubnew_page_018,3557,5203,73.31,76.7,7.62,stop,True,1,3.04,0.553,1
+newspaper_TheBostonGlobe-2025-1-8@magazinesclubnew_page_025,3147,10673,179.33,61.0,7.58,stop,True,6,2.22,1.0,0
+newspaper_TheWashingtonPost-2025-01-08@magazinesclubnew_page_042,1827,2843,42.67,72.3,7.74,stop,True,18,2.82,1.0,0
+newspaper_a105e3b0ddb10be6a596f76407c79180_1,2717,5666,81.46,74.4,7.58,stop,True,83,3.01,1.0,0
+newspaper_b615618f3cdb0f2c13ffb5865dea799c_1,2717,16731,312.41,54.5,7.58,stop,True,12,4.97,0.734,0
+newspaper_e62730aaeb9b509119e0c3699ac18201_1,2737,2169,33.07,76.7,7.62,stop,True,2,2.0,1.0,0
+newspaper_eb569707cf5621d4c71d5898216cdb17_1,2737,2633,37.08,78.6,7.58,stop,True,56,6.43,0.817,0
+newspaper_ef5c785d9cc21ccf6b73d143f231b5c5_1,2737,6672,92.97,74.7,7.58,stop,True,8,2.98,1.0,0
+notes_9e951846094758afac08c620144e3a76_17,907,550,7.82,87.7,7.74,stop,True,1,1.4,1.0,0
+notes_9e951846094758afac08c620144e3a76_9,907,145,3.15,85.7,7.74,stop,True,1,0.94,1.0,0
+page-00b6ac57-4466-4eb0-937d-bb29a44fa0d3,3117,1287,20.37,80.0,7.74,stop,True,1,1.87,1.0,1
+page-07088b2f-f9d6-4c38-9c97-d7f98bc3d556,1507,385,7.46,79.9,7.74,stop,True,1,3.38,1.0,0
+page-14cd673f-d86d-45a7-a13e-2b4e1d91c08f,907,805,10.45,89.1,7.74,stop,True,1,1.82,1.0,0
+page-8e2f7ce3-83c4-4977-b6dc-278394c4bd64,907,1349,17.6,82.9,7.74,stop,True,29,5.22,1.0,0
+page-9a25d716-f3a8-42e6-9a4d-e5e49a71ab41,907,782,10.38,88.3,7.74,stop,True,1,1.85,1.0,0
+page-b342f5e6-cc5a-4920-b1b5-83f96bc476d8,907,1909,23.19,87.4,7.62,stop,True,1,3.88,1.0,0
+page-bea34248-acae-4578-9ff2-3149a84d7c38,907,684,9.41,87.7,7.62,stop,True,1,1.79,1.0,0
+page-c7771a62-5b6b-48f0-b591-6b657d26e125,1517,4123,51.23,84.4,7.62,stop,True,1,2.57,1.0,1
+page-d5a3ea83-5427-4f90-a157-7b39b784b26e,1517,961,13.69,84.1,7.62,stop,True,1,1.77,1.0,0
+page-dad79c54-8125-4927-9988-ee1d2a139d7b,2717,8815,136.56,67.1,7.74,stop,True,3,11.06,1.0,0
+page-dca64e05-1ce6-49ee-857a-9b5d05a87357,907,1152,18.63,68.4,7.74,stop,True,1,3.31,1.0,1
+scihub_j.1528-1167.2008.01552.x.pdf_3,1517,1973,32.16,68.1,7.74,stop,True,1,2.42,1.0,1
+scihub_s12237-014-9873-7.pdf_4,1517,960,16.2,71.5,7.74,stop,True,1,6.7,1.0,0
+yanbaopptmerge_70a45bf10fb90ae0c91d44a11e0a97a8f9515d85626b54eb50a80b6146e5c2bf.pdf_10,907,858,14.08,70.6,7.74,stop,True,1,1.47,1.0,0
+yanbaopptmerge_yanbaoPPT_4330,277,20,0.8,94.4,7.23,stop,True,0,0.57,1.0,0
+yanbaopptmerge_yanbaoPPT_4570,1507,1798,28.53,68.5,7.74,stop,True,3,11.6,1.0,0
+yanbaopptmerge_yanbaoPPT_770,277,56,1.17,91.2,7.23,stop,True,1,0.75,1.0,0
+yanbaor2_89c3718f5a45179ef57a5063c6df36fc2c9b7e3ab4275f4905ed89f1c17232ea.pdf_14,907,550,7.55,88.7,7.74,stop,True,1,1.73,1.0,0
+yanbaor2_d599e33e54376640020110ac1733ccdde8c6323d5d5f0c3ca8cb395dc6e46cf5.pdf_7,907,122,2.77,87.8,7.74,stop,True,1,1.15,1.0,0
