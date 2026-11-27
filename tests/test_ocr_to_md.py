@@ -147,6 +147,60 @@ def test_split_merged_tables_leaves_normal_table():
     assert split_merged_tables(tbl) == tbl
 
 
+def test_split_merged_tables_leaves_banner_row_with_same_columns():
+    from ocr_to_md import split_merged_tables
+
+    tbl = (
+        "<table>"
+        "<tr><td rowspan=\"2\">Task</td><td colspan=\"2\">Group A</td><td colspan=\"2\">Group B</td><td colspan=\"2\">Group C</td></tr>"
+        "<tr><td>Mean</td><td>SD</td><td>Mean</td><td>SD</td><td>Mean</td><td>SD</td></tr>"
+        "<tr><td>Speed</td><td>10</td><td>1</td><td>12</td><td>1</td><td>11</td><td>2</td></tr>"
+        "<tr><td>Accuracy</td><td>90</td><td>5</td><td>88</td><td>4</td><td>92</td><td>3</td></tr>"
+        "<tr><td colspan=\"7\">Random generation (standardised scores)</td></tr>"
+        "<tr><td>Score A</td><td>50</td><td>5</td><td>52</td><td>4</td><td>48</td><td>6</td></tr>"
+        "<tr><td>Score B</td><td>60</td><td>6</td><td>62</td><td>5</td><td>58</td><td>7</td></tr>"
+        "<tr><td>Score C</td><td>70</td><td>7</td><td>72</td><td>6</td><td>68</td><td>8</td></tr>"
+        "</table>"
+    )
+    assert split_merged_tables(tbl) == tbl
+
+
+def test_split_merged_tables_leaves_correlation_matrix_with_numeric_cells():
+    from ocr_to_md import split_merged_tables
+
+    tbl = (
+        "<table>"
+        "<tr><td>PTEs</td><td>As</td><td>Cd</td><td>Co</td><td>Cr</td><td>Cu</td></tr>"
+        "<tr><td>As</td><td>1.00</td><td></td><td></td><td></td><td></td></tr>"
+        "<tr><td>Cd</td><td>0.50</td><td>1.00</td><td></td><td></td><td></td></tr>"
+        "<tr><td>Co</td><td>-0.18</td><td>-0.45</td><td>1.00</td><td></td><td></td></tr>"
+        "<tr><td>Cr</td><td>0.46</td><td>0.56</td><td>0.04</td><td>1.00</td><td></td></tr>"
+        "<tr><td>Cu</td><td>-0.28</td><td>-0.18</td><td>0.03</td><td>0.11</td><td>1.00</td></tr>"
+        "<tr><td>Hg</td><td>0.53</td><td>0.19</td><td>0.04</td><td>0.25</td><td>-0.04</td></tr>"
+        "<tr><td>Mo</td><td>0.16</td><td>0.47</td><td>-0.01</td><td>0.26</td><td>0.23</td></tr>"
+        "</table>"
+    )
+    assert split_merged_tables(tbl) == tbl
+
+
+def test_split_merged_tables_leaves_financial_section_headings():
+    from ocr_to_md import split_merged_tables
+
+    tbl = (
+        "<table>"
+        "<tr><td>Item</td><td>2021A</td><td>2022E</td><td>2023E</td><td>2024E</td></tr>"
+        "<tr><td colspan=\"5\">Current Assets</td></tr>"
+        "<tr><td>Cash</td><td>100</td><td>120</td><td>150</td><td>200</td></tr>"
+        "<tr><td>Receivables</td><td>50</td><td>60</td><td>70</td><td>80</td></tr>"
+        "<tr><td colspan=\"5\">Non-current Assets</td></tr>"
+        "<tr><td>Property</td><td>300</td><td>320</td><td>350</td><td>400</td></tr>"
+        "<tr><td>Equipment</td><td>150</td><td>160</td><td>170</td><td>180</td></tr>"
+        "<tr><td>Total</td><td>600</td><td>660</td><td>740</td><td>860</td></tr>"
+        "</table>"
+    )
+    assert split_merged_tables(tbl) == tbl
+
+
 def test_unwrap_single_row_tables_removes_false_table():
     """1-row table with a short code cell and a long prose cell is unwrapped."""
     from ocr_to_md import unwrap_single_row_tables

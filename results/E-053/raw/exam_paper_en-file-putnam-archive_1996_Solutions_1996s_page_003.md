@@ -1,0 +1,41 @@
+<|det|>page_number [914, 35, 923, 46]<|/det|>3
+<|det|>text [125, 65, 332, 81]<|/det|>tiating and taking square roots,
+<|det|>equation [166, 92, 408, 226]<|/det|>\[
+\begin{array}{l} \left(\frac {2 n - 1}{e}\right) ^ {\frac {2 n - 1}{2}} <   (2 n - 1) ^ {\frac {2 n - 1}{2}} e ^ {- n + 1} \\ \leq 1 \cdot 3 \dots (2 n - 1) \\ \leq (2 n + 1) ^ {\frac {2 n + 1}{2}} \frac {e ^ {- n + 1}}{3 ^ {3 / 2}} \\ <   \left(\frac {2 n + 1}{e}\right) ^ {\frac {2 n + 1}{2}}, \\ \end{array}
+\]
+<|det|>text [125, 235, 318, 250]<|/det|>using the fact that 1 < e < 3.
+<|det|>text [91, 260, 490, 303]<|/det|>B-3 View \( x_{1}, \ldots, x_{n} \) as an arrangement of the numbers \( 1, 2, \ldots, n \) on a circle. We prove that the optimal arrangement is
+<|det|>equation [177, 316, 398, 332]<|/det|>\[
+\dots , n - 4, n - 2, n, n - 1, n - 3, \dots
+\]
+<|det|>text [123, 342, 491, 415]<|/det|>To show this, note that if a, b is a pair of adjacent numbers and c, d is another pair (read in the same order around the circle) with a < d and b > c, then the segment from b to c can be reversed, increasing the sum by
+<|det|>equation [153, 426, 420, 443]<|/det|>\[
+a c + b d - a b - c d = (d - a) (b - c) > 0.
+\]
+<|det|>text [124, 454, 489, 482]<|/det|>Now relabel the numbers so they appear in order as follows:
+<|det|>equation [166, 497, 409, 511]<|/det|>\[
+\dots , a _ {n - 4}, a _ {n - 2}, a _ {n} = n, a _ {n - 1}, a _ {n - 3}, \dots
+\]
+<|det|>text [123, 523, 490, 653]<|/det|>where without loss of generality we assume  \( a_{n-1} > a_{n-2} \) . By considering the pairs  \( a_{n-2}, a_{n} \)  and  \( a_{n-1}, a_{n-3} \)  and using the trivial fact  \( a_{n} > a_{n-1} \) , we deduce  \( a_{n-2} > a_{n-3} \) . We then compare the pairs  \( a_{n-4}, a_{n-2} \)  and  \( a_{n-1}, a_{n-3} \) , and using that  \( a_{n-1} > a_{n-2} \) , we deduce  \( a_{n-3} > a_{n-4} \) . Continuing in this fashion, we prove that  \( a_{n} > a_{n-1} > \cdots > a_{1} \)  and so  \( a_{k} = k \)  for  \( k = 1, 2, \ldots, n \) , i.e. that the optimal arrangement is as claimed. In particular, the maximum value of the sum is
+<|det|>equation [102, 668, 474, 774]<|/det|>\[
+\begin{array}{l} 1 \cdot 2 + (n - 1) \cdot n + 1 \cdot 3 + 2 \cdot 4 + \dots + (n - 2) \cdot n \\ = 2 + n ^ {2} - n + (1 ^ {2} - 1) + \dots + [ (n - 1) ^ {2} - 1 ] \\ = n ^ {2} - n + 2 - (n - 1) + \frac {(n - 1) n (2 n - 1)}{6} \\ = \frac {2 n ^ {3} + 3 n ^ {2} - 1 1 n + 1 8}{6}. \\ \end{array}
+\]
+<|det|>text [123, 787, 491, 918]<|/det|>Alternate solution: We prove by induction that the value given above is an upper bound; it is clearly a lower bound because of the arrangement given above. Assume this is the case for \( n - 1 \). The optimal arrangement for \( n \) is obtained from some arrangement for \( n - 1 \) by inserting \( n \) between some pair \( x, y \) of adjacent terms. This operation increases the sum by \( nx + ny - xy = n^2 - (n - x)(n - y) \), which is an increasing function of both \( x \) and \( y \). In particular, this difference is maximal
+<|det|>text [553, 66, 920, 125]<|/det|>when x and y equal n - 1 and n - 2. Fortunately, this yields precisely the difference between the claimed upper bound for n and the assumed upper bound for n - 1, completing the induction.
+<|det|>text [522, 135, 921, 250]<|/det|>B-4 Suppose such a matrix \( A \) exists. If the eigenvalues of \( A \) (over the complex numbers) are distinct, then there exists a complex matrix \( C \) such that \( B = CAC^{-1} \) is diagonal. Consequently, \( \sin B \) is diagonal. But then \( \sin A = C^{-1}(\sin B)C \) must be diagonalizable, a contradiction. Hence the eigenvalues of \( A \) are the same, and \( A \) has a conjugate \( B = CAC^{-1} \) over the complex numbers of the form
+<|det|>equation [684, 259, 752, 293]<|/det|>\[
+\left( \begin{array}{c c} x & y \\ 0 & x \end{array} \right).
+\]
+<|det|>text [555, 303, 772, 317]<|/det|>A direct computation shows that
+<|det|>equation [625, 329, 807, 361]<|/det|>\[
+\sin B = \left( \begin{array}{c c} \sin x & y \cdot \cos x \\ 0 & \sin x \end{array} \right).
+\]
+<|det|>text [553, 372, 920, 430]<|/det|>Since  \( \sin A \)  and  \( \sin B \)  are conjugate, their eigenvalues must be the same, and so we must have  \( \sin x = 1 \) . This implies  \( \cos x = 0 \) , so that  \( \sin B \)  is the identity matrix, as must be  \( \sin A \) , a contradiction. Thus A cannot exist.
+<|det|>text [553, 435, 920, 493]<|/det|>Alternate solution (due to Craig Helfgott and Alex Popa): Define both  \( \sin A \)  and  \( \cos A \)  by the usual power series. Since A commutes with itself, the power series identity
+<|det|>equation [653, 503, 782, 520]<|/det|>\[
+\sin^ {2} A + \cos^ {2} A = I
+\]
+<|det|>text [553, 531, 920, 633]<|/det|>holds. But if  \( \sin A \)  is the given matrix, then by the above identity,  \( \cos^{2}A \)  must equal  \( \begin{pmatrix}0 & -2 \cdot 1996 \\ 0 & 0\end{pmatrix} \)  which is a nilpotent matrix. Thus  \( \cos A \)  is also nilpotent. However, the square of any  \( 2 \times 2 \)  nilpotent matrix must be zero (e.g., by the Cayley-Hamilton theorem). This is a contradiction.
+<|det|>text [522, 644, 920, 774]<|/det|>B-5 Consider a \(1 \times n\) checkerboard, in which we write an \(n\)-letter string, one letter per square. If the string is balanced, we can cover each pair of adjacent squares containing the same letter with a \(1 \times 2\) domino, and these will not overlap (because no three in a row can be the same). Moreover, any domino is separated from the next by an even number of squares, since they must cover opposite letters, and the sequence must alternate in between.
+<|det|>text [553, 779, 920, 868]<|/det|>Conversely, any arrangement of dominoes where adjacent dominoes are separated by an even number of squares corresponds to a unique balanced string, once we choose whether the string starts with X or O. In other words, the number of balanced strings is twice the number of acceptable domino arrangements.
+<|det|>text [554, 872, 920, 915]<|/det|>We count these arrangements by numbering the squares 0, 1, ..., n-1 and distinguishing whether the dominoes start on even or odd numbers. Once this is decided, one

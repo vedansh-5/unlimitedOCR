@@ -1,6 +1,6 @@
 # Summary
 
-Last updated: 2026-10-28 (after full-set clean-up rescore, E-052)
+Last updated: 2026-10-28 (after full-set safer table splitter rescore, E-053)
 
 ## Objective
 
@@ -14,13 +14,16 @@ Scope: no training. The released weights are used as published.
 
 Full benchmark (E-028, 1,651 pages under 7.5 GB cap): Text Edit 0.0500 (pooled 0.0511),
 TEDS 87.82, R-order 0.1366, behind the paper (0.042, 90.2, 0.129). Kept post-processing
-clean-up on the full run (E-052) reduced text edit to 0.0494 (pooled 0.0504) while
-preserving table TEDS (87.82). E-051 tested table splitting and prose unwrapping on the
-full set but was rejected after dropping table TEDS by 3.6 points (87.82 to 84.20). On
-the 50-page problem set, the retry ladder (E-049) cut text edit from 0.6846 to 0.3968
-(-0.2878) and raised table TEDS from 29.33 to 45.33 (+15.99). Dev set checks (E-041,
-E-045, E-050) confirmed zero regressions on normal pages. Full-set model retry for all
-flagged pages is pending.
+clean-up and safer table splitter on the full run (E-053) reduced text edit to 0.0494
+(pooled 0.0504) while raising table TEDS to 88.09 (+0.26). E-051 tested table splitting
+and prose unwrapping on the full set but was rejected after dropping table TEDS by
+3.6 points (87.82 to 84.20). On the 50-page problem set, the retry ladder with kept
+fixes and safer splitter (E-055) cut text edit from 0.6846 to 0.4271 (-0.2575) and
+raised table TEDS from 29.33 to 45.23 (+15.90); earlier replay E-049 reached 0.3968 and
+45.33 by including prose unwrapping and the unconstrained splitter, which both caused
+full-set regressions and were rejected. Dev set checks (E-041, E-045, E-050, E-057)
+confirmed zero regressions on normal pages. Full-set model retry for all flagged pages
+is pending.
 
 | Item | State |
 |---|---|
@@ -42,8 +45,8 @@ flagged pages is pending.
 | Fast setup on test (E-019 to E-021) | Within noise of bf16 but leaning worse, 26% faster; option only. Accuracy runs stay bf16 + loop repair |
 | Drop page furniture (E-022) | Rejected (slightly worse) |
 | I-8 page-by-page decoding for long documents (E-009, E-010) | Kept. 40 pages: edit 0.228 to 0.077, recall 0.917 to 0.968, 44% less time (Base); Gundam slightly more accurate, 19% slower |
-| Problem set repair ladder (E-030 to E-049) | Kept. 50 pages: Text Edit 0.6846 to 0.3968 (-0.2878), Table TEDS 29.33 to 45.33 (+15.99) |
-| Full run table splitting & prose unwrapping (E-051) | Rejected: dropped full-set table TEDS by 3.6 points (87.82 to 84.20) |
+| Problem set kept fixes and safer splitter (E-055) | Kept. 50 pages: Text Edit 0.6846 to 0.4271 (-0.2575), Table TEDS 29.33 to 45.23 (+15.90) |
+| Full run safer table splitter (E-053) | Kept: raised full-set table TEDS by +0.26 points (87.82 to 88.09), zero table regressions |
 | Full run clean-up rescore (E-052) | Kept. 1,651 pages: Text Edit 0.0500 to 0.0494 (-0.0006), TEDS 87.82 (preserved) |
 
 ## Baseline
@@ -52,13 +55,13 @@ flagged pages is pending.
 |---|---|---|---|
 | Paper (A800 GPUs, reported) | 93.23 | 93.92 | 0.1069 |
 | This project, full run E-028 (1,651 pages, 8 GB cap) | not measured | Text Edit 0.0500, TEDS 87.82, R-order 0.1366 (CDM and Overall not measured) | - |
-| This project, full run clean-up E-052 (1,651 pages) | not measured | Text Edit 0.0494, TEDS 87.82, R-order 0.1366 (CDM and Overall not measured) | - |
+| This project, full run clean-up E-053 (1,651 pages) | not measured | Text Edit 0.0494, TEDS 88.09, R-order 0.1355 (CDM and Overall not measured) | - |
 | This project (M5, MLX), E-002 / E-003 | not measured | Text Edit 0.036, TEDS 92.4, R-order 0.107 (CDM and Overall not measured) | 0.228 (NIST, text-layer reference; not comparable) |
 
 ## Best result so far
 
-- OmniDocBench problem set (50 worst pages): Text Edit 0.3968 with E-049 (down from 0.6846 baseline, delta -0.2878 [-0.4430, -0.1379]), Table TEDS 45.33 (up from 29.33, +15.99 points), Reading order 0.3671 (down from 0.5910, delta -0.2240).
-- OmniDocBench full run (1,651 pages): Text Edit 0.0494 with E-052 (down from 0.0500 baseline, delta -0.0006 [-0.0016, -0.0000]), Table TEDS 87.82.
+- OmniDocBench problem set (50 worst pages): Text Edit 0.4271 with E-055 under kept fixes (down from 0.6846 baseline, delta -0.2575 [-0.4116, -0.1074]), Table TEDS 45.23 (up from 29.33, +15.90 points), Reading order 0.3929 (down from 0.5910, delta -0.1982). Earlier E-049 reached 0.3968 by including prose unwrapping and the old splitter, both rejected on the full set.
+- OmniDocBench full run (1,651 pages): Text Edit 0.0494 with E-053 (down from 0.0500 baseline, delta -0.0006 [-0.0016, -0.0000]), Table TEDS 88.09 (up from 87.82, delta +0.2621 [0.0053, 0.6441]).
 - Dev subset (45 pages): Text Edit 0.0542, TEDS 93.50, zero regressions across 44 non-flagged pages.
 
 ## Key findings so far (from reading, not experiments)

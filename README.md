@@ -116,3 +116,6 @@ Formula CDM is not computed: it needs Linux, TeX Live, ImageMagick and Ghostscri
 
 `docs/plan.md` (plan and experiment list), `docs/summary.md` (current status),
 `docs/experiment_log.md`, `docs/findings.md`, `docs/report.md`.
+
+Project report in IEEE journal format: `docs/ieee_report/unlimited_ocr_report.pdf`
+(LaTeX source alongside it; build with `pdflatex` run twice).
